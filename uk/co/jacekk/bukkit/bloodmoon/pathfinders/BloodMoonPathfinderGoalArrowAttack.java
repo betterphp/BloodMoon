@@ -30,7 +30,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	}
 	
 	public boolean a(){
-		EntityLiving entityliving = this.skeleton.as();
+		EntityLiving entityliving = this.skeleton.at();
 
 		if (entityliving == null){
 			return false;
@@ -41,7 +41,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	}
 	
 	public boolean b(){
-		return this.a() || !this.skeleton.ak().e();
+		return this.a() || !this.skeleton.al().e();
 	}
 	
 	public void d(){
@@ -51,7 +51,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	public void e(){
 		double d0 = 100.0D;
 		double d1 = this.skeleton.e(this.c.locX, this.c.boundingBox.b, this.c.locZ);
-		boolean flag = this.skeleton.al().canSee(this.c);
+		boolean flag = this.skeleton.am().canSee(this.c);
 		
 		if (flag){
 			++this.f;
@@ -60,9 +60,9 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 		}
 		
 		if (d1 <= d0 && this.f >= 20){
-			this.skeleton.ak().f();
+			this.skeleton.al().f();
 		}else{
-			this.skeleton.ak().a(this.c, this.e);
+			this.skeleton.al().a(this.c, this.e);
 		}
 		
 		this.skeleton.getControllerLook().a(this.c, 30.0F, 30.0F);
@@ -77,7 +77,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	private void f(){
 		EntityArrow entityarrow = new EntityArrow(this.world, this.skeleton, this.c, 1.6F, 12.0F);
 		
-		this.world.makeSound(this.skeleton, "random.bow", 1.0F, 1.0F / (this.skeleton.am().nextFloat() * 0.4F + 0.8F));
+		this.world.makeSound(this.skeleton, "random.bow", 1.0F, 1.0F / (this.skeleton.an().nextFloat() * 0.4F + 0.8F));
 		this.world.addEntity(entityarrow);
 		
 		if (this.skeleton.bloodMoonState && BloodMoon.config.getBoolean("features.fire-arrows.enabled")){
