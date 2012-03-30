@@ -4,8 +4,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftEntity;
-import org.bukkit.entity.CreatureType;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,13 +26,13 @@ public class EntityListener implements Listener {
 		
 		Location location = event.getLocation();
 		Entity entity = event.getEntity();
-		CreatureType creatureType = event.getCreatureType();
+		EntityType creatureType = event.getEntityType();
 		World world = location.getWorld();
 		
 		net.minecraft.server.World mcWorld = ((CraftWorld) world).getHandle();
 		net.minecraft.server.Entity mcEntity = (((CraftEntity) entity).getHandle());
 		
-		if (creatureType == CreatureType.CREEPER && mcEntity instanceof BloodMoonEntityCreeper == false){
+		if (creatureType == EntityType.CREEPER && mcEntity instanceof BloodMoonEntityCreeper == false){
 			BloodMoonEntityCreeper bloodMoonEntityCreeper = new BloodMoonEntityCreeper(mcWorld);
 			
 			bloodMoonEntityCreeper.setPosition(location.getX(), location.getY(), location.getZ());
@@ -43,7 +43,7 @@ public class EntityListener implements Listener {
 			return;
 		}
 		
-		if (creatureType == CreatureType.SKELETON && mcEntity instanceof BloodMoonEntitySkeleton == false){
+		if (creatureType == EntityType.SKELETON && mcEntity instanceof BloodMoonEntitySkeleton == false){
 			BloodMoonEntitySkeleton bloodMoonEntitySkeleton = new BloodMoonEntitySkeleton(mcWorld);
 			
 			bloodMoonEntitySkeleton.setPosition(location.getX(), location.getY(), location.getZ());
@@ -54,7 +54,7 @@ public class EntityListener implements Listener {
 			return;
 		}
 		
-		if (creatureType == CreatureType.SPIDER && mcEntity instanceof BloodMoonEntitySpider == false){
+		if (creatureType == EntityType.SPIDER && mcEntity instanceof BloodMoonEntitySpider == false){
 			BloodMoonEntitySpider bloodMoonEntitySpider = new BloodMoonEntitySpider(mcWorld);
 			
 			bloodMoonEntitySpider.setPosition(location.getX(), location.getY(), location.getZ());
@@ -65,7 +65,7 @@ public class EntityListener implements Listener {
 			return;
 		}
 		
-		if (creatureType == CreatureType.ZOMBIE && mcEntity instanceof BloodMoonEntityZombie == false){
+		if (creatureType == EntityType.ZOMBIE && mcEntity instanceof BloodMoonEntityZombie == false){
 			BloodMoonEntityZombie bloodMoonEntityZombie = new BloodMoonEntityZombie(mcWorld);
 			
 			bloodMoonEntityZombie.setPosition(location.getX(), location.getY(), location.getZ());
@@ -76,7 +76,7 @@ public class EntityListener implements Listener {
 			return;
 		}
 		
-		if (creatureType == CreatureType.ENDERMAN && mcEntity instanceof BloodMoonEntityEnderman == false){
+		if (creatureType == EntityType.ENDERMAN && mcEntity instanceof BloodMoonEntityEnderman == false){
 			BloodMoonEntityEnderman bloodMoonEntityEnderman = new BloodMoonEntityEnderman(mcWorld);
 			
 			bloodMoonEntityEnderman.setPosition(location.getX(), location.getY(), location.getZ());
