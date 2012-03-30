@@ -30,9 +30,6 @@ public class BloodMoonConfig {
 		this.configDefaults.put("features.fire-arrows.enabled", true);
 		this.configDefaults.put("features.fire-arrows.ignight-target", true);
 		
-		this.configDefaults.put("features.spider-jump.enabled", true);
-		this.configDefaults.put("features.spider-jump.multiplier", 2.0D);
-		
 		this.configDefaults.put("features.break-blocks.enabled", true);
 		this.configDefaults.put("features.break-blocks.realistic-drop", false);
 		this.configDefaults.put("features.break-blocks.mobs", Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));

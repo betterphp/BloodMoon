@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.featurelisteners;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,7 +23,7 @@ public class SpawnOnSleepListener implements Listener {
 		
 		if (BloodMoon.bloodMoonWorlds.contains(world.getName())){
 			String mobName = BloodMoon.config.getRandomStringFromList("features.spawn-on-sleep.spawn");
-			CreatureType creatureType = CreatureType.fromName(Character.toUpperCase(mobName.charAt(0)) + mobName.toLowerCase().substring(1));
+			EntityType creatureType = EntityType.fromName(Character.toUpperCase(mobName.charAt(0)) + mobName.toLowerCase().substring(1));
 			
 			if (creatureType != null){
 				world.spawnCreature(location, creatureType);

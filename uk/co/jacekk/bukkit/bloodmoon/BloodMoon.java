@@ -109,8 +109,6 @@ public class BloodMoon extends JavaPlugin {
 			this.manager.registerEvents(new FireArrowsListener(), this);
 		}
 		
-		// spider-jump is handled in BloodMoonEntitySpider
-		
 		if (BloodMoon.config.getBoolean("features.double-health.enabled")){
 			this.manager.registerEvents(new DoubleHealthListener(), this);
 		}

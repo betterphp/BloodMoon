@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.entity.CreatureType;
+import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -26,15 +26,15 @@ public class MoreSpawningListener implements Listener {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
 		if (event.isCancelled() || event.getSpawnReason() != SpawnReason.NATURAL) return;
 		
-		CreatureType type = event.getCreatureType();
+		EntityType type = event.getEntityType();
 		Location location = event.getLocation();
 		World world = location.getWorld();
 		
-		List<CreatureType> types = Arrays.asList(CreatureType.CREEPER, CreatureType.ENDERMAN, CreatureType.SKELETON, CreatureType.ZOMBIE, CreatureType.SPIDER);
+		List<EntityType> types = Arrays.asList(EntityType.CREEPER, EntityType.ENDERMAN, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.SPIDER);
 		
 		if (BloodMoon.bloodMoonWorlds.contains(world.getName()) && types.contains(type)){
 			for (int i = 0; i < this.multiplier; ++i){
