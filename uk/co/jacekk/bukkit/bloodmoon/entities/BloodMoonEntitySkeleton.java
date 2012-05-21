@@ -1,9 +1,9 @@
 package uk.co.jacekk.bukkit.bloodmoon.entities;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.util.UnsafeList;
 import org.bukkit.entity.Skeleton;
 
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
@@ -28,7 +28,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 			a.setAccessible(true);
 			
 			@SuppressWarnings("unchecked")
-			ArrayList<PathfinderGoal> goals = (ArrayList<PathfinderGoal>) a.get(this.goalSelector);
+			UnsafeList<PathfinderGoal> goals = (UnsafeList<PathfinderGoal>) a.get(this.goalSelector);
 			
 			for (Object item : goals){
 				Field goal = item.getClass().getDeclaredField("a");
