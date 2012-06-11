@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
+import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.commands.BloodMoonExecuter;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityEnderman;
@@ -29,19 +30,13 @@ import uk.co.jacekk.bukkit.bloodmoon.listeners.WorldListener;
 public class BloodMoon extends BasePlugin {
 	
 	public Random rand;
-	
-	public static BloodMoonConfig config;
-	public static ArrayList<String> bloodMoonWorlds;
-	
-	protected BloodMoonTimeMonitor timeMonitor;
+	public ArrayList<String> bloodMoonActiveWorlds;
 	
 	public void onEnable(){
 		this.rand = new Random();
+		this.bloodMoonActiveWorlds = new ArrayList<String>();
 		
-		BloodMoon.config = new BloodMoonConfig(new File(this.baseDirPath + File.separator + "config.yml"), this);
-		BloodMoon.bloodMoonWorlds = new ArrayList<String>();
-		
-		this.timeMonitor = new BloodMoonTimeMonitor(this);
+		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
 		
 		try{
 			@SuppressWarnings({"rawtypes"})
@@ -66,10 +61,10 @@ public class BloodMoon extends BasePlugin {
 			return;
 		}
 		
-		if (BloodMoon.config.getBoolean("always-on")){
+		if (this.config.getBoolean(Config.ALWAYS_ON)){
 			this.pluginManager.registerEvents(new WorldListener(this), this);
 		}else{
-			this.scheduler.scheduleAsyncRepeatingTask(this, this.timeMonitor, 100, 100);
+			this.scheduler.scheduleAsyncRepeatingTask(this, new BloodMoonTimeMonitor(this), 100L, 100L);
 		}
 		
 		this.getCommand("bloodmoon").setExecutor(new BloodMoonExecuter(this));
@@ -79,56 +74,47 @@ public class BloodMoon extends BasePlugin {
 		this.pluginManager.registerEvents(new EntityListener(this), this);
 		
 		// These events are only needed by the certain features.
-		if (BloodMoon.config.getBoolean("features.break-blocks.enabled")){
+		if (this.config.getBoolean(Config.FEATURE_BREAK_BLOCKS_ENABLED)){
 			this.pluginManager.registerEvents(new BreakBlocksListener(this), this);
 		}
 		
-		if (BloodMoon.config.getBoolean("features.fire-arrows.enabled") && BloodMoon.config.getBoolean("features.fire-arrows.ignight-target")){
+		if (this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_IGNITE_TARGET)){
 			this.pluginManager.registerEvents(new FireArrowsListener(this), this);
 		}
 		
-		if (BloodMoon.config.getBoolean("features.double-health.enabled")){
+		if (this.config.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED)){
 			this.pluginManager.registerEvents(new DoubleHealthListener(this), this);
 		}
 		
-		if (BloodMoon.config.getBoolean("features.more-spawning.enabled")){
+		if (this.config.getBoolean(Config.FEATURE_MORE_SPAWNING_ENABLED)){
 			this.pluginManager.registerEvents(new MoreSpawningListener(this), this);
 		}
 		
-		if (BloodMoon.config.getBoolean("features.more-exp.enabled")){
+		if (this.config.getBoolean(Config.FEATURE_MORE_EXP_ENABLED)){
 			this.pluginManager.registerEvents(new MoreExpListener(this), this);
 		}
 		
-		if (BloodMoon.config.getBoolean("features.super-creepers.enabled")){
+		if (this.config.getBoolean(Config.FEATURE_SUPER_CREEPERS_ENABLED)){
 			this.pluginManager.registerEvents(new SuperCreepersListener(this), this);
 		}
 		
-		if (BloodMoon.config.getBoolean("features.spawn-on-kill.enabled")){
+		if (this.config.getBoolean(Config.FEATURE_SPAWN_ON_KILL_ENABLED)){
 			this.pluginManager.registerEvents(new SpawnOnKillListener(this), this);
 		}
 		
 		// arrow-rate is handled in BloodMoonEntitySkeleton
 		
-		if (BloodMoon.config.getBoolean("features.sword-damage.enabled")){
+		if (this.config.getBoolean(Config.FEATURE_SWORD_DAMAGE_ENABLED)){
 			this.pluginManager.registerEvents(new SwordDamageListener(this), this);
 		}
 		
-		if (BloodMoon.config.getBoolean("features.lock-in-world.enabled") && BloodMoon.config.getBoolean("always-on") == false){
+		if (this.config.getBoolean(Config.FEATURE_LOCK_IN_WORLD_ENABLED) && !this.config.getBoolean(Config.ALWAYS_ON)){
 			this.pluginManager.registerEvents(new LockInWorldListener(this), this);
 		}
 		
-		if (BloodMoon.config.getBoolean("features.spawn-on-sleep.enabled")){
+		if (this.config.getBoolean(Config.FEATURE_SPAWN_ON_SLEEP_ENABLED)){
 			this.pluginManager.registerEvents(new SpawnOnSleepListener(this), this);
 		}
-		
-		this.log.info("Enabled.");
-	}
-	
-	public void onDisable(){
-		this.log.info("Disabled");
-		
-		BloodMoon.config = null;
-		BloodMoon.bloodMoonWorlds = null;
 	}
 	
 }

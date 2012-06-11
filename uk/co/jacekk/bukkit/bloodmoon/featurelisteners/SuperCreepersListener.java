@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntityExplodeEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class SuperCreepersListener extends BaseListener<BloodMoon> {
 	
@@ -25,10 +26,10 @@ public class SuperCreepersListener extends BaseListener<BloodMoon> {
 			World world = location.getWorld();
 			String worldName = world.getName();
 			
-			if (BloodMoon.bloodMoonWorlds.contains(worldName)){
+			if (plugin.bloodMoonActiveWorlds.contains(worldName)){
 				event.setCancelled(true);
 				
-				world.createExplosion(location, (float) BloodMoon.config.getDouble("features.super-creepers.power"), true);
+				world.createExplosion(location, (float) plugin.config.getDouble(Config.FEATURE_SUPER_CREEPERS_POWER), true);
 			}
 		}
 	}

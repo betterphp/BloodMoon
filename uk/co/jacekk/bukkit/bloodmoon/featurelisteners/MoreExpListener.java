@@ -8,6 +8,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class MoreExpListener extends BaseListener<BloodMoon> {
 	
@@ -16,7 +17,7 @@ public class MoreExpListener extends BaseListener<BloodMoon> {
 	public MoreExpListener(BloodMoon plugin){
 		super(plugin);
 		
-		this.multiplier = BloodMoon.config.getInt("features.more-exp.multiplier");
+		this.multiplier = plugin.config.getInt(Config.FEATURE_MORE_EXP_MULTIPLIER);
 		
 		if (this.multiplier == 0 || this.multiplier > 100){
 			this.multiplier = 1;
@@ -27,7 +28,7 @@ public class MoreExpListener extends BaseListener<BloodMoon> {
 	public void onEntityDeath(EntityDeathEvent event){
 		Entity entity = event.getEntity();
 		
-		if (entity instanceof Creature && BloodMoon.bloodMoonWorlds.contains(entity.getWorld().getName())){
+		if (entity instanceof Creature && plugin.bloodMoonActiveWorlds.contains(entity.getWorld().getName())){
 			event.setDroppedExp(event.getDroppedExp() * multiplier);
 		}
 	}

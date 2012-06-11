@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 	
@@ -30,19 +31,19 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			return true;
 		}
 		
-		if (BloodMoon.config.getStringList("affected-worlds").contains(worldName) == false){
+		if (!plugin.config.getStringList(Config.AFFECTED_WORLDS).contains(worldName)){
 			player.sendMessage(ChatColor.RED + "The blood moon is not enabled for this world !");
 			return true;
 		}
 		
-		if (BloodMoon.bloodMoonWorlds.contains(worldName)){
-			BloodMoon.bloodMoonWorlds.remove(worldName);
+		if (plugin.bloodMoonActiveWorlds.contains(worldName)){
+			plugin.bloodMoonActiveWorlds.remove(worldName);
 			
 			for (Player worldPlayer : world.getPlayers()){
 				worldPlayer.sendMessage(ChatColor.RED + "[" + player.getName() + "] The blood moon has been stopped !");
 			}
 		}else{
-			BloodMoon.bloodMoonWorlds.add(worldName);
+			plugin.bloodMoonActiveWorlds.add(worldName);
 			
 			for (Player worldPlayer : world.getPlayers()){
 				worldPlayer.sendMessage(ChatColor.RED + "[" + player.getName() + "] The blood moon is rising !");

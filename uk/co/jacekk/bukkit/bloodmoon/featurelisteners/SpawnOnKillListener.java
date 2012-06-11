@@ -16,6 +16,7 @@ import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 	
@@ -28,7 +29,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 		Entity entity = event.getEntity();
 		World world = entity.getWorld();
 		
-		if (entity instanceof Creature && BloodMoon.bloodMoonWorlds.contains(world.getName())){
+		if (entity instanceof Creature && plugin.bloodMoonActiveWorlds.contains(world.getName())){
 			Creature creature = (Creature) entity;
 			LivingEntity target = creature.getTarget();
 			
@@ -41,7 +42,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 										);
 			
 			if (target instanceof Player && causes.contains(entity.getLastDamageCause().getCause()) && BloodMoon.config.isCreatureOnMobList("features.spawn-on-kill.mobs", creature)){
-				if (plugin.rand.nextInt(100) <= BloodMoon.config.getInt("features.spawn-on-kill.chance")){
+				if (plugin.rand.nextInt(100) <= plugin.config.getInt(Config.FEATURE_SPAWN_ON_KILL_CHANCE)){
 					String mobName = BloodMoon.config.getRandomStringFromList("features.spawn-on-kill.spawn");
 					EntityType creatureType = EntityType.fromName(Character.toUpperCase(mobName.charAt(0)) + mobName.toLowerCase().substring(1));
 					

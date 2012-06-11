@@ -13,20 +13,22 @@ public class BloodMoonTimeMonitor implements Runnable {
 	}
 	
 	public void run(){
-		for (String worldName : BloodMoon.config.getStringList("affected-worlds")){
+		for (String worldName : plugin.config.getStringList(Config.AFFECTED_WORLDS)){
 			World world = plugin.server.getWorld(worldName);
 			
 			if (world != null){
 				int worldTime = Math.round(world.getTime() / 100);
 				
-				if (worldTime == 123 && Math.random() < (((double) BloodMoon.config.getInt("bloodmoon-chance")) / 100) && BloodMoon.bloodMoonWorlds.contains(worldName) == false){
-					for (Player player : world.getPlayers()){
-						player.sendMessage(ChatColor.RED + "The blood moon is rising !");
+				if (worldTime == 123 && Math.random() < (((double) plugin.config.getInt(Config.CHANCE)) / 100)){
+					if (!plugin.bloodMoonActiveWorlds.contains(worldName)){
+						for (Player player : world.getPlayers()){
+							player.sendMessage(ChatColor.RED + "The blood moon is rising !");
+						}
+						
+						plugin.bloodMoonActiveWorlds.add(worldName);
 					}
-					
-					BloodMoon.bloodMoonWorlds.add(worldName);
-				}else if (worldTime < 1 && BloodMoon.bloodMoonWorlds.contains(worldName)){
-					BloodMoon.bloodMoonWorlds.remove(worldName);
+				}else if (worldTime < 1 && plugin.bloodMoonActiveWorlds.contains(worldName)){
+					plugin.bloodMoonActiveWorlds.remove(worldName);
 				}
 			}
 		}

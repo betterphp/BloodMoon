@@ -18,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.CreeperMoveEvent;
 import uk.co.jacekk.bukkit.bloodmoon.events.EndermanMoveEvent;
 import uk.co.jacekk.bukkit.bloodmoon.events.SkeletonMoveEvent;
@@ -31,15 +32,13 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	public BreakBlocksListener(BloodMoon plugin){
 		super(plugin);
 		
-		if (BloodMoon.config != null){
-			this.mobList = BloodMoon.config.getStringList("features.break-blocks.mobs");
-		}
+		this.mobList = plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS);
 	}
 	
 	private void mobAttemptBreakBlock(Block block){
 		if (block.getWorld().getTime() % 10 == 0 && plugin.rand.nextInt(100) < 50) return;
 		
-		List<String> blockList = BloodMoon.config.getStringList("features.break-blocks.blocks");
+		List<String> blockList = plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_BLOCKS);
 		Material type = block.getType();
 		
 		if (type != Material.AIR && blockList.contains(type.toString())){
@@ -55,7 +54,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		LivingEntity target = event.getTarget();
 		Creeper creeper = event.getCreeper();
 		
-		if (target instanceof Player && BloodMoon.bloodMoonWorlds.contains(creeper.getWorld().getName())){
+		if (target instanceof Player && plugin.bloodMoonActiveWorlds.contains(creeper.getWorld().getName())){
 			Block[] blocks = new Block[2];
 			
 			try{
@@ -78,7 +77,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		LivingEntity target = event.getTarget();
 		Skeleton skeleton = event.getSkeleton();
 		
-		if (target instanceof Player && BloodMoon.bloodMoonWorlds.contains(skeleton.getWorld().getName())){
+		if (target instanceof Player && plugin.bloodMoonActiveWorlds.contains(skeleton.getWorld().getName())){
 			Block[] blocks = new Block[2];
 			
 			try{
@@ -101,7 +100,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		LivingEntity target = event.getTarget();
 		Spider spider = event.getSpider();
 		
-		if (target instanceof Player && BloodMoon.bloodMoonWorlds.contains(spider.getWorld().getName())){
+		if (target instanceof Player && plugin.bloodMoonActiveWorlds.contains(spider.getWorld().getName())){
 			Block[] blocks = new Block[2];
 			
 			try{
@@ -124,7 +123,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		LivingEntity target = event.getTarget();
 		Zombie zombie = event.getZombie();
 		
-		if (target instanceof Player && BloodMoon.bloodMoonWorlds.contains(zombie.getWorld().getName())){
+		if (target instanceof Player && plugin.bloodMoonActiveWorlds.contains(zombie.getWorld().getName())){
 			Block[] blocks = new Block[2];
 			
 			try{
@@ -147,7 +146,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		LivingEntity target = event.getTarget();
 		Enderman enderman = event.getEnderman();
 		
-		if (target instanceof Player && BloodMoon.bloodMoonWorlds.contains(enderman.getWorld().getName())){
+		if (target instanceof Player && plugin.bloodMoonActiveWorlds.contains(enderman.getWorld().getName())){
 			Block[] blocks = new Block[3];
 			
 			try{

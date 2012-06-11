@@ -23,7 +23,7 @@ public class PlayerListener extends BaseListener<BloodMoon> {
 		Player player = event.getPlayer();
 		World toWorld = player.getWorld();
 		
-		if (BloodMoon.bloodMoonWorlds.contains(toWorld.getName())){
+		if (plugin.bloodMoonActiveWorlds.contains(toWorld.getName())){
 			player.sendMessage(ChatColor.RED + "The blood moon is rising !");
 		}
 	}
@@ -32,7 +32,7 @@ public class PlayerListener extends BaseListener<BloodMoon> {
 	public void onPlayerChangedWorld(PlayerChangedWorldEvent event){
 		Player player = event.getPlayer();
 		
-		if (BloodMoon.bloodMoonWorlds.contains(player.getWorld().getName())){
+		if (plugin.bloodMoonActiveWorlds.contains(player.getWorld().getName())){
 			player.sendMessage(ChatColor.RED + "The blood moon is rising !");
 		}
 	}

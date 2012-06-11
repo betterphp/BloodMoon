@@ -13,6 +13,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class MoreSpawningListener extends BaseListener<BloodMoon> {
 	
@@ -21,7 +22,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 	public MoreSpawningListener(BloodMoon plugin){
 		super(plugin);
 		
-		this.multiplier = BloodMoon.config.getInt("features.more-spawning.multiplier");
+		this.multiplier = plugin.config.getInt(Config.FEATURE_MORE_SPAWNING_MULTIPLIER);
 		
 		if (this.multiplier == 0 || this.multiplier > 100){
 			this.multiplier = 1;
@@ -38,7 +39,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 		
 		List<EntityType> types = Arrays.asList(EntityType.CREEPER, EntityType.ENDERMAN, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.SPIDER);
 		
-		if (BloodMoon.bloodMoonWorlds.contains(world.getName()) && types.contains(type)){
+		if (plugin.bloodMoonActiveWorlds.contains(world.getName()) && types.contains(type)){
 			for (int i = 0; i < this.multiplier; ++i){
 				world.spawnCreature(location, type);
 			}

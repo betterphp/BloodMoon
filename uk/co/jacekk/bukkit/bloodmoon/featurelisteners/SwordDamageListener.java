@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class SwordDamageListener extends BaseListener<BloodMoon> {
 	
@@ -25,7 +26,7 @@ public class SwordDamageListener extends BaseListener<BloodMoon> {
 		
 		Entity entity = event.getEntity();
 		
-		if (event.getCause() == DamageCause.ENTITY_ATTACK && BloodMoon.bloodMoonWorlds.contains(entity.getWorld().getName())){
+		if (event.getCause() == DamageCause.ENTITY_ATTACK && plugin.bloodMoonActiveWorlds.contains(entity.getWorld().getName())){
 			if (entity instanceof Creature){
 				Creature creature = (Creature) entity;
 				
@@ -37,31 +38,10 @@ public class SwordDamageListener extends BaseListener<BloodMoon> {
 					ItemStack item = player.getItemInHand();
 					
 					// 190 character line :D
-					if (BloodMoon.config.isCreatureOnMobList("features.sword-damage.mobs", creature) && plugin.rand.nextInt(100) <= BloodMoon.config.getInt("features.sword-damage.chance")){
+					if (BloodMoon.config.isCreatureOnMobList("features.sword-damage.mobs", creature) && plugin.rand.nextInt(100) <= plugin.config.getInt(Config.FEATURE_SWORD_DAMAGE_CHANCE)){
 						short damage = item.getDurability();
 						
-						switch (item.getType()){
-							case DIAMOND_SWORD:
-								if (damage > BloodMoon.config.getInt("features.sword-damage.damage.diamond")){
-									item.setDurability((short) (item.getDurability() - BloodMoon.config.getInt("features.sword-damage.damage.diamond")));
-								}
-							case IRON_SWORD:
-								if (damage > BloodMoon.config.getInt("features.sword-damage.damage.iron")){
-									item.setDurability((short) (item.getDurability() - BloodMoon.config.getInt("features.sword-damage.damage.iron")));
-								}
-							case GOLD_SWORD:
-								if (damage > BloodMoon.config.getInt("features.sword-damage.damage.gold")){
-									item.setDurability((short) (item.getDurability() - BloodMoon.config.getInt("features.sword-damage.damage.gold")));
-								}
-							case STONE_SWORD:
-								if (damage > BloodMoon.config.getInt("features.sword-damage.damage.stone")){
-									item.setDurability((short) (item.getDurability() - BloodMoon.config.getInt("features.sword-damage.damage.stone")));
-								}
-							case WOOD_SWORD:
-								if (damage > BloodMoon.config.getInt("features.sword-damage.damage.wood")){
-									item.setDurability((short) (item.getDurability() - BloodMoon.config.getInt("features.sword-damage.damage.wood")));
-								}
-						}
+						// TODO: Take a percentage of the max uses
 					}
 				}
 			}

@@ -6,6 +6,7 @@ import org.bukkit.event.world.WorldInitEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class WorldListener extends BaseListener<BloodMoon> {
 	
@@ -17,8 +18,8 @@ public class WorldListener extends BaseListener<BloodMoon> {
 	public void onWorldInit(WorldInitEvent event){
 		String worldName = event.getWorld().getName();
 		
-		if (BloodMoon.config.getStringList("affected-worlds").contains(worldName)){
-			BloodMoon.bloodMoonWorlds.add(worldName);
+		if (plugin.config.getStringList(Config.AFFECTED_WORLDS).contains(worldName)){
+			plugin.bloodMoonActiveWorlds.add(worldName);
 		}
 	}
 	

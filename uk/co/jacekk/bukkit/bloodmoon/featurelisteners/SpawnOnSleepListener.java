@@ -25,7 +25,7 @@ public class SpawnOnSleepListener extends BaseListener<BloodMoon> {
 		Location location = player.getLocation();
 		World world = location.getWorld();
 		
-		if (BloodMoon.bloodMoonWorlds.contains(world.getName())){
+		if (plugin.bloodMoonActiveWorlds.contains(world.getName())){
 			String mobName = BloodMoon.config.getRandomStringFromList("features.spawn-on-sleep.spawn");
 			EntityType creatureType = EntityType.fromName(Character.toUpperCase(mobName.charAt(0)) + mobName.toLowerCase().substring(1));
 			
