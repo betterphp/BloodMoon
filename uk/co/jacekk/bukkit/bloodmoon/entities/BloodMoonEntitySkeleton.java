@@ -47,7 +47,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 	}
 	
 	@Override
-	public void d_(){
+	public void F_(){
 		Skeleton skeleton = (Skeleton) this.getBukkitEntity();
 		
 		Location from = new Location(skeleton.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -61,7 +61,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 			return;
 		}
 		
-		super.d_();
+		super.F_();
 	}
 
 }

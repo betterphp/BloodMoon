@@ -8,13 +8,13 @@ import uk.co.jacekk.bukkit.bloodmoon.events.CreeperMoveEvent;
 import net.minecraft.server.World;
 
 public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
-
+	
 	public BloodMoonEntityCreeper(World world) {
 		super(world);
 	}
 	
 	@Override
-	public void d_(){
+	public void F_(){
 		Creeper creeper = (Creeper) this.getBukkitEntity();
 		
 		Location from = new Location(creeper.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -28,7 +28,7 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 			return;
 		}
 		
-		super.d_();
+		super.F_();
 	}
 	
 }

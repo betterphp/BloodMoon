@@ -14,7 +14,7 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 	}
 	
 	@Override
-	public void d_(){
+	public void F_(){
 		Spider spider = (Spider) this.getBukkitEntity();
 		
 		Location from = new Location(spider.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -28,7 +28,7 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 			return;
 		}
 		
-		super.d_();
+		super.F_();
 	}
 	
 }

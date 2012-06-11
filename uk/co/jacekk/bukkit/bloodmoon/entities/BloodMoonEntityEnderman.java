@@ -14,7 +14,7 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 	}
 	
 	@Override
-	public void d_(){
+	public void F_(){
 		Enderman enderman = (Enderman) this.getBukkitEntity();
 		
 		Location from = new Location(enderman.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -28,7 +28,7 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 			return;
 		}
 		
-		super.d_();
+		super.F_();
 	}
 	
 }

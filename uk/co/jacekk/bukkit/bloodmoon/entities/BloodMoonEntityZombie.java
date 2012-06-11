@@ -14,7 +14,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 	}
 	
 	@Override
-	public void d_(){
+	public void F_(){
 		Zombie zombie = (Zombie) this.getBukkitEntity();
 		
 		Location from = new Location(zombie.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -28,7 +28,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 			return;
 		}
 		
-		super.d_();
+		super.F_();
 	}
 	
 }
