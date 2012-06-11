@@ -1,6 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.pathfinders;
 
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySkeleton;
 import net.minecraft.server.EntityArrow;
 import net.minecraft.server.EntityLiving;
@@ -9,8 +10,10 @@ import net.minecraft.server.World;
 
 public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	
-	World world;
+	private BloodMoon plugin;
 	BloodMoonEntitySkeleton skeleton;
+	World world;
+	
 	EntityLiving c;
 	int d = 0;
 	float e;
@@ -18,7 +21,8 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	int g;
 	int h;
 	
-	public BloodMoonPathfinderGoalArrowAttack(BloodMoonEntitySkeleton skeleton, float f, int i, int j){
+	public BloodMoonPathfinderGoalArrowAttack(BloodMoonEntitySkeleton skeleton, BloodMoon plugin, float f, int i, int j){
+		this.plugin = plugin;
 		this.skeleton = skeleton;
 		this.world = skeleton.world;
 		
@@ -66,7 +70,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 		}
 		
 		this.skeleton.getControllerLook().a(this.c, 30.0F, 30.0F);
-		this.d = Math.max(this.d - ((this.skeleton.bloodMoonState) ? BloodMoon.config.getInt("features.arrow-rate.multiplier") : 1), 0);
+		this.d = Math.max(this.d - ((plugin.isActive(this.skeleton.world.worldData.name)) ? plugin.config.getInt(Config.FEATURE_ARROW_RATE_MULTIPLIER) : 1), 0);
 		
 		if (this.d <= 0 && d1 <= d0 && flag){
 			this.f();
@@ -80,7 +84,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 		this.world.makeSound(this.skeleton, "random.bow", 1.0F, 1.0F / (this.skeleton.an().nextFloat() * 0.4F + 0.8F));
 		this.world.addEntity(entityarrow);
 		
-		if (this.skeleton.bloodMoonState && BloodMoon.config.getBoolean("features.fire-arrows.enabled")){
+		if (plugin.isActive(this.skeleton.world.worldData.name) && plugin.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED)){
 			entityarrow.fireTicks = 1200;
 		}
 	}

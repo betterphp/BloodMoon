@@ -48,7 +48,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		}
 		
 		if (creatureType == EntityType.SKELETON && mcEntity instanceof BloodMoonEntitySkeleton == false){
-			BloodMoonEntitySkeleton bloodMoonEntitySkeleton = new BloodMoonEntitySkeleton(mcWorld);
+			BloodMoonEntitySkeleton bloodMoonEntitySkeleton = new BloodMoonEntitySkeleton(mcWorld, plugin);
 			
 			bloodMoonEntitySkeleton.setPosition(location.getX(), location.getY(), location.getZ());
 			

@@ -16,12 +16,8 @@ import net.minecraft.server.World;
 
 public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton {
 	
-	public boolean bloodMoonState;
-	
-	public BloodMoonEntitySkeleton(World world){
+	public BloodMoonEntitySkeleton(World world, BloodMoon plugin){
 		super(world);
-		
-		this.bloodMoonState = BloodMoon.bloodMoonWorlds.contains(world.worldData.name);
 		
 		try{
 			Field a = this.goalSelector.getClass().getDeclaredField("a");
@@ -35,7 +31,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 				goal.setAccessible(true);
 				
 				if (goal.get(item) instanceof PathfinderGoalArrowAttack){
-					goal.set(item, new BloodMoonPathfinderGoalArrowAttack(this, this.bb, 1, 60));
+					goal.set(item, new BloodMoonPathfinderGoalArrowAttack(this, plugin, this.bb, 1, 60));
 				}
 			}
 			
