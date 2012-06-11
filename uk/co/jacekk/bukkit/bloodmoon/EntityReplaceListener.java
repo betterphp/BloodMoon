@@ -24,10 +24,8 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
-	@EventHandler(priority = EventPriority.MONITOR)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
-		if (event.isCancelled()) return;
-		
 		Location location = event.getLocation();
 		Entity entity = event.getEntity();
 		EntityType creatureType = event.getEntityType();

@@ -19,10 +19,8 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 	public void onPlayerTeleport(PlayerTeleportEvent event){
-		if (event.isCancelled()) return;
-		
 		Player player = event.getPlayer();
 		World toWorld = event.getTo().getWorld();
 		World fromWorld = event.getFrom().getWorld();

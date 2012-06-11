@@ -65,9 +65,9 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onCreeperMoveEvent(CreeperMoveEvent event){
-		if (event.isCancelled() || this.mobList == null || mobList.contains("CREEPER") == false) return;
+		if (this.mobList == null || mobList.contains("CREEPER") == false) return;
 		
 		LivingEntity target = event.getTarget();
 		Creeper creeper = event.getCreeper();
@@ -88,9 +88,9 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onSkeletonMoveEvent(SkeletonMoveEvent event){
-		if (event.isCancelled() || this.mobList == null || mobList.contains("SKELETON") == false) return;
+		if (this.mobList == null || mobList.contains("SKELETON") == false) return;
 		
 		LivingEntity target = event.getTarget();
 		Skeleton skeleton = event.getSkeleton();
@@ -111,9 +111,9 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onSpiderMoveEvent(SpiderMoveEvent event){
-		if (event.isCancelled() || this.mobList == null || mobList.contains("SPIDER") == false) return;
+		if (this.mobList == null || mobList.contains("SPIDER") == false) return;
 		
 		LivingEntity target = event.getTarget();
 		Spider spider = event.getSpider();
@@ -134,9 +134,9 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onZombieMoveEvent(ZombieMoveEvent event){
-		if (event.isCancelled() || this.mobList == null || mobList.contains("ZOMBIE") == false) return;
+		if (this.mobList == null || mobList.contains("ZOMBIE") == false) return;
 		
 		LivingEntity target = event.getTarget();
 		Zombie zombie = event.getZombie();
@@ -157,9 +157,9 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onEndermanMoveEvent(EndermanMoveEvent event){
-		if (event.isCancelled() || this.mobList == null || mobList.contains("ENDERMAN") == false) return;
+		if (this.mobList == null || mobList.contains("ENDERMAN") == false) return;
 		
 		LivingEntity target = event.getTarget();
 		Enderman enderman = event.getEnderman();

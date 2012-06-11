@@ -31,7 +31,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
-		if (event.isCancelled() || event.getSpawnReason() != SpawnReason.NATURAL) return;
+		if (event.getSpawnReason() != SpawnReason.NATURAL) return;
 		
 		EntityType type = event.getEntityType();
 		Location location = event.getLocation();

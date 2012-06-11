@@ -20,10 +20,8 @@ public class DoubleHealthListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
 	public void onEntityDamage(EntityDamageEvent event){
-		if (event.isCancelled()) return;
-		
 		Entity entity = event.getEntity();
 		List<DamageCause> causes = Arrays.asList(
 										DamageCause.ENTITY_ATTACK,
