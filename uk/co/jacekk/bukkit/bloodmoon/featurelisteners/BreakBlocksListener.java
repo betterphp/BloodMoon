@@ -91,10 +91,13 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 				Block[] blocks = new Block[2];
 				
 				blocks[0] = skeleton.getTargetBlock(null, 1);
-				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
 				
-				for (Block block : blocks){
-					this.mobAttemptBreakBlock(block);
+				if (blocks[0] != null){
+					blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
+					
+					for (Block block : blocks){
+						this.mobAttemptBreakBlock(block);
+					}
 				}
 			}
 		}
@@ -107,12 +110,9 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 			Spider spider = event.getSpider();
 			
 			if (target instanceof Player && plugin.isActive(spider.getWorld())){
-				Block[] blocks = new Block[2];
+				Block block = spider.getTargetBlock(null, 1);
 				
-				blocks[0] = spider.getTargetBlock(null, 1);
-				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
-				
-				for (Block block : blocks){
+				if (block != null){
 					this.mobAttemptBreakBlock(block);
 				}
 			}
@@ -129,10 +129,13 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 				Block[] blocks = new Block[2];
 				
 				blocks[0] = zombie.getTargetBlock(null, 1);
-				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
 				
-				for (Block block : blocks){
-					this.mobAttemptBreakBlock(block);
+				if (blocks[0] != null){
+					blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
+					
+					for (Block block : blocks){
+						this.mobAttemptBreakBlock(block);
+					}
 				}
 			}
 		}
@@ -148,11 +151,14 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 				Block[] blocks = new Block[3];
 				
 				blocks[0] = enderman.getTargetBlock(null, 1);
-				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
-				blocks[2] = blocks[1].getRelative(BlockFace.DOWN);
 				
-				for (Block block : blocks){
-					this.mobAttemptBreakBlock(block);
+				if (blocks[0] != null){
+					blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
+					blocks[2] = blocks[1].getRelative(BlockFace.DOWN);
+					
+					for (Block block : blocks){
+						this.mobAttemptBreakBlock(block);
+					}
 				}
 			}
 		}
