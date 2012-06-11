@@ -11,7 +11,7 @@ public enum Config implements PluginConfigKey {
 	CHANCE(									"chance",									14),
 	
 	FEATURE_ARROW_RATE_ENABLED(				"features.arrow-rate.enabled",				true),
-	FEATURE_ARROW_RATE_MULTIPLIER(			"features.arrow-rate.multiplier",			true),
+	FEATURE_ARROW_RATE_MULTIPLIER(			"features.arrow-rate.multiplier",			2),
 	
 	FEATURE_FIRE_ARROWS_ENABLED(			"features.fire-arrows.enabled",				true),
 	FEATURE_FIRE_ARROWS_IGNITE_TARGET(		"features.fire-arrows.ignite-arget",		true),
