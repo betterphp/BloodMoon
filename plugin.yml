@@ -1,15 +1,9 @@
 name: BloodMoon
-version: 0.13.3
+version: 0.14
 main: uk.co.jacekk.bukkit.bloodmoon.BloodMoon
 load: startup
 commands:
     bloodmoon:
         description: Toggles the bloodmoon for the current world.
-        usage: /bloodmoon 
-permissions:
-    bloodmoon.command.bloodmoon:
-        description: Allows use of the /bloodmoon command.
-        default: op
-    bloodmoon.feature.ignore-world-lock:
-        description: Allows the player to leave the world even if the bloodmoon is active the lock-in-world feature is enabled.
-        default: op
+        usage: /<command> <start/stop> [world_name]
+        aliases: [bm, blood]

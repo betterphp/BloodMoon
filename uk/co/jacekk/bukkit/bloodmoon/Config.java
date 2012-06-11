@@ -8,7 +8,7 @@ public enum Config implements PluginConfigKey {
 	
 	AFFECTED_WORLDS(						"affected-worlds",							Arrays.asList("world")),
 	ALWAYS_ON(								"always-on",								false),
-	CHANCE(									"bloodmoon-chance",							14),
+	CHANCE(									"chance",									14),
 	
 	FEATURE_ARROW_RATE_ENABLED(				"features.arrow-rate.enabled",				true),
 	FEATURE_ARROW_RATE_MULTIPLIER(			"features.arrow-rate.multiplier",			true),

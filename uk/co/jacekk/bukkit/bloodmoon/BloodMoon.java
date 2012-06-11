@@ -57,13 +57,17 @@ public class BloodMoon extends BasePlugin {
 			return;
 		}
 		
+		this.getCommand("bloodmoon").setExecutor(new BloodMoonExecuter(this));
+		
+		for (Permission permission : Permission.values()){
+			this.pluginManager.addPermission(new org.bukkit.permissions.Permission(permission.getNode(), permission.getDescription(), permission.getDefault()));
+		}
+		
 		if (this.config.getBoolean(Config.ALWAYS_ON)){
 			this.pluginManager.registerEvents(new ActivateWorldListener(this), this);
 		}else{
 			this.scheduler.scheduleAsyncRepeatingTask(this, new TimeMonitorTask(this), 100L, 100L);
 		}
-		
-		this.getCommand("bloodmoon").setExecutor(new BloodMoonExecuter(this));
 		
 		// These events are always needed.
 		this.pluginManager.registerEvents(new PlayerEnterWorldListener(this), this);
