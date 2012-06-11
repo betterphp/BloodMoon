@@ -1,6 +1,5 @@
 package uk.co.jacekk.bukkit.bloodmoon.featurelisteners;
 
-import java.util.List;
 import java.util.Random;
 
 import org.bukkit.Effect;
@@ -32,13 +31,11 @@ import uk.co.jacekk.bukkit.bloodmoon.events.ZombieMoveEvent;
 public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	
 	private Random rand;
-	private List<String> mobList;
 	
 	public BreakBlocksListener(BloodMoon plugin){
 		super(plugin);
 		
 		this.rand = new Random();
-		this.mobList = plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS);
 	}
 	
 	private void mobAttemptBreakBlock(Block block){
@@ -67,116 +64,96 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onCreeperMoveEvent(CreeperMoveEvent event){
-		if (this.mobList == null || mobList.contains("CREEPER") == false) return;
-		
-		LivingEntity target = event.getTarget();
-		Creeper creeper = event.getCreeper();
-		
-		if (target instanceof Player && plugin.isActive(creeper.getWorld())){
-			Block[] blocks = new Block[2];
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("CREEPER")){;
+			LivingEntity target = event.getTarget();
+			Creeper creeper = event.getCreeper();
 			
-			try{
+			if (target instanceof Player && plugin.isActive(creeper.getWorld())){
+				Block[] blocks = new Block[2];
+				
 				blocks[0] = creeper.getTargetBlock(null, 1);
 				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
-			}catch (Exception e){
-				return;
-			}
-			
-			for (Block block : blocks){
-				this.mobAttemptBreakBlock(block);
+				
+				for (Block block : blocks){
+					this.mobAttemptBreakBlock(block);
+				}
 			}
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onSkeletonMoveEvent(SkeletonMoveEvent event){
-		if (this.mobList == null || mobList.contains("SKELETON") == false) return;
-		
-		LivingEntity target = event.getTarget();
-		Skeleton skeleton = event.getSkeleton();
-		
-		if (target instanceof Player && plugin.isActive(skeleton.getWorld())){
-			Block[] blocks = new Block[2];
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("SKELETON")){
+			LivingEntity target = event.getTarget();
+			Skeleton skeleton = event.getSkeleton();
 			
-			try{
+			if (target instanceof Player && plugin.isActive(skeleton.getWorld())){
+				Block[] blocks = new Block[2];
+				
 				blocks[0] = skeleton.getTargetBlock(null, 1);
 				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
-			}catch (Exception e){
-				return;
-			}
-			
-			for (Block block : blocks){
-				this.mobAttemptBreakBlock(block);
+				
+				for (Block block : blocks){
+					this.mobAttemptBreakBlock(block);
+				}
 			}
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onSpiderMoveEvent(SpiderMoveEvent event){
-		if (this.mobList == null || mobList.contains("SPIDER") == false) return;
-		
-		LivingEntity target = event.getTarget();
-		Spider spider = event.getSpider();
-		
-		if (target instanceof Player && plugin.isActive(spider.getWorld())){
-			Block[] blocks = new Block[2];
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("SPIDER")){
+			LivingEntity target = event.getTarget();
+			Spider spider = event.getSpider();
 			
-			try{
+			if (target instanceof Player && plugin.isActive(spider.getWorld())){
+				Block[] blocks = new Block[2];
+				
 				blocks[0] = spider.getTargetBlock(null, 1);
 				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
-			}catch (Exception e){
-				return;
-			}
-			
-			for (Block block : blocks){
-				this.mobAttemptBreakBlock(block);
+				
+				for (Block block : blocks){
+					this.mobAttemptBreakBlock(block);
+				}
 			}
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onZombieMoveEvent(ZombieMoveEvent event){
-		if (this.mobList == null || mobList.contains("ZOMBIE") == false) return;
-		
-		LivingEntity target = event.getTarget();
-		Zombie zombie = event.getZombie();
-		
-		if (target instanceof Player && plugin.isActive(zombie.getWorld())){
-			Block[] blocks = new Block[2];
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("ZOMBIE")){
+			LivingEntity target = event.getTarget();
+			Zombie zombie = event.getZombie();
 			
-			try{
+			if (target instanceof Player && plugin.isActive(zombie.getWorld())){
+				Block[] blocks = new Block[2];
+				
 				blocks[0] = zombie.getTargetBlock(null, 1);
 				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
-			}catch (Exception e){
-				return;
-			}
-			
-			for (Block block : blocks){
-				this.mobAttemptBreakBlock(block);
+				
+				for (Block block : blocks){
+					this.mobAttemptBreakBlock(block);
+				}
 			}
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onEndermanMoveEvent(EndermanMoveEvent event){
-		if (this.mobList == null || mobList.contains("ENDERMAN") == false) return;
-		
-		LivingEntity target = event.getTarget();
-		Enderman enderman = event.getEnderman();
-		
-		if (target instanceof Player && plugin.isActive(enderman.getWorld())){
-			Block[] blocks = new Block[3];
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("ENDERMAN")){
+			LivingEntity target = event.getTarget();
+			Enderman enderman = event.getEnderman();
 			
-			try{
+			if (target instanceof Player && plugin.isActive(enderman.getWorld())){
+				Block[] blocks = new Block[3];
+				
 				blocks[0] = enderman.getTargetBlock(null, 1);
 				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
 				blocks[2] = blocks[1].getRelative(BlockFace.DOWN);
-			}catch (Exception e){
-				return;
-			}
-			
-			for (Block block : blocks){
-				this.mobAttemptBreakBlock(block);
+				
+				for (Block block : blocks){
+					this.mobAttemptBreakBlock(block);
+				}
 			}
 		}
 	}
