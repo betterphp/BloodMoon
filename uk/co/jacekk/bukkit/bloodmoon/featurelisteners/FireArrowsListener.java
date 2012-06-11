@@ -8,13 +8,17 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySkeleton;
 
-public class FireArrowsListener implements Listener {
+public class FireArrowsListener extends BaseListener<BloodMoon> {
+	
+	public FireArrowsListener(BloodMoon plugin){
+		super(plugin);
+	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onProjectileHit(ProjectileHitEvent event){

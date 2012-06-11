@@ -6,12 +6,16 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 
-public class SpawnOnSleepListener implements Listener {
+public class SpawnOnSleepListener extends BaseListener<BloodMoon> {
+	
+	public SpawnOnSleepListener(BloodMoon plugin){
+		super(plugin);
+	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onPlayerBedEnter(PlayerBedEnterEvent event){

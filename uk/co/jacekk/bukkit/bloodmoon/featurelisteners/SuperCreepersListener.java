@@ -5,12 +5,16 @@ import org.bukkit.World;
 import org.bukkit.entity.Creeper;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 
-public class SuperCreepersListener implements Listener {
+public class SuperCreepersListener extends BaseListener<BloodMoon> {
+	
+	public SuperCreepersListener(BloodMoon plugin){
+		super(plugin);
+	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onEntityExplode(EntityExplodeEvent event){

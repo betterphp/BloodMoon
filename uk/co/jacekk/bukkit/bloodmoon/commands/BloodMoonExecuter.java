@@ -3,13 +3,17 @@ package uk.co.jacekk.bukkit.bloodmoon.commands;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
 import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 
-public class BloodMoonExecuter implements CommandExecutor {
+public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
+	
+	public BloodMoonExecuter(BloodMoon plugin){
+		super(plugin);
+	}
 	
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
 		if (sender instanceof Player == false){

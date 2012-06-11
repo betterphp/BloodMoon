@@ -8,17 +8,19 @@ import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 
-public class MoreSpawningListener implements Listener {
+public class MoreSpawningListener extends BaseListener<BloodMoon> {
 	
 	private int multiplier;
 	
-	public MoreSpawningListener(){
+	public MoreSpawningListener(BloodMoon plugin){
+		super(plugin);
+		
 		this.multiplier = BloodMoon.config.getInt("features.more-spawning.multiplier");
 		
 		if (this.multiplier == 0 || this.multiplier > 100){

@@ -11,18 +11,16 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 
-public class SpawnOnKillListener implements Listener {
+public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 	
-	private BloodMoon plugin;
-	
-	public SpawnOnKillListener(BloodMoon instance){
-		this.plugin = instance;
+	public SpawnOnKillListener(BloodMoon plugin){
+		super(plugin);
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)

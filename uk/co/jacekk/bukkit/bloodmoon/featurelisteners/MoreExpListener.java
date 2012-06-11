@@ -4,16 +4,18 @@ import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 
-public class MoreExpListener implements Listener {
+public class MoreExpListener extends BaseListener<BloodMoon> {
 	
-private int multiplier;
+	private int multiplier;
 	
-	public MoreExpListener(){
+	public MoreExpListener(BloodMoon plugin){
+		super(plugin);
+		
 		this.multiplier = BloodMoon.config.getInt("features.more-exp.multiplier");
 		
 		if (this.multiplier == 0 || this.multiplier > 100){

@@ -6,19 +6,17 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 import org.bukkit.inventory.ItemStack;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 
-public class SwordDamageListener implements Listener {
+public class SwordDamageListener extends BaseListener<BloodMoon> {
 	
-	private BloodMoon plugin;
-	
-	public SwordDamageListener(BloodMoon instance){
-		this.plugin = instance;
+	public SwordDamageListener(BloodMoon plugin){
+		super(plugin);
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)

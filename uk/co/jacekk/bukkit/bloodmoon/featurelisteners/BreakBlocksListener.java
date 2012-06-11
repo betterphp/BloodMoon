@@ -14,9 +14,9 @@ import org.bukkit.entity.Spider;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.events.CreeperMoveEvent;
 import uk.co.jacekk.bukkit.bloodmoon.events.EndermanMoveEvent;
@@ -24,13 +24,12 @@ import uk.co.jacekk.bukkit.bloodmoon.events.SkeletonMoveEvent;
 import uk.co.jacekk.bukkit.bloodmoon.events.SpiderMoveEvent;
 import uk.co.jacekk.bukkit.bloodmoon.events.ZombieMoveEvent;
 
-public class BreakBlocksListener implements Listener {
+public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	
-	private BloodMoon plugin;
 	private List<String> mobList;
 	
-	public BreakBlocksListener(BloodMoon instance){
-		this.plugin = instance;
+	public BreakBlocksListener(BloodMoon plugin){
+		super(plugin);
 		
 		if (BloodMoon.config != null){
 			this.mobList = BloodMoon.config.getStringList("features.break-blocks.mobs");

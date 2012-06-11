@@ -5,11 +5,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.bukkit.Server;
-import org.bukkit.plugin.PluginManager;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitScheduler;
-
+import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
 import uk.co.jacekk.bukkit.bloodmoon.commands.BloodMoonExecuter;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityEnderman;
@@ -30,16 +26,7 @@ import uk.co.jacekk.bukkit.bloodmoon.listeners.EntityListener;
 import uk.co.jacekk.bukkit.bloodmoon.listeners.PlayerListener;
 import uk.co.jacekk.bukkit.bloodmoon.listeners.WorldListener;
 
-public class BloodMoon extends JavaPlugin {
-	
-	protected Server server;
-	protected PluginManager manager;
-	protected BukkitScheduler scheduler;
-	
-	protected String pluignDirPath;
-	protected File configFile;
-	
-	protected BloodMoonLogger log;
+public class BloodMoon extends BasePlugin {
 	
 	public Random rand;
 	
@@ -49,18 +36,9 @@ public class BloodMoon extends JavaPlugin {
 	protected BloodMoonTimeMonitor timeMonitor;
 	
 	public void onEnable(){
-		this.server = this.getServer();
-		this.manager = this.server.getPluginManager();
-		this.scheduler = this.server.getScheduler();
-		
-		this.log = new BloodMoonLogger(this);
-		
 		this.rand = new Random();
 		
-		this.pluignDirPath = this.getDataFolder().getAbsolutePath();
-		this.configFile = new File(this.pluignDirPath + File.separator + "config.yml");
-		
-		BloodMoon.config = new BloodMoonConfig(this.configFile, this);
+		BloodMoon.config = new BloodMoonConfig(new File(this.baseDirPath + File.separator + "config.yml"), this);
 		BloodMoon.bloodMoonWorlds = new ArrayList<String>();
 		
 		this.timeMonitor = new BloodMoonTimeMonitor(this);
@@ -89,58 +67,58 @@ public class BloodMoon extends JavaPlugin {
 		}
 		
 		if (BloodMoon.config.getBoolean("always-on")){
-			this.manager.registerEvents(new WorldListener(), this);
+			this.pluginManager.registerEvents(new WorldListener(this), this);
 		}else{
 			this.scheduler.scheduleAsyncRepeatingTask(this, this.timeMonitor, 100, 100);
 		}
 		
-		this.getCommand("bloodmoon").setExecutor(new BloodMoonExecuter());
+		this.getCommand("bloodmoon").setExecutor(new BloodMoonExecuter(this));
 		
 		// These events are always needed.
-		this.manager.registerEvents(new PlayerListener(), this);
-		this.manager.registerEvents(new EntityListener(), this);
+		this.pluginManager.registerEvents(new PlayerListener(this), this);
+		this.pluginManager.registerEvents(new EntityListener(this), this);
 		
 		// These events are only needed by the certain features.
 		if (BloodMoon.config.getBoolean("features.break-blocks.enabled")){
-			this.manager.registerEvents(new BreakBlocksListener(this), this);
+			this.pluginManager.registerEvents(new BreakBlocksListener(this), this);
 		}
 		
 		if (BloodMoon.config.getBoolean("features.fire-arrows.enabled") && BloodMoon.config.getBoolean("features.fire-arrows.ignight-target")){
-			this.manager.registerEvents(new FireArrowsListener(), this);
+			this.pluginManager.registerEvents(new FireArrowsListener(this), this);
 		}
 		
 		if (BloodMoon.config.getBoolean("features.double-health.enabled")){
-			this.manager.registerEvents(new DoubleHealthListener(), this);
+			this.pluginManager.registerEvents(new DoubleHealthListener(this), this);
 		}
 		
 		if (BloodMoon.config.getBoolean("features.more-spawning.enabled")){
-			this.manager.registerEvents(new MoreSpawningListener(), this);
+			this.pluginManager.registerEvents(new MoreSpawningListener(this), this);
 		}
 		
 		if (BloodMoon.config.getBoolean("features.more-exp.enabled")){
-			this.manager.registerEvents(new MoreExpListener(), this);
+			this.pluginManager.registerEvents(new MoreExpListener(this), this);
 		}
 		
 		if (BloodMoon.config.getBoolean("features.super-creepers.enabled")){
-			this.manager.registerEvents(new SuperCreepersListener(), this);
+			this.pluginManager.registerEvents(new SuperCreepersListener(this), this);
 		}
 		
 		if (BloodMoon.config.getBoolean("features.spawn-on-kill.enabled")){
-			this.manager.registerEvents(new SpawnOnKillListener(this), this);
+			this.pluginManager.registerEvents(new SpawnOnKillListener(this), this);
 		}
 		
 		// arrow-rate is handled in BloodMoonEntitySkeleton
 		
 		if (BloodMoon.config.getBoolean("features.sword-damage.enabled")){
-			this.manager.registerEvents(new SwordDamageListener(this), this);
+			this.pluginManager.registerEvents(new SwordDamageListener(this), this);
 		}
 		
 		if (BloodMoon.config.getBoolean("features.lock-in-world.enabled") && BloodMoon.config.getBoolean("always-on") == false){
-			this.manager.registerEvents(new LockInWorldListener(), this);
+			this.pluginManager.registerEvents(new LockInWorldListener(this), this);
 		}
 		
 		if (BloodMoon.config.getBoolean("features.spawn-on-sleep.enabled")){
-			this.manager.registerEvents(new SpawnOnSleepListener(), this);
+			this.pluginManager.registerEvents(new SpawnOnSleepListener(this), this);
 		}
 		
 		this.log.info("Enabled.");

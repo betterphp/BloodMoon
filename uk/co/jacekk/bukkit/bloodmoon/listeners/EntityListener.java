@@ -8,17 +8,22 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
+import uk.co.jacekk.bukkit.baseplugin.BaseListener;
+import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityEnderman;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySkeleton;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySpider;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityZombie;
 
-public class EntityListener implements Listener {
+public class EntityListener extends BaseListener<BloodMoon> {
+	
+	public EntityListener(BloodMoon plugin){
+		super(plugin);
+	}
 	
 	@EventHandler(priority = EventPriority.MONITOR)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
