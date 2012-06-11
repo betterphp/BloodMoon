@@ -30,6 +30,8 @@ public class BloodMoon extends BasePlugin {
 	private ArrayList<String> activeWorlds;
 	
 	public void onEnable(){
+		super.onEnable(true);
+		
 		this.activeWorlds = new ArrayList<String>();
 		
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
