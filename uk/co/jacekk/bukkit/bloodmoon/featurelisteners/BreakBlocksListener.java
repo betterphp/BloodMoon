@@ -42,10 +42,10 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		World world = block.getWorld();
 		Material type = block.getType();
 		
-		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_BLOCKS).contains(type.name().toUpperCase()) && block.getWorld().getTime() % 10 == 0){
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_BLOCKS).contains(type.name().toUpperCase()) && block.getWorld().getTime() % 20 == 0){
 			Location location = block.getLocation();
 			
-			if (this.rand.nextInt(100) < 75){
+			if (this.rand.nextInt(100) < 80){
 				world.playEffect(location, Effect.ZOMBIE_CHEW_WOODEN_DOOR, 0);
 			}else{
 				world.playEffect(location, Effect.ZOMBIE_DESTROY_DOOR, 0);
