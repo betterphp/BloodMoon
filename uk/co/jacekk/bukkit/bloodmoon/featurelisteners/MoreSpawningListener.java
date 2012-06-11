@@ -39,7 +39,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 		
 		List<EntityType> types = Arrays.asList(EntityType.CREEPER, EntityType.ENDERMAN, EntityType.SKELETON, EntityType.ZOMBIE, EntityType.SPIDER);
 		
-		if (plugin.bloodMoonActiveWorlds.contains(world.getName()) && types.contains(type)){
+		if (types.contains(type) && plugin.isActive(world)){
 			for (int i = 0; i < this.multiplier; ++i){
 				world.spawnCreature(location, type);
 			}

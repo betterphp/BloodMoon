@@ -26,7 +26,7 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 		World toWorld = event.getTo().getWorld();
 		World fromWorld = event.getFrom().getWorld();
 		
-		if (player.hasPermission("bloodmoon.feature.ignore-world-lock") == false && fromWorld != toWorld && plugin.bloodMoonActiveWorlds.contains(fromWorld.getName())){
+		if (player.hasPermission("bloodmoon.feature.ignore-world-lock") == false && fromWorld != toWorld && plugin.isActive(fromWorld)){
 			event.setCancelled(true);
 			player.sendMessage(ChatColor.RED + "You cannot leave the world until the bloodmoon has ended.");
 		}
@@ -43,7 +43,7 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 		World toWorld = event.getRespawnLocation().getWorld();
 		World fromWorld = player.getWorld();
 		
-		if (player.hasPermission("bloodmoon.feature.ignore-world-lock") == false && fromWorld != toWorld && plugin.bloodMoonActiveWorlds.contains(fromWorld.getName())){
+		if (player.hasPermission("bloodmoon.feature.ignore-world-lock") == false && fromWorld != toWorld && plugin.isActive(fromWorld)){
 			event.setRespawnLocation(fromWorld.getSpawnLocation());
 			player.sendMessage(ChatColor.RED + "You cannot leave the world until the bloodmoon has ended.");
 		}

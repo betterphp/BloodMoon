@@ -28,7 +28,7 @@ public class MoreExpListener extends BaseListener<BloodMoon> {
 	public void onEntityDeath(EntityDeathEvent event){
 		Entity entity = event.getEntity();
 		
-		if (entity instanceof Creature && plugin.bloodMoonActiveWorlds.contains(entity.getWorld().getName())){
+		if (entity instanceof Creature && plugin.isActive(entity.getWorld())){
 			event.setDroppedExp(event.getDroppedExp() * multiplier);
 		}
 	}

@@ -36,14 +36,14 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			return true;
 		}
 		
-		if (plugin.bloodMoonActiveWorlds.contains(worldName)){
-			plugin.bloodMoonActiveWorlds.remove(worldName);
+		if (plugin.isActive(worldName)){
+			plugin.deactivate(worldName);
 			
 			for (Player worldPlayer : world.getPlayers()){
 				worldPlayer.sendMessage(ChatColor.RED + "[" + player.getName() + "] The blood moon has been stopped !");
 			}
 		}else{
-			plugin.bloodMoonActiveWorlds.add(worldName);
+			plugin.activate(worldName);
 			
 			for (Player worldPlayer : world.getPlayers()){
 				worldPlayer.sendMessage(ChatColor.RED + "[" + player.getName() + "] The blood moon is rising !");

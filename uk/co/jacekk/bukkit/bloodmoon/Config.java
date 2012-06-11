@@ -28,7 +28,7 @@ public enum Config implements PluginConfigKey {
 	FEATURE_MORE_SPAWNING_MULTIPLIER(		"features.more-spawning.multiplier",		2),
 	
 	FEATURE_MORE_EXP_ENABLED(				"features.more-exp.enabled",				true),
-	FEATURE_MORE_EXP_MULTIPLIER(			"features,more-exp.multiplier",				2),
+	FEATURE_MORE_EXP_MULTIPLIER(			"features.more-exp.multiplier",				2),
 	
 	FEATURE_SWORD_DAMAGE_ENABLED(			"features.sword-damage.enabled",			true),
 	FEATURE_SWORD_DAMAGE_MOBS(				"features.sword-damage.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),

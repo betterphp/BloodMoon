@@ -2,6 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.featurelisteners;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import org.bukkit.World;
 import org.bukkit.entity.Creature;
@@ -15,13 +16,18 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 	
+	private Random rand;
+	
 	public SpawnOnKillListener(BloodMoon plugin){
 		super(plugin);
+		
+		this.rand = new Random();
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
@@ -29,7 +35,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 		Entity entity = event.getEntity();
 		World world = entity.getWorld();
 		
-		if (entity instanceof Creature && plugin.bloodMoonActiveWorlds.contains(world.getName())){
+		if (entity instanceof Creature && plugin.isActive(world)){
 			Creature creature = (Creature) entity;
 			LivingEntity target = creature.getTarget();
 			
@@ -41,10 +47,10 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 											DamageCause.PROJECTILE
 										);
 			
-			if (target instanceof Player && causes.contains(entity.getLastDamageCause().getCause()) && BloodMoon.config.isCreatureOnMobList("features.spawn-on-kill.mobs", creature)){
-				if (plugin.rand.nextInt(100) <= plugin.config.getInt(Config.FEATURE_SPAWN_ON_KILL_CHANCE)){
-					String mobName = BloodMoon.config.getRandomStringFromList("features.spawn-on-kill.spawn");
-					EntityType creatureType = EntityType.fromName(Character.toUpperCase(mobName.charAt(0)) + mobName.toLowerCase().substring(1));
+			if (target instanceof Player && causes.contains(entity.getLastDamageCause().getCause()) && plugin.config.getStringList(Config.FEATURE_SPAWN_ON_KILL_MOBS).contains(creature.getType().name().toUpperCase())){
+				if (this.rand.nextInt(100) <= plugin.config.getInt(Config.FEATURE_SPAWN_ON_KILL_CHANCE)){
+					String mobName = (String) ListUtils.getRandom(plugin.config.getStringList(Config.FEATURE_SPAWN_ON_KILL_SPAWN));
+					EntityType creatureType = EntityType.fromName(mobName.toUpperCase());
 					
 					if (creatureType != null){
 						world.spawnCreature(creature.getLocation(), creatureType);

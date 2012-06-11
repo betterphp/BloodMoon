@@ -1,5 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.featurelisteners;
 
+import java.util.Random;
+
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -16,8 +18,12 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class SwordDamageListener extends BaseListener<BloodMoon> {
 	
+	private Random rand;
+	
 	public SwordDamageListener(BloodMoon plugin){
 		super(plugin);
+		
+		this.rand = new Random();
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
@@ -26,22 +32,20 @@ public class SwordDamageListener extends BaseListener<BloodMoon> {
 		
 		Entity entity = event.getEntity();
 		
-		if (event.getCause() == DamageCause.ENTITY_ATTACK && plugin.bloodMoonActiveWorlds.contains(entity.getWorld().getName())){
+		if (event.getCause() == DamageCause.ENTITY_ATTACK && plugin.isActive(entity.getWorld())){
 			if (entity instanceof Creature){
 				Creature creature = (Creature) entity;
-				
 				LivingEntity target = creature.getTarget();
 				
 				if (target instanceof Player){
 					Player player = (Player) target;
-					
 					ItemStack item = player.getItemInHand();
 					
-					// 190 character line :D
-					if (BloodMoon.config.isCreatureOnMobList("features.sword-damage.mobs", creature) && plugin.rand.nextInt(100) <= plugin.config.getInt(Config.FEATURE_SWORD_DAMAGE_CHANCE)){
+					if (plugin.config.getStringList(Config.FEATURE_SPAWN_ON_KILL_MOBS).contains(creature.getType().name().toUpperCase()) && this.rand.nextInt(100) <= plugin.config.getInt(Config.FEATURE_SWORD_DAMAGE_CHANCE)){
 						short damage = item.getDurability();
+						short remove = (short) (item.getType().getMaxDurability() / 50);
 						
-						// TODO: Take a percentage of the max uses
+						item.setDurability((short) ((damage > remove) ? damage - remove : 1));
 					}
 				}
 			}

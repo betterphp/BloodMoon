@@ -9,7 +9,9 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class SpawnOnSleepListener extends BaseListener<BloodMoon> {
 	
@@ -25,9 +27,9 @@ public class SpawnOnSleepListener extends BaseListener<BloodMoon> {
 		Location location = player.getLocation();
 		World world = location.getWorld();
 		
-		if (plugin.bloodMoonActiveWorlds.contains(world.getName())){
-			String mobName = BloodMoon.config.getRandomStringFromList("features.spawn-on-sleep.spawn");
-			EntityType creatureType = EntityType.fromName(Character.toUpperCase(mobName.charAt(0)) + mobName.toLowerCase().substring(1));
+		if (plugin.isActive(world)){
+			String mobName = (String) ListUtils.getRandom(plugin.config.getStringList(Config.FEATURE_SPAWN_ON_SLEEP_SPAWN));
+			EntityType creatureType = EntityType.fromName(mobName.toUpperCase());
 			
 			if (creatureType != null){
 				world.spawnCreature(location, creatureType);

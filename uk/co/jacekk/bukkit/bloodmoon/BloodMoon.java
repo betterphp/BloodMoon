@@ -3,7 +3,8 @@ package uk.co.jacekk.bukkit.bloodmoon;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Random;
+
+import org.bukkit.World;
 
 import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -23,23 +24,18 @@ import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SpawnOnKillListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SpawnOnSleepListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SuperCreepersListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SwordDamageListener;
-import uk.co.jacekk.bukkit.bloodmoon.listeners.EntityListener;
-import uk.co.jacekk.bukkit.bloodmoon.listeners.PlayerListener;
-import uk.co.jacekk.bukkit.bloodmoon.listeners.WorldListener;
 
 public class BloodMoon extends BasePlugin {
 	
-	public Random rand;
-	public ArrayList<String> bloodMoonActiveWorlds;
+	private ArrayList<String> activeWorlds;
 	
 	public void onEnable(){
-		this.rand = new Random();
-		this.bloodMoonActiveWorlds = new ArrayList<String>();
+		this.activeWorlds = new ArrayList<String>();
 		
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
 		
 		try{
-			@SuppressWarnings({"rawtypes"})
+			@SuppressWarnings("rawtypes")
 			Class[] args = new Class[3];
 			args[0] = Class.class;
 			args[1] = String.class;
@@ -62,16 +58,16 @@ public class BloodMoon extends BasePlugin {
 		}
 		
 		if (this.config.getBoolean(Config.ALWAYS_ON)){
-			this.pluginManager.registerEvents(new WorldListener(this), this);
+			this.pluginManager.registerEvents(new ActivateWorldListener(this), this);
 		}else{
-			this.scheduler.scheduleAsyncRepeatingTask(this, new BloodMoonTimeMonitor(this), 100L, 100L);
+			this.scheduler.scheduleAsyncRepeatingTask(this, new TimeMonitorTask(this), 100L, 100L);
 		}
 		
 		this.getCommand("bloodmoon").setExecutor(new BloodMoonExecuter(this));
 		
 		// These events are always needed.
-		this.pluginManager.registerEvents(new PlayerListener(this), this);
-		this.pluginManager.registerEvents(new EntityListener(this), this);
+		this.pluginManager.registerEvents(new PlayerEnterWorldListener(this), this);
+		this.pluginManager.registerEvents(new EntityReplaceListener(this), this);
 		
 		// These events are only needed by the certain features.
 		if (this.config.getBoolean(Config.FEATURE_BREAK_BLOCKS_ENABLED)){
@@ -102,6 +98,10 @@ public class BloodMoon extends BasePlugin {
 			this.pluginManager.registerEvents(new SpawnOnKillListener(this), this);
 		}
 		
+		if (this.config.getBoolean(Config.FEATURE_SPAWN_ON_SLEEP_ENABLED)){
+			this.pluginManager.registerEvents(new SpawnOnSleepListener(this), this);
+		}
+		
 		// arrow-rate is handled in BloodMoonEntitySkeleton
 		
 		if (this.config.getBoolean(Config.FEATURE_SWORD_DAMAGE_ENABLED)){
@@ -111,10 +111,30 @@ public class BloodMoon extends BasePlugin {
 		if (this.config.getBoolean(Config.FEATURE_LOCK_IN_WORLD_ENABLED) && !this.config.getBoolean(Config.ALWAYS_ON)){
 			this.pluginManager.registerEvents(new LockInWorldListener(this), this);
 		}
-		
-		if (this.config.getBoolean(Config.FEATURE_SPAWN_ON_SLEEP_ENABLED)){
-			this.pluginManager.registerEvents(new SpawnOnSleepListener(this), this);
-		}
+	}
+	
+	public void activate(String worldName){
+		this.activeWorlds.add(worldName);
+	}
+	
+	public void activate(World world){
+		this.activate(world.getName());
+	}
+	
+	public void deactivate(String worldName){
+		this.activeWorlds.remove(worldName);
+	}
+	
+	public void deactivate(World world){
+		this.activate(world.getName());
+	}
+	
+	public boolean isActive(String worldName){
+		return this.activeWorlds.contains(worldName);
+	}
+	
+	public boolean isActive(World world){
+		return this.isActive(world.getName());
 	}
 	
 }
