@@ -73,13 +73,14 @@ public class BloodMoon extends BasePlugin {
 		this.pluginManager.registerEvents(new PlayerEnterWorldListener(this), this);
 		this.pluginManager.registerEvents(new EntityReplaceListener(this), this);
 		
-		// These events are only needed by the certain features.
-		if (this.config.getBoolean(Config.FEATURE_BREAK_BLOCKS_ENABLED)){
-			this.pluginManager.registerEvents(new BreakBlocksListener(this), this);
-		}
+		// NOTE: arrow-rate is handled in BloodMoonEntitySkeleton
 		
 		if (this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_IGNITE_TARGET)){
 			this.pluginManager.registerEvents(new FireArrowsListener(this), this);
+		}
+		
+		if (this.config.getBoolean(Config.FEATURE_BREAK_BLOCKS_ENABLED)){
+			this.pluginManager.registerEvents(new BreakBlocksListener(this), this);
 		}
 		
 		if (this.config.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED)){
@@ -94,6 +95,10 @@ public class BloodMoon extends BasePlugin {
 			this.pluginManager.registerEvents(new MoreExpListener(this), this);
 		}
 		
+		if (this.config.getBoolean(Config.FEATURE_SWORD_DAMAGE_ENABLED)){
+			this.pluginManager.registerEvents(new SwordDamageListener(this), this);
+		}
+		
 		if (this.config.getBoolean(Config.FEATURE_SUPER_CREEPERS_ENABLED)){
 			this.pluginManager.registerEvents(new SuperCreepersListener(this), this);
 		}
@@ -104,12 +109,6 @@ public class BloodMoon extends BasePlugin {
 		
 		if (this.config.getBoolean(Config.FEATURE_SPAWN_ON_SLEEP_ENABLED)){
 			this.pluginManager.registerEvents(new SpawnOnSleepListener(this), this);
-		}
-		
-		// arrow-rate is handled in BloodMoonEntitySkeleton
-		
-		if (this.config.getBoolean(Config.FEATURE_SWORD_DAMAGE_ENABLED)){
-			this.pluginManager.registerEvents(new SwordDamageListener(this), this);
 		}
 		
 		if (this.config.getBoolean(Config.FEATURE_LOCK_IN_WORLD_ENABLED) && !this.config.getBoolean(Config.ALWAYS_ON)){

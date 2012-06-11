@@ -3,7 +3,10 @@ package uk.co.jacekk.bukkit.bloodmoon.featurelisteners;
 import java.util.List;
 import java.util.Random;
 
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Creeper;
@@ -39,14 +42,26 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	}
 	
 	private void mobAttemptBreakBlock(Block block){
-		if (block.getWorld().getTime() % 10 == 0 && this.rand.nextInt(100) < 50) return;
-		
-		List<String> blockList = plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_BLOCKS);
+		World world = block.getWorld();
 		Material type = block.getType();
 		
-		if (type != Material.AIR && blockList.contains(type.toString())){
-			block.setType(Material.AIR);
-			block.getWorld().dropItemNaturally(block.getLocation(), new ItemStack(type, 1));
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_BLOCKS).contains(type.name().toUpperCase()) && block.getWorld().getTime() % 10 == 0){
+			Location location = block.getLocation();
+			
+			if (this.rand.nextInt(100) < 75){
+				world.playEffect(location, Effect.ZOMBIE_CHEW_WOODEN_DOOR, 0);
+			}else{
+				world.playEffect(location, Effect.ZOMBIE_DESTROY_DOOR, 0);
+				
+				if (plugin.config.getBoolean(Config.FEATURE_BREAK_BLOCKS_REALISTIC_DROP)){
+					block.breakNaturally();
+				}else{
+					if (type != Material.AIR){
+						block.setType(Material.AIR);
+						world.dropItemNaturally(location, new ItemStack(type, 1));
+					}
+				}
+			}
 		}
 	}
 	
