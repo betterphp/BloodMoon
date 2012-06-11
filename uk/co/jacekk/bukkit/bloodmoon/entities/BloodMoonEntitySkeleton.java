@@ -31,7 +31,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 				goal.setAccessible(true);
 				
 				if (goal.get(item) instanceof PathfinderGoalArrowAttack){
-					goal.set(item, new BloodMoonPathfinderGoalArrowAttack(this, plugin, this.bb, 1, 60));
+					goal.set(item, new BloodMoonPathfinderGoalArrowAttack(this, plugin, this.bb, 60));
 				}
 			}
 			
