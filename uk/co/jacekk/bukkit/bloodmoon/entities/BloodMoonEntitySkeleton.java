@@ -2,6 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.entities;
 
 import java.lang.reflect.Field;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.util.UnsafeList;
 import org.bukkit.entity.Skeleton;
@@ -39,6 +40,10 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 		}catch (Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	public BloodMoonEntitySkeleton(World world){
+		this(world, (BloodMoon) Bukkit.getPluginManager().getPlugin("BloodMoon"));
 	}
 	
 	@Override
