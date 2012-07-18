@@ -22,11 +22,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 	public MoreSpawningListener(BloodMoon plugin){
 		super(plugin);
 		
-		this.multiplier = plugin.config.getInt(Config.FEATURE_MORE_SPAWNING_MULTIPLIER);
-		
-		if (this.multiplier == 0 || this.multiplier > 100){
-			this.multiplier = 1;
-		}
+		this.multiplier = Math.max(plugin.config.getInt(Config.FEATURE_MORE_SPAWNING_MULTIPLIER), 1);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
