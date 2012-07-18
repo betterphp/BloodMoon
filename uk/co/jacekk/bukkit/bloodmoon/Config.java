@@ -25,7 +25,8 @@ public enum Config implements PluginConfigKey {
 	FEATURE_DOUBLE_HEALTH_MOBS(				"features.double-health.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
 	
 	FEATURE_MORE_SPAWNING_ENABLED(			"features.more-spawning.enabled",			true),
-	FEATURE_MORE_SPAWNING_MULTIPLIER(		"features.more-spawning.multiplier",		2),
+	FEATURE_MORE_SPAWNING_MOBS(				"features.more-spawning.mods",				2),
+	FEATURE_MORE_SPAWNING_MULTIPLIER(		"features.more-spawning.multiplier",		Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
 	
 	FEATURE_MORE_EXP_ENABLED(				"features.more-exp.enabled",				true),
 	FEATURE_MORE_EXP_MULTIPLIER(			"features.more-exp.multiplier",				2),
