@@ -17,11 +17,7 @@ public class MoreExpListener extends BaseListener<BloodMoon> {
 	public MoreExpListener(BloodMoon plugin){
 		super(plugin);
 		
-		this.multiplier = plugin.config.getInt(Config.FEATURE_MORE_EXP_MULTIPLIER);
-		
-		if (this.multiplier == 0 || this.multiplier > 100){
-			this.multiplier = 1;
-		}
+		this.multiplier = Math.max(plugin.config.getInt(Config.FEATURE_MORE_EXP_MULTIPLIER), 1);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL)
