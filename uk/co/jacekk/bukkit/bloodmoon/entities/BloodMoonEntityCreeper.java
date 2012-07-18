@@ -24,7 +24,7 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 		
 		this.world.getServer().getPluginManager().callEvent(event);
 		
-		if (event.isCancelled() && creeper.isDead() == false){
+		if (event.isCancelled() && !creeper.isDead()){
 			return;
 		}
 		

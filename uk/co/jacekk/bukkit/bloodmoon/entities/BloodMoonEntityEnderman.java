@@ -24,7 +24,7 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 		
 		this.world.getServer().getPluginManager().callEvent(event);
 		
-		if (event.isCancelled() && enderman.isDead() == false){
+		if (event.isCancelled() && !enderman.isDead()){
 			return;
 		}
 		

@@ -42,7 +42,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		World world = block.getWorld();
 		Material type = block.getType();
 		
-		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_BLOCKS).contains(type.name().toUpperCase()) && block.getWorld().getTime() % 20 == 0){
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_BLOCKS).contains(type.name().toUpperCase())){
 			Location location = block.getLocation();
 			
 			if (this.rand.nextInt(100) < 80){
@@ -64,11 +64,13 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onCreeperMoveEvent(CreeperMoveEvent event){
-		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("CREEPER")){;
+		Creeper creeper = event.getCreeper();
+		World world = creeper.getWorld();
+		
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("CREEPER") && world.getTime() % 20 == 0){
 			LivingEntity target = event.getTarget();
-			Creeper creeper = event.getCreeper();
 			
-			if (target instanceof Player && plugin.isActive(creeper.getWorld())){
+			if (target instanceof Player && plugin.isActive(world)){
 				Block[] blocks = new Block[2];
 				
 				blocks[0] = creeper.getTargetBlock(null, 1);
@@ -83,11 +85,13 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onSkeletonMoveEvent(SkeletonMoveEvent event){
-		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("SKELETON")){
+		Skeleton skeleton = event.getSkeleton();
+		World world = skeleton.getWorld();
+		
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("SKELETON") && world.getTime() % 20 == 0){
 			LivingEntity target = event.getTarget();
-			Skeleton skeleton = event.getSkeleton();
 			
-			if (target instanceof Player && plugin.isActive(skeleton.getWorld())){
+			if (target instanceof Player && plugin.isActive(world)){
 				Block[] blocks = new Block[2];
 				
 				blocks[0] = skeleton.getTargetBlock(null, 1);
@@ -105,11 +109,13 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onSpiderMoveEvent(SpiderMoveEvent event){
-		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("SPIDER")){
+		Spider spider = event.getSpider();
+		World world = spider.getWorld();
+		
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("SPIDER") && world.getTime() % 20 == 0){
 			LivingEntity target = event.getTarget();
-			Spider spider = event.getSpider();
 			
-			if (target instanceof Player && plugin.isActive(spider.getWorld())){
+			if (target instanceof Player && plugin.isActive(world)){
 				Block block = spider.getTargetBlock(null, 1);
 				
 				if (block != null){
@@ -121,11 +127,13 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onZombieMoveEvent(ZombieMoveEvent event){
-		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("ZOMBIE")){
+		Zombie zombie = event.getZombie();
+		World world = zombie.getWorld();
+		
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("ZOMBIE") && world.getTime() % 20 == 0){
 			LivingEntity target = event.getTarget();
-			Zombie zombie = event.getZombie();
 			
-			if (target instanceof Player && plugin.isActive(zombie.getWorld())){
+			if (target instanceof Player && plugin.isActive(world)){
 				Block[] blocks = new Block[2];
 				
 				blocks[0] = zombie.getTargetBlock(null, 1);
@@ -143,11 +151,13 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onEndermanMoveEvent(EndermanMoveEvent event){
-		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("ENDERMAN")){
+		Enderman enderman = event.getEnderman();
+		World world = enderman.getWorld();
+		
+		if (plugin.config.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains("ENDERMAN") && world.getTime() % 20 == 0){
 			LivingEntity target = event.getTarget();
-			Enderman enderman = event.getEnderman();
 			
-			if (target instanceof Player && plugin.isActive(enderman.getWorld())){
+			if (target instanceof Player && plugin.isActive(world)){
 				Block[] blocks = new Block[3];
 				
 				blocks[0] = enderman.getTargetBlock(null, 1);

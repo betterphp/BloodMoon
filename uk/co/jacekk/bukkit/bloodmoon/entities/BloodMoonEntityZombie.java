@@ -24,7 +24,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 		
 		this.world.getServer().getPluginManager().callEvent(event);
 		
-		if (event.isCancelled() && zombie.isDead() == false){
+		if (event.isCancelled() && !zombie.isDead()){
 			return;
 		}
 		

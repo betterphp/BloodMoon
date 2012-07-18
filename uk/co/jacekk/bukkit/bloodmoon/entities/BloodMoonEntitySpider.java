@@ -24,7 +24,7 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 		
 		this.world.getServer().getPluginManager().callEvent(event);
 		
-		if (event.isCancelled() && spider.isDead() == false){
+		if (event.isCancelled() && !spider.isDead()){
 			return;
 		}
 		

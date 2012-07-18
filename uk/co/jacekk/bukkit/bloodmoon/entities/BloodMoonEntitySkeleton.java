@@ -57,7 +57,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 		
 		this.world.getServer().getPluginManager().callEvent(event);
 		
-		if (event.isCancelled() && skeleton.isDead() == false){
+		if (event.isCancelled() && !skeleton.isDead()){
 			return;
 		}
 		
