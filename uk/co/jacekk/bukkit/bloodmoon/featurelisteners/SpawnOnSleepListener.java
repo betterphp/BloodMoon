@@ -19,7 +19,7 @@ public class SpawnOnSleepListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPlayerBedEnter(PlayerBedEnterEvent event){
 		Player player = event.getPlayer();
 		Location location = player.getLocation();

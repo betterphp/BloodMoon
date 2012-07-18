@@ -26,7 +26,7 @@ public class SwordDamageListener extends BaseListener<BloodMoon> {
 		this.rand = new Random();
 	}
 	
-	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onEntityDamage(EntityDamageEvent event){
 		Entity entity = event.getEntity();
 		

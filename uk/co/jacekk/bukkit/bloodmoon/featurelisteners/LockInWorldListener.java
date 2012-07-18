@@ -19,7 +19,7 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPlayerTeleport(PlayerTeleportEvent event){
 		Player player = event.getPlayer();
 		World toWorld = event.getTo().getWorld();
@@ -31,12 +31,12 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPlayerPortal(PlayerPortalEvent event){
 		this.onPlayerTeleport(event);
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerRespawn(PlayerRespawnEvent event){
 		Player player = event.getPlayer();
 		World toWorld = event.getRespawnLocation().getWorld();

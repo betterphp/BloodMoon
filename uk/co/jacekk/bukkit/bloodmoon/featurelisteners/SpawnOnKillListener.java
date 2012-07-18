@@ -30,7 +30,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 		this.rand = new Random();
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDeath(EntityDeathEvent event){
 		Entity entity = event.getEntity();
 		World world = entity.getWorld();

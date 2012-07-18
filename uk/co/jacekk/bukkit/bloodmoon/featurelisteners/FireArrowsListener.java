@@ -20,7 +20,7 @@ public class FireArrowsListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onProjectileHit(ProjectileHitEvent event){
 		Entity entity = event.getEntity();
 		
