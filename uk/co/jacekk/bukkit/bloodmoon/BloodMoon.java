@@ -68,7 +68,7 @@ public class BloodMoon extends BasePlugin {
 		if (this.config.getBoolean(Config.ALWAYS_ON)){
 			this.pluginManager.registerEvents(new ActivateWorldListener(this), this);
 		}else{
-			this.scheduler.scheduleAsyncRepeatingTask(this, new TimeMonitorTask(this), 100L, 100L);
+			this.scheduler.scheduleSyncRepeatingTask(this, new TimeMonitorTask(this), 100L, 100L);
 		}
 		
 		// These events are always needed.
