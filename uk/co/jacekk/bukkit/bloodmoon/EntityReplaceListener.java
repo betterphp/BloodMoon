@@ -32,58 +32,58 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		World world = location.getWorld();
 		
 		net.minecraft.server.World mcWorld = ((CraftWorld) world).getHandle();
-		net.minecraft.server.Entity mcEntity = (((CraftEntity) entity).getHandle());
+		net.minecraft.server.Entity mcEntity = ((CraftEntity) entity).getHandle();
 		
-		if (creatureType == EntityType.CREEPER && mcEntity instanceof BloodMoonEntityCreeper == false){
+		if (creatureType == EntityType.CREEPER && !(mcEntity instanceof BloodMoonEntityCreeper)){
 			BloodMoonEntityCreeper bloodMoonEntityCreeper = new BloodMoonEntityCreeper(mcWorld);
 			
 			bloodMoonEntityCreeper.setPosition(location.getX(), location.getY(), location.getZ());
 			
-			mcWorld.removeEntity((net.minecraft.server.EntityCreeper) mcEntity);
+			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntityCreeper, SpawnReason.CUSTOM);
 			
 			return;
 		}
 		
-		if (creatureType == EntityType.SKELETON && mcEntity instanceof BloodMoonEntitySkeleton == false){
+		if (creatureType == EntityType.SKELETON && !(mcEntity instanceof BloodMoonEntitySkeleton)){
 			BloodMoonEntitySkeleton bloodMoonEntitySkeleton = new BloodMoonEntitySkeleton(mcWorld, plugin);
 			
 			bloodMoonEntitySkeleton.setPosition(location.getX(), location.getY(), location.getZ());
 			
-			mcWorld.removeEntity((net.minecraft.server.EntitySkeleton) mcEntity);
+			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntitySkeleton, SpawnReason.CUSTOM);
 			
 			return;
 		}
 		
-		if (creatureType == EntityType.SPIDER && mcEntity instanceof BloodMoonEntitySpider == false){
+		if (creatureType == EntityType.SPIDER && !(mcEntity instanceof BloodMoonEntitySpider)){
 			BloodMoonEntitySpider bloodMoonEntitySpider = new BloodMoonEntitySpider(mcWorld);
 			
 			bloodMoonEntitySpider.setPosition(location.getX(), location.getY(), location.getZ());
 			
-			mcWorld.removeEntity((net.minecraft.server.EntitySpider) mcEntity);
+			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntitySpider, SpawnReason.CUSTOM);
 			
 			return;
 		}
 		
-		if (creatureType == EntityType.ZOMBIE && mcEntity instanceof BloodMoonEntityZombie == false){
+		if (creatureType == EntityType.ZOMBIE && !(mcEntity instanceof BloodMoonEntityZombie)){
 			BloodMoonEntityZombie bloodMoonEntityZombie = new BloodMoonEntityZombie(mcWorld);
 			
 			bloodMoonEntityZombie.setPosition(location.getX(), location.getY(), location.getZ());
 			
-			mcWorld.removeEntity((net.minecraft.server.EntityZombie) mcEntity);
+			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntityZombie, SpawnReason.CUSTOM);
 			
 			return;
 		}
 		
-		if (creatureType == EntityType.ENDERMAN && mcEntity instanceof BloodMoonEntityEnderman == false){
+		if (creatureType == EntityType.ENDERMAN && !(mcEntity instanceof BloodMoonEntityEnderman)){
 			BloodMoonEntityEnderman bloodMoonEntityEnderman = new BloodMoonEntityEnderman(mcWorld);
 			
 			bloodMoonEntityEnderman.setPosition(location.getX(), location.getY(), location.getZ());
 			
-			mcWorld.removeEntity((net.minecraft.server.EntityEnderman) mcEntity);
+			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntityEnderman, SpawnReason.CUSTOM);
 			
 			return;
