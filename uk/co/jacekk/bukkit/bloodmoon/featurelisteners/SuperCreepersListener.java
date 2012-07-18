@@ -17,7 +17,7 @@ public class SuperCreepersListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityExplode(EntityExplodeEvent event){
 		if (event.getEntityType() == EntityType.CREEPER){
 			Location location = event.getLocation();

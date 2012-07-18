@@ -48,7 +48,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 										);
 			
 			if (target instanceof Player && causes.contains(entity.getLastDamageCause().getCause()) && plugin.config.getStringList(Config.FEATURE_SPAWN_ON_KILL_MOBS).contains(creature.getType().name().toUpperCase())){
-				if (this.rand.nextInt(100) <= plugin.config.getInt(Config.FEATURE_SPAWN_ON_KILL_CHANCE)){
+				if (this.rand.nextInt(100) < plugin.config.getInt(Config.FEATURE_SPAWN_ON_KILL_CHANCE)){
 					String mobName = (String) ListUtils.getRandom(plugin.config.getStringList(Config.FEATURE_SPAWN_ON_KILL_SPAWN));
 					EntityType creatureType = EntityType.fromName(mobName.toUpperCase());
 					
