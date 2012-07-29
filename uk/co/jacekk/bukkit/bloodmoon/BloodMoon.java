@@ -37,8 +37,7 @@ public class BloodMoon extends BasePlugin {
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
 		
 		try{
-			@SuppressWarnings("rawtypes")
-			Class[] args = new Class[3];
+			Class<?>[] args = new Class[3];
 			args[0] = Class.class;
 			args[1] = String.class;
 			args[2] = int.class;
