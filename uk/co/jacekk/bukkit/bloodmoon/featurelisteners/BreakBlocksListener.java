@@ -55,7 +55,8 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 				}else{
 					if (type != Material.AIR){
 						block.setType(Material.AIR);
-						world.dropItemNaturally(location, new ItemStack(type, 1));
+						
+						world.dropItemNaturally(location, new ItemStack(type, 1, block.getData()));
 					}
 				}
 			}
