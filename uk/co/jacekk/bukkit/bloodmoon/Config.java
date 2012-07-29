@@ -16,6 +16,10 @@ public enum Config implements PluginConfigKey {
 	FEATURE_FIRE_ARROWS_ENABLED(			"features.fire-arrows.enabled",				true),
 	FEATURE_FIRE_ARROWS_IGNITE_TARGET(		"features.fire-arrows.ignite-arget",		true),
 	
+	FEATURE_TARGET_DISTANCE_ENABLED(		"features.target-distance.enabled",			true),
+	FEATURE_TARGET_DISTANCE_MULTIPLIER(		"features.target-distance.multiplier",		3),
+	FEATURE_TARGET_DISTANCE_MOBS(			"features.target-distance.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
+	
 	FEATURE_BREAK_BLOCKS_ENABLED(			"features.break-blocks.enabled",			true),
 	FEATURE_BREAK_BLOCKS_REALISTIC_DROP(	"features.break-blocks.realistic-drop",		true),
 	FEATURE_BREAK_BLOCKS_MOBS(				"features.break-blocks.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),

@@ -76,6 +76,8 @@ public class BloodMoon extends BasePlugin {
 		
 		// NOTE: arrow-rate is handled in BloodMoonEntitySkeleton
 		
+		// NOTE: target-distance is handled in BloodMoonPathfinderGoalNearestAttackableTarget and all BloodMoonEntity*
+		
 		if (this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_IGNITE_TARGET)){
 			this.pluginManager.registerEvents(new FireArrowsListener(this), this);
 		}
