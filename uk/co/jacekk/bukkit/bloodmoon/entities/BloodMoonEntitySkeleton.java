@@ -20,13 +20,21 @@ import net.minecraft.server.EntityHuman;
 import net.minecraft.server.EntityLiving;
 import net.minecraft.server.PathfinderGoal;
 import net.minecraft.server.PathfinderGoalArrowAttack;
+import net.minecraft.server.PathfinderGoalFleeSun;
+import net.minecraft.server.PathfinderGoalFloat;
+import net.minecraft.server.PathfinderGoalHurtByTarget;
+import net.minecraft.server.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.PathfinderGoalRandomLookaround;
+import net.minecraft.server.PathfinderGoalRandomStroll;
+import net.minecraft.server.PathfinderGoalRestrictSun;
 import net.minecraft.server.World;
 
 public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton {
 	
 	private BloodMoon plugin;
 	
+	@SuppressWarnings("unchecked")
 	public BloodMoonEntitySkeleton(World world, Plugin plugin){
 		super(world);
 		
@@ -47,50 +55,37 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 			}
 		}
 		
-		if (this.plugin.config.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)){
-			try{
-				Field a = this.goalSelector.getClass().getDeclaredField("a");
-				a.setAccessible(true);
-				
-				@SuppressWarnings("unchecked")
-				UnsafeList<PathfinderGoal> goals = (UnsafeList<PathfinderGoal>) a.get(this.goalSelector);
-				
-				for (Object item : goals){
-					Field goal = item.getClass().getDeclaredField("a");
-					goal.setAccessible(true);
-					
-					if (goal.get(item) instanceof PathfinderGoalArrowAttack){
-						goal.set(item, new BloodMoonPathfinderGoalArrowAttack(this, this.plugin, this.bb, 60));
-					}
-				}
-				
-				a.set(this.goalSelector, goals);
-			}catch (Exception e){
-				e.printStackTrace();
-			}
-		}
-		
-		if (this.plugin.config.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SKELETON")){
-			try{
-				Field a = this.targetSelector.getClass().getDeclaredField("a");
-				a.setAccessible(true);
-				
-				@SuppressWarnings("unchecked")
-				UnsafeList<PathfinderGoal> goals = (UnsafeList<PathfinderGoal>) a.get(this.targetSelector);
-				
-				for (Object item : goals){
-					Field goal = item.getClass().getDeclaredField("a");
-					goal.setAccessible(true);
-					
-					if (goal.get(item) instanceof PathfinderGoalNearestAttackableTarget){
-						goal.set(item, new BloodMoonPathfinderGoalNearestAttackableTarget(this.plugin, this, EntityHuman.class, 16.0F, 0, true));
-					}
-				}
-				
-				a.set(this.targetSelector, goals);
-			}catch (Exception e){
-				e.printStackTrace();
-			}
+		try{
+			Field goala = this.goalSelector.getClass().getDeclaredField("a");
+			goala.setAccessible(true);
+			((UnsafeList<PathfinderGoal>) goala.get(this.goalSelector)).clear();
+			
+			Field targeta = this.targetSelector.getClass().getDeclaredField("a");
+			targeta.setAccessible(true);
+			((UnsafeList<PathfinderGoal>) targeta.get(this.targetSelector)).clear();
+			
+	        this.goalSelector.a(1, new PathfinderGoalFloat(this));
+	        this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
+	        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bb));
+	        
+	        if (this.plugin.config.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)){
+	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this, this.plugin, this.bb, 60));
+	        }else{
+	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bb, 1, 60));
+	        }
+	        
+	        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bb));
+	        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
+	        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
+	        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
+	        
+	        if (this.plugin.config.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SKELETON")){
+	        	this.targetSelector.a(2, new BloodMoonPathfinderGoalNearestAttackableTarget(this.plugin, this, EntityHuman.class, 16.0F, 0, true));
+	        }else{
+	        	this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, 16.0F, 0, true));
+	        }
+		}catch (Exception e){
+			e.printStackTrace();
 		}
 	}
 	
