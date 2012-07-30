@@ -18,6 +18,7 @@ import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.BreakBlocksListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.DoubleHealthListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.FireArrowsListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.LockInWorldListener;
+import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.MoreDropsListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.MoreExpListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.MoreSpawningListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SpawnOnKillListener;
@@ -98,6 +99,10 @@ public class BloodMoon extends BasePlugin {
 		
 		if (this.config.getBoolean(Config.FEATURE_MORE_EXP_ENABLED)){
 			this.pluginManager.registerEvents(new MoreExpListener(this), this);
+		}
+		
+		if (this.config.getBoolean(Config.FEATURE_MORE_DROPS_ENABLED)){
+			this.pluginManager.registerEvents(new MoreDropsListener(this), this);
 		}
 		
 		if (this.config.getBoolean(Config.FEATURE_SWORD_DAMAGE_ENABLED)){

@@ -40,6 +40,10 @@ public enum Config implements PluginConfigKey {
 	FEATURE_MORE_EXP_IGNORE_SPAWNERS(		"features.more-exp.ignore-spawners",		false),
 	FEATURE_MORE_EXP_MULTIPLIER(			"features.more-exp.multiplier",				2),
 	
+	FEATURE_MORE_DROPS_ENABLED(				"features.more-drops.enabled",				true),
+	FEATURE_MORE_DROPS_IGNORE_SPAWNERS(		"features.more-drops.ignore-spawners",		false),
+	FEATURE_MORE_DROPS_MULTIPLIER(			"features.more-drops.multiplier",			2),
+	
 	FEATURE_SWORD_DAMAGE_ENABLED(			"features.sword-damage.enabled",			true),
 	FEATURE_SWORD_DAMAGE_MOBS(				"features.sword-damage.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
 	FEATURE_SWORD_DAMAGE_CHANCE(			"features.sword-damage.chance",				10),
