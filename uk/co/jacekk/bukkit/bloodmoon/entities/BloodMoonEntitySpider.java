@@ -1,5 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.entities;
 
+import java.lang.reflect.Field;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Spider;
@@ -8,8 +10,10 @@ import org.bukkit.plugin.Plugin;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.SpiderMoveEvent;
+import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonNavigation;
 
 import net.minecraft.server.Entity;
+import net.minecraft.server.EntityLiving;
 import net.minecraft.server.World;
 
 public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
@@ -25,6 +29,16 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 		}
 		
 		this.plugin = (BloodMoon) plugin;
+		
+		if (this.plugin.config.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains("SPIDER")){
+			try{
+				Field navigation = EntityLiving.class.getDeclaredField("navigation");
+				navigation.setAccessible(true);
+				navigation.set(this, new BloodMoonNavigation(this.plugin, this, this.world, 16.0f));
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public BloodMoonEntitySpider(World world){

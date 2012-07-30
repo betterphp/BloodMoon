@@ -78,6 +78,8 @@ public class BloodMoon extends BasePlugin {
 		
 		// NOTE: target-distance is handled in BloodMoonPathfinderGoalNearestAttackableTarget and all BloodMoonEntity*
 		
+		// NOTE: movement-speed is handled in all BloodMoonNavigation* and BloodMoonEntity*
+		
 		if (this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_IGNITE_TARGET)){
 			this.pluginManager.registerEvents(new FireArrowsListener(this), this);
 		}

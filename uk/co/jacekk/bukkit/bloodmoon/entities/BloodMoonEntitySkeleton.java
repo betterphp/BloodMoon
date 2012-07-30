@@ -11,11 +11,13 @@ import org.bukkit.plugin.Plugin;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.SkeletonMoveEvent;
+import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonPathfinderGoalArrowAttack;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonPathfinderGoalNearestAttackableTarget;
 
 import net.minecraft.server.Entity;
 import net.minecraft.server.EntityHuman;
+import net.minecraft.server.EntityLiving;
 import net.minecraft.server.PathfinderGoal;
 import net.minecraft.server.PathfinderGoalArrowAttack;
 import net.minecraft.server.PathfinderGoalNearestAttackableTarget;
@@ -35,25 +37,37 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 		
 		this.plugin = (BloodMoon) plugin;
 		
-		try{
-			Field a = this.goalSelector.getClass().getDeclaredField("a");
-			a.setAccessible(true);
-			
-			@SuppressWarnings("unchecked")
-			UnsafeList<PathfinderGoal> goals = (UnsafeList<PathfinderGoal>) a.get(this.goalSelector);
-			
-			for (Object item : goals){
-				Field goal = item.getClass().getDeclaredField("a");
-				goal.setAccessible(true);
-				
-				if (goal.get(item) instanceof PathfinderGoalArrowAttack){
-					goal.set(item, new BloodMoonPathfinderGoalArrowAttack(this, this.plugin, this.bb, 60));
-				}
+		if (this.plugin.config.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains("SKELETON")){
+			try{
+				Field navigation = EntityLiving.class.getDeclaredField("navigation");
+				navigation.setAccessible(true);
+				navigation.set(this, new BloodMoonNavigation(this.plugin, this, this.world, 16.0f));
+			}catch (Exception e){
+				e.printStackTrace();
 			}
-			
-			a.set(this.goalSelector, goals);
-		}catch (Exception e){
-			e.printStackTrace();
+		}
+		
+		if (this.plugin.config.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)){
+			try{
+				Field a = this.goalSelector.getClass().getDeclaredField("a");
+				a.setAccessible(true);
+				
+				@SuppressWarnings("unchecked")
+				UnsafeList<PathfinderGoal> goals = (UnsafeList<PathfinderGoal>) a.get(this.goalSelector);
+				
+				for (Object item : goals){
+					Field goal = item.getClass().getDeclaredField("a");
+					goal.setAccessible(true);
+					
+					if (goal.get(item) instanceof PathfinderGoalArrowAttack){
+						goal.set(item, new BloodMoonPathfinderGoalArrowAttack(this, this.plugin, this.bb, 60));
+					}
+				}
+				
+				a.set(this.goalSelector, goals);
+			}catch (Exception e){
+				e.printStackTrace();
+			}
 		}
 		
 		if (this.plugin.config.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SKELETON")){

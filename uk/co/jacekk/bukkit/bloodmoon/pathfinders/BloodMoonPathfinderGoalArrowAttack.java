@@ -1,8 +1,9 @@
 package uk.co.jacekk.bukkit.bloodmoon.pathfinders;
 
+import org.bukkit.event.entity.EntityTargetEvent;
+
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
-import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySkeleton;
 import net.minecraft.server.EntityArrow;
 import net.minecraft.server.EntityLiving;
 import net.minecraft.server.PathfinderGoal;
@@ -12,7 +13,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	
 	private BloodMoon plugin;
 	
-	private BloodMoonEntitySkeleton skeleton;
+	private EntityLiving skeleton;
 	private EntityLiving target;
 	private World world;
     
@@ -21,7 +22,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	private int f = 0;
 	private int h;
 	
-	public BloodMoonPathfinderGoalArrowAttack(BloodMoonEntitySkeleton skeleton, BloodMoon plugin, float f, int j){
+	public BloodMoonPathfinderGoalArrowAttack(EntityLiving skeleton, BloodMoon plugin, float f, int j){
 		this.plugin = plugin;
 		
 		this.skeleton = skeleton;
@@ -35,7 +36,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	
 	public boolean a(){
 		EntityLiving entityliving = this.skeleton.at();
-
+		
 		if (entityliving == null){
 			return false;
 		}else{
@@ -49,6 +50,9 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	}
 	
 	public void d(){
+        EntityTargetEvent.TargetReason reason = this.target.isAlive() ? EntityTargetEvent.TargetReason.FORGOT_TARGET : EntityTargetEvent.TargetReason.TARGET_DIED;
+        org.bukkit.craftbukkit.event.CraftEventFactory.callEntityTargetEvent(this.skeleton, null, reason);
+        
 		this.target = null;
 	}
 	

@@ -11,10 +11,12 @@ import org.bukkit.plugin.Plugin;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.CreeperMoveEvent;
+import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonPathfinderGoalNearestAttackableTarget;
 
 import net.minecraft.server.Entity;
 import net.minecraft.server.EntityHuman;
+import net.minecraft.server.EntityLiving;
 import net.minecraft.server.PathfinderGoal;
 import net.minecraft.server.PathfinderGoalNearestAttackableTarget;
 import net.minecraft.server.World;
@@ -32,6 +34,16 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 		}
 		
 		this.plugin = (BloodMoon) plugin;
+		
+		if (this.plugin.config.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains("CREEPER")){
+			try{
+				Field navigation = EntityLiving.class.getDeclaredField("navigation");
+				navigation.setAccessible(true);
+				navigation.set(this, new BloodMoonNavigation(this.plugin, this, this.world, 16.0f));
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+		}
 		
 		if (this.plugin.config.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("CREEPER")){
 			try{

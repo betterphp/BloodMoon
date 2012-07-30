@@ -1,5 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.entities;
 
+import java.lang.reflect.Field;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Enderman;
@@ -8,10 +10,12 @@ import org.bukkit.plugin.Plugin;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.EndermanMoveEvent;
+import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonNavigation;
 
 import net.minecraft.server.Block;
 import net.minecraft.server.Entity;
 import net.minecraft.server.EntityHuman;
+import net.minecraft.server.EntityLiving;
 import net.minecraft.server.ItemStack;
 import net.minecraft.server.Vec3D;
 import net.minecraft.server.World;
@@ -30,6 +34,16 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 		}
 		
 		this.plugin = (BloodMoon) plugin;
+		
+		if (this.plugin.config.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains("ENDERMAN")){
+			try{
+				Field navigation = EntityLiving.class.getDeclaredField("navigation");
+				navigation.setAccessible(true);
+				navigation.set(this, new BloodMoonNavigation(this.plugin, this, this.world, 16.0f));
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public BloodMoonEntityEnderman(World world){

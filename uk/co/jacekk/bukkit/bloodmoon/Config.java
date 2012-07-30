@@ -18,12 +18,16 @@ public enum Config implements PluginConfigKey {
 	
 	FEATURE_TARGET_DISTANCE_ENABLED(		"features.target-distance.enabled",			true),
 	FEATURE_TARGET_DISTANCE_MULTIPLIER(		"features.target-distance.multiplier",		3),
-	FEATURE_TARGET_DISTANCE_MOBS(			"features.target-distance.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
+	FEATURE_TARGET_DISTANCE_MOBS(			"features.target-distance.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER")),
+	
+	FEATURE_MOVEMENT_SPEED_ENABLED(			"features.movement-speed.enabled",			true),
+	FEATURE_MOVEMENT_SPEED_MULTIPLIER(		"features.movement-speed.multiplier",		1.35d),
+	FEATURE_MOVEMENT_SPEED_MOBS(			"features.movement-speed.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "CREEPER")),
 	
 	FEATURE_BREAK_BLOCKS_ENABLED(			"features.break-blocks.enabled",			true),
 	FEATURE_BREAK_BLOCKS_REALISTIC_DROP(	"features.break-blocks.realistic-drop",		true),
 	FEATURE_BREAK_BLOCKS_MOBS(				"features.break-blocks.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
-	FEATURE_BREAK_BLOCKS_BLOCKS(			"features.break-blocks.blocks",				Arrays.asList("WOOD")),
+	FEATURE_BREAK_BLOCKS_BLOCKS(			"features.break-blocks.blocks",				Arrays.asList("WOOD", "LOG", "GLASS")),
 	
 	FEATURE_DOUBLE_HEALTH_ENABLED(			"features.double-health.enabled",			true),
 	FEATURE_DOUBLE_HEALTH_MOBS(				"features.double-health.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
