@@ -22,7 +22,19 @@ public class PlayerEnterWorldListener extends BaseListener<BloodMoon> {
 		World toWorld = player.getWorld();
 		
 		if (plugin.isActive(toWorld)){
-			player.sendMessage(ChatColor.RED + "The blood moon is rising !");
+			final String playerName = player.getName();
+			
+			plugin.scheduler.scheduleSyncDelayedTask(plugin, new Runnable(){
+				
+				public void run(){
+					Player player = plugin.server.getPlayer(playerName);
+					
+					if (player != null){
+						player.sendMessage(ChatColor.RED + "The blood moon is rising !");
+					}
+				}
+				
+			}, 40);
 		}
 	}
 	

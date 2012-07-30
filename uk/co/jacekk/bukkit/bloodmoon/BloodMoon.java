@@ -74,7 +74,7 @@ public class BloodMoon extends BasePlugin {
 		this.pluginManager.registerEvents(new PlayerEnterWorldListener(this), this);
 		this.pluginManager.registerEvents(new EntityReplaceListener(this), this);
 		
-		// NOTE: arrow-rate is handled in BloodMoonEntitySkeleton
+		// NOTE: arrow-rate is handled in BloodMoonPathfinderGoalArrowAttack and BloodMoonEntitySkeleton
 		
 		// NOTE: target-distance is handled in BloodMoonPathfinderGoalNearestAttackableTarget and all BloodMoonEntity*
 		
