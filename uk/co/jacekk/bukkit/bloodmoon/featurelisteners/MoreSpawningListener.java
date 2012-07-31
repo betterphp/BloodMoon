@@ -32,7 +32,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 		
 		if (plugin.config.getStringList(Config.FEATURE_MORE_SPAWNING_MOBS).contains(type.getName().toUpperCase()) && plugin.isActive(world)){
 			for (int i = 0; i < this.multiplier; ++i){
-				world.spawnCreature(location, type);
+				world.spawnEntity(location, type);
 			}
 		}
 	}

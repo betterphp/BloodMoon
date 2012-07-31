@@ -30,7 +30,7 @@ public class SpawnOnSleepListener extends BaseListener<BloodMoon> {
 			EntityType creatureType = EntityType.fromName(mobName.toUpperCase());
 			
 			if (creatureType != null){
-				world.spawnCreature(location, creatureType);
+				world.spawnEntity(location, creatureType);
 			}
 		}
 	}

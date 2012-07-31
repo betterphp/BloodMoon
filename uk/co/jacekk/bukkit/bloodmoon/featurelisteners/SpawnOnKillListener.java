@@ -53,7 +53,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 					EntityType creatureType = EntityType.fromName(mobName.toUpperCase());
 					
 					if (creatureType != null){
-						world.spawnCreature(creature.getLocation(), creatureType);
+						world.spawnEntity(creature.getLocation(), creatureType);
 					}
 				}
 			}
