@@ -14,6 +14,8 @@ import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityEnderman;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySkeleton;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySpider;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityZombie;
+import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonEndEvent;
+import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonStartEvent;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.BreakBlocksListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.DoubleHealthListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.FireArrowsListener;
@@ -127,6 +129,7 @@ public class BloodMoon extends BasePlugin {
 	}
 	
 	public void activate(String worldName){
+		this.pluginManager.callEvent(new BloodMoonStartEvent(this.server.getWorld(worldName)));
 		this.activeWorlds.add(worldName);
 	}
 	
@@ -135,6 +138,7 @@ public class BloodMoon extends BasePlugin {
 	}
 	
 	public void deactivate(String worldName){
+		this.pluginManager.callEvent(new BloodMoonEndEvent(this.server.getWorld(worldName)));
 		this.activeWorlds.remove(worldName);
 	}
 	
