@@ -35,7 +35,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	}
 	
 	public boolean a(){
-		EntityLiving entityliving = this.skeleton.at();
+		EntityLiving entityliving = this.skeleton.az();
 		
 		if (entityliving == null){
 			return false;
@@ -46,20 +46,20 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	}
 	
 	public boolean b(){
-		return this.a() || !this.skeleton.al().e();
+		return this.a() || !this.skeleton.getNavigation().f();
 	}
 	
-	public void d(){
+	public void c(){
         EntityTargetEvent.TargetReason reason = this.target.isAlive() ? EntityTargetEvent.TargetReason.FORGOT_TARGET : EntityTargetEvent.TargetReason.TARGET_DIED;
         org.bukkit.craftbukkit.event.CraftEventFactory.callEntityTargetEvent(this.skeleton, null, reason);
         
 		this.target = null;
 	}
 	
-	public void e(){
+	public void d(){
 		double d0 = 100.0D;
 		double d1 = this.skeleton.e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
-		boolean flag = this.skeleton.am().canSee(this.target);
+		boolean flag = this.skeleton.at().canSee(this.target);
 		
 		if (flag){
 			++this.f;
@@ -68,13 +68,13 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 		}
 		
 		if (d1 <= d0 && this.f >= 20){
-			this.skeleton.al().f();
+			this.skeleton.getNavigation().g();
 		}else{
-			this.skeleton.al().a(this.target, this.e);
+			this.skeleton.getNavigation().a(this.target, this.e);
 		}
 		
 		this.skeleton.getControllerLook().a(this.target, 30.0F, 30.0F);
-		this.d = Math.max(this.d - ((plugin.isActive(this.skeleton.world.worldData.name)) ? plugin.config.getInt(Config.FEATURE_ARROW_RATE_MULTIPLIER) : 1), 0);
+		this.d = Math.max(this.d - ((plugin.isActive(this.skeleton.world.worldData.getName())) ? plugin.config.getInt(Config.FEATURE_ARROW_RATE_MULTIPLIER) : 1), 0);
 		
 		if (this.d <= 0 && d1 <= d0 && flag){
 			this.f();
@@ -85,10 +85,10 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	private void f(){
 		EntityArrow entityarrow = new EntityArrow(this.world, this.skeleton, this.target, 1.6F, 12.0F);
 		
-		this.world.makeSound(this.skeleton, "random.bow", 1.0F, 1.0F / (this.skeleton.an().nextFloat() * 0.4F + 0.8F));
+		this.world.makeSound(this.skeleton, "random.bow", 1.0F, 1.0F / (this.skeleton.au().nextFloat() * 0.4F + 0.8F));
 		this.world.addEntity(entityarrow);
 		
-		if (plugin.isActive(this.skeleton.world.worldData.name) && plugin.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED)){
+		if (plugin.isActive(this.skeleton.world.worldData.getName()) && plugin.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED)){
 			entityarrow.fireTicks = 1200;
 		}
 	}

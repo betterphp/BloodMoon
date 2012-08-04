@@ -46,7 +46,7 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 	}
 	
 	@Override
-	public void F_(){
+	public void h_(){
 		Spider spider = (Spider) this.getBukkitEntity();
 		
 		Location from = new Location(spider.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -60,15 +60,15 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 			return;
 		}
 		
-		super.F_();
+		super.h_();
 	}
 	
 	@Override
 	protected Entity findTarget(){
-		float f = this.b(1.0F);
+		float f = this.c(1.0F);
 		
 		if (f < 0.5F){
-			double distance = (plugin.isActive(this.world.worldData.name) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SPIDER")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0d : 16.0d;
+			double distance = (plugin.isActive(this.world.worldData.getName()) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SPIDER")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0d : 16.0d;
 			
 			return this.world.findNearbyVulnerablePlayer(this, distance);
 		}else{

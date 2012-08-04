@@ -1,10 +1,10 @@
 package uk.co.jacekk.bukkit.bloodmoon.entities;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.util.UnsafeList;
 import org.bukkit.entity.Zombie;
 import org.bukkit.plugin.Plugin;
 
@@ -59,19 +59,19 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 		try{
 			Field goala = this.goalSelector.getClass().getDeclaredField("a");
 			goala.setAccessible(true);
-			((UnsafeList<PathfinderGoal>) goala.get(this.goalSelector)).clear();
+			((List<PathfinderGoal>) goala.get(this.goalSelector)).clear();
 			
 			Field targeta = this.targetSelector.getClass().getDeclaredField("a");
 			targeta.setAccessible(true);
-			((UnsafeList<PathfinderGoal>) targeta.get(this.targetSelector)).clear();
+			((List<PathfinderGoal>) targeta.get(this.targetSelector)).clear();
 			
 			this.goalSelector.a(0, new PathfinderGoalFloat(this));
 			this.goalSelector.a(1, new PathfinderGoalBreakDoor(this));
-			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bb, false));
-			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bb, true));
-			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bb));
-			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bb, false));
-			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bb));
+			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bw, false));
+			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bw, true));
+			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bw));
+			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bw, false));
+			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bw));
 			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
 			
@@ -94,7 +94,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 	}
 	
 	@Override
-	public void F_(){
+	public void h_(){
 		Zombie zombie = (Zombie) this.getBukkitEntity();
 		
 		Location from = new Location(zombie.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -108,16 +108,16 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 			return;
 		}
 		
-		super.F_();
+		super.h_();
 	}
 	
 	@Override
 	protected Entity findTarget(){
-		float distance = (plugin.isActive(this.world.worldData.name) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("ZOMBIE")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0f : 16.0f;
+		float distance = (plugin.isActive(this.world.worldData.getName()) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("ZOMBIE")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0f : 16.0f;
 		
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, (double) distance);
 		
-		return entityhuman != null && this.h(entityhuman) ? entityhuman : null;
+		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
 	}
 	
 }

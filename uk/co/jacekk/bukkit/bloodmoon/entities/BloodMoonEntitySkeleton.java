@@ -1,10 +1,10 @@
 package uk.co.jacekk.bukkit.bloodmoon.entities;
 
 import java.lang.reflect.Field;
+import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.util.UnsafeList;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.plugin.Plugin;
 
@@ -58,23 +58,23 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 		try{
 			Field goala = this.goalSelector.getClass().getDeclaredField("a");
 			goala.setAccessible(true);
-			((UnsafeList<PathfinderGoal>) goala.get(this.goalSelector)).clear();
+			((List<PathfinderGoal>) goala.get(this.goalSelector)).clear();
 			
 			Field targeta = this.targetSelector.getClass().getDeclaredField("a");
 			targeta.setAccessible(true);
-			((UnsafeList<PathfinderGoal>) targeta.get(this.targetSelector)).clear();
+			((List<PathfinderGoal>) targeta.get(this.targetSelector)).clear();
 			
 	        this.goalSelector.a(1, new PathfinderGoalFloat(this));
 	        this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
-	        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bb));
+	        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bw));
 	        
 	        if (this.plugin.config.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)){
-	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this, this.plugin, this.bb, 60));
+	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this, this.plugin, this.bw, 60));
 	        }else{
-	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bb, 1, 60));
+	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bw, 1, 60));
 	        }
 	        
-	        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bb));
+	        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bw));
 	        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 	        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
 	        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
@@ -94,7 +94,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 	}
 	
 	@Override
-	public void F_(){
+	public void h_(){
 		Skeleton skeleton = (Skeleton) this.getBukkitEntity();
 		
 		Location from = new Location(skeleton.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -108,16 +108,16 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 			return;
 		}
 		
-		super.F_();
+		super.h_();
 	}
 	
 	@Override
 	protected Entity findTarget(){
-		float distance = (plugin.isActive(this.world.worldData.name) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SKELETON")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0f : 16.0f;
+		float distance = (plugin.isActive(this.world.worldData.getName()) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SKELETON")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0f : 16.0f;
 		
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, (double) distance);
 		
-		return entityhuman != null && this.h(entityhuman) ? entityhuman : null;
+		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
 	}
 
 }

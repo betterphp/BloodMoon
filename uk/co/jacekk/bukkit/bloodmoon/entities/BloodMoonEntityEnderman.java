@@ -51,7 +51,7 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 	}
 	
 	@Override
-	public void F_(){
+	public void h_(){
 		Enderman enderman = (Enderman) this.getBukkitEntity();
 		
 		Location from = new Location(enderman.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -65,33 +65,33 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 			return;
 		}
 		
-		super.F_();
+		super.h_();
 	}
 	
-	private boolean c(EntityHuman entityhuman){
+	private boolean d(EntityHuman entityhuman){
 		ItemStack itemstack = entityhuman.inventory.armor[3];
 		
 		if (itemstack != null && itemstack.id == Block.PUMPKIN.id){
 			return false;
 		}else{
-			Vec3D vec3d = entityhuman.f(1.0F).b();
-			Vec3D vec3d1 = Vec3D.create(this.locX - entityhuman.locX, this.boundingBox.b + (double) (this.length / 2.0F) - (entityhuman.locY + (double) entityhuman.getHeadHeight()), this.locZ - entityhuman.locZ);
+			Vec3D vec3d = entityhuman.i(1.0F).b();
+			Vec3D vec3d1 = Vec3D.a().create(this.locX - entityhuman.locX, this.boundingBox.b + (double) (this.length / 2.0F) - (entityhuman.locY + (double) entityhuman.getHeadHeight()), this.locZ - entityhuman.locZ);
 			double d0 = vec3d1.c();
 			
 			vec3d1 = vec3d1.b();
-			double d1 = vec3d.a(vec3d1);
+			double d1 = vec3d.b(vec3d1);
 			
-			return d1 > 1.0D - 0.025D / d0 ? entityhuman.h(this) : false;
+			return d1 > 1.0D - 0.025D / d0 ? entityhuman.l(this) : false;
 		}
 	}
 	
 	protected Entity findTarget(){
-		double distance = (plugin.isActive(this.world.worldData.name) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("ENDERMAN")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 64.0d : 64.0d;
+		double distance = (plugin.isActive(this.world.worldData.getName()) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("ENDERMAN")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 64.0d : 64.0d;
 		
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
 		if (entityhuman != null){
-			if (this.c(entityhuman)){
+			if (this.d(entityhuman)){
 				if (this.h++ == 5){
 					this.h = 0;
 					return entityhuman;

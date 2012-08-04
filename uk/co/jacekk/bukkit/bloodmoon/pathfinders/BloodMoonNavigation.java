@@ -36,7 +36,7 @@ public class BloodMoonNavigation extends Navigation {
 	
 	@Override
 	public boolean a(PathEntity path, float speed){
-		if (plugin.isActive(this.entity.world.worldData.name)){
+		if (plugin.isActive(this.entity.world.worldData.getName())){
 			speed *= (float) plugin.config.getDouble(Config.FEATURE_MOVEMENT_SPEED_MULTIPLIER);
 		}
 		

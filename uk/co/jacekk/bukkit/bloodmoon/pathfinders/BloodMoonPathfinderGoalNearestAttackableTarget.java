@@ -19,7 +19,7 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 	private EntityLiving entity;
 	@SuppressWarnings("rawtypes")
 	private Class targetType;
-	private int f;
+	private int c;
 	
 	private BloodMoonDistanceComparator g;
 	
@@ -30,8 +30,8 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 		
 		this.entity = entity;
 		this.targetType = targetType;
-		this.d = distance;
-		this.f = i;
+		this.e = distance;
+		this.c = i;
 		this.g = new BloodMoonDistanceComparator(entity);
 	}
 	
@@ -41,20 +41,20 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 	
 	@SuppressWarnings({"rawtypes", "unchecked"})
 	public boolean a(){
-		float distance = (plugin.isActive(this.entity.world.worldData.name)) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * this.d : this.d;
+		float distance = (plugin.isActive(this.entity.world.worldData.getName())) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * this.e : this.e;
 				
-		if (this.f > 0 && this.c.an().nextInt(this.f) != 0){
+		if (this.c > 0 && this.d.au().nextInt(this.c) != 0){
 			return false;
 		}else{
 			if (this.targetType == EntityHuman.class){
-				EntityHuman entityhuman = this.c.world.findNearbyVulnerablePlayer(this.c, (double) distance);
+				EntityHuman entityhuman = this.d.world.findNearbyVulnerablePlayer(this.d, (double) distance);
 				
 				if (this.a(entityhuman, false)){
 					this.entity = entityhuman;
 					return true;
 				}
 			}else{
-				List list = this.c.world.a(this.targetType, this.c.boundingBox.grow((double) distance, 4.0D, (double) distance));
+				List list = this.d.world.a(this.targetType, this.d.boundingBox.grow((double) distance, 4.0D, (double) distance));
 				
 				Collections.sort(list, this.g);
 				Iterator iterator = list.iterator();
@@ -74,9 +74,9 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 		}
 	}
 	
-	public void c(){
-		this.c.b(this.entity);
-		super.c();
+	public void e(){
+		this.d.b(this.entity);
+		super.e();
 	}
 	
 }
