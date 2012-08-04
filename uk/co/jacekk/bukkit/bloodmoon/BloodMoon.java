@@ -143,7 +143,7 @@ public class BloodMoon extends BasePlugin {
 	}
 	
 	public void deactivate(World world){
-		this.activate(world.getName());
+		this.deactivate(world.getName());
 	}
 	
 	public boolean isActive(String worldName){
