@@ -17,6 +17,7 @@ import org.bukkit.entity.Spider;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
@@ -38,7 +39,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 		this.rand = new Random();
 	}
 	
-	private void mobAttemptBreakBlock(Block block){
+	private void mobAttemptBreakBlock(LivingEntity entity, Block block){
 		World world = block.getWorld();
 		Material type = block.getType();
 		
@@ -48,15 +49,20 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 			if (this.rand.nextInt(100) < 80){
 				world.playEffect(location, Effect.ZOMBIE_CHEW_WOODEN_DOOR, 0);
 			}else{
-				world.playEffect(location, Effect.ZOMBIE_DESTROY_DOOR, 0);
+				EntityChangeBlockEvent event = new EntityChangeBlockEvent(entity, block, Material.AIR);
+				plugin.pluginManager.callEvent(event);
 				
-				if (plugin.config.getBoolean(Config.FEATURE_BREAK_BLOCKS_REALISTIC_DROP)){
-					block.breakNaturally();
-				}else{
-					if (type != Material.AIR){
-						block.setType(Material.AIR);
-						
-						world.dropItemNaturally(location, new ItemStack(type, 1, block.getData()));
+				if (!event.isCancelled()){
+					world.playEffect(location, Effect.ZOMBIE_DESTROY_DOOR, 0);
+					
+					if (plugin.config.getBoolean(Config.FEATURE_BREAK_BLOCKS_REALISTIC_DROP)){
+						block.breakNaturally();
+					}else{
+						if (type != Material.AIR){
+							block.setType(Material.AIR);
+							
+							world.dropItemNaturally(location, new ItemStack(type, 1, block.getData()));
+						}
 					}
 				}
 			}
@@ -78,7 +84,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 				blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
 				
 				for (Block block : blocks){
-					this.mobAttemptBreakBlock(block);
+					this.mobAttemptBreakBlock(creeper, block);
 				}
 			}
 		}
@@ -101,7 +107,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 					blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
 					
 					for (Block block : blocks){
-						this.mobAttemptBreakBlock(block);
+						this.mobAttemptBreakBlock(skeleton, block);
 					}
 				}
 			}
@@ -120,7 +126,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 				Block block = spider.getTargetBlock(null, 1);
 				
 				if (block != null){
-					this.mobAttemptBreakBlock(block);
+					this.mobAttemptBreakBlock(spider, block);
 				}
 			}
 		}
@@ -143,7 +149,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 					blocks[1] = blocks[0].getRelative(BlockFace.DOWN);
 					
 					for (Block block : blocks){
-						this.mobAttemptBreakBlock(block);
+						this.mobAttemptBreakBlock(zombie, block);
 					}
 				}
 			}
@@ -168,7 +174,7 @@ public class BreakBlocksListener extends BaseListener<BloodMoon> {
 					blocks[2] = blocks[1].getRelative(BlockFace.DOWN);
 					
 					for (Block block : blocks){
-						this.mobAttemptBreakBlock(block);
+						this.mobAttemptBreakBlock(enderman, block);
 					}
 				}
 			}
