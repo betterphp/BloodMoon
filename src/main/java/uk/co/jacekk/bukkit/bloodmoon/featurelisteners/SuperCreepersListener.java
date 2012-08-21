@@ -19,7 +19,9 @@ public class SuperCreepersListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
 	public void onEntityExplode(EntityExplodeEvent event){
-		if (event.getEntityType() == EntityType.CREEPER){
+		EntityType type = event.getEntityType();
+		
+		if (type != null && type == EntityType.CREEPER){
 			Location location = event.getLocation();
 			World world = location.getWorld();
 			
