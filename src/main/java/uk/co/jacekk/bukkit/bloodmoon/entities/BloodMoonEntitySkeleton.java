@@ -115,7 +115,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 	protected Entity findTarget(){
 		float distance = (plugin.isActive(this.world.worldData.getName()) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SKELETON")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0f : 16.0f;
 		
-		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, (double) distance);
+		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
 		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
 	}

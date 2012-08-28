@@ -45,33 +45,33 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 				
 		if (this.c > 0 && this.d.au().nextInt(this.c) != 0){
 			return false;
+		}
+		
+		if (this.targetType == EntityHuman.class){
+			EntityHuman entityhuman = this.d.world.findNearbyVulnerablePlayer(this.d, distance);
+			
+			if (this.a(entityhuman, false)){
+				this.entity = entityhuman;
+				return true;
+			}
 		}else{
-			if (this.targetType == EntityHuman.class){
-				EntityHuman entityhuman = this.d.world.findNearbyVulnerablePlayer(this.d, (double) distance);
+			List list = this.d.world.a(this.targetType, this.d.boundingBox.grow( distance, 4.0D, distance));
+			
+			Collections.sort(list, this.g);
+			Iterator iterator = list.iterator();
+			
+			while (iterator.hasNext()){
+				Entity entity = (Entity) iterator.next();
+				EntityLiving entityliving = (EntityLiving) entity;
 				
-				if (this.a(entityhuman, false)){
-					this.entity = entityhuman;
+				if (this.a(entityliving, false)){
+					this.entity = entityliving;
 					return true;
 				}
-			}else{
-				List list = this.d.world.a(this.targetType, this.d.boundingBox.grow((double) distance, 4.0D, (double) distance));
-				
-				Collections.sort(list, this.g);
-				Iterator iterator = list.iterator();
-				
-				while (iterator.hasNext()){
-					Entity entity = (Entity) iterator.next();
-					EntityLiving entityliving = (EntityLiving) entity;
-					
-					if (this.a(entityliving, false)){
-						this.entity = entityliving;
-						return true;
-					}
-				}
 			}
-			
-			return false;
 		}
+		
+		return false;
 	}
 	
 	public void e(){

@@ -39,10 +39,11 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 		
 		if (entityliving == null){
 			return false;
-		}else{
-			this.target = entityliving;
-			return true;
 		}
+		
+		this.target = entityliving;
+		
+		return true;
 	}
 	
 	public boolean b(){

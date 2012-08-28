@@ -115,7 +115,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 	protected Entity findTarget(){
 		float distance = (plugin.isActive(this.world.worldData.getName()) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("ZOMBIE")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0f : 16.0f;
 		
-		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, (double) distance);
+		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
 		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
 	}

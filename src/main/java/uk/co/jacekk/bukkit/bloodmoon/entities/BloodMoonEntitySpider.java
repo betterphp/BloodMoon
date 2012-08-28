@@ -71,9 +71,9 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 			double distance = (plugin.isActive(this.world.worldData.getName()) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("SPIDER")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 16.0d : 16.0d;
 			
 			return this.world.findNearbyVulnerablePlayer(this, distance);
-		}else{
-			return null;
 		}
+		
+		return null;
 	}
-
+	
 }

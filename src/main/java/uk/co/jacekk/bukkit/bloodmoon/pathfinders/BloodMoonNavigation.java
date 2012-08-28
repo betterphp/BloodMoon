@@ -22,7 +22,7 @@ public class BloodMoonNavigation extends Navigation {
 	
 	@Override
 	public boolean a(double d0, double d1, double d2, float f){
-		PathEntity pathentity = this.a((double) MathHelper.floor(d0), (double) ((int) d1), (double) MathHelper.floor(d2));
+		PathEntity pathentity = this.a(MathHelper.floor(d0), ((int) d1), MathHelper.floor(d2));
 		
 		return this.a(pathentity, f);
 	}

@@ -73,16 +73,16 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 		
 		if (itemstack != null && itemstack.id == Block.PUMPKIN.id){
 			return false;
-		}else{
-			Vec3D vec3d = entityhuman.i(1.0F).b();
-			Vec3D vec3d1 = Vec3D.a().create(this.locX - entityhuman.locX, this.boundingBox.b + (double) (this.length / 2.0F) - (entityhuman.locY + (double) entityhuman.getHeadHeight()), this.locZ - entityhuman.locZ);
-			double d0 = vec3d1.c();
-			
-			vec3d1 = vec3d1.b();
-			double d1 = vec3d.b(vec3d1);
-			
-			return d1 > 1.0D - 0.025D / d0 ? entityhuman.l(this) : false;
 		}
+		
+		Vec3D vec3d = entityhuman.i(1.0F).b();
+		Vec3D vec3d1 = Vec3D.a().create(this.locX - entityhuman.locX, this.boundingBox.b + (this.length / 2.0F) - (entityhuman.locY + entityhuman.getHeadHeight()), this.locZ - entityhuman.locZ);
+		double d0 = vec3d1.c();
+		
+		vec3d1 = vec3d1.b();
+		double d1 = vec3d.b(vec3d1);
+		
+		return d1 > 1.0D - 0.025D / d0 ? entityhuman.l(this) : false;
 	}
 	
 	protected Entity findTarget(){
