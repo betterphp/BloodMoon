@@ -25,7 +25,7 @@ public class SuperCreepersListener extends BaseListener<BloodMoon> {
 			Location location = event.getLocation();
 			World world = location.getWorld();
 			
-			if (plugin.isActive(world)){
+			if (plugin.isActive(world.getName())){
 				event.setCancelled(true);
 				
 				world.createExplosion(location, (float) plugin.config.getDouble(Config.FEATURE_SUPER_CREEPERS_POWER), true);

@@ -35,7 +35,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 		Entity entity = event.getEntity();
 		World world = entity.getWorld();
 		
-		if (entity instanceof Creature && plugin.isActive(world)){
+		if (entity instanceof Creature && plugin.isActive(world.getName())){
 			Creature creature = (Creature) entity;
 			LivingEntity target = creature.getTarget();
 			

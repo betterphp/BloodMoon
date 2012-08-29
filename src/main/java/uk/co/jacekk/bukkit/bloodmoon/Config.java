@@ -59,7 +59,11 @@ public enum Config implements PluginConfigKey {
 	FEATURE_SPAWN_ON_SLEEP_ENABLED(			"features.spawn-on-sleep.enabled",			true),
 	FEATURE_SPAWN_ON_SLEEP_SPAWN(			"features.spawn-on-sleep.spawn",			Arrays.asList("ZOMBIE")),
 	
-	FEATURE_LOCK_IN_WORLD_ENABLED(			"features.lock-in-world.enabled",			false);
+	FEATURE_LOCK_IN_WORLD_ENABLED(			"features.lock-in-world.enabled",			false),
+	
+	FEATURE_TEXTURE_PACK_ENABLED(			"features.texture-pack.enabled",			false),
+	FEATURE_TEXTURE_PACK_NORMAL(			"features.texture-pack.normal",				"http://bukkit.jacekk.co.uk/bloodmoon_tps/normal.zip"),
+	FEATURE_TEXTURE_PACK_BLOODMOON(			"features.texture-pack.bloodmoon",			"http://bukkit.jacekk.co.uk/bloodmoon_tps/bloodmoon.zip");
 	
 	private String key;
 	private Object defaultValue;

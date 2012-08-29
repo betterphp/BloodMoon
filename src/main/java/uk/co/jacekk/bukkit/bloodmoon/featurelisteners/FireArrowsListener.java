@@ -24,7 +24,7 @@ public class FireArrowsListener extends BaseListener<BloodMoon> {
 	public void onProjectileHit(ProjectileHitEvent event){
 		Entity entity = event.getEntity();
 		
-		if (entity instanceof Projectile && plugin.isActive(entity.getWorld())){
+		if (entity instanceof Projectile && plugin.isActive(entity.getWorld().getName())){
 			Projectile projectile = (Projectile) entity;
 			
 			LivingEntity shooter = projectile.getShooter();

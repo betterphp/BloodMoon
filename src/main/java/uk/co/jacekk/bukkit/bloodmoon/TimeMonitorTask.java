@@ -22,20 +22,22 @@ public class TimeMonitorTask extends BaseTask<BloodMoon> {
 		for (String worldName : plugin.config.getStringList(Config.AFFECTED_WORLDS)){
 			World world = plugin.server.getWorld(worldName);
 			
-			if (world != null){
-				long worldTime = world.getTime();
-				
-				if (worldTime >= 13000 && worldTime <= 13100 && this.random.nextInt(100) < plugin.config.getInt(Config.CHANCE)){
-					if (!plugin.isActive(worldName)){
-						for (Player player : world.getPlayers()){
-							player.sendMessage(ChatColor.RED + "The blood moon is rising !");
-						}
-						
-						plugin.activate(worldName);
+			if (world == null){
+				continue;
+			}
+			
+			long worldTime = world.getTime();
+			
+			if (worldTime >= 13000 && worldTime <= 13100 && this.random.nextInt(100) < plugin.config.getInt(Config.CHANCE)){
+				if (!plugin.isActive(worldName)){
+					for (Player player : world.getPlayers()){
+						player.sendMessage(ChatColor.RED + "The blood moon is rising !");
 					}
-				}else if (worldTime >= 23000 && worldTime <= 23100 && plugin.isActive(worldName)){
-					plugin.deactivate(worldName);
+					
+					plugin.activate(worldName);
 				}
+			}else if (worldTime >= 23000 && worldTime <= 23100 && plugin.isActive(worldName)){
+				plugin.deactivate(worldName);
 			}
 		}
 	}

@@ -4,7 +4,11 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import net.minecraft.server.Packet250CustomPayload;
+
 import org.bukkit.World;
+import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -27,6 +31,7 @@ import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SpawnOnKillListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SpawnOnSleepListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SuperCreepersListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SwordDamageListener;
+import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.TexturePackListener;
 
 public class BloodMoon extends BasePlugin {
 	
@@ -126,32 +131,36 @@ public class BloodMoon extends BasePlugin {
 		if (this.config.getBoolean(Config.FEATURE_LOCK_IN_WORLD_ENABLED) && !this.config.getBoolean(Config.ALWAYS_ON)){
 			this.pluginManager.registerEvents(new LockInWorldListener(this), this);
 		}
+		
+		if (this.config.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+			this.pluginManager.registerEvents(new TexturePackListener(this), this);
+		}
 	}
 	
 	public void activate(String worldName){
-		this.pluginManager.callEvent(new BloodMoonStartEvent(this.server.getWorld(worldName)));
+		World world = this.server.getWorld(worldName);
+		
+		if (world == null){
+			return;
+		}
+		
+		this.pluginManager.callEvent(new BloodMoonStartEvent(world));
 		this.activeWorlds.add(worldName);
 	}
 	
-	public void activate(World world){
-		this.activate(world.getName());
-	}
-	
 	public void deactivate(String worldName){
-		this.pluginManager.callEvent(new BloodMoonEndEvent(this.server.getWorld(worldName)));
+		World world = this.server.getWorld(worldName);
+		
+		if (world == null){
+			return;
+		}
+		
+		this.pluginManager.callEvent(new BloodMoonEndEvent(world));
 		this.activeWorlds.remove(worldName);
-	}
-	
-	public void deactivate(World world){
-		this.deactivate(world.getName());
 	}
 	
 	public boolean isActive(String worldName){
 		return this.activeWorlds.contains(worldName);
-	}
-	
-	public boolean isActive(World world){
-		return this.isActive(world.getName());
 	}
 	
 }

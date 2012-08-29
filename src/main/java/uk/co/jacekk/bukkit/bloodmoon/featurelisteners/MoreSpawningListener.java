@@ -30,7 +30,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 		Location location = event.getLocation();
 		World world = location.getWorld();
 		
-		if (plugin.config.getStringList(Config.FEATURE_MORE_SPAWNING_MOBS).contains(type.getName().toUpperCase()) && plugin.isActive(world)){
+		if (plugin.config.getStringList(Config.FEATURE_MORE_SPAWNING_MOBS).contains(type.getName().toUpperCase()) && plugin.isActive(world.getName())){
 			for (int i = 0; i < this.multiplier; ++i){
 				world.spawnEntity(location, type);
 			}

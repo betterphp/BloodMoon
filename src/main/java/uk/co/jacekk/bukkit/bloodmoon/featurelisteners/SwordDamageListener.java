@@ -30,7 +30,7 @@ public class SwordDamageListener extends BaseListener<BloodMoon> {
 	public void onEntityDamage(EntityDamageEvent event){
 		Entity entity = event.getEntity();
 		
-		if (event.getCause() == DamageCause.ENTITY_ATTACK && plugin.isActive(entity.getWorld())){
+		if (event.getCause() == DamageCause.ENTITY_ATTACK && plugin.isActive(entity.getWorld().getName())){
 			if (entity instanceof Creature){
 				Creature creature = (Creature) entity;
 				LivingEntity target = creature.getTarget();

@@ -31,7 +31,7 @@ public class DoubleHealthListener extends BaseListener<BloodMoon> {
 										DamageCause.PROJECTILE
 									);
 		
-		if (entity instanceof Creature && causes.contains(event.getCause()) && plugin.isActive(entity.getWorld())){
+		if (entity instanceof Creature && causes.contains(event.getCause()) && plugin.isActive(entity.getWorld().getName())){
 			Creature creature = (Creature) entity;
 			
 			if (creature.getTarget() instanceof Player){

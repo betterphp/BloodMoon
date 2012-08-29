@@ -21,7 +21,7 @@ public class PlayerEnterWorldListener extends BaseListener<BloodMoon> {
 		Player player = event.getPlayer();
 		World toWorld = player.getWorld();
 		
-		if (plugin.isActive(toWorld)){
+		if (plugin.isActive(toWorld.getName())){
 			final String playerName = player.getName();
 			
 			plugin.scheduler.scheduleSyncDelayedTask(plugin, new Runnable(){
@@ -42,7 +42,7 @@ public class PlayerEnterWorldListener extends BaseListener<BloodMoon> {
 	public void onPlayerChangedWorld(PlayerChangedWorldEvent event){
 		Player player = event.getPlayer();
 		
-		if (plugin.isActive(player.getWorld())){
+		if (plugin.isActive(player.getWorld().getName())){
 			player.sendMessage(ChatColor.RED + "The blood moon is rising !");
 		}
 	}
