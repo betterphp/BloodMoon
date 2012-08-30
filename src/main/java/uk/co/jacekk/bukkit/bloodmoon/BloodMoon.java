@@ -17,6 +17,7 @@ import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityZombie;
 import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonStartEvent;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.BreakBlocksListener;
+import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.ChatMessageListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.DoubleHealthListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.FireArrowsListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.LockInWorldListener;
@@ -75,7 +76,6 @@ public class BloodMoon extends BasePlugin {
 		}
 		
 		// These events are always needed.
-		this.pluginManager.registerEvents(new PlayerEnterWorldListener(this), this);
 		this.pluginManager.registerEvents(new EntityReplaceListener(this), this);
 		
 		// NOTE: arrow-rate is handled in BloodMoonPathfinderGoalArrowAttack and BloodMoonEntitySkeleton
@@ -83,6 +83,10 @@ public class BloodMoon extends BasePlugin {
 		// NOTE: target-distance is handled in BloodMoonPathfinderGoalNearestAttackableTarget and all BloodMoonEntity*
 		
 		// NOTE: movement-speed is handled in all BloodMoonNavigation* and BloodMoonEntity*
+		
+		if (this.config.getBoolean(Config.FEATURE_CHAT_MESSAGE_ENABLED)){
+			this.pluginManager.registerEvents(new ChatMessageListener(this), this);
+		}
 		
 		if (this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && this.config.getBoolean(Config.FEATURE_FIRE_ARROWS_IGNITE_TARGET)){
 			this.pluginManager.registerEvents(new FireArrowsListener(this), this);

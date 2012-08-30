@@ -10,6 +10,9 @@ public enum Config implements PluginConfigKey {
 	ALWAYS_ON(								"always-on",								false),
 	CHANCE(									"chance",									14),
 	
+	FEATURE_CHAT_MESSAGE_ENABLED(			"features.chat-message.enabled",			true),
+	FEATURE_CHAT_MESSAGE_MESSAGE(			"features.chat-message.message",			"&cThe bloodmoon is rising !"),
+	
 	FEATURE_ARROW_RATE_ENABLED(				"features.arrow-rate.enabled",				true),
 	FEATURE_ARROW_RATE_MULTIPLIER(			"features.arrow-rate.multiplier",			2),
 	
