@@ -11,7 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import uk.co.jacekk.bukkit.baseplugin.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityEnderman;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySkeleton;
