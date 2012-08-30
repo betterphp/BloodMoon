@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
@@ -38,6 +39,7 @@ public class TexturePackListener extends BaseListener<BloodMoon> {
 		}
 	}
 	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPlayerChangedWorld(PlayerChangedWorldEvent event){
 		Player player = event.getPlayer();
 		String from = event.getFrom().getName();
@@ -47,6 +49,16 @@ public class TexturePackListener extends BaseListener<BloodMoon> {
 			this.setTexturePack(player, plugin.config.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
 		}else if (plugin.isActive(from) && !plugin.isActive(to)){
 			this.setTexturePack(player, plugin.config.getString(Config.FEATURE_TEXTURE_PACK_NORMAL));
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onPlayerJoin(PlayerJoinEvent event){
+		Player player = event.getPlayer();
+		String to = player.getWorld().getName();
+		
+		if (plugin.isActive(to)){
+			this.setTexturePack(player, plugin.config.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
 		}
 	}
 	
