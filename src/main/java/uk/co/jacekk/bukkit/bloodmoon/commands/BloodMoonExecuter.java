@@ -38,8 +38,6 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			return true;
 		}
 		
-		World world = plugin.server.getWorld(worldName);
-		
 		if (option.equalsIgnoreCase("start")){
 			if (!Permission.ADMIN_START.hasPermission(sender)){
 				sender.sendMessage(plugin.formatMessage(ChatColor.RED + "You do not have permission to start a bloodmoon"));
@@ -47,10 +45,6 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			}
 			
 			plugin.activate(worldName);
-			
-			for (Player worldPlayer : world.getPlayers()){
-				worldPlayer.sendMessage(ChatColor.RED + "The blood moon is rising !");
-			}
 		}else if (option.equalsIgnoreCase("stop")){
 			if (!Permission.ADMIN_STOP.hasPermission(sender)){
 				sender.sendMessage(plugin.formatMessage(ChatColor.RED + "You do not have permission to stop a bloodmoon"));
@@ -58,10 +52,6 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			}
 			
 			plugin.deactivate(worldName);
-			
-			for (Player worldPlayer : world.getPlayers()){
-				worldPlayer.sendMessage(ChatColor.RED + "The blood moon has been stopped !");
-			}
 		}else{
 			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Invalid option, see /" + label + " for correct usage"));
 		}
