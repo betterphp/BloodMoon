@@ -63,7 +63,7 @@ public class BloodMoon extends BasePlugin {
 			return;
 		}
 		
-		this.getCommand("bloodmoon").setExecutor(new BloodMoonExecuter(this));
+		this.commandManager.registerCommandExecutor(new BloodMoonExecuter(this));
 		
 		for (Permission permission : Permission.values()){
 			this.pluginManager.addPermission(new org.bukkit.permissions.Permission(permission.getNode(), permission.getDescription(), permission.getDefault()));

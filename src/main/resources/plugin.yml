@@ -2,8 +2,3 @@ name: BloodMoon
 version: 0.17
 main: uk.co.jacekk.bukkit.bloodmoon.BloodMoon
 load: startup
-commands:
-    bloodmoon:
-        description: Toggles the bloodmoon for the current world.
-        usage: /<command> <start/stop> [world_name]
-        aliases: [bm, blood]
