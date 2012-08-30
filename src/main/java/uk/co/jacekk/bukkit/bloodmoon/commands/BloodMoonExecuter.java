@@ -1,7 +1,6 @@
 package uk.co.jacekk.bukkit.bloodmoon.commands;
 
 import org.bukkit.ChatColor;
-import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
