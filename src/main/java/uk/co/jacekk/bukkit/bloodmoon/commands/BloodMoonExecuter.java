@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import uk.co.jacekk.bukkit.baseplugin.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v1.command.BaseCommandExecutor;
+import uk.co.jacekk.bukkit.baseplugin.v1.command.CommandHandler;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.Permission;

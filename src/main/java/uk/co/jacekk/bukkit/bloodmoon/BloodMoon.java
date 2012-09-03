@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import org.bukkit.World;
 
-import uk.co.jacekk.bukkit.baseplugin.BasePlugin;
-import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v1.BasePlugin;
+import uk.co.jacekk.bukkit.baseplugin.v1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.commands.BloodMoonExecuter;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityEnderman;
