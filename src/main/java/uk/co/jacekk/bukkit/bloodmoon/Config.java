@@ -53,6 +53,7 @@ public enum Config implements PluginConfigKey {
 	
 	FEATURE_SUPER_CREEPERS_ENABLED(			"features.super-creepers.enabled",			true),
 	FEATURE_SUPER_CREEPERS_POWER(			"features.super-creepers.power",			4.0D),
+	FEATURE_SUPER_CREEPERS_FIRE(			"features.super-creepers.fire",				true),
 	
 	FEATURE_SPAWN_ON_KILL_ENABLED(			"features.spawn-on-kill.enabled",			true),
 	FEATURE_SPAWN_ON_KILL_MOBS(				"features.spawn-on-kill.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
