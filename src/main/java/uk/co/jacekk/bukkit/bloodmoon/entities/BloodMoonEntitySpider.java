@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.entity.CraftSpider;
 import org.bukkit.entity.Spider;
 import org.bukkit.plugin.Plugin;
 
@@ -20,8 +22,10 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 	
 	private BloodMoon plugin;
 	
-	public BloodMoonEntitySpider(World world, Plugin plugin){
+	public BloodMoonEntitySpider(World world){
 		super(world);
+		
+		Plugin plugin = Bukkit.getPluginManager().getPlugin("BloodMoon");
 		
 		if (plugin == null || !(plugin instanceof BloodMoon)){
 			this.world.removeEntity(this);
@@ -29,6 +33,8 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 		}
 		
 		this.plugin = (BloodMoon) plugin;
+		
+		this.bukkitEntity = new CraftSpider((CraftServer) this.plugin.server, this);
 		
 		if (this.plugin.config.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains("SPIDER")){
 			try{
@@ -39,10 +45,6 @@ public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public BloodMoonEntitySpider(World world){
-		this(world, Bukkit.getPluginManager().getPlugin("BloodMoon"));
 	}
 	
 	@Override

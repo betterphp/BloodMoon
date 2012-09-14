@@ -35,7 +35,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		net.minecraft.server.Entity mcEntity = ((CraftEntity) entity).getHandle();
 		
 		if (creatureType == EntityType.CREEPER && !(mcEntity instanceof BloodMoonEntityCreeper)){
-			BloodMoonEntityCreeper bloodMoonEntityCreeper = new BloodMoonEntityCreeper(mcWorld, plugin);
+			BloodMoonEntityCreeper bloodMoonEntityCreeper = new BloodMoonEntityCreeper(mcWorld);
 			
 			bloodMoonEntityCreeper.setPosition(location.getX(), location.getY(), location.getZ());
 			
@@ -46,7 +46,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		}
 		
 		if (creatureType == EntityType.SKELETON && !(mcEntity instanceof BloodMoonEntitySkeleton)){
-			BloodMoonEntitySkeleton bloodMoonEntitySkeleton = new BloodMoonEntitySkeleton(mcWorld, plugin);
+			BloodMoonEntitySkeleton bloodMoonEntitySkeleton = new BloodMoonEntitySkeleton(mcWorld);
 			
 			bloodMoonEntitySkeleton.setPosition(location.getX(), location.getY(), location.getZ());
 			
@@ -57,7 +57,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		}
 		
 		if (creatureType == EntityType.SPIDER && !(mcEntity instanceof BloodMoonEntitySpider)){
-			BloodMoonEntitySpider bloodMoonEntitySpider = new BloodMoonEntitySpider(mcWorld, plugin);
+			BloodMoonEntitySpider bloodMoonEntitySpider = new BloodMoonEntitySpider(mcWorld);
 			
 			bloodMoonEntitySpider.setPosition(location.getX(), location.getY(), location.getZ());
 			
@@ -68,7 +68,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		}
 		
 		if (creatureType == EntityType.ZOMBIE && !(mcEntity instanceof BloodMoonEntityZombie)){
-			BloodMoonEntityZombie bloodMoonEntityZombie = new BloodMoonEntityZombie(mcWorld, plugin);
+			BloodMoonEntityZombie bloodMoonEntityZombie = new BloodMoonEntityZombie(mcWorld);
 			
 			bloodMoonEntityZombie.setPosition(location.getX(), location.getY(), location.getZ());
 			
@@ -79,7 +79,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		}
 		
 		if (creatureType == EntityType.ENDERMAN && !(mcEntity instanceof BloodMoonEntityEnderman)){
-			BloodMoonEntityEnderman bloodMoonEntityEnderman = new BloodMoonEntityEnderman(mcWorld, plugin);
+			BloodMoonEntityEnderman bloodMoonEntityEnderman = new BloodMoonEntityEnderman(mcWorld);
 			
 			bloodMoonEntityEnderman.setPosition(location.getX(), location.getY(), location.getZ());
 			

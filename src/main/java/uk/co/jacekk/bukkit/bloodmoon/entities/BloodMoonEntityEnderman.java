@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.entity.CraftEnderman;
 import org.bukkit.entity.Enderman;
 import org.bukkit.plugin.Plugin;
 
@@ -25,8 +27,10 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 	private BloodMoon plugin;
 	private int h = 0;
 	
-	public BloodMoonEntityEnderman(World world, Plugin plugin){
+	public BloodMoonEntityEnderman(World world){
 		super(world);
+		
+		Plugin plugin = Bukkit.getPluginManager().getPlugin("BloodMoon");
 		
 		if (plugin == null || !(plugin instanceof BloodMoon)){
 			this.world.removeEntity(this);
@@ -34,6 +38,8 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 		}
 		
 		this.plugin = (BloodMoon) plugin;
+		
+		this.bukkitEntity = new CraftEnderman((CraftServer) this.plugin.server, this);
 		
 		if (this.plugin.config.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains("ENDERMAN")){
 			try{
@@ -44,10 +50,6 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public BloodMoonEntityEnderman(World world){
-		this(world, Bukkit.getPluginManager().getPlugin("BloodMoon"));
 	}
 	
 	@Override

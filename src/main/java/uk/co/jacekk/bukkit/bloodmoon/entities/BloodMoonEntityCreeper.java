@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.entity.CraftCreeper;
 import org.bukkit.entity.Creeper;
 import org.bukkit.plugin.Plugin;
 
@@ -35,8 +37,10 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 	private BloodMoon plugin;
 	
 	@SuppressWarnings("unchecked")
-	public BloodMoonEntityCreeper(World world, Plugin plugin){
+	public BloodMoonEntityCreeper(World world){
 		super(world);
+		
+		Plugin plugin = Bukkit.getPluginManager().getPlugin("BloodMoon");
 		
 		if (plugin == null || !(plugin instanceof BloodMoon)){
 			this.world.removeEntity(this);
@@ -44,6 +48,8 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 		}
 		
 		this.plugin = (BloodMoon) plugin;
+		
+		this.bukkitEntity = new CraftCreeper((CraftServer) this.plugin.server, this);
 		
 		if (this.plugin.config.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains("CREEPER")){
 			try{
@@ -82,10 +88,6 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}
-	
-	public BloodMoonEntityCreeper(World world){
-		this(world, Bukkit.getPluginManager().getPlugin("BloodMoon"));
 	}
 	
 	@Override

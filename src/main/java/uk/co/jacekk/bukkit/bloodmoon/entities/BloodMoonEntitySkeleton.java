@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.craftbukkit.CraftServer;
+import org.bukkit.craftbukkit.entity.CraftSkeleton;
 import org.bukkit.entity.Skeleton;
 import org.bukkit.plugin.Plugin;
 
@@ -35,8 +37,10 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 	private BloodMoon plugin;
 	
 	@SuppressWarnings("unchecked")
-	public BloodMoonEntitySkeleton(World world, Plugin plugin){
+	public BloodMoonEntitySkeleton(World world){
 		super(world);
+		
+		Plugin plugin = Bukkit.getPluginManager().getPlugin("BloodMoon");
 		
 		if (plugin == null || !(plugin instanceof BloodMoon)){
 			this.world.removeEntity(this);
@@ -44,6 +48,8 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 		}
 		
 		this.plugin = (BloodMoon) plugin;
+		
+		this.bukkitEntity = new CraftSkeleton((CraftServer) this.plugin.server, this);
 		
 		if (this.plugin.config.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.plugin.config.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains("SKELETON")){
 			try{
@@ -87,10 +93,6 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-	}
-	
-	public BloodMoonEntitySkeleton(World world){
-		this(world, Bukkit.getPluginManager().getPlugin("BloodMoon"));
 	}
 	
 	@Override
