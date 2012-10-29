@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon;
 
 import java.util.Arrays;
 
-import uk.co.jacekk.bukkit.baseplugin.v1.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.v4.config.PluginConfigKey;
 
 public enum Config implements PluginConfigKey {
 	

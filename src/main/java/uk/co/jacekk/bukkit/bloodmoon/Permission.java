@@ -8,7 +8,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionDefault;
 
-public enum Permission {
+import uk.co.jacekk.bukkit.baseplugin.v4.permissions.PluginPermission;
+
+public enum Permission implements PluginPermission {
 	
 	ADMIN_START(				"bloodmoon.admin.start",				PermissionDefault.OP,		"Allows the player to manually start a bloodmoon"),
 	ADMIN_STOP(					"bloodmoon.admin.stop",					PermissionDefault.OP,		"Allows the player to manually stop a bloodmoon"),
@@ -28,7 +30,7 @@ public enum Permission {
 		ArrayList<Player> players = new ArrayList<Player>();
 		
 		for (Player player : Bukkit.getServer().getOnlinePlayers()){
-			if (this.hasPermission(player)){
+			if (this.has(player)){
 				players.add(player);
 			}
 		}
@@ -36,7 +38,7 @@ public enum Permission {
 		return players;
 	}
 	
-	public Boolean hasPermission(CommandSender sender){
+	public boolean has(CommandSender sender){
 		return sender.hasPermission(this.node);
 	}
 	

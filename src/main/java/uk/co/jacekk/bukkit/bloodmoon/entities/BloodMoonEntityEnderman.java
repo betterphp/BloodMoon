@@ -53,7 +53,7 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 	}
 	
 	@Override
-	public void h_(){
+	public void j_(){
 		Enderman enderman = (Enderman) this.getBukkitEntity();
 		
 		Location from = new Location(enderman.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -67,7 +67,7 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 			return;
 		}
 		
-		super.h_();
+		super.j_();
 	}
 	
 	private boolean d(EntityHuman entityhuman){
@@ -77,16 +77,17 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman
 			return false;
 		}
 		
-		Vec3D vec3d = entityhuman.i(1.0F).b();
-		Vec3D vec3d1 = Vec3D.a().create(this.locX - entityhuman.locX, this.boundingBox.b + (this.length / 2.0F) - (entityhuman.locY + entityhuman.getHeadHeight()), this.locZ - entityhuman.locZ);
-		double d0 = vec3d1.c();
+		Vec3D vec3d = entityhuman.i(1.0F).a();
+		Vec3D vec3d1 = this.world.getVec3DPool().create(this.locX - entityhuman.locX, this.boundingBox.b + (this.length / 2.0F) - (entityhuman.locY + entityhuman.getHeadHeight()), this.locZ - entityhuman.locZ);
+		double d0 = vec3d1.b();
 		
-		vec3d1 = vec3d1.b();
+		vec3d1 = vec3d1.a();
 		double d1 = vec3d.b(vec3d1);
 		
-		return d1 > 1.0D - 0.025D / d0 ? entityhuman.l(this) : false;
+		return d1 > 1.0D - 0.025D / d0 ? entityhuman.m(this) : false;
 	}
 	
+	@Override
 	protected Entity findTarget(){
 		double distance = (plugin.isActive(this.world.worldData.getName()) && plugin.config.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains("ENDERMAN")) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * 64.0d : 64.0d;
 		

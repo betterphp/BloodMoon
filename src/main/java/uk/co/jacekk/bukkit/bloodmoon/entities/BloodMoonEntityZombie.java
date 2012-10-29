@@ -73,11 +73,11 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 			
 			this.goalSelector.a(0, new PathfinderGoalFloat(this));
 			this.goalSelector.a(1, new PathfinderGoalBreakDoor(this));
-			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bw, false));
-			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bw, true));
-			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bw));
-			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bw, false));
-			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bw));
+			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bc, false));
+			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bc, true));
+			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bc));
+			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bc, false));
+			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bc));
 			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
 			
@@ -96,7 +96,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 	}
 	
 	@Override
-	public void h_(){
+	public void j_(){
 		Zombie zombie = (Zombie) this.getBukkitEntity();
 		
 		Location from = new Location(zombie.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -110,7 +110,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 			return;
 		}
 		
-		super.h_();
+		super.j_();
 	}
 	
 	@Override

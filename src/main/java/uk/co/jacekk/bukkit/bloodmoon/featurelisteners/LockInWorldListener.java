@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v1.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v4.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Permission;
 
@@ -25,7 +25,7 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 		World toWorld = event.getTo().getWorld();
 		World fromWorld = event.getFrom().getWorld();
 		
-		if (!Permission.ADMIN_IGNORE_WORLD_LOCK.hasPermission(player) && fromWorld != toWorld && plugin.isActive(fromWorld.getName())){
+		if (!Permission.ADMIN_IGNORE_WORLD_LOCK.has(player) && fromWorld != toWorld && plugin.isActive(fromWorld.getName())){
 			event.setCancelled(true);
 			player.sendMessage(ChatColor.RED + "You cannot leave the world until the bloodmoon has ended.");
 		}
@@ -42,7 +42,7 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 		World toWorld = event.getRespawnLocation().getWorld();
 		World fromWorld = player.getWorld();
 		
-		if (!Permission.ADMIN_IGNORE_WORLD_LOCK.hasPermission(player) && fromWorld != toWorld && plugin.isActive(fromWorld.getName())){
+		if (!Permission.ADMIN_IGNORE_WORLD_LOCK.has(player) && fromWorld != toWorld && plugin.isActive(fromWorld.getName())){
 			event.setRespawnLocation(fromWorld.getSpawnLocation());
 			player.sendMessage(ChatColor.RED + "You cannot leave the world until the bloodmoon has ended.");
 		}

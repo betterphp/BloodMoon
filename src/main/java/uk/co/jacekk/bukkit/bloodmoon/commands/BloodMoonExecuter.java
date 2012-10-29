@@ -4,8 +4,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import uk.co.jacekk.bukkit.baseplugin.v1.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.v1.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v4.command.BaseCommandExecutor;
+import uk.co.jacekk.bukkit.baseplugin.v4.command.CommandHandler;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.Permission;
@@ -39,14 +39,14 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 		}
 		
 		if (option.equalsIgnoreCase("start")){
-			if (!Permission.ADMIN_START.hasPermission(sender)){
+			if (!Permission.ADMIN_START.has(sender)){
 				sender.sendMessage(plugin.formatMessage(ChatColor.RED + "You do not have permission to start a bloodmoon"));
 				return;
 			}
 			
 			plugin.activate(worldName);
 		}else if (option.equalsIgnoreCase("stop")){
-			if (!Permission.ADMIN_STOP.hasPermission(sender)){
+			if (!Permission.ADMIN_STOP.has(sender)){
 				sender.sendMessage(plugin.formatMessage(ChatColor.RED + "You do not have permission to stop a bloodmoon"));
 				return;
 			}

@@ -10,6 +10,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import net.minecraft.server.Entity;
 import net.minecraft.server.EntityHuman;
 import net.minecraft.server.EntityLiving;
+import net.minecraft.server.IEntitySelector;
 import net.minecraft.server.PathfinderGoalTarget;
 
 public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget {
@@ -17,13 +18,12 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 	private BloodMoon plugin;
 	
 	private EntityLiving entity;
-	@SuppressWarnings("rawtypes")
-	private Class targetType;
+	private Class<?> targetType;
 	private int c;
+	private BloodMoonDistanceComparator comparator;
+	private IEntitySelector entitySelctor;
 	
-	private BloodMoonDistanceComparator g;
-	
-	public BloodMoonPathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> targetType, float distance, int i, boolean flag, boolean flag1){
+	public BloodMoonPathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> targetType, float distance, int i, boolean flag, boolean flag1, IEntitySelector entitySelector){
 		super(entity, distance, flag, flag1);
 		
 		this.plugin = plugin;
@@ -32,18 +32,23 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 		this.targetType = targetType;
 		this.e = distance;
 		this.c = i;
-		this.g = new BloodMoonDistanceComparator(entity);
+		this.comparator = new BloodMoonDistanceComparator(entity);
+		this.entitySelctor = entitySelector;
+	}
+	
+	public BloodMoonPathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> oclass, float distance, int i, boolean flag, boolean flag1){
+		this(plugin, entity, oclass, distance, i, flag, flag1, null);
 	}
 	
 	public BloodMoonPathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> oclass, float distance, int i, boolean flag){
-		this(plugin, entity, oclass, distance, i, flag, false);
+		this(plugin, entity, oclass, distance, i, flag, false, null);
 	}
 	
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@Override
 	public boolean a(){
 		float distance = (plugin.isActive(this.entity.world.worldData.getName())) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * this.e : this.e;
 				
-		if (this.c > 0 && this.d.au().nextInt(this.c) != 0){
+		if (this.c > 0 && this.d.aA().nextInt(this.c) != 0){
 			return false;
 		}
 		
@@ -57,7 +62,7 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 		}else{
 			List list = this.d.world.a(this.targetType, this.d.boundingBox.grow( distance, 4.0D, distance));
 			
-			Collections.sort(list, this.g);
+			Collections.sort(list, this.comparator);
 			Iterator iterator = list.iterator();
 			
 			while (iterator.hasNext()){
@@ -74,9 +79,10 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 		return false;
 	}
 	
-	public void e(){
+	@Override
+	public void c(){
 		this.d.b(this.entity);
-		super.e();
+		super.c();
 	}
 	
 }

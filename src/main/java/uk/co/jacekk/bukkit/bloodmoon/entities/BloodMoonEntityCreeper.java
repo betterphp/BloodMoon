@@ -91,7 +91,7 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 	}
 	
 	@Override
-	public void h_(){
+	public void j_(){
 		Creeper creeper = (Creeper) this.getBukkitEntity();
 		
 		Location from = new Location(creeper.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -105,7 +105,7 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 			return;
 		}
 		
-		super.h_();
+		super.j_();
 	}
 	
 	@Override

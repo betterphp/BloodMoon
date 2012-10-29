@@ -17,9 +17,13 @@ import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonPathfinderGoalArrowAttack;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonPathfinderGoalNearestAttackableTarget;
 
+import net.minecraft.server.Enchantment;
+import net.minecraft.server.EnchantmentManager;
 import net.minecraft.server.Entity;
+import net.minecraft.server.EntityArrow;
 import net.minecraft.server.EntityHuman;
 import net.minecraft.server.EntityLiving;
+import net.minecraft.server.IRangedEntity;
 import net.minecraft.server.PathfinderGoal;
 import net.minecraft.server.PathfinderGoalArrowAttack;
 import net.minecraft.server.PathfinderGoalFleeSun;
@@ -32,7 +36,7 @@ import net.minecraft.server.PathfinderGoalRandomStroll;
 import net.minecraft.server.PathfinderGoalRestrictSun;
 import net.minecraft.server.World;
 
-public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton {
+public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton implements IRangedEntity {
 	
 	private BloodMoon plugin;
 	
@@ -72,15 +76,15 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 			
 	        this.goalSelector.a(1, new PathfinderGoalFloat(this));
 	        this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
-	        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bw));
+	        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bI));
 	        
 	        if (this.plugin.config.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)){
-	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this, this.plugin, this.bw, 60));
+	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this.plugin, this, this.bI, 60, 10.0f));
 	        }else{
-	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bw, 1, 60));
+	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bI, 60, 10.0f));
 	        }
 	        
-	        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bw));
+	        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bc));
 	        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 	        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
 	        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
@@ -96,7 +100,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 	}
 	
 	@Override
-	public void h_(){
+	public void j_(){
 		Skeleton skeleton = (Skeleton) this.getBukkitEntity();
 		
 		Location from = new Location(skeleton.getWorld(), this.lastX, this.lastY, this.lastZ, this.lastYaw, this.lastPitch);
@@ -110,7 +114,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 			return;
 		}
 		
-		super.h_();
+		super.j_();
 	}
 	
 	@Override
@@ -121,5 +125,28 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 		
 		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
 	}
-
+	
+	@Override
+	public void d(EntityLiving entityLiving){
+		EntityArrow entityarrow = new EntityArrow(this.world, this, entityLiving, 1.6F, 12.0F);
+		
+		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, bA());
+		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, bA());
+		
+		if (i > 0){
+			entityarrow.b(entityarrow.c() + i * 0.5D + 0.5D);
+		}
+		
+		if (j > 0){
+			entityarrow.a(j);
+		}
+		
+		if (EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, bA()) > 0 || getSkeletonType() == 1 || (plugin.isActive(this.world.worldData.getName()) && plugin.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED))){
+			entityarrow.setOnFire(1024);
+		}
+		
+		this.world.makeSound(this, "random.bow", 1.0F, 1.0F / (aA().nextFloat() * 0.4F + 0.8F));
+		this.world.addEntity(entityarrow);
+	}
+	
 }

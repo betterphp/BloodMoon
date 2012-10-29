@@ -11,7 +11,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
-import uk.co.jacekk.bukkit.baseplugin.v1.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v4.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 
 public class DoubleHealthListener extends BaseListener<BloodMoon> {
