@@ -73,11 +73,11 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 			
 			this.goalSelector.a(0, new PathfinderGoalFloat(this));
 			this.goalSelector.a(1, new PathfinderGoalBreakDoor(this));
-			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bc, false));
-			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bc, true));
-			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bc));
-			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bc, false));
-			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bc));
+			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bI, false));
+			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bI, true));
+			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bI));
+			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bI, false));
+			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bI));
 			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
 			
