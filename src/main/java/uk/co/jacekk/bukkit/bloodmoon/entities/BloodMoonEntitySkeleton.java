@@ -1,6 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.entities;
 
 import java.lang.reflect.Field;
+import java.util.Calendar;
 import java.util.List;
 
 import org.bukkit.Bukkit;
@@ -17,6 +18,7 @@ import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonPathfinderGoalArrowAttack;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonPathfinderGoalNearestAttackableTarget;
 
+import net.minecraft.server.Block;
 import net.minecraft.server.Enchantment;
 import net.minecraft.server.EnchantmentManager;
 import net.minecraft.server.Entity;
@@ -24,17 +26,21 @@ import net.minecraft.server.EntityArrow;
 import net.minecraft.server.EntityHuman;
 import net.minecraft.server.EntityLiving;
 import net.minecraft.server.IRangedEntity;
+import net.minecraft.server.Item;
+import net.minecraft.server.ItemStack;
 import net.minecraft.server.PathfinderGoal;
 import net.minecraft.server.PathfinderGoalArrowAttack;
 import net.minecraft.server.PathfinderGoalFleeSun;
 import net.minecraft.server.PathfinderGoalFloat;
 import net.minecraft.server.PathfinderGoalHurtByTarget;
 import net.minecraft.server.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.PathfinderGoalMeleeAttack;
 import net.minecraft.server.PathfinderGoalNearestAttackableTarget;
 import net.minecraft.server.PathfinderGoalRandomLookaround;
 import net.minecraft.server.PathfinderGoalRandomStroll;
 import net.minecraft.server.PathfinderGoalRestrictSun;
 import net.minecraft.server.World;
+import net.minecraft.server.WorldProviderHell;
 
 public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton implements IRangedEntity {
 	
@@ -77,13 +83,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 	        this.goalSelector.a(1, new PathfinderGoalFloat(this));
 	        this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
 	        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bI));
-	        
-	        if (this.plugin.config.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)){
-	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this.plugin, this, this.bI, 60, 10.0f));
-	        }else{
-	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bI, 60, 10.0f));
-	        }
-	        
+	        // NOTE: See bD() below
 	        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bI));
 	        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 	        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
@@ -96,6 +96,35 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 	        }
 		}catch (Exception e){
 			e.printStackTrace();
+		}
+	}
+	
+	@Override
+	public void bD(){
+		if ((this.world.worldProvider instanceof WorldProviderHell) && aA().nextInt(5) > 0){
+			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bI, false));
+			this.setSkeletonType(1);
+			this.setEquipment(0, new ItemStack(Item.STONE_SWORD));
+		}else{
+			if (this.plugin.config.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)){
+	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this.plugin, this, this.bI, 60, 10.0f));
+	        }else{
+	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bI, 60, 10.0f));
+	        }
+			
+			this.bB();
+			this.bC();
+		}
+		
+		this.canPickUpLoot = (this.random.nextFloat() < as[this.world.difficulty]);
+		
+		if (getEquipment(4) == null){
+			Calendar calendar = this.world.S();
+			
+			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.random.nextFloat() < 0.25F){
+				setEquipment(4, new ItemStack(this.random.nextFloat() < 0.1F ? Block.JACK_O_LANTERN : Block.PUMPKIN));
+				this.dropChances[4] = 0.0F;
+			}
 		}
 	}
 	
