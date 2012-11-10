@@ -8,7 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import uk.co.jacekk.bukkit.baseplugin.v4.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 

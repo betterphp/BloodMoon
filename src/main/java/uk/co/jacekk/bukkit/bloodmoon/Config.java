@@ -2,87 +2,71 @@ package uk.co.jacekk.bukkit.bloodmoon;
 
 import java.util.Arrays;
 
-import uk.co.jacekk.bukkit.baseplugin.v4.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.v5.config.PluginConfigKey;
 
-public enum Config implements PluginConfigKey {
+public class Config {
 	
-	AFFECTED_WORLDS(						"affected-worlds",							Arrays.asList("world")),
-	ALWAYS_ON(								"always-on",								false),
-	CHANCE(									"chance",									14),
+	public static final PluginConfigKey AFFECTED_WORLDS						= new PluginConfigKey("affected-worlds", 						Arrays.asList("world"));
+	public static final PluginConfigKey ALWAYS_ON								= new PluginConfigKey("always-on",								false);
+	public static final PluginConfigKey CHANCE								= new PluginConfigKey("chance",									14);
 	
-	FEATURE_CHAT_MESSAGE_ENABLED(			"features.chat-message.enabled",			true),
-	FEATURE_CHAT_MESSAGE_MESSAGE(			"features.chat-message.message",			"&cThe bloodmoon is rising !"),
+	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_ENABLED			= new PluginConfigKey("features.chat-message.enabled",			true);
+	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_MESSAGE			= new PluginConfigKey("features.chat-message.message",			"&cThe bloodmoon is rising !");
 	
-	FEATURE_ARROW_RATE_ENABLED(				"features.arrow-rate.enabled",				true),
-	FEATURE_ARROW_RATE_MULTIPLIER(			"features.arrow-rate.multiplier",			2),
+	public static final PluginConfigKey FEATURE_ARROW_RATE_ENABLED			= new PluginConfigKey("features.arrow-rate.enabled",			true);
+	public static final PluginConfigKey FEATURE_ARROW_RATE_MULTIPLIER			= new PluginConfigKey("features.arrow-rate.multiplier",			2);
 	
-	FEATURE_FIRE_ARROWS_ENABLED(			"features.fire-arrows.enabled",				true),
-	FEATURE_FIRE_ARROWS_IGNITE_TARGET(		"features.fire-arrows.ignite-target",		true),
+	public static final PluginConfigKey FEATURE_FIRE_ARROWS_ENABLED			= new PluginConfigKey("features.fire-arrows.enabled",			true);
+	public static final PluginConfigKey FEATURE_FIRE_ARROWS_IGNITE_TARGET		= new PluginConfigKey("features.fire-arrows.ignite-target",		true);
 	
-	FEATURE_TARGET_DISTANCE_ENABLED(		"features.target-distance.enabled",			true),
-	FEATURE_TARGET_DISTANCE_MULTIPLIER(		"features.target-distance.multiplier",		3),
-	FEATURE_TARGET_DISTANCE_MOBS(			"features.target-distance.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER")),
+	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_ENABLED		= new PluginConfigKey("features.target-distance.enabled",		true);
+	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MULTIPLIER	= new PluginConfigKey("features.target-distance.multiplier",	3);
+	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MOBS			= new PluginConfigKey("features.target-distance.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER"));
 	
-	FEATURE_MOVEMENT_SPEED_ENABLED(			"features.movement-speed.enabled",			true),
-	FEATURE_MOVEMENT_SPEED_MULTIPLIER(		"features.movement-speed.multiplier",		1.35d),
-	FEATURE_MOVEMENT_SPEED_MOBS(			"features.movement-speed.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "CREEPER")),
+	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_ENABLED		= new PluginConfigKey("features.movement-speed.enabled",		true);
+	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MULTIPLIER		= new PluginConfigKey("features.movement-speed.multiplier",		1.35d);
+	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MOBS			= new PluginConfigKey("features.movement-speed.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "CREEPER"));
 	
-	FEATURE_BREAK_BLOCKS_ENABLED(			"features.break-blocks.enabled",			true),
-	FEATURE_BREAK_BLOCKS_REALISTIC_DROP(	"features.break-blocks.realistic-drop",		true),
-	FEATURE_BREAK_BLOCKS_MOBS(				"features.break-blocks.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
-	FEATURE_BREAK_BLOCKS_BLOCKS(			"features.break-blocks.blocks",				Arrays.asList("WOOD", "LOG", "GLASS")),
+	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_ENABLED			= new PluginConfigKey("features.break-blocks.enabled",			true);
+	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_REALISTIC_DROP	= new PluginConfigKey("features.break-blocks.realistic-drop",	true);
+	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_MOBS				= new PluginConfigKey("features.break-blocks.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
+	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_BLOCKS			= new PluginConfigKey("features.break-blocks.blocks",			Arrays.asList("WOOD", "LOG", "GLASS"));
 	
-	FEATURE_DOUBLE_HEALTH_ENABLED(			"features.double-health.enabled",			true),
-	FEATURE_DOUBLE_HEALTH_MOBS(				"features.double-health.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
+	public static final PluginConfigKey FEATURE_DOUBLE_HEALTH_ENABLED			= new PluginConfigKey("features.double-health.enabled",			true);
+	public static final PluginConfigKey FEATURE_DOUBLE_HEALTH_MOBS			= new PluginConfigKey("features.double-health.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
 	
-	FEATURE_MORE_SPAWNING_ENABLED(			"features.more-spawning.enabled",			true),
-	FEATURE_MORE_SPAWNING_MULTIPLIER(		"features.more-spawning.multiplier",		2),
-	FEATURE_MORE_SPAWNING_MOBS(				"features.more-spawning.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
+	public static final PluginConfigKey FEATURE_MORE_SPAWNING_ENABLED			= new PluginConfigKey("features.more-spawning.enabled",			true);
+	public static final PluginConfigKey FEATURE_MORE_SPAWNING_MULTIPLIER		= new PluginConfigKey("features.more-spawning.multiplier",		2);
+	public static final PluginConfigKey FEATURE_MORE_SPAWNING_MOBS			= new PluginConfigKey("features.more-spawning.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
 	
-	FEATURE_MORE_EXP_ENABLED(				"features.more-exp.enabled",				true),
-	FEATURE_MORE_EXP_IGNORE_SPAWNERS(		"features.more-exp.ignore-spawners",		false),
-	FEATURE_MORE_EXP_MULTIPLIER(			"features.more-exp.multiplier",				2),
+	public static final PluginConfigKey FEATURE_MORE_EXP_ENABLED				= new PluginConfigKey("features.more-exp.enabled",				true);
+	public static final PluginConfigKey FEATURE_MORE_EXP_IGNORE_SPAWNERS		= new PluginConfigKey("features.more-exp.ignore-spawners",		false);
+	public static final PluginConfigKey FEATURE_MORE_EXP_MULTIPLIER			= new PluginConfigKey("features.more-exp.multiplier",			2);
 	
-	FEATURE_MORE_DROPS_ENABLED(				"features.more-drops.enabled",				true),
-	FEATURE_MORE_DROPS_IGNORE_SPAWNERS(		"features.more-drops.ignore-spawners",		false),
-	FEATURE_MORE_DROPS_MULTIPLIER(			"features.more-drops.multiplier",			2),
+	public static final PluginConfigKey FEATURE_MORE_DROPS_ENABLED			= new PluginConfigKey("features.more-drops.enabled",			true);
+	public static final PluginConfigKey FEATURE_MORE_DROPS_IGNORE_SPAWNERS	= new PluginConfigKey("features.more-drops.ignore-spawners",	false);
+	public static final PluginConfigKey FEATURE_MORE_DROPS_MULTIPLIER			= new PluginConfigKey("features.more-drops.multiplier",			2);
 	
-	FEATURE_SWORD_DAMAGE_ENABLED(			"features.sword-damage.enabled",			true),
-	FEATURE_SWORD_DAMAGE_MOBS(				"features.sword-damage.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
-	FEATURE_SWORD_DAMAGE_CHANCE(			"features.sword-damage.chance",				10),
+	public static final PluginConfigKey FEATURE_SWORD_DAMAGE_ENABLED			= new PluginConfigKey("features.sword-damage.enabled",			true);
+	public static final PluginConfigKey FEATURE_SWORD_DAMAGE_MOBS				= new PluginConfigKey("features.sword-damage.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
+	public static final PluginConfigKey FEATURE_SWORD_DAMAGE_CHANCE			= new PluginConfigKey("features.sword-damage.chance",			10);
 	
-	FEATURE_SUPER_CREEPERS_ENABLED(			"features.super-creepers.enabled",			true),
-	FEATURE_SUPER_CREEPERS_POWER(			"features.super-creepers.power",			4.0D),
-	FEATURE_SUPER_CREEPERS_FIRE(			"features.super-creepers.fire",				true),
+	public static final PluginConfigKey FEATURE_SUPER_CREEPERS_ENABLED		= new PluginConfigKey("features.super-creepers.enabled",		true);
+	public static final PluginConfigKey FEATURE_SUPER_CREEPERS_POWER			= new PluginConfigKey("features.super-creepers.power",			4.0D);
+	public static final PluginConfigKey FEATURE_SUPER_CREEPERS_FIRE			= new PluginConfigKey("features.super-creepers.fire",			true);
 	
-	FEATURE_SPAWN_ON_KILL_ENABLED(			"features.spawn-on-kill.enabled",			true),
-	FEATURE_SPAWN_ON_KILL_MOBS(				"features.spawn-on-kill.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
-	FEATURE_SPAWN_ON_KILL_CHANCE(			"features.spawn-on-kill.chance",			10),
-	FEATURE_SPAWN_ON_KILL_SPAWN(			"features.spawn-on-kill.spawn",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN")),
+	public static final PluginConfigKey FEATURE_SPAWN_ON_KILL_ENABLED			= new PluginConfigKey("features.spawn-on-kill.enabled",			true);
+	public static final PluginConfigKey FEATURE_SPAWN_ON_KILL_MOBS			= new PluginConfigKey("features.spawn-on-kill.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
+	public static final PluginConfigKey FEATURE_SPAWN_ON_KILL_CHANCE			= new PluginConfigKey("features.spawn-on-kill.chance",			10);
+	public static final PluginConfigKey FEATURE_SPAWN_ON_KILL_SPAWN			= new PluginConfigKey("features.spawn-on-kill.spawn",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
 	
-	FEATURE_SPAWN_ON_SLEEP_ENABLED(			"features.spawn-on-sleep.enabled",			true),
-	FEATURE_SPAWN_ON_SLEEP_SPAWN(			"features.spawn-on-sleep.spawn",			Arrays.asList("ZOMBIE")),
+	public static final PluginConfigKey FEATURE_SPAWN_ON_SLEEP_ENABLED		= new PluginConfigKey("features.spawn-on-sleep.enabled",		true);
+	public static final PluginConfigKey FEATURE_SPAWN_ON_SLEEP_SPAWN			= new PluginConfigKey("features.spawn-on-sleep.spawn",			Arrays.asList("ZOMBIE"));
 	
-	FEATURE_LOCK_IN_WORLD_ENABLED(			"features.lock-in-world.enabled",			false),
+	public static final PluginConfigKey FEATURE_LOCK_IN_WORLD_ENABLED			= new PluginConfigKey("features.lock-in-world.enabled",			false);
 	
-	FEATURE_TEXTURE_PACK_ENABLED(			"features.texture-pack.enabled",			false),
-	FEATURE_TEXTURE_PACK_NORMAL(			"features.texture-pack.normal",				"http://bukkit.jacekk.co.uk/bloodmoon_tps/normal.zip"),
-	FEATURE_TEXTURE_PACK_BLOODMOON(			"features.texture-pack.bloodmoon",			"http://bukkit.jacekk.co.uk/bloodmoon_tps/bloodmoon.zip");
-	
-	private String key;
-	private Object defaultValue;
-	
-	private Config(String key, Object defaultValue){
-		this.key = key;
-		this.defaultValue = defaultValue;
-	}
-	
-	public Object getDefault(){
-		return this.defaultValue;
-	}
-	
-	public String getKey(){
-		return this.key;
-	}
+	public static final PluginConfigKey FEATURE_TEXTURE_PACK_ENABLED			= new PluginConfigKey("features.texture-pack.enabled",			false);
+	public static final PluginConfigKey FEATURE_TEXTURE_PACK_NORMAL			= new PluginConfigKey("features.texture-pack.normal",			"http://bukkit.jacekk.co.uk/bloodmoon_tps/normal.zip");
+	public static final PluginConfigKey FEATURE_TEXTURE_PACK_BLOODMOON		= new PluginConfigKey("features.texture-pack.bloodmoon",		"http://bukkit.jacekk.co.uk/bloodmoon_tps/bloodmoon.zip");
 	
 }

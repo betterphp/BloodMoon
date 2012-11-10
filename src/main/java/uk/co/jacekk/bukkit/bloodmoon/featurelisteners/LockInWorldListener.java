@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v4.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Permission;
 

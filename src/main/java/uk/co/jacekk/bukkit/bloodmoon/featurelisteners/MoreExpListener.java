@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 
-import uk.co.jacekk.bukkit.baseplugin.v4.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 

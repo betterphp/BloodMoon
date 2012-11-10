@@ -15,8 +15,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
-import uk.co.jacekk.bukkit.baseplugin.v4.event.BaseListener;
-import uk.co.jacekk.bukkit.baseplugin.v4.util.ListUtils;
+import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v5.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 

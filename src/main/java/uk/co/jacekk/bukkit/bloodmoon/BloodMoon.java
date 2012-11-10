@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import org.bukkit.World;
 
-import uk.co.jacekk.bukkit.baseplugin.v4.BasePlugin;
-import uk.co.jacekk.bukkit.baseplugin.v4.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v5.BasePlugin;
+import uk.co.jacekk.bukkit.baseplugin.v5.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.commands.BloodMoonExecuter;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityEnderman;
@@ -39,7 +39,7 @@ public class BloodMoon extends BasePlugin {
 		
 		this.activeWorlds = new ArrayList<String>();
 		
-		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.values(), this.log);
+		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.class, this.log);
 		
 		try{
 			Class<?>[] args = new Class[3];
@@ -63,11 +63,9 @@ public class BloodMoon extends BasePlugin {
 			return;
 		}
 		
-		this.commandManager.registerCommandExecutor(new BloodMoonExecuter(this));
+		this.permissionManager.registerPermissions(Permission.class);
 		
-		for (Permission permission : Permission.values()){
-			this.pluginManager.addPermission(new org.bukkit.permissions.Permission(permission.getNode(), permission.getDescription(), permission.getDefault()));
-		}
+		this.commandManager.registerCommandExecutor(new BloodMoonExecuter(this));
 		
 		if (this.config.getBoolean(Config.ALWAYS_ON)){
 			this.pluginManager.registerEvents(new ActivateWorldListener(this), this);
