@@ -24,6 +24,11 @@ public class Config {
 	public static final PluginConfigKey FEATURE_ZOMBIE_WEAPON_DROP_CHANCE		= new PluginConfigKey("features.zombie-weapon.drop-chance",		25);
 	public static final PluginConfigKey FEATURE_ZOMBIE_WEAPON_WEAPONS			= new PluginConfigKey("features.zombie-weapon.weapons",			Arrays.asList("DIAMOND_SWORD", "GOLD_SWORD", "IRON_SWORD"));
 	
+	public static final PluginConfigKey FEATURE_ZOMBIE_ARMOR_ENABLED			= new PluginConfigKey("features.zombie-armor.enabled",			true);
+	public static final PluginConfigKey FEATURE_ZOMBIE_ARMOR_CHANCE			= new PluginConfigKey("features.zombie-armor.chance",			60);
+	public static final PluginConfigKey FEATURE_ZOMBIE_ARMOR_DROP_CHANCE		= new PluginConfigKey("features.zombie-armor.drop-chance",		7);
+	public static final PluginConfigKey FEATURE_ZOMBIE_ARMOR_ARMOR			= new PluginConfigKey("features.zombie-armor.armor",			Arrays.asList("DIAMOND", "GOLD", "IRON"));
+	
 	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_ENABLED		= new PluginConfigKey("features.target-distance.enabled",		true);
 	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MULTIPLIER	= new PluginConfigKey("features.target-distance.multiplier",	3);
 	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MOBS			= new PluginConfigKey("features.target-distance.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER"));

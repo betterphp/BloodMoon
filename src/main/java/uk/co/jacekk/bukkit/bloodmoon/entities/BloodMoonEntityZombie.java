@@ -20,6 +20,8 @@ import net.minecraft.server.Entity;
 import net.minecraft.server.EntityHuman;
 import net.minecraft.server.EntityLiving;
 import net.minecraft.server.EntityVillager;
+import net.minecraft.server.Item;
+import net.minecraft.server.ItemStack;
 import net.minecraft.server.PathfinderGoal;
 import net.minecraft.server.PathfinderGoalBreakDoor;
 import net.minecraft.server.PathfinderGoalFloat;
@@ -95,10 +97,6 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 		}
 	}
 	
-	public void setEquipmentDropChance(int slot, float chance){
-		this.dropChances[slot] = chance;
-	}
-	
 	@Override
 	public void j_(){
 		Zombie zombie = (Zombie) this.getBukkitEntity();
@@ -124,6 +122,10 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
 		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
+	}
+	
+	public void setEquipmentDropChance(int slot, float chance){
+		this.dropChances[slot] = chance;
 	}
 	
 }

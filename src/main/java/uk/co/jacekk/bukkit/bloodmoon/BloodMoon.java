@@ -29,6 +29,7 @@ import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SpawnOnSleepListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SuperCreepersListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SwordDamageListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.TexturePackListener;
+import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.ZombieArmorListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.ZombieWeaponListener;
 
 public class BloodMoon extends BasePlugin {
@@ -93,6 +94,10 @@ public class BloodMoon extends BasePlugin {
 		
 		if (this.config.getBoolean(Config.FEATURE_ZOMBIE_WEAPON_ENABLED)){
 			this.pluginManager.registerEvents(new ZombieWeaponListener(this), this);
+		}
+		
+		if (this.config.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_ENABLED)){
+			this.pluginManager.registerEvents(new ZombieArmorListener(this), this);
 		}
 		
 		if (this.config.getBoolean(Config.FEATURE_BREAK_BLOCKS_ENABLED)){
