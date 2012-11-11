@@ -95,6 +95,10 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 		}
 	}
 	
+	public void setEquipmentDropChance(int slot, float chance){
+		this.dropChances[slot] = chance;
+	}
+	
 	@Override
 	public void j_(){
 		Zombie zombie = (Zombie) this.getBukkitEntity();
