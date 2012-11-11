@@ -1,5 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.featurelisteners;
 
+import java.util.Random;
+
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
@@ -15,11 +17,13 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 public class MoreSpawningListener extends BaseListener<BloodMoon> {
 	
 	private int multiplier;
+	private Random rand;
 	
 	public MoreSpawningListener(BloodMoon plugin){
 		super(plugin);
 		
 		this.multiplier = Math.max(plugin.config.getInt(Config.FEATURE_MORE_SPAWNING_MULTIPLIER), 1);
+		this.rand = new Random();
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -32,7 +36,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 		
 		if (plugin.config.getStringList(Config.FEATURE_MORE_SPAWNING_MOBS).contains(type.getName().toUpperCase()) && plugin.isActive(world.getName())){
 			for (int i = 0; i < this.multiplier; ++i){
-				world.spawnEntity(location, type);
+				world.spawnEntity(location.add((this.rand.nextDouble() * 3) - 1.5, 0, (this.rand.nextDouble() * 3) - 1.5), type);
 			}
 		}
 	}
