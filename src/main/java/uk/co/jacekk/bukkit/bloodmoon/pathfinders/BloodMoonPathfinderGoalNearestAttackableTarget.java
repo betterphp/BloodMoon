@@ -48,7 +48,7 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 	public boolean a(){
 		float distance = (plugin.isActive(this.entity.world.worldData.getName())) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * this.e : this.e;
 				
-		if (this.c > 0 && this.d.aA().nextInt(this.c) != 0){
+		if (this.c > 0 && this.d.aB().nextInt(this.c) != 0){
 			return false;
 		}
 		

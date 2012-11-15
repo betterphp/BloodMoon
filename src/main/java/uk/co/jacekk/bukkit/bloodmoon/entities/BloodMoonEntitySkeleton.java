@@ -82,9 +82,9 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 			
 	        this.goalSelector.a(1, new PathfinderGoalFloat(this));
 	        this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
-	        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bI));
+	        this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bG));
 	        // NOTE: See bD() below
-	        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bI));
+	        this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bG));
 	        this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 	        this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
 	        this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
@@ -100,26 +100,26 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 	}
 	
 	@Override
-	public void bD(){
-		if ((this.world.worldProvider instanceof WorldProviderHell) && aA().nextInt(5) > 0){
-			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bI, false));
+	public void bG(){
+		if ((this.world.worldProvider instanceof WorldProviderHell) && aB().nextInt(5) > 0){
+			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bG, false));
 			this.setSkeletonType(1);
 			this.setEquipment(0, new ItemStack(Item.STONE_SWORD));
 		}else{
 			if (this.plugin.config.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)){
-	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this.plugin, this, this.bI, 60, 10.0f));
+	        	this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this.plugin, this, this.bG, 60, 10.0f));
 	        }else{
-	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bI, 60, 10.0f));
+	        	this.goalSelector.a(4, new PathfinderGoalArrowAttack(this, this.bG, 60, 10.0f));
 	        }
 			
-			this.bB();
-			this.bC();
+			this.bE();
+			this.bF();
 		}
 		
 		this.canPickUpLoot = (this.random.nextFloat() < as[this.world.difficulty]);
 		
 		if (getEquipment(4) == null){
-			Calendar calendar = this.world.S();
+			Calendar calendar = this.world.T();
 			
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.random.nextFloat() < 0.25F){
 				setEquipment(4, new ItemStack(this.random.nextFloat() < 0.1F ? Block.JACK_O_LANTERN : Block.PUMPKIN));
@@ -152,15 +152,15 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 		
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
-		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
+		return entityhuman != null && this.n(entityhuman) ? entityhuman : null;
 	}
 	
 	@Override
 	public void d(EntityLiving entityLiving){
 		EntityArrow entityarrow = new EntityArrow(this.world, this, entityLiving, 1.6F, 12.0F);
 		
-		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, bA());
-		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, bA());
+		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, bD());
+		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, bD());
 		
 		if (i > 0){
 			entityarrow.b(entityarrow.c() + i * 0.5D + 0.5D);
@@ -170,11 +170,11 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.EntitySkeleton
 			entityarrow.a(j);
 		}
 		
-		if (EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, bA()) > 0 || getSkeletonType() == 1 || (plugin.isActive(this.world.worldData.getName()) && plugin.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED))){
+		if (EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, bD()) > 0 || getSkeletonType() == 1 || (plugin.isActive(this.world.worldData.getName()) && plugin.config.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED))){
 			entityarrow.setOnFire(1024);
 		}
 		
-		this.world.makeSound(this, "random.bow", 1.0F, 1.0F / (aA().nextFloat() * 0.4F + 0.8F));
+		this.world.makeSound(this, "random.bow", 1.0F, 1.0F / (aB().nextFloat() * 0.4F + 0.8F));
 		this.world.addEntity(entityarrow);
 	}
 	

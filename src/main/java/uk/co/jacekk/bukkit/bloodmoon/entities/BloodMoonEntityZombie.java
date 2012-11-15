@@ -75,11 +75,11 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 			
 			this.goalSelector.a(0, new PathfinderGoalFloat(this));
 			this.goalSelector.a(1, new PathfinderGoalBreakDoor(this));
-			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bI, false));
-			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bI, true));
-			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bI));
-			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bI, false));
-			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bI));
+			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bG, false));
+			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bG, true));
+			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bG));
+			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bG, false));
+			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bG));
 			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
 			
@@ -121,7 +121,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.EntityZombie {
 		
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
-		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
+		return entityhuman != null && this.n(entityhuman) ? entityhuman : null;
 	}
 	
 	public void setEquipmentDropChance(int slot, float chance){

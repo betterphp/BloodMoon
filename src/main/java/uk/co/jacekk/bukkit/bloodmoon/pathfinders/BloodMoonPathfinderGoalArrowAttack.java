@@ -43,7 +43,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	
 	@Override
 	public boolean a(){
-		EntityLiving entityliving = this.entity.aF();
+		EntityLiving entityliving = this.entity.aG();
 		
 		if (entityliving == null){
 			return false;
@@ -68,7 +68,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	
 	public void e(){
 		double d0 = this.entity.e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
-		boolean flag = this.entity.az().canSee(this.target);
+		boolean flag = this.entity.aA().canSee(this.target);
 		
 		if (flag){
 			this.f += 1;

@@ -114,7 +114,7 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.EntityCreeper {
 		
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
-		return entityhuman != null && this.l(entityhuman) ? entityhuman : null;
+		return entityhuman != null && this.n(entityhuman) ? entityhuman : null;
 	}
 	
 }
