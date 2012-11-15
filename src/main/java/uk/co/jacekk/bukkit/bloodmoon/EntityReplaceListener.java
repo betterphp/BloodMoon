@@ -38,7 +38,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 			BloodMoonEntityCreeper bloodMoonEntityCreeper = new BloodMoonEntityCreeper(mcWorld);
 			
 			bloodMoonEntityCreeper.setPosition(location.getX(), location.getY(), location.getZ());
-			bloodMoonEntityCreeper.bD();
+			bloodMoonEntityCreeper.bG();
 			
 			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntityCreeper, SpawnReason.CUSTOM);
@@ -50,7 +50,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 			BloodMoonEntitySkeleton bloodMoonEntitySkeleton = new BloodMoonEntitySkeleton(mcWorld);
 			
 			bloodMoonEntitySkeleton.setPosition(location.getX(), location.getY(), location.getZ());
-			bloodMoonEntitySkeleton.bD();
+			bloodMoonEntitySkeleton.bG();
 			
 			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntitySkeleton, SpawnReason.CUSTOM);
@@ -62,7 +62,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 			BloodMoonEntitySpider bloodMoonEntitySpider = new BloodMoonEntitySpider(mcWorld);
 			
 			bloodMoonEntitySpider.setPosition(location.getX(), location.getY(), location.getZ());
-			bloodMoonEntitySpider.bD();
+			bloodMoonEntitySpider.bG();
 			
 			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntitySpider, SpawnReason.CUSTOM);
@@ -74,7 +74,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 			BloodMoonEntityZombie bloodMoonEntityZombie = new BloodMoonEntityZombie(mcWorld);
 			
 			bloodMoonEntityZombie.setPosition(location.getX(), location.getY(), location.getZ());
-			bloodMoonEntityZombie.bD();
+			bloodMoonEntityZombie.bG();
 			
 			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntityZombie, SpawnReason.CUSTOM);
@@ -86,7 +86,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 			BloodMoonEntityEnderman bloodMoonEntityEnderman = new BloodMoonEntityEnderman(mcWorld);
 			
 			bloodMoonEntityEnderman.setPosition(location.getX(), location.getY(), location.getZ());
-			bloodMoonEntityEnderman.bD();
+			bloodMoonEntityEnderman.bG();
 			
 			mcWorld.removeEntity(mcEntity);
 			mcWorld.addEntity(bloodMoonEntityEnderman, SpawnReason.CUSTOM);
