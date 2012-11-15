@@ -6,6 +6,7 @@ import org.bukkit.entity.Player;
 
 import uk.co.jacekk.bukkit.baseplugin.v5.command.BaseCommandExecutor;
 import uk.co.jacekk.bukkit.baseplugin.v5.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v5.command.CommandTabCompletion;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.Permission;
@@ -17,6 +18,7 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 	}
 	
 	@CommandHandler(names = {"bloodmoon", "blood", "bm"}, description = "Toggles the bloodmoon for the current world.", usage = "[start/stop] [world_name]")
+	@CommandTabCompletion({"start|stop"})
 	public void execute(CommandSender sender, String label, String[] args){
 		if (args.length != 1 && args.length != 2){
 			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Usage: /" + label + " [start/stop] [world_name]"));
