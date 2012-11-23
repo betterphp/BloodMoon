@@ -4,6 +4,8 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import net.minecraft.server.EntityTypes;
+
 import org.bukkit.World;
 
 import uk.co.jacekk.bukkit.baseplugin.v5.BasePlugin;
@@ -44,12 +46,7 @@ public class BloodMoon extends BasePlugin {
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.class, this.log);
 		
 		try{
-			Class<?>[] args = new Class[3];
-			args[0] = Class.class;
-			args[1] = String.class;
-			args[2] = int.class;
-			
-			Method a = net.minecraft.server.EntityTypes.class.getDeclaredMethod("a", args);
+			Method a = EntityTypes.class.getDeclaredMethod("a", new Class<?>[]{Class.class, String.class, int.class});
 			
 			a.setAccessible(true);
 			
