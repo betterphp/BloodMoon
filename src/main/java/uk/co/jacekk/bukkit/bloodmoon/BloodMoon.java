@@ -143,6 +143,11 @@ public class BloodMoon extends BasePlugin {
 		}
 	}
 	
+	/**
+	 * Starts a bloodmoon in a specific world
+	 * 
+	 * @param worldName The name of the world
+	 */
 	public void activate(String worldName){
 		World world = this.server.getWorld(worldName);
 		
@@ -159,6 +164,11 @@ public class BloodMoon extends BasePlugin {
 		}
 	}
 	
+	/**
+	 * Starts a bloodmoon the next time night is reached in a specfic world
+	 * 
+	 * @param worldName The name of the world
+	 */
 	public void forceNextNight(String worldName){
 		World world = this.server.getWorld(worldName);
 		
@@ -169,6 +179,11 @@ public class BloodMoon extends BasePlugin {
 		this.forceWorlds.add(worldName);
 	}
 	
+	/**
+	 * Stops an existing bloodmoon in a world
+	 * 
+	 * @param worldName The name of the world
+	 */
 	public void deactivate(String worldName){
 		World world = this.server.getWorld(worldName);
 		
@@ -185,6 +200,12 @@ public class BloodMoon extends BasePlugin {
 		}
 	}
 	
+	/**
+	 * Checks if a bloodmoon is currently active in a world
+	 * 
+	 * @param worldName The name of the world
+	 * @return true if a bloodmoon is active false if not
+	 */
 	public boolean isActive(String worldName){
 		return this.activeWorlds.contains(worldName);
 	}
