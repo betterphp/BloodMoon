@@ -11,11 +11,7 @@ import org.bukkit.World;
 import uk.co.jacekk.bukkit.baseplugin.v5.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v5.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.commands.BloodMoonExecuter;
-import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityCreeper;
-import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityEnderman;
-import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySkeleton;
-import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySpider;
-import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntityZombie;
+import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntity;
 import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonStartEvent;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.BreakBlocksListener;
@@ -52,11 +48,9 @@ public class BloodMoon extends BasePlugin {
 			
 			a.setAccessible(true);
 			
-			a.invoke(a, BloodMoonEntityCreeper.class, "Creeper", 50);
-			a.invoke(a, BloodMoonEntitySkeleton.class, "Skeleton", 51);
-			a.invoke(a, BloodMoonEntitySpider.class, "Spider", 52);
-			a.invoke(a, BloodMoonEntityZombie.class, "Zombie", 54);
-			a.invoke(a, BloodMoonEntityEnderman.class, "Enderman", 58);
+			for (BloodMoonEntity entity : BloodMoonEntity.values()){
+				a.invoke(a, entity.getBloodMoonClass(), entity.getName(), entity.getID());
+			}
 		}catch (Exception e){
 			e.printStackTrace();
 			

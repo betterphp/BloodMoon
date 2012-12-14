@@ -6,7 +6,7 @@ import org.bukkit.event.HandlerList;
 
 public class BloodMoonEndEvent extends Event {
 	
-private static final HandlerList handlers = new HandlerList();
+	private static final HandlerList handlers = new HandlerList();
 	
 	private World world;
 	
