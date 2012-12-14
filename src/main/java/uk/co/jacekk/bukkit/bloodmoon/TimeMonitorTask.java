@@ -16,6 +16,7 @@ public class TimeMonitorTask extends BaseTask<BloodMoon> {
 		this.random = new Random();
 	}
 	
+	@Override
 	public void run(){
 		for (String worldName : plugin.config.getStringList(Config.AFFECTED_WORLDS)){
 			World world = plugin.server.getWorld(worldName);

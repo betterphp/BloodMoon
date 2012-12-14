@@ -17,6 +17,7 @@ public class BloodMoonStartEvent extends Event implements Cancellable {
 		this.world = world;
 	}
 	
+	@Override
 	public HandlerList getHandlers(){
 		return handlers;
 	}
@@ -29,10 +30,12 @@ public class BloodMoonStartEvent extends Event implements Cancellable {
 		return this.world;
 	}
 	
+	@Override
 	public boolean isCancelled(){
 		return this.isCancelled;
 	}
-
+	
+	@Override
 	public void setCancelled(boolean cancelled){
 		this.isCancelled = cancelled;
 	}

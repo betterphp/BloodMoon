@@ -23,6 +23,7 @@ public class CreeperMoveEvent extends Event implements Cancellable {
 		this.to = to;
 	}
 	
+	@Override
 	public HandlerList getHandlers(){
 		return handlers;
 	}
@@ -47,10 +48,12 @@ public class CreeperMoveEvent extends Event implements Cancellable {
 		return creeper.getTarget();
 	}
 	
+	@Override
 	public boolean isCancelled(){
 		return this.isCancelled;
 	}
-
+	
+	@Override
 	public void setCancelled(boolean cancelled){
 		this.isCancelled = cancelled;
 	}

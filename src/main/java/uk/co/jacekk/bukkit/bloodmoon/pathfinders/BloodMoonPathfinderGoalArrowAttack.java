@@ -54,10 +54,12 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 		return true;
 	}
 	
+	@Override
 	public boolean b(){
 		return (a()) || (!this.entity.getNavigation().f());
 	}
 	
+	@Override
 	public void d(){
 		EntityTargetEvent.TargetReason reason = this.target.isAlive() ? EntityTargetEvent.TargetReason.FORGOT_TARGET : EntityTargetEvent.TargetReason.TARGET_DIED;
 		CraftEventFactory.callEntityTargetEvent((Entity) this.rangedEntity, null, reason);
@@ -66,6 +68,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 		this.f = 0;
 	}
 	
+	@Override
 	public void e(){
 		double d0 = this.entity.e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
 		boolean flag = this.entity.aA().canSee(this.target);

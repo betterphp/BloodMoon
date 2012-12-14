@@ -44,10 +44,9 @@ public class ZombieArmorListener extends BaseListener<BloodMoon> {
 		entity.setEquipment(3, new ItemStack(Item.byId[Material.getMaterial(name + "_CHESTPLATE").getId()]));
 		entity.setEquipment(4, new ItemStack(Item.byId[Material.getMaterial(name + "_HELMET").getId()]));
 		
-		entity.setEquipmentDropChance(1, plugin.config.getInt(Config.FEATURE_ZOMBIE_ARMOR_DROP_CHANCE) / 100.0f);
-		entity.setEquipmentDropChance(2, plugin.config.getInt(Config.FEATURE_ZOMBIE_ARMOR_DROP_CHANCE) / 100.0f);
-		entity.setEquipmentDropChance(3, plugin.config.getInt(Config.FEATURE_ZOMBIE_ARMOR_DROP_CHANCE) / 100.0f);
-		entity.setEquipmentDropChance(4, plugin.config.getInt(Config.FEATURE_ZOMBIE_ARMOR_DROP_CHANCE) / 100.0f);
+		for (int i = 1; i <= 4; ++i){
+			entity.setEquipmentDropChance(i, plugin.config.getInt(Config.FEATURE_ZOMBIE_ARMOR_DROP_CHANCE) / 100.0f);
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -80,15 +79,10 @@ public class ZombieArmorListener extends BaseListener<BloodMoon> {
 			if (mcEntity instanceof BloodMoonEntityZombie){
 				BloodMoonEntityZombie bloodMoonEntity = (BloodMoonEntityZombie) mcEntity;
 				
-				bloodMoonEntity.setEquipment(1, null);
-				bloodMoonEntity.setEquipment(2, null);
-				bloodMoonEntity.setEquipment(3, null);
-				bloodMoonEntity.setEquipment(4, null);
-				
-				bloodMoonEntity.setEquipmentDropChance(1, 0.0f);
-				bloodMoonEntity.setEquipmentDropChance(2, 0.0f);
-				bloodMoonEntity.setEquipmentDropChance(3, 0.0f);
-				bloodMoonEntity.setEquipmentDropChance(4, 0.0f);
+				for (int i = 1; i <= 4; ++i){
+					bloodMoonEntity.setEquipment(i, null);
+					bloodMoonEntity.setEquipmentDropChance(i, 0.0f);
+				}
 			}
 		}
 	}

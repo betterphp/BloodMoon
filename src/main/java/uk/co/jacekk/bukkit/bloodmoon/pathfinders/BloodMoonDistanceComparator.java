@@ -12,6 +12,7 @@ public class BloodMoonDistanceComparator implements Comparator<Entity> {
 		this.b = b;
 	}
 	
+	@Override
 	public int compare(Entity e1, Entity e2){
 		double d0 = this.b.e(e1);
 		double d1 = this.b.e(e2);

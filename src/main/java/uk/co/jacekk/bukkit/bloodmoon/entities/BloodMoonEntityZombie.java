@@ -20,8 +20,6 @@ import net.minecraft.server.v1_4_5.Entity;
 import net.minecraft.server.v1_4_5.EntityHuman;
 import net.minecraft.server.v1_4_5.EntityLiving;
 import net.minecraft.server.v1_4_5.EntityVillager;
-import net.minecraft.server.v1_4_5.Item;
-import net.minecraft.server.v1_4_5.ItemStack;
 import net.minecraft.server.v1_4_5.PathfinderGoal;
 import net.minecraft.server.v1_4_5.PathfinderGoalBreakDoor;
 import net.minecraft.server.v1_4_5.PathfinderGoalFloat;
