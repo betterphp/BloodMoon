@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.entity.CraftEnderman;
+import org.bukkit.craftbukkit.v1_4_5.CraftServer;
+import org.bukkit.craftbukkit.v1_4_5.entity.CraftEnderman;
 import org.bukkit.entity.Enderman;
 import org.bukkit.plugin.Plugin;
 
@@ -14,15 +14,15 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.EndermanMoveEvent;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonNavigation;
 
-import net.minecraft.server.Block;
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityHuman;
-import net.minecraft.server.EntityLiving;
-import net.minecraft.server.ItemStack;
-import net.minecraft.server.Vec3D;
-import net.minecraft.server.World;
+import net.minecraft.server.v1_4_5.Block;
+import net.minecraft.server.v1_4_5.Entity;
+import net.minecraft.server.v1_4_5.EntityHuman;
+import net.minecraft.server.v1_4_5.EntityLiving;
+import net.minecraft.server.v1_4_5.ItemStack;
+import net.minecraft.server.v1_4_5.Vec3D;
+import net.minecraft.server.v1_4_5.World;
 
-public class BloodMoonEntityEnderman extends net.minecraft.server.EntityEnderman {
+public class BloodMoonEntityEnderman extends net.minecraft.server.v1_4_5.EntityEnderman {
 	
 	private BloodMoon plugin;
 	private int h = 0;

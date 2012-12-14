@@ -4,7 +4,7 @@ import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-import net.minecraft.server.EntityTypes;
+import net.minecraft.server.v1_4_5.EntityTypes;
 
 import org.bukkit.World;
 

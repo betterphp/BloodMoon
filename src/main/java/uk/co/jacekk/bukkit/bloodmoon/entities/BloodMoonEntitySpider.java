@@ -4,8 +4,8 @@ import java.lang.reflect.Field;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.CraftServer;
-import org.bukkit.craftbukkit.entity.CraftSpider;
+import org.bukkit.craftbukkit.v1_4_5.CraftServer;
+import org.bukkit.craftbukkit.v1_4_5.entity.CraftSpider;
 import org.bukkit.entity.Spider;
 import org.bukkit.plugin.Plugin;
 
@@ -14,11 +14,11 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.SpiderMoveEvent;
 import uk.co.jacekk.bukkit.bloodmoon.pathfinders.BloodMoonNavigation;
 
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityLiving;
-import net.minecraft.server.World;
+import net.minecraft.server.v1_4_5.Entity;
+import net.minecraft.server.v1_4_5.EntityLiving;
+import net.minecraft.server.v1_4_5.World;
 
-public class BloodMoonEntitySpider extends net.minecraft.server.EntitySpider {
+public class BloodMoonEntitySpider extends net.minecraft.server.v1_4_5.EntitySpider {
 	
 	private BloodMoon plugin;
 	

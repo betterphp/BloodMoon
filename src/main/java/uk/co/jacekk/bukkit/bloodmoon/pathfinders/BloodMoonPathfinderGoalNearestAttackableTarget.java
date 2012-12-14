@@ -7,11 +7,11 @@ import java.util.List;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityHuman;
-import net.minecraft.server.EntityLiving;
-import net.minecraft.server.IEntitySelector;
-import net.minecraft.server.PathfinderGoalTarget;
+import net.minecraft.server.v1_4_5.Entity;
+import net.minecraft.server.v1_4_5.EntityHuman;
+import net.minecraft.server.v1_4_5.EntityLiving;
+import net.minecraft.server.v1_4_5.IEntitySelector;
+import net.minecraft.server.v1_4_5.PathfinderGoalTarget;
 
 public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget {
 	

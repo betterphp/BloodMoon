@@ -2,8 +2,8 @@ package uk.co.jacekk.bukkit.bloodmoon;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.CraftWorld;
-import org.bukkit.craftbukkit.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_4_5.CraftWorld;
+import org.bukkit.craftbukkit.v1_4_5.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -31,8 +31,8 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		EntityType creatureType = event.getEntityType();
 		World world = location.getWorld();
 		
-		net.minecraft.server.World mcWorld = ((CraftWorld) world).getHandle();
-		net.minecraft.server.Entity mcEntity = ((CraftEntity) entity).getHandle();
+		net.minecraft.server.v1_4_5.World mcWorld = ((CraftWorld) world).getHandle();
+		net.minecraft.server.v1_4_5.Entity mcEntity = ((CraftEntity) entity).getHandle();
 		
 		if (creatureType == EntityType.CREEPER && !(mcEntity instanceof BloodMoonEntityCreeper)){
 			BloodMoonEntityCreeper bloodMoonEntityCreeper = new BloodMoonEntityCreeper(mcWorld);

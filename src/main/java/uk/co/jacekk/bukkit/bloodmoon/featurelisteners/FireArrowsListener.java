@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.featurelisteners;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_4_5.entity.CraftEntity;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Projectile;

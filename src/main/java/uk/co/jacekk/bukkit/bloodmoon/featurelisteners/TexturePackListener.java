@@ -1,8 +1,8 @@
 package uk.co.jacekk.bukkit.bloodmoon.featurelisteners;
 
-import net.minecraft.server.Packet250CustomPayload;
+import net.minecraft.server.v1_4_5.Packet250CustomPayload;
 
-import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_4_5.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

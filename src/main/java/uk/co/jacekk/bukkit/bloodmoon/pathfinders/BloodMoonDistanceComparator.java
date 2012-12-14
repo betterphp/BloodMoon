@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.pathfinders;
 
 import java.util.Comparator;
 
-import net.minecraft.server.Entity;
+import net.minecraft.server.v1_4_5.Entity;
 
 public class BloodMoonDistanceComparator implements Comparator<Entity> {
 	

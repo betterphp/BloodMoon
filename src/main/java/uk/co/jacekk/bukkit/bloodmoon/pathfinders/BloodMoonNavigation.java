@@ -2,11 +2,11 @@ package uk.co.jacekk.bukkit.bloodmoon.pathfinders;
 
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
-import net.minecraft.server.EntityLiving;
-import net.minecraft.server.MathHelper;
-import net.minecraft.server.Navigation;
-import net.minecraft.server.PathEntity;
-import net.minecraft.server.World;
+import net.minecraft.server.v1_4_5.EntityLiving;
+import net.minecraft.server.v1_4_5.MathHelper;
+import net.minecraft.server.v1_4_5.Navigation;
+import net.minecraft.server.v1_4_5.PathEntity;
+import net.minecraft.server.v1_4_5.World;
 
 public class BloodMoonNavigation extends Navigation {
 	
