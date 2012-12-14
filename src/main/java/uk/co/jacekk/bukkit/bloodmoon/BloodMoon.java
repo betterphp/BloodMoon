@@ -22,6 +22,7 @@ import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.LockInWorldListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.MoreDropsListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.MoreExpListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.MoreSpawningListener;
+import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.NetherMobsListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SpawnOnKillListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SpawnOnSleepListener;
 import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.SuperCreepersListener;
@@ -127,6 +128,10 @@ public class BloodMoon extends BasePlugin {
 		
 		if (this.config.getBoolean(Config.FEATURE_SPAWN_ON_SLEEP_ENABLED)){
 			this.pluginManager.registerEvents(new SpawnOnSleepListener(this), this);
+		}
+		
+		if (this.config.getBoolean(Config.FEATURE_NETHER_MOBS_ENABLED)){
+			this.pluginManager.registerEvents(new NetherMobsListener(this), this);
 		}
 		
 		if (this.config.getBoolean(Config.FEATURE_LOCK_IN_WORLD_ENABLED) && !this.config.getBoolean(Config.ALWAYS_ON)){
