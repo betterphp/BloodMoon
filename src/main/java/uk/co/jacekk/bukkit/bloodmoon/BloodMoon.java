@@ -145,8 +145,13 @@ public class BloodMoon extends BasePlugin {
 			return;
 		}
 		
-		this.pluginManager.callEvent(new BloodMoonStartEvent(world));
-		this.activeWorlds.add(worldName);
+		BloodMoonStartEvent event = new BloodMoonStartEvent(world);
+		
+		this.pluginManager.callEvent(event);
+		
+		if (!event.isCancelled()){
+			this.activeWorlds.add(worldName);
+		}
 	}
 	
 	public void forceNextNight(String worldName){
@@ -166,8 +171,13 @@ public class BloodMoon extends BasePlugin {
 			return;
 		}
 		
-		this.pluginManager.callEvent(new BloodMoonEndEvent(world));
-		this.activeWorlds.remove(worldName);
+		BloodMoonEndEvent event = new BloodMoonEndEvent(world);
+		
+		this.pluginManager.callEvent(event);
+		
+		if (!event.isCancelled()){
+			this.activeWorlds.remove(worldName);
+		}
 	}
 	
 	public boolean isActive(String worldName){
