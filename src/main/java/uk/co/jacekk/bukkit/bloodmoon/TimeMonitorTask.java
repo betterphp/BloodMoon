@@ -26,10 +26,12 @@ public class TimeMonitorTask extends BaseTask<BloodMoon> {
 			
 			long worldTime = world.getTime();
 			
-			if (worldTime >= 13000 && worldTime <= 13100 && this.random.nextInt(100) < plugin.config.getInt(Config.CHANCE)){
+			if (worldTime >= 13000 && worldTime <= 13100 && (plugin.forceWorlds.contains(worldName) || this.random.nextInt(100) < plugin.config.getInt(Config.CHANCE))){
 				if (!plugin.isActive(worldName)){
 					plugin.activate(worldName);
 				}
+				
+				plugin.forceWorlds.remove(worldName);
 			}else if (worldTime >= 23000 && worldTime <= 23100){
 				if (plugin.isActive(worldName)){
 					plugin.deactivate(worldName);

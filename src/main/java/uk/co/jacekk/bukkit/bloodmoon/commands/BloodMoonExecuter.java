@@ -18,12 +18,14 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 	}
 	
 	@CommandHandler(names = {"bloodmoon", "blood", "bm"}, description = "Toggles the bloodmoon for the current world.", usage = "[start/stop] [world_name]")
-	@CommandTabCompletion({"start|stop"})
+	@CommandTabCompletion({"start|next|stop"})
 	public void execute(CommandSender sender, String label, String[] args){
 		if (args.length != 1 && args.length != 2){
-			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Usage: /" + label + " [start/stop] [world_name]"));
-			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Example: /" + label + " start"));
-			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Example: /" + label + " stop world"));
+			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Usage: /" + label + " [action] [world_name]"));
+			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Actions:"));
+			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  start - Forces a bloodmoon to start"));
+			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  next - Forces a bloodmoon to start at the next night"));
+			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  stop - Stops a bloodmoon"));
 			return;
 		}
 		
@@ -47,6 +49,17 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			}
 			
 			plugin.activate(worldName);
+			
+			sender.sendMessage(ChatColor.GREEN + "Bloodmoon started in " + worldName);
+		}else if (option.equalsIgnoreCase("next")){
+			if (!Permission.ADMIN_START.has(sender)){
+				sender.sendMessage(plugin.formatMessage(ChatColor.RED + "You do not have permission to start a bloodmoon"));
+				return;
+			}
+			
+			plugin.forceNextNight(worldName);
+			
+			sender.sendMessage(ChatColor.GREEN + "Bloodmoon forced in " + worldName);
 		}else if (option.equalsIgnoreCase("stop")){
 			if (!Permission.ADMIN_STOP.has(sender)){
 				sender.sendMessage(plugin.formatMessage(ChatColor.RED + "You do not have permission to stop a bloodmoon"));
@@ -54,6 +67,8 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			}
 			
 			plugin.deactivate(worldName);
+			
+			sender.sendMessage(ChatColor.GREEN + "Bloodmoon stopped in " + worldName);
 		}else{
 			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Invalid option, see /" + label + " for correct usage"));
 		}

@@ -37,11 +37,13 @@ import uk.co.jacekk.bukkit.bloodmoon.featurelisteners.ZombieWeaponListener;
 public class BloodMoon extends BasePlugin {
 	
 	private ArrayList<String> activeWorlds;
+	protected ArrayList<String> forceWorlds;
 	
 	public void onEnable(){
 		super.onEnable(true);
 		
 		this.activeWorlds = new ArrayList<String>();
+		this.forceWorlds = new ArrayList<String>();
 		
 		this.config = new PluginConfig(new File(this.baseDirPath + File.separator + "config.yml"), Config.class, this.log);
 		
@@ -151,6 +153,16 @@ public class BloodMoon extends BasePlugin {
 		
 		this.pluginManager.callEvent(new BloodMoonStartEvent(world));
 		this.activeWorlds.add(worldName);
+	}
+	
+	public void forceNextNight(String worldName){
+		World world = this.server.getWorld(worldName);
+		
+		if (world == null){
+			return;
+		}
+		
+		this.forceWorlds.add(worldName);
 	}
 	
 	public void deactivate(String worldName){
