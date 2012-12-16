@@ -10,18 +10,15 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class MoreExpListener extends BaseListener<BloodMoon> {
 	
-	private int multiplier;
-	
 	public MoreExpListener(BloodMoon plugin){
 		super(plugin);
-		
-		this.multiplier = Math.max(plugin.config.getInt(Config.FEATURE_MORE_EXP_MULTIPLIER), 1);
 	}
 	
 	private void setSpawnReason(Entity entity, SpawnReason reason){
@@ -46,10 +43,12 @@ public class MoreExpListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDeath(EntityDeathEvent event){
 		Entity entity = event.getEntity();
+		String worldName = entity.getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity instanceof Creature && plugin.isActive(entity.getWorld().getName())){
-			if (!plugin.config.getBoolean(Config.FEATURE_MORE_EXP_IGNORE_SPAWNERS) || this.getSpawnReason(entity) != SpawnReason.SPAWNER){
-				event.setDroppedExp(event.getDroppedExp() * multiplier);
+		if (entity instanceof Creature && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_MORE_EXP_ENABLED)){
+			if (!worldConfig.getBoolean(Config.FEATURE_MORE_EXP_IGNORE_SPAWNERS) || this.getSpawnReason(entity) != SpawnReason.SPAWNER){
+				event.setDroppedExp(event.getDroppedExp() * Math.max(worldConfig.getInt(Config.FEATURE_MORE_EXP_MULTIPLIER), 1));
 			}
 		}
 	}

@@ -11,18 +11,15 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class MoreDropsListener extends BaseListener<BloodMoon> {
 	
-	private int multiplier;
-	
 	public MoreDropsListener(BloodMoon plugin){
 		super(plugin);
-		
-		this.multiplier = Math.max(plugin.config.getInt(Config.FEATURE_MORE_DROPS_MULTIPLIER), 1);
 	}
 	
 	private void setSpawnReason(Entity entity, SpawnReason reason){
@@ -47,11 +44,13 @@ public class MoreDropsListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDeath(EntityDeathEvent event){
 		Entity entity = event.getEntity();
+		String worldName = entity.getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity instanceof Creature && plugin.isActive(entity.getWorld().getName())){
-			if (!plugin.config.getBoolean(Config.FEATURE_MORE_EXP_IGNORE_SPAWNERS) || this.getSpawnReason(entity) != SpawnReason.SPAWNER){
+		if (entity instanceof Creature && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_MORE_DROPS_ENABLED)){
+			if (!worldConfig.getBoolean(Config.FEATURE_MORE_EXP_IGNORE_SPAWNERS) || this.getSpawnReason(entity) != SpawnReason.SPAWNER){
 				for (ItemStack drop : event.getDrops()){
-					drop.setAmount(drop.getAmount() * this.multiplier);
+					drop.setAmount(drop.getAmount() * Math.max(worldConfig.getInt(Config.FEATURE_MORE_DROPS_MULTIPLIER), 1));
 				}
 			}
 		}

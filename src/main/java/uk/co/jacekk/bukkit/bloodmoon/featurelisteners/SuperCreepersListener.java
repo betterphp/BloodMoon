@@ -7,7 +7,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
@@ -22,11 +23,13 @@ public class SuperCreepersListener extends BaseListener<BloodMoon> {
 		if (event.getEntity() != null && event.getEntityType() == EntityType.CREEPER && !event.blockList().isEmpty()){
 			Location location = event.getLocation();
 			World world = location.getWorld();
+			String worldName = world.getName();
+			PluginConfig worldConfig = plugin.getConfig(worldName);
 			
-			if (plugin.isActive(world.getName())){
+			if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_SUPER_CREEPERS_ENABLED)){
 				event.setCancelled(true);
 				
-				world.createExplosion(location, (float) plugin.config.getDouble(Config.FEATURE_SUPER_CREEPERS_POWER), plugin.config.getBoolean(Config.FEATURE_SUPER_CREEPERS_FIRE));
+				world.createExplosion(location, (float) worldConfig.getDouble(Config.FEATURE_SUPER_CREEPERS_POWER), worldConfig.getBoolean(Config.FEATURE_SUPER_CREEPERS_FIRE));
 			}
 		}
 	}

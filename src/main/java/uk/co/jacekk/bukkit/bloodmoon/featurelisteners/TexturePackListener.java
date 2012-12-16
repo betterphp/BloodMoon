@@ -9,7 +9,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonEndEvent;
@@ -27,38 +28,50 @@ public class TexturePackListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onBloodMoonStart(BloodMoonStartEvent event){
-		for (Player player : event.getWorld().getPlayers()){
-			this.setTexturePack(player, plugin.config.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
+		String worldName = event.getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+			for (Player player : event.getWorld().getPlayers()){
+				this.setTexturePack(player, worldConfig.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
+			}
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onBloodMoonEnd(BloodMoonEndEvent event){
-		for (Player player : event.getWorld().getPlayers()){
-			this.setTexturePack(player, plugin.config.getString(Config.FEATURE_TEXTURE_PACK_NORMAL));
+		String worldName = event.getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+			for (Player player : event.getWorld().getPlayers()){
+				this.setTexturePack(player, worldConfig.getString(Config.FEATURE_TEXTURE_PACK_NORMAL));
+			}
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onPlayerChangedWorld(PlayerChangedWorldEvent event){
 		Player player = event.getPlayer();
-		String from = event.getFrom().getName();
-		String to = player.getWorld().getName();
+		String fromName = event.getFrom().getName();
+		String toName = player.getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(toName);
 		
-		if (!plugin.isActive(from) && plugin.isActive(to)){
-			this.setTexturePack(player, plugin.config.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
-		}else if (plugin.isActive(from) && !plugin.isActive(to)){
-			this.setTexturePack(player, plugin.config.getString(Config.FEATURE_TEXTURE_PACK_NORMAL));
+		if (!plugin.isActive(fromName) && plugin.isActive(toName) && worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+			this.setTexturePack(player, worldConfig.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
+		}else if (plugin.isActive(fromName) && !plugin.isActive(toName) && !worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+			this.setTexturePack(player, worldConfig.getString(Config.FEATURE_TEXTURE_PACK_NORMAL));
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPlayerJoin(PlayerJoinEvent event){
 		Player player = event.getPlayer();
-		String to = player.getWorld().getName();
+		String worldName = player.getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(to)){
-			this.setTexturePack(player, plugin.config.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
+		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+			this.setTexturePack(player, worldConfig.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
 		}
 	}
 	

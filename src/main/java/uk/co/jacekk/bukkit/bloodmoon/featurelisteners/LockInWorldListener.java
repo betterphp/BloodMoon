@@ -9,8 +9,10 @@ import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.Permission;
 
 public class LockInWorldListener extends BaseListener<BloodMoon> {
@@ -19,13 +21,18 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
+	private boolean canTeleport(Player player, World from, World to){
+		String worldName = from.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		return (Permission.ADMIN_IGNORE_WORLD_LOCK.has(player) || from.equals(to) || !plugin.isActive(worldName) || !worldConfig.getBoolean(Config.FEATURE_LOCK_IN_WORLD_ENABLED));
+	}
+	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPlayerTeleport(PlayerTeleportEvent event){
 		Player player = event.getPlayer();
-		World toWorld = event.getTo().getWorld();
-		World fromWorld = event.getFrom().getWorld();
 		
-		if (!Permission.ADMIN_IGNORE_WORLD_LOCK.has(player) && fromWorld != toWorld && plugin.isActive(fromWorld.getName())){
+		if (!this.canTeleport(player, event.getFrom().getWorld(), event.getTo().getWorld())){
 			event.setCancelled(true);
 			player.sendMessage(ChatColor.RED + "You cannot leave the world until the bloodmoon has ended.");
 		}
@@ -39,10 +46,10 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerRespawn(PlayerRespawnEvent event){
 		Player player = event.getPlayer();
-		World toWorld = event.getRespawnLocation().getWorld();
 		World fromWorld = player.getWorld();
+		World toWorld = event.getRespawnLocation().getWorld();
 		
-		if (!Permission.ADMIN_IGNORE_WORLD_LOCK.has(player) && fromWorld != toWorld && plugin.isActive(fromWorld.getName())){
+		if (!this.canTeleport(player, fromWorld, toWorld)){
 			event.setRespawnLocation(fromWorld.getSpawnLocation());
 			player.sendMessage(ChatColor.RED + "You cannot leave the world until the bloodmoon has ended.");
 		}

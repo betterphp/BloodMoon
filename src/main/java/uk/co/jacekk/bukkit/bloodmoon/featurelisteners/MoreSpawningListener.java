@@ -10,20 +10,19 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class MoreSpawningListener extends BaseListener<BloodMoon> {
 	
-	private int multiplier;
-	private Random rand;
+	private Random random;
 	
 	public MoreSpawningListener(BloodMoon plugin){
 		super(plugin);
 		
-		this.multiplier = Math.max(plugin.config.getInt(Config.FEATURE_MORE_SPAWNING_MULTIPLIER), 1);
-		this.rand = new Random();
+		this.random = new Random();
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -33,10 +32,12 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 		EntityType type = event.getEntityType();
 		Location location = event.getLocation();
 		World world = location.getWorld();
+		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.config.getStringList(Config.FEATURE_MORE_SPAWNING_MOBS).contains(type.getName().toUpperCase()) && plugin.isActive(world.getName())){
-			for (int i = 0; i < this.multiplier; ++i){
-				world.spawnEntity(location.add((this.rand.nextDouble() * 3) - 1.5, 0, (this.rand.nextDouble() * 3) - 1.5), type);
+		if (plugin.isActive(worldName) && worldConfig.getStringList(Config.FEATURE_MORE_SPAWNING_MOBS).contains(type.getName().toUpperCase())){
+			for (int i = 0; i < Math.max(worldConfig.getInt(Config.FEATURE_MORE_SPAWNING_MULTIPLIER), 1); ++i){
+				world.spawnEntity(location.add((this.random.nextDouble() * 3) - 1.5, 0, (this.random.nextDouble() * 3) - 1.5), type);
 			}
 		}
 	}

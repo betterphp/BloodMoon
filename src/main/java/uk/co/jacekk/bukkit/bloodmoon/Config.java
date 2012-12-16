@@ -2,11 +2,11 @@ package uk.co.jacekk.bukkit.bloodmoon;
 
 import java.util.Arrays;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfigKey;
 
 public class Config {
 	
-	public static final PluginConfigKey AFFECTED_WORLDS						= new PluginConfigKey("affected-worlds", 						Arrays.asList("world"));
+	public static final PluginConfigKey ENABLED								= new PluginConfigKey("enabled", 								false);
 	public static final PluginConfigKey ALWAYS_ON								= new PluginConfigKey("always-on",								false);
 	public static final PluginConfigKey CHANCE								= new PluginConfigKey("chance",									14);
 	

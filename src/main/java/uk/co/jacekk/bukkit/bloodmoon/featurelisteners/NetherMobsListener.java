@@ -12,13 +12,13 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
-import uk.co.jacekk.bukkit.baseplugin.v5.scheduler.BaseTask;
-import uk.co.jacekk.bukkit.baseplugin.v5.util.ListUtils;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.scheduler.BaseTask;
+import uk.co.jacekk.bukkit.baseplugin.v6.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonEndEvent;
-import uk.co.jacekk.bukkit.bloodmoon.events.BloodMoonStartEvent;
 
 public class NetherMobsListener extends BaseListener<BloodMoon> {
 	
@@ -26,7 +26,6 @@ public class NetherMobsListener extends BaseListener<BloodMoon> {
 	private ArrayList<EntityType> netherEntities;
 	
 	private BaseTask<BloodMoon> task;
-	private int taskID;
 	
 	public NetherMobsListener(BloodMoon plugin){
 		super(plugin);
@@ -44,11 +43,15 @@ public class NetherMobsListener extends BaseListener<BloodMoon> {
 			@Override
 			public void run(){
 				for (World world : plugin.server.getWorlds()){
-					if (plugin.config.getStringList(Config.AFFECTED_WORLDS).contains(world.getName())){
+					String worldName = world.getName();
+					
+					if (plugin.isActive(worldName)){
+						PluginConfig worldConfig = plugin.getConfig(worldName);
+						
 						spawn: for (Chunk chunk : world.getLoadedChunks()){
-							EntityType type = EntityType.valueOf(ListUtils.getRandom(plugin.config.getStringList(Config.FEATURE_NETHER_MOBS_SPAWN)));
+							EntityType type = EntityType.valueOf(ListUtils.getRandom(worldConfig.getStringList(Config.FEATURE_NETHER_MOBS_SPAWN)));
 							
-							if (type != null && netherEntities.contains(type) && random.nextInt(100) < plugin.config.getInt(Config.FEATURE_NETHER_MOBS_CHANCE)){
+							if (type != null && netherEntities.contains(type) && random.nextInt(100) < worldConfig.getInt(Config.FEATURE_NETHER_MOBS_CHANCE)){
 								int x = (chunk.getX() * 16) + random.nextInt(12) + 2;
 								int z = (chunk.getZ() * 16) + random.nextInt(12) + 2;
 								int y = world.getHighestBlockYAt(x, z);
@@ -65,7 +68,7 @@ public class NetherMobsListener extends BaseListener<BloodMoon> {
 									}
 								}
 								
-								int group = plugin.config.getInt(Config.FEATURE_NETHER_MOBS_GROUP_SIZE) + random.nextInt(plugin.config.getInt(Config.FEATURE_NETHER_MOBS_GROUP_VARIATION));
+								int group = worldConfig.getInt(Config.FEATURE_NETHER_MOBS_GROUP_SIZE) + random.nextInt(worldConfig.getInt(Config.FEATURE_NETHER_MOBS_GROUP_VARIATION));
 								
 								for (int i = 0; i < group; ++i){
 									world.spawnEntity(spawnLocation.add((random.nextDouble() * 3) - 1.5, 0, (random.nextDouble() * 3) - 1.5), type);
@@ -77,17 +80,12 @@ public class NetherMobsListener extends BaseListener<BloodMoon> {
 			}
 			
 		};
-	}
-	
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onStart(BloodMoonStartEvent event){
-		this.taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, this.task, 0L, 100L);
+		
+		plugin.scheduler.scheduleSyncRepeatingTask(plugin, this.task, 0L, 100L);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onStop(BloodMoonEndEvent event){
-		plugin.scheduler.cancelTask(this.taskID);
-		
 		for (LivingEntity entity : event.getWorld().getLivingEntities()){
 			if (this.netherEntities.contains(entity.getType())){
 				entity.remove();

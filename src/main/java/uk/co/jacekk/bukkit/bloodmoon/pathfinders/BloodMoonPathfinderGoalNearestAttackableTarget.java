@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
@@ -46,8 +47,16 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 	
 	@Override
 	public boolean a(){
-		float distance = (plugin.isActive(this.entity.world.worldData.getName())) ? plugin.config.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER) * this.e : this.e;
-				
+		String worldName = this.entity.world.worldData.getName();
+		String entityName = this.entity.getBukkitEntity().getType().name().toUpperCase();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		float distance = this.e;
+		
+		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
+			distance *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
+		}
+		
 		if (this.c > 0 && this.d.aB().nextInt(this.c) != 0){
 			return false;
 		}
@@ -60,7 +69,7 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 				return true;
 			}
 		}else{
-			List list = this.d.world.a(this.targetType, this.d.boundingBox.grow( distance, 4.0D, distance));
+			List list = this.d.world.a(this.targetType, this.d.boundingBox.grow(distance, 4.0D, distance));
 			
 			Collections.sort(list, this.comparator);
 			Iterator iterator = list.iterator();

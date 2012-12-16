@@ -1,5 +1,6 @@
 package uk.co.jacekk.bukkit.bloodmoon.pathfinders;
 
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import net.minecraft.server.v1_4_5.EntityLiving;
@@ -36,8 +37,12 @@ public class BloodMoonNavigation extends Navigation {
 	
 	@Override
 	public boolean a(PathEntity path, float speed){
-		if (plugin.isActive(this.entity.world.worldData.getName())){
-			speed *= (float) plugin.config.getDouble(Config.FEATURE_MOVEMENT_SPEED_MULTIPLIER);
+		String worldName = this.entity.world.worldData.getName();
+		String entityName = this.entity.getBukkitEntity().getType().name().toUpperCase();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && worldConfig.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains(entityName)){
+			speed *= (float) worldConfig.getDouble(Config.FEATURE_MOVEMENT_SPEED_MULTIPLIER);
 		}
 		
 		return super.a(path, speed);

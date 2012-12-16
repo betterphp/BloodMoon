@@ -3,6 +3,7 @@ package uk.co.jacekk.bukkit.bloodmoon.pathfinders;
 import org.bukkit.craftbukkit.v1_4_5.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityTargetEvent;
 
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import net.minecraft.server.v1_4_5.Entity;
@@ -86,7 +87,11 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 		}
 		
 		this.entity.getControllerLook().a(this.target, 30.0F, 30.0F);
-		this.d = Math.max(this.d - (plugin.isActive(this.entity.world.worldData.getName()) ? plugin.config.getInt(Config.FEATURE_ARROW_RATE_MULTIPLIER) : 1), 0);
+		
+		String worldName = this.entity.world.worldData.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		this.d = Math.max(this.d - ((plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)) ? worldConfig.getInt(Config.FEATURE_ARROW_RATE_MULTIPLIER) : 1), 0);
 		
 		if ((this.d <= 0) && (d0 <= this.h) && (flag)){
 			this.rangedEntity.d(this.target);

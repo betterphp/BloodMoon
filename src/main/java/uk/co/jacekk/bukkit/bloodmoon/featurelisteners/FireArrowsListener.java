@@ -10,8 +10,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.ProjectileHitEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntitySkeleton;
 
 public class FireArrowsListener extends BaseListener<BloodMoon> {
@@ -23,19 +25,18 @@ public class FireArrowsListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onProjectileHit(ProjectileHitEvent event){
 		Entity entity = event.getEntity();
+		String worldName = entity.getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity instanceof Projectile && plugin.isActive(entity.getWorld().getName())){
+		if (entity instanceof Projectile && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_IGNITE_TARGET)){
 			Projectile projectile = (Projectile) entity;
-			
 			LivingEntity shooter = projectile.getShooter();
 			
-			if (shooter != null){
-				if (((CraftEntity) shooter).getHandle() instanceof BloodMoonEntitySkeleton){
-					Block block = projectile.getWorld().getBlockAt(projectile.getLocation());
-					
-					if (block.getType() != Material.AIR){
-						block.setType(Material.FIRE);
-					}
+			if (shooter != null && ((CraftEntity) shooter).getHandle() instanceof BloodMoonEntitySkeleton){
+				Block block = projectile.getWorld().getBlockAt(projectile.getLocation());
+				
+				if (block.getType() != Material.AIR){
+					block.setType(Material.FIRE);
 				}
 			}
 		}

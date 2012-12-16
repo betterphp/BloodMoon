@@ -4,7 +4,8 @@ import java.util.Random;
 
 import org.bukkit.World;
 
-import uk.co.jacekk.bukkit.baseplugin.v5.scheduler.BaseTask;
+import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v6.scheduler.BaseTask;
 
 public class TimeMonitorTask extends BaseTask<BloodMoon> {
 	
@@ -18,24 +19,28 @@ public class TimeMonitorTask extends BaseTask<BloodMoon> {
 	
 	@Override
 	public void run(){
-		for (String worldName : plugin.config.getStringList(Config.AFFECTED_WORLDS)){
-			World world = plugin.server.getWorld(worldName);
+		for (World world : plugin.server.getWorlds()){
+			String worldName = world.getName();
 			
-			if (world == null){
-				continue;
-			}
-			
-			long worldTime = world.getTime();
-			
-			if (worldTime >= 13000 && worldTime <= 13100 && (plugin.forceWorlds.contains(worldName) || this.random.nextInt(100) < plugin.config.getInt(Config.CHANCE))){
-				if (!plugin.isActive(worldName)){
-					plugin.activate(worldName);
-				}
+			if (plugin.isEnabled(worldName)){
+				PluginConfig worldConfig = plugin.getConfig(worldName);
 				
-				plugin.forceWorlds.remove(worldName);
-			}else if (worldTime >= 23000 && worldTime <= 23100){
-				if (plugin.isActive(worldName)){
-					plugin.deactivate(worldName);
+				if (!worldConfig.getBoolean(Config.ALWAYS_ON)){
+					long worldTime = world.getTime();
+					
+					if (worldTime >= 13000 && worldTime <= 13100){
+						if (plugin.forceWorlds.contains(worldName) || this.random.nextInt(100) < worldConfig.getInt(Config.CHANCE)){
+							if (!plugin.isActive(worldName)){
+								plugin.activate(worldName);
+							}
+							
+							plugin.forceWorlds.remove(worldName);
+						}
+					}else if (worldTime >= 23000 && worldTime <= 23100){
+						if (plugin.isActive(worldName)){
+							plugin.deactivate(worldName);
+						}
+					}
 				}
 			}
 		}
