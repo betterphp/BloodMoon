@@ -14,7 +14,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
-import uk.co.jacekk.bukkit.bloodmoon.entities.BloodMoonEntity;
+import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntity;
 
 public class EntityReplaceListener extends BaseListener<BloodMoon> {
 	
