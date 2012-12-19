@@ -85,4 +85,8 @@ public class Config {
 	public static final PluginConfigKey FEATURE_TEXTURE_PACK_NORMAL			= new PluginConfigKey("features.texture-pack.normal",			"http://bukkit.jacekk.co.uk/bloodmoon_tps/normal.zip");
 	public static final PluginConfigKey FEATURE_TEXTURE_PACK_BLOODMOON		= new PluginConfigKey("features.texture-pack.bloodmoon",		"http://bukkit.jacekk.co.uk/bloodmoon_tps/bloodmoon.zip");
 	
+	public static final PluginConfigKey FEATURE_EXTENDED_NIGHT_ENABLED		= new PluginConfigKey("features.extended-night.enabled",		true);
+	public static final PluginConfigKey FEATURE_EXTENDED_NIGHT_MIN_KILLS		= new PluginConfigKey("features.extended-night.min-kills",		16);
+	public static final PluginConfigKey FEATURE_EXTENDED_NIGHT_MAX_RESETS		= new PluginConfigKey("features.extended-night.max-resets",		6);
+	
 }
