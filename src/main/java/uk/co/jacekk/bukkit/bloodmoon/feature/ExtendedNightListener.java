@@ -47,7 +47,7 @@ public class ExtendedNightListener extends BaseListener<BloodMoon> {
 		
 		if (worldConfig.getBoolean(Config.FEATURE_EXTENDED_NIGHT_ENABLED)){
 			ExtendedNightTask task = new ExtendedNightTask(plugin, world, worldConfig);
-			int taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, task, 0L, 20000L);
+			int taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, task, 0L, 100L);
 			
 			if (taskID != -1){
 				task.taskID = taskID;
