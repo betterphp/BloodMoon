@@ -9,8 +9,8 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_4_5.CraftServer;
-import org.bukkit.craftbukkit.v1_4_5.entity.CraftSkeleton;
+import org.bukkit.craftbukkit.v1_4_6.CraftServer;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftSkeleton;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.plugin.Plugin;
@@ -23,29 +23,29 @@ import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalArrowAttack;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalNearestAttackableTarget;
 
-import net.minecraft.server.v1_4_5.Block;
-import net.minecraft.server.v1_4_5.Enchantment;
-import net.minecraft.server.v1_4_5.EnchantmentManager;
-import net.minecraft.server.v1_4_5.Entity;
-import net.minecraft.server.v1_4_5.EntityArrow;
-import net.minecraft.server.v1_4_5.EntityHuman;
-import net.minecraft.server.v1_4_5.EntityLiving;
-import net.minecraft.server.v1_4_5.IRangedEntity;
-import net.minecraft.server.v1_4_5.Item;
-import net.minecraft.server.v1_4_5.ItemStack;
-import net.minecraft.server.v1_4_5.PathfinderGoal;
-import net.minecraft.server.v1_4_5.PathfinderGoalFleeSun;
-import net.minecraft.server.v1_4_5.PathfinderGoalFloat;
-import net.minecraft.server.v1_4_5.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_4_5.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_4_5.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_4_5.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_4_5.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_4_5.PathfinderGoalRestrictSun;
-import net.minecraft.server.v1_4_5.World;
-import net.minecraft.server.v1_4_5.WorldProviderHell;
+import net.minecraft.server.v1_4_6.Block;
+import net.minecraft.server.v1_4_6.Enchantment;
+import net.minecraft.server.v1_4_6.EnchantmentManager;
+import net.minecraft.server.v1_4_6.Entity;
+import net.minecraft.server.v1_4_6.EntityArrow;
+import net.minecraft.server.v1_4_6.EntityHuman;
+import net.minecraft.server.v1_4_6.EntityLiving;
+import net.minecraft.server.v1_4_6.IRangedEntity;
+import net.minecraft.server.v1_4_6.Item;
+import net.minecraft.server.v1_4_6.ItemStack;
+import net.minecraft.server.v1_4_6.PathfinderGoal;
+import net.minecraft.server.v1_4_6.PathfinderGoalFleeSun;
+import net.minecraft.server.v1_4_6.PathfinderGoalFloat;
+import net.minecraft.server.v1_4_6.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_4_6.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_4_6.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_4_6.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_4_6.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_4_6.PathfinderGoalRestrictSun;
+import net.minecraft.server.v1_4_6.World;
+import net.minecraft.server.v1_4_6.WorldProviderHell;
 
-public class BloodMoonEntitySkeleton extends net.minecraft.server.v1_4_5.EntitySkeleton implements IRangedEntity {
+public class BloodMoonEntitySkeleton extends net.minecraft.server.v1_4_6.EntitySkeleton implements IRangedEntity {
 	
 	private BloodMoon plugin;
 	
@@ -104,7 +104,7 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.v1_4_5.EntityS
 			this.bF();
 		}
 		
-		this.canPickUpLoot = (this.random.nextFloat() < as[this.world.difficulty]);
+		this.canPickUpLoot = (this.random.nextFloat() < at[this.world.difficulty]);
 		
 		if (getEquipment(4) == null){
 			Calendar calendar = this.world.T();

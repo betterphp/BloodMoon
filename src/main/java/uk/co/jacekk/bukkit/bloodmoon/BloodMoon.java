@@ -3,7 +3,7 @@ package uk.co.jacekk.bukkit.bloodmoon;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import net.minecraft.server.v1_4_5.EntityTypes;
+import net.minecraft.server.v1_4_6.EntityTypes;
 
 import org.bukkit.World;
 

@@ -9,8 +9,8 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_4_5.CraftServer;
-import org.bukkit.craftbukkit.v1_4_5.entity.CraftZombie;
+import org.bukkit.craftbukkit.v1_4_6.CraftServer;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftZombie;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
@@ -23,24 +23,24 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalNearestAttackableTarget;
 
-import net.minecraft.server.v1_4_5.Entity;
-import net.minecraft.server.v1_4_5.EntityHuman;
-import net.minecraft.server.v1_4_5.EntityLiving;
-import net.minecraft.server.v1_4_5.EntityVillager;
-import net.minecraft.server.v1_4_5.PathfinderGoal;
-import net.minecraft.server.v1_4_5.PathfinderGoalBreakDoor;
-import net.minecraft.server.v1_4_5.PathfinderGoalFloat;
-import net.minecraft.server.v1_4_5.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_4_5.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_4_5.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_4_5.PathfinderGoalMoveThroughVillage;
-import net.minecraft.server.v1_4_5.PathfinderGoalMoveTowardsRestriction;
-import net.minecraft.server.v1_4_5.PathfinderGoalNearestAttackableTarget;
-import net.minecraft.server.v1_4_5.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_4_5.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_4_5.World;
+import net.minecraft.server.v1_4_6.Entity;
+import net.minecraft.server.v1_4_6.EntityHuman;
+import net.minecraft.server.v1_4_6.EntityLiving;
+import net.minecraft.server.v1_4_6.EntityVillager;
+import net.minecraft.server.v1_4_6.PathfinderGoal;
+import net.minecraft.server.v1_4_6.PathfinderGoalBreakDoor;
+import net.minecraft.server.v1_4_6.PathfinderGoalFloat;
+import net.minecraft.server.v1_4_6.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_4_6.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_4_6.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_4_6.PathfinderGoalMoveThroughVillage;
+import net.minecraft.server.v1_4_6.PathfinderGoalMoveTowardsRestriction;
+import net.minecraft.server.v1_4_6.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_4_6.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_4_6.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_4_6.World;
 
-public class BloodMoonEntityZombie extends net.minecraft.server.v1_4_5.EntityZombie {
+public class BloodMoonEntityZombie extends net.minecraft.server.v1_4_6.EntityZombie {
 	
 	private BloodMoon plugin;
 	

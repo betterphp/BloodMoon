@@ -1,15 +1,15 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import org.bukkit.craftbukkit.v1_4_5.event.CraftEventFactory;
+import org.bukkit.craftbukkit.v1_4_6.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
-import net.minecraft.server.v1_4_5.Entity;
-import net.minecraft.server.v1_4_5.EntityLiving;
-import net.minecraft.server.v1_4_5.IRangedEntity;
-import net.minecraft.server.v1_4_5.PathfinderGoal;
+import net.minecraft.server.v1_4_6.Entity;
+import net.minecraft.server.v1_4_6.EntityLiving;
+import net.minecraft.server.v1_4_6.IRangedEntity;
+import net.minecraft.server.v1_4_6.PathfinderGoal;
 
 public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	

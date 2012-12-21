@@ -3,11 +3,11 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
-import net.minecraft.server.v1_4_5.EntityLiving;
-import net.minecraft.server.v1_4_5.MathHelper;
-import net.minecraft.server.v1_4_5.Navigation;
-import net.minecraft.server.v1_4_5.PathEntity;
-import net.minecraft.server.v1_4_5.World;
+import net.minecraft.server.v1_4_6.EntityLiving;
+import net.minecraft.server.v1_4_6.MathHelper;
+import net.minecraft.server.v1_4_6.Navigation;
+import net.minecraft.server.v1_4_6.PathEntity;
+import net.minecraft.server.v1_4_6.World;
 
 public class BloodMoonNavigation extends Navigation {
 	

@@ -2,12 +2,12 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 
 import org.bukkit.entity.EntityType;
 
-import net.minecraft.server.v1_4_5.EntityCreeper;
-import net.minecraft.server.v1_4_5.EntityEnderman;
-import net.minecraft.server.v1_4_5.EntityLiving;
-import net.minecraft.server.v1_4_5.EntitySkeleton;
-import net.minecraft.server.v1_4_5.EntitySpider;
-import net.minecraft.server.v1_4_5.EntityZombie;
+import net.minecraft.server.v1_4_6.EntityCreeper;
+import net.minecraft.server.v1_4_6.EntityEnderman;
+import net.minecraft.server.v1_4_6.EntityLiving;
+import net.minecraft.server.v1_4_6.EntitySkeleton;
+import net.minecraft.server.v1_4_6.EntitySpider;
+import net.minecraft.server.v1_4_6.EntityZombie;
 
 public enum BloodMoonEntity {
 	
