@@ -94,11 +94,11 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.v1_4_6.EntityS
 	@Override
 	public void bG(){
 		if ((this.world.worldProvider instanceof WorldProviderHell) && aB().nextInt(5) > 0){
-			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bG, false));
+			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bH, false));
 			this.setSkeletonType(1);
 			this.setEquipment(0, new ItemStack(Item.STONE_SWORD));
 		}else{
-			this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this.plugin, this, this.bG, 60, 10.0f));
+			this.goalSelector.a(4, new BloodMoonPathfinderGoalArrowAttack(this.plugin, this, this.bH, 60, 10.0f));
 			
 			this.bE();
 			this.bF();
