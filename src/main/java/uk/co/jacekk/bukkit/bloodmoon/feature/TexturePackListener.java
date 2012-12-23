@@ -1,7 +1,5 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature;
 
-import net.minecraft.server.v1_4_6.Packet250CustomPayload;
-
 import org.bukkit.craftbukkit.v1_4_6.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,7 +21,7 @@ public class TexturePackListener extends BaseListener<BloodMoon> {
 	}
 	
 	private void setTexturePack(Player player, String path){
-		((CraftPlayer) player).getHandle().playerConnection.sendPacket(new Packet250CustomPayload("MC|TPack", (path + "\0" + 16).getBytes()));
+		((CraftPlayer) player).setTexturePack(path);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)

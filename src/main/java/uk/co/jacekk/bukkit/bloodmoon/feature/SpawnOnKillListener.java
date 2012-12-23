@@ -11,6 +11,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
 
@@ -48,8 +49,9 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 		if (entity instanceof Creature && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_SPAWN_ON_KILL_ENABLED)){
 			Creature creature = (Creature) entity;
 			LivingEntity target = creature.getTarget();
+			EntityDamageEvent lastDamage = entity.getLastDamageCause();
 			
-			if (target instanceof Player && this.playerCauses.contains(entity.getLastDamageCause().getCause()) && worldConfig.getStringList(Config.FEATURE_SPAWN_ON_KILL_MOBS).contains(creature.getType().name().toUpperCase())){
+			if (lastDamage != null && target instanceof Player && this.playerCauses.contains(lastDamage.getCause()) && worldConfig.getStringList(Config.FEATURE_SPAWN_ON_KILL_MOBS).contains(creature.getType().name().toUpperCase())){
 				if (this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_SPAWN_ON_KILL_CHANCE)){
 					String mobName = ListUtils.getRandom(worldConfig.getStringList(Config.FEATURE_SPAWN_ON_KILL_SPAWN));
 					EntityType creatureType = EntityType.fromName(mobName.toUpperCase());
