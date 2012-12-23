@@ -89,4 +89,8 @@ public class Config {
 	public static final PluginConfigKey FEATURE_EXTENDED_NIGHT_MIN_KILLS		= new PluginConfigKey("features.extended-night.min-kills",		16);
 	public static final PluginConfigKey FEATURE_EXTENDED_NIGHT_MAX_RESETS		= new PluginConfigKey("features.extended-night.max-resets",		6);
 	
+	public static final PluginConfigKey FEATURE_WEATHER_ENABLED					= new PluginConfigKey("features.weather.enabled",				true);
+	public static final PluginConfigKey FEATURE_WEATHER_THUNDER					= new PluginConfigKey("features.weather.thunder",				true);
+	public static final PluginConfigKey FEATURE_WEATHER_RAIN					= new PluginConfigKey("features.weather.rain",					true);
+	
 }

@@ -28,6 +28,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnSleepListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SuperCreepersListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SwordDamageListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.TexturePackListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.WeatherListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.ZombieArmorListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.ZombieWeaponListener;
 
@@ -85,6 +86,7 @@ public class BloodMoon extends BasePlugin {
 		this.pluginManager.registerEvents(new LockInWorldListener(this), this);
 		this.pluginManager.registerEvents(new TexturePackListener(this), this);
 		this.pluginManager.registerEvents(new ExtendedNightListener(this), this);
+		this.pluginManager.registerEvents(new WeatherListener(this), this);
 	}
 	
 	/**
