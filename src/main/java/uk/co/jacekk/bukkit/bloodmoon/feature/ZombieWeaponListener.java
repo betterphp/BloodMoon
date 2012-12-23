@@ -2,23 +2,20 @@ package uk.co.jacekk.bukkit.bloodmoon.feature;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_4_6.EntityLiving;
-import net.minecraft.server.v1_4_6.Item;
-import net.minecraft.server.v1_4_6.ItemStack;
-
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_4_6.entity.CraftLivingEntity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.ItemStack;
 
 import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.baseplugin.v6.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
-import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityZombie;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -32,7 +29,7 @@ public class ZombieWeaponListener extends BaseListener<BloodMoon> {
 		this.random = new Random();
 	}
 	
-	private void giveWeapon(BloodMoonEntityZombie entity, PluginConfig worldConfig){
+	private void giveWeapon(LivingEntity entity, PluginConfig worldConfig){
 		String name = ListUtils.getRandom(worldConfig.getStringList(Config.FEATURE_ZOMBIE_WEAPON_WEAPONS));
 		Material type = Material.getMaterial(name);
 		
@@ -41,8 +38,10 @@ public class ZombieWeaponListener extends BaseListener<BloodMoon> {
 			return;
 		}
 		
-		entity.setEquipment(0, new ItemStack(Item.byId[type.getId()]));
-		entity.setEquipmentDropChance(0, worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_DROP_CHANCE) / 100.0f);
+		EntityEquipment equipment = entity.getEquipment();
+		
+		equipment.setItemInHand(new ItemStack(type));
+		equipment.setItemInHandDropChance(worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_DROP_CHANCE) / 100.0f);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -52,10 +51,8 @@ public class ZombieWeaponListener extends BaseListener<BloodMoon> {
 		
 		if (worldConfig.getBoolean(Config.FEATURE_ZOMBIE_WEAPON_ENABLED)){
 			for (LivingEntity entity : event.getWorld().getLivingEntities()){
-				EntityLiving mcEntity = ((CraftLivingEntity) entity).getHandle();
-				
-				if (mcEntity instanceof BloodMoonEntityZombie && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
-					this.giveWeapon((BloodMoonEntityZombie) mcEntity, worldConfig);
+				if (entity.getType() == EntityType.ZOMBIE && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
+					this.giveWeapon(entity, worldConfig);
 				}
 			}
 		}
@@ -67,10 +64,10 @@ public class ZombieWeaponListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_ZOMBIE_WEAPON_ENABLED)){
-			EntityLiving mcEntity = ((CraftLivingEntity) event.getEntity()).getHandle();
+			LivingEntity entity = event.getEntity();
 			
-			if (mcEntity instanceof BloodMoonEntityZombie && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
-				this.giveWeapon((BloodMoonEntityZombie) mcEntity, worldConfig);
+			if (entity.getType() == EntityType.ZOMBIE && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
+				this.giveWeapon(entity, worldConfig);
 			}
 		}
 	}
@@ -82,13 +79,11 @@ public class ZombieWeaponListener extends BaseListener<BloodMoon> {
 		
 		if (worldConfig.getBoolean(Config.FEATURE_ZOMBIE_WEAPON_ENABLED)){
 			for (LivingEntity entity : event.getWorld().getLivingEntities()){
-				EntityLiving mcEntity = ((CraftLivingEntity) entity).getHandle();
-				
-				if (mcEntity instanceof BloodMoonEntityZombie){
-					BloodMoonEntityZombie bloodMoonEntity = (BloodMoonEntityZombie) mcEntity;
+				if (entity.getType() == EntityType.ZOMBIE){
+					EntityEquipment equipment = entity.getEquipment();
 					
-					bloodMoonEntity.setEquipment(0, null);
-					bloodMoonEntity.setEquipmentDropChance(0, 0.0f);
+					equipment.setItemInHand(null);
+					equipment.setItemInHandDropChance(0.0f);
 				}
 			}
 		}

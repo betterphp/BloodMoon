@@ -162,8 +162,4 @@ public class BloodMoonEntityZombie extends net.minecraft.server.v1_4_6.EntityZom
 		return entityhuman != null && this.n(entityhuman) ? entityhuman : null;
 	}
 	
-	public void setEquipmentDropChance(int slot, float chance){
-		this.dropChances[slot] = chance;
-	}
-	
 }

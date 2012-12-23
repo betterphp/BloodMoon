@@ -216,8 +216,4 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.v1_4_6.EntityS
 		this.world.addEntity(entityarrow);
 	}
 	
-	public void setEquipmentDropChance(int slot, float chance){
-		this.dropChances[slot] = chance;
-	}
-	
 }
