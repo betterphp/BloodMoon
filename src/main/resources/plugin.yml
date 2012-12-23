@@ -1,4 +1,4 @@
 name: BloodMoon
-version: 0.20.1
+version: 0.20.2
 main: uk.co.jacekk.bukkit.bloodmoon.BloodMoon
 load: startup

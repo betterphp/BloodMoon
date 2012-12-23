@@ -6,8 +6,10 @@ import java.util.Random;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_4_6.CraftWorld;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v6.scheduler.BaseTask;
@@ -17,7 +19,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class NetherMobsTask extends BaseTask<BloodMoon> {
 	
-	private World world;
+	private CraftWorld world;
 	private ArrayList<EntityType> netherEntities;
 	
 	private Random random;
@@ -25,7 +27,7 @@ public class NetherMobsTask extends BaseTask<BloodMoon> {
 	public NetherMobsTask(BloodMoon plugin, World world, ArrayList<EntityType> netherEntities){
 		super(plugin);
 		
-		this.world = world;
+		this.world = (CraftWorld) world;
 		this.netherEntities = netherEntities;
 		
 		this.random = new Random();
@@ -58,7 +60,8 @@ public class NetherMobsTask extends BaseTask<BloodMoon> {
 				int group = worldConfig.getInt(Config.FEATURE_NETHER_MOBS_GROUP_SIZE) + this.random.nextInt(worldConfig.getInt(Config.FEATURE_NETHER_MOBS_GROUP_VARIATION));
 				
 				for (int i = 0; i < group; ++i){
-					this.world.spawnEntity(spawnLocation.add((this.random.nextDouble() * 3) - 1.5, 0, (this.random.nextDouble() * 3) - 1.5), type);
+					spawnLocation.add((this.random.nextDouble() * 3) - 1.5, 0, (this.random.nextDouble() * 3) - 1.5);
+					this.world.spawn(spawnLocation, type.getEntityClass(), SpawnReason.NATURAL);
 				}
 			}
 		}
