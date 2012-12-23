@@ -77,9 +77,9 @@ public class BloodMoonEntitySkeleton extends net.minecraft.server.v1_4_6.EntityS
 			
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
-			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bG));
+			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bH));
 			// NOTE: See bD() below
-			this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bG));
+			this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bH));
 			this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
 			
