@@ -97,7 +97,7 @@ public class BloodMoon extends BasePlugin {
 	public void activate(String worldName){
 		World world = this.server.getWorld(worldName);
 		
-		if (world == null){
+		if (world == null || this.isActive(worldName)){
 			return;
 		}
 		
@@ -133,7 +133,7 @@ public class BloodMoon extends BasePlugin {
 	public void deactivate(String worldName){
 		World world = this.server.getWorld(worldName);
 		
-		if (world == null){
+		if (world == null || !this.isActive(worldName)){
 			return;
 		}
 		
