@@ -8,6 +8,7 @@ import net.minecraft.server.v1_4_6.EntityLiving;
 import net.minecraft.server.v1_4_6.EntitySkeleton;
 import net.minecraft.server.v1_4_6.EntitySpider;
 import net.minecraft.server.v1_4_6.EntityZombie;
+import net.minecraft.server.v1_4_6.World;
 
 public enum BloodMoonEntity {
 	
@@ -49,6 +50,16 @@ public enum BloodMoonEntity {
 	
 	public Class<? extends EntityLiving> getBloodMoonClass(){
 		return this.bloodMoonClass;
+	}
+	
+	public EntityLiving createEntity(World world){
+		try{
+			return this.getBloodMoonClass().getConstructor(World.class).newInstance(world);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		
+		return null;
 	}
 	
 }

@@ -33,13 +33,16 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		for (BloodMoonEntity bloodMoonEntity : BloodMoonEntity.values()){
 			if (creatureType == bloodMoonEntity.getEntityType() && entity.getClass().equals(bloodMoonEntity.getNMSClass())){
 				try{
-					EntityLiving customEntity = bloodMoonEntity.getBloodMoonClass().getConstructor(World.class).newInstance(world);
-					
-					customEntity.setPosition(location.getX(), location.getY(), location.getZ());
-					customEntity.bG();
+					EntityLiving customEntity = bloodMoonEntity.createEntity(world);
 					
 					world.removeEntity(entity);
-					world.addEntity(customEntity, SpawnReason.CUSTOM);
+					
+					if (customEntity != null){
+						customEntity.setPosition(location.getX(), location.getY(), location.getZ());
+						customEntity.bG();
+						
+						world.addEntity(customEntity, SpawnReason.CUSTOM);
+					}
 				}catch (Exception e){
 					e.printStackTrace();
 				}
