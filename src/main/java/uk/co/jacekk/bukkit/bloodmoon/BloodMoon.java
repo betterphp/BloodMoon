@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.server.v1_4_6.EntityTypes;
+import net.minecraft.server.v1_4_6.SpawnerCreature;
 
 import org.bukkit.World;
+import org.bukkit.entity.Entity;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.metadata.MetadataValue;
 
 import uk.co.jacekk.bukkit.baseplugin.v6.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
@@ -61,6 +65,7 @@ public class BloodMoon extends BasePlugin {
 		this.permissionManager.registerPermissions(Permission.class);
 		this.commandManager.registerCommandExecutor(new BloodMoonExecuter(this));
 		
+		this.pluginManager.registerEvents(new SpawnReasonListener(this), this);
 		this.pluginManager.registerEvents(new EntityReplaceListener(this), this);
 		this.pluginManager.registerEvents(new ConfigCreateListener(this), this);
 		
@@ -178,6 +183,22 @@ public class BloodMoon extends BasePlugin {
 	 */
 	public PluginConfig getConfig(String worldName){
 		return this.worldConfig.get(worldName);
+	}
+	
+	/**
+	 * Gets the reason that an entity spawned. Note that these reasons are reset when the server restarts.
+	 * 
+	 * @param entity The entity
+	 * @return The {@link SpawnReason}
+	 */
+	public SpawnReason getSpawnReason(Entity entity){
+		for (MetadataValue value : entity.getMetadata("spawn-reason")){
+			if (value.getOwningPlugin() instanceof BloodMoon){
+				return (SpawnReason) value.value();
+			}
+		}
+		
+		return SpawnReason.DEFAULT;
 	}
 	
 }

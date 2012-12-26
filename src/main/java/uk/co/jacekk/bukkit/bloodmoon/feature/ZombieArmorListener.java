@@ -8,6 +8,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
@@ -59,8 +60,10 @@ public class ZombieArmorListener extends BaseListener<BloodMoon> {
 		
 		if (worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_ENABLED)){
 			for (LivingEntity entity : event.getWorld().getLivingEntities()){
-				if (entity.getType() == EntityType.ZOMBIE && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
-					this.giveArmor(entity, worldConfig);
+				if (!worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_IGNORE_SPAWNERS) || plugin.getSpawnReason(entity) != SpawnReason.SPAWNER){
+					if (entity.getType() == EntityType.ZOMBIE && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
+						this.giveArmor(entity, worldConfig);
+					}
 				}
 			}
 		}
@@ -74,8 +77,10 @@ public class ZombieArmorListener extends BaseListener<BloodMoon> {
 		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_ENABLED)){
 			LivingEntity entity = event.getEntity();
 			
-			if (entity.getType() == EntityType.ZOMBIE && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
-				this.giveArmor(entity, worldConfig);
+			if (!worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_IGNORE_SPAWNERS) || plugin.getSpawnReason(entity) != SpawnReason.SPAWNER){
+				if (entity.getType() == EntityType.ZOMBIE && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
+					this.giveArmor(entity, worldConfig);
+				}
 			}
 		}
 	}
