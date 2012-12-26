@@ -6,12 +6,14 @@ import net.minecraft.server.v1_4_6.World;
 
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_4_6.CraftWorld;
-import org.bukkit.craftbukkit.v1_4_6.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftLivingEntity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
+import org.bukkit.event.world.WorldInitEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntity;
@@ -22,12 +24,11 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		super(plugin);
 	}
 	
-	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-	public void onCreatureSpawn(CreatureSpawnEvent event){
-		Location location = event.getLocation();
-		EntityType creatureType = event.getEntityType();
+	private void replaceEntity(LivingEntity livingEntity){
+		Location location = livingEntity.getLocation();
+		EntityType creatureType = livingEntity.getType();
 		
-		Entity entity = ((CraftEntity) event.getEntity()).getHandle();
+		Entity entity = ((CraftLivingEntity) livingEntity).getHandle();
 		World world = ((CraftWorld) location.getWorld()).getHandle();
 		
 		for (BloodMoonEntity bloodMoonEntity : BloodMoonEntity.values()){
@@ -49,6 +50,18 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 				
 				return;
 			}
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onCreatureSpawn(CreatureSpawnEvent event){
+		this.replaceEntity(event.getEntity());
+	}
+	
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onWorldInit(WorldInitEvent event){
+		for (LivingEntity entity : event.getWorld().getLivingEntities()){
+			this.replaceEntity(entity);
 		}
 	}
 	
