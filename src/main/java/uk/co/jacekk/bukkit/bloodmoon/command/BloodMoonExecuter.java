@@ -17,7 +17,7 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 	}
 	
 	@CommandHandler(names = {"bloodmoon", "blood", "bm"}, description = "Toggles the bloodmoon for the current world.", usage = "[start/stop] [world_name]")
-	@CommandTabCompletion({"start|next|stop"})
+	@CommandTabCompletion({"start|next|stop|debug"})
 	public void execute(CommandSender sender, String label, String[] args){
 		if (args.length != 1 && args.length != 2){
 			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Usage: /" + label + " [action] [world_name]"));

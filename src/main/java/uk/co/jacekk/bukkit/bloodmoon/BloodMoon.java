@@ -1,5 +1,6 @@
 package uk.co.jacekk.bukkit.bloodmoon;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -64,9 +65,13 @@ public class BloodMoon extends BasePlugin {
 		this.permissionManager.registerPermissions(Permission.class);
 		this.commandManager.registerCommandExecutor(new BloodMoonExecuter(this));
 		
+		for (World world : this.server.getWorlds()){
+			this.createConfig(world);
+		}
+		
+		this.pluginManager.registerEvents(new ConfigCreateListener(this), this);
 		this.pluginManager.registerEvents(new SpawnReasonListener(this), this);
 		this.pluginManager.registerEvents(new EntityReplaceListener(this), this);
-		this.pluginManager.registerEvents(new ConfigCreateListener(this), this);
 		
 		this.scheduler.scheduleSyncRepeatingTask(this, new TimeMonitorTask(this), 100L, 100L);
 		
@@ -172,6 +177,25 @@ public class BloodMoon extends BasePlugin {
 		}
 		
 		return this.worldConfig.get(worldName).getBoolean(Config.ENABLED);
+	}
+	
+	/**
+	 * Sets up the config for a world. This should only be used by other plugins if a world is being loaded that would not call a WorldInitEvent.
+	 * 
+	 * @param world The {@link World} being loaded
+	 */
+	public void createConfig(World world){
+		String worldName = world.getName();
+		
+		if (!this.worldConfig.containsKey(worldName)){
+			PluginConfig worldConfig = new PluginConfig(new File(this.baseDirPath + File.separator + worldName + ".yml"), Config.class, this.log);
+			
+			this.worldConfig.put(worldName, worldConfig);
+			
+			if (worldConfig.getBoolean(Config.ALWAYS_ON)){
+				this.activate(worldName);
+			}
+		}
 	}
 	
 	/**
