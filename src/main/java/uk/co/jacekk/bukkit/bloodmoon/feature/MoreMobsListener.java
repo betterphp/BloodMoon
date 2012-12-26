@@ -1,10 +1,8 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.bukkit.World;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -16,21 +14,14 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
-public class NetherMobsListener extends BaseListener<BloodMoon> {
+public class MoreMobsListener extends BaseListener<BloodMoon> {
 	
-	private ArrayList<EntityType> netherEntities;
 	private HashMap<String, Integer> worldTasks;
 	
-	public NetherMobsListener(BloodMoon plugin){
+	public MoreMobsListener(BloodMoon plugin){
 		super(plugin);
 		
-		this.netherEntities = new ArrayList<EntityType>();
 		this.worldTasks = new HashMap<String, Integer>();
-		
-		this.netherEntities.add(EntityType.GHAST);
-		this.netherEntities.add(EntityType.PIG_ZOMBIE);
-		this.netherEntities.add(EntityType.BLAZE);
-		this.netherEntities.add(EntityType.MAGMA_CUBE);
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -39,8 +30,8 @@ public class NetherMobsListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_NETHER_MOBS_ENABLED)){
-			int taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, new NetherMobsTask(plugin, world, this.netherEntities), 0L, 100L);
+		if (worldConfig.getBoolean(Config.FEATURE_MORE_MOBS_ENABLED)){
+			int taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, new MoreMobsTask(plugin, world), 0L, 100L);
 			
 			if (taskID != -1){
 				this.worldTasks.put(worldName, taskID);
@@ -52,6 +43,7 @@ public class NetherMobsListener extends BaseListener<BloodMoon> {
 	public void onStop(BloodMoonEndEvent event){
 		World world = event.getWorld();
 		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		Integer taskID = this.worldTasks.get(worldName);
 		
@@ -60,7 +52,7 @@ public class NetherMobsListener extends BaseListener<BloodMoon> {
 			this.worldTasks.remove(worldName);
 			
 			for (LivingEntity entity : world.getLivingEntities()){
-				if (this.netherEntities.contains(entity.getType())){
+				if (worldConfig.getStringList(Config.FEATURE_MORE_MOBS_SPAWN).contains(entity.getType().name())){
 					entity.remove();
 				}
 			}

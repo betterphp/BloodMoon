@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import net.minecraft.server.v1_4_6.EntityTypes;
-import net.minecraft.server.v1_4_6.SpawnerCreature;
 
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -26,7 +25,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.LockInWorldListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreDropsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreExpListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreSpawningListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.NetherMobsListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.MoreMobsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnKillListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnSleepListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SuperCreepersListener;
@@ -87,7 +86,7 @@ public class BloodMoon extends BasePlugin {
 		this.pluginManager.registerEvents(new SuperCreepersListener(this), this);
 		this.pluginManager.registerEvents(new SpawnOnKillListener(this), this);
 		this.pluginManager.registerEvents(new SpawnOnSleepListener(this), this);
-		this.pluginManager.registerEvents(new NetherMobsListener(this), this);
+		this.pluginManager.registerEvents(new MoreMobsListener(this), this);
 		this.pluginManager.registerEvents(new LockInWorldListener(this), this);
 		this.pluginManager.registerEvents(new TexturePackListener(this), this);
 		this.pluginManager.registerEvents(new ExtendedNightListener(this), this);

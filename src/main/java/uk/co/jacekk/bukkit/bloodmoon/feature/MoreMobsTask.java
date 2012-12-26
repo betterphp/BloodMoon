@@ -17,36 +17,46 @@ import uk.co.jacekk.bukkit.baseplugin.v6.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
-public class NetherMobsTask extends BaseTask<BloodMoon> {
+public class MoreMobsTask extends BaseTask<BloodMoon> {
 	
 	private CraftWorld world;
-	private ArrayList<EntityType> netherEntities;
+	private PluginConfig worldConfig;
+	private ArrayList<EntityType> types;
 	
 	private Random random;
 	
-	public NetherMobsTask(BloodMoon plugin, World world, ArrayList<EntityType> netherEntities){
+	public MoreMobsTask(BloodMoon plugin, World world){
 		super(plugin);
 		
 		this.world = (CraftWorld) world;
-		this.netherEntities = netherEntities;
+		this.worldConfig = plugin.getConfig(world.getName());
+		this.types = new ArrayList<EntityType>();
+		
+		for (String name : this.worldConfig.getStringList(Config.FEATURE_MORE_MOBS_SPAWN)){
+			EntityType type = EntityType.valueOf(name);
+			
+			if (type != null && type.isAlive()){
+				this.types.add(type);
+			}
+		}
 		
 		this.random = new Random();
 	}
 	
 	@Override
 	public void run(){
-		PluginConfig worldConfig = plugin.getConfig(this.world.getName());
-		
 		spawn: for (Chunk chunk : this.world.getLoadedChunks()){
-			EntityType type = EntityType.valueOf(ListUtils.getRandom(worldConfig.getStringList(Config.FEATURE_NETHER_MOBS_SPAWN)));
+			EntityType type = ListUtils.getRandom(this.types);
 			
-			if (type != null && this.netherEntities.contains(type) && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_NETHER_MOBS_CHANCE)){
+			if (this.random.nextInt(100) < this.worldConfig.getInt(Config.FEATURE_MORE_MOBS_CHANCE)){
 				int x = (chunk.getX() * 16) + this.random.nextInt(12) + 2;
 				int z = (chunk.getZ() * 16) + this.random.nextInt(12) + 2;
 				int y = this.world.getHighestBlockYAt(x, z);
 				
 				if (type == EntityType.GHAST){
 					y += 20;
+				}else if (type == EntityType.BAT){
+					y += 4;
 				}
 				
 				Location spawnLocation = new Location(world, x, y, z);
@@ -57,7 +67,7 @@ public class NetherMobsTask extends BaseTask<BloodMoon> {
 					}
 				}
 				
-				int group = worldConfig.getInt(Config.FEATURE_NETHER_MOBS_GROUP_SIZE) + this.random.nextInt(worldConfig.getInt(Config.FEATURE_NETHER_MOBS_GROUP_VARIATION));
+				int group = this.worldConfig.getInt(Config.FEATURE_MORE_MOBS_GROUP_SIZE) + this.random.nextInt(this.worldConfig.getInt(Config.FEATURE_MORE_MOBS_GROUP_VARIATION));
 				
 				for (int i = 0; i < group; ++i){
 					spawnLocation.add((this.random.nextDouble() * 3) - 1.5, 0, (this.random.nextDouble() * 3) - 1.5);
