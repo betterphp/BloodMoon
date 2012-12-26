@@ -1,5 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
+import java.util.Random;
+
 import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
@@ -13,12 +15,14 @@ public class BloodMoonNavigation extends Navigation {
 	
 	private BloodMoon plugin;
 	private EntityLiving entity;
+	private Random random;
 	
 	public BloodMoonNavigation(BloodMoon plugin, EntityLiving entity, World world, float f){
 		super(entity, world, f);
 		
 		this.plugin = plugin;
 		this.entity = entity;
+		this.random = new Random();
 	}
 	
 	@Override
@@ -42,7 +46,11 @@ public class BloodMoonNavigation extends Navigation {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && worldConfig.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains(entityName)){
-			speed *= (float) worldConfig.getDouble(Config.FEATURE_MOVEMENT_SPEED_MULTIPLIER);
+			if (this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_MOVEMENT_SPEED_FAST_CHANCE)){
+				speed *= (float) worldConfig.getDouble(Config.FEATURE_MOVEMENT_SPEED_FAST_MULTIPLIER);
+			}else{
+				speed *= (float) worldConfig.getDouble(Config.FEATURE_MOVEMENT_SPEED_MULTIPLIER);
+			}
 		}
 		
 		return super.a(path, speed);

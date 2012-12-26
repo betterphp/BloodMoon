@@ -36,7 +36,9 @@ public class Config {
 	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MOBS			= new PluginConfigKey("features.target-distance.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER"));
 	
 	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_ENABLED			= new PluginConfigKey("features.movement-speed.enabled",		true);
-	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MULTIPLIER		= new PluginConfigKey("features.movement-speed.multiplier",		1.35d);
+	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MULTIPLIER		= new PluginConfigKey("features.movement-speed.multiplier",		1.30d);
+	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_FAST_CHANCE		= new PluginConfigKey("features.movement-speed.multiplier",		15);
+	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_FAST_MULTIPLIER	= new PluginConfigKey("features.movement-speed.multiplier",		1.5d);
 	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MOBS				= new PluginConfigKey("features.movement-speed.mobs",			Arrays.asList("ZOMBIE", "SKELETON", "CREEPER"));
 	
 	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_ENABLED			= new PluginConfigKey("features.break-blocks.enabled",			true);
