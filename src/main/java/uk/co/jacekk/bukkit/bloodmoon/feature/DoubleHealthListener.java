@@ -1,50 +1,65 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature;
 
-import java.util.ArrayList;
-
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
+import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_4_6.entity.CraftLivingEntity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
+import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
 public class DoubleHealthListener extends BaseListener<BloodMoon> {
 	
-	private ArrayList<DamageCause> playerCauses;
-	
 	public DoubleHealthListener(BloodMoon plugin){
 		super(plugin);
-		
-		this.playerCauses = new ArrayList<DamageCause>();
-		
-		this.playerCauses.add(DamageCause.ENTITY_ATTACK);
-		this.playerCauses.add(DamageCause.MAGIC);
-		this.playerCauses.add(DamageCause.POISON);
-		this.playerCauses.add(DamageCause.FIRE_TICK);
-		this.playerCauses.add(DamageCause.PROJECTILE);
 	}
 	
-	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onEntityDamage(EntityDamageEvent event){
-		Entity entity = event.getEntity();
-		String worldName = entity.getWorld().getName();
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onStart(BloodMoonStartEvent event){
+		World world = event.getWorld();
+		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity instanceof Creature && this.playerCauses.contains(event.getCause()) && plugin.isActive(worldName)){
-			Creature creature = (Creature) entity;
-			PluginConfig worldConfig = plugin.getConfig(worldName);
-			
-			if (creature.getTarget() instanceof Player && worldConfig.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED) && worldConfig.getStringList(Config.FEATURE_DOUBLE_HEALTH_MOBS).contains(entity.getType().name().toUpperCase())){
-				event.setDamage((int) Math.floor(event.getDamage() / 2F));
+		if (worldConfig.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED)){
+			for (LivingEntity livingEntity : world.getLivingEntities()){
+				CraftLivingEntity entity = (CraftLivingEntity) livingEntity;
 				
-				if (creature.getHealth() < 0){
-					creature.setHealth(0);
+				if (worldConfig.getStringList(Config.FEATURE_DOUBLE_HEALTH_MOBS).contains(entity.getType().name())){
+					entity.setMaxHealth(entity.getMaxHealth() * 2);
+				}
+			}
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onCreatureSpawn(CreatureSpawnEvent event){
+		CraftLivingEntity entity = (CraftLivingEntity) event.getEntity();
+		String worldName = event.getLocation().getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED) && worldConfig.getStringList(Config.FEATURE_DOUBLE_HEALTH_MOBS).contains(entity.getType().name())){
+			entity.setMaxHealth(entity.getMaxHealth() * 2);
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+	public void onStop(BloodMoonEndEvent event){
+		World world = event.getWorld();
+		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (worldConfig.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED)){
+			for (LivingEntity livingEntity : world.getLivingEntities()){
+				CraftLivingEntity entity = (CraftLivingEntity) livingEntity;
+				
+				if (worldConfig.getStringList(Config.FEATURE_DOUBLE_HEALTH_MOBS).contains(entity.getType().name())){
+					entity.resetMaxHealth();
 				}
 			}
 		}
