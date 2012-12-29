@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 
 import java.util.Random;
 
-import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import net.minecraft.server.v1_4_6.EntityLiving;

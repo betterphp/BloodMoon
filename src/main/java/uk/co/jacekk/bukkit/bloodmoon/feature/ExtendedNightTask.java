@@ -2,8 +2,8 @@ package uk.co.jacekk.bukkit.bloodmoon.feature;
 
 import org.bukkit.World;
 
-import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v6.scheduler.BaseTask;
+import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v7.scheduler.BaseTask;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 

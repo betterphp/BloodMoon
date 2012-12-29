@@ -7,9 +7,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v6.event.BaseListener;
-import uk.co.jacekk.bukkit.baseplugin.v6.util.ListUtils;
+import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v7.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v7.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 

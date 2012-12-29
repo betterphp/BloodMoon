@@ -17,8 +17,8 @@ import org.powermock.core.MockGateway;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import uk.co.jacekk.bukkit.baseplugin.v6.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v6.logging.PluginLogger;
+import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v7.logging.PluginLogger;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({BloodMoon.class, PluginDescriptionFile.class, World.class, WorldInitEvent.class})
