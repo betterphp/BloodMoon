@@ -1,6 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,8 +32,10 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPlayerTeleport(PlayerTeleportEvent event){
 		Player player = event.getPlayer();
+		Location from = event.getFrom();
+		Location to = event.getTo();
 		
-		if (!this.canTeleport(player, event.getFrom().getWorld(), event.getTo().getWorld())){
+		if (from != null && to != null && !this.canTeleport(player, from.getWorld(), to.getWorld())){
 			event.setCancelled(true);
 			player.sendMessage(ChatColor.RED + "You cannot leave the world until the bloodmoon has ended.");
 		}
