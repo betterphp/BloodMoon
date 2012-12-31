@@ -45,7 +45,7 @@
 		<dependency>
 			<groupId>uk.co.jacekk.bukkit</groupId>
 			<artifactId>baseplugin</artifactId>
-			<version>7.0-SNAPSHOT</version>
+			<version>7.0</version>
 			<scope>compile</scope>
 		</dependency>
 		
