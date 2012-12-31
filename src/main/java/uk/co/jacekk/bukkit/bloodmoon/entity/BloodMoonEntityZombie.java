@@ -94,7 +94,7 @@ public class BloodMoonEntityZombie extends net.minecraft.server.v1_4_6.EntityZom
 		String entityName = this.getBukkitEntity().getType().name().toUpperCase();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (this.target instanceof EntityHuman && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_BREAK_BLOCKS_ENABLED) && worldConfig.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains(entityName) && world.getTime() % 20 == 0){
+		if (this.target instanceof EntityHuman && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_BREAK_BLOCKS_ENABLED) && worldConfig.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains(entityName) && world.getTime() % 20 == 0 && this.world.worldData.getName().equals(this.target.world.worldData.getName())){
 			LivingEntity bukkitEntity = ((LivingEntity) this.getBukkitEntity());
 			Location direction = this.target.getBukkitEntity().getLocation().subtract(bukkitEntity.getLocation());
 			
