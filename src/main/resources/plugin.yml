@@ -1,4 +1,4 @@
-name: BloodMoon
-version: 0.20.2
-main: uk.co.jacekk.bukkit.bloodmoon.BloodMoon
+name: ${project.name}
+version: ${project.version}
+main: ${project.groupId}.${project.artifactId}.${project.name}
 load: startup
