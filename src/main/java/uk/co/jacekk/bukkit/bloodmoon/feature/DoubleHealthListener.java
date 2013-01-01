@@ -1,7 +1,6 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature;
 
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_4_6.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -27,9 +26,7 @@ public class DoubleHealthListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (worldConfig.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED)){
-			for (LivingEntity livingEntity : world.getLivingEntities()){
-				CraftLivingEntity entity = (CraftLivingEntity) livingEntity;
-				
+			for (LivingEntity entity : world.getLivingEntities()){
 				if (worldConfig.getStringList(Config.FEATURE_DOUBLE_HEALTH_MOBS).contains(entity.getType().name())){
 					entity.setMaxHealth(entity.getMaxHealth() * 2);
 				}
@@ -39,7 +36,7 @@ public class DoubleHealthListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
-		CraftLivingEntity entity = (CraftLivingEntity) event.getEntity();
+		LivingEntity entity = event.getEntity();
 		String worldName = event.getLocation().getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
@@ -55,9 +52,7 @@ public class DoubleHealthListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (worldConfig.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED)){
-			for (LivingEntity livingEntity : world.getLivingEntities()){
-				CraftLivingEntity entity = (CraftLivingEntity) livingEntity;
-				
+			for (LivingEntity entity : world.getLivingEntities()){
 				if (worldConfig.getStringList(Config.FEATURE_DOUBLE_HEALTH_MOBS).contains(entity.getType().name())){
 					entity.resetMaxHealth();
 				}
