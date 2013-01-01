@@ -120,7 +120,7 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.v1_4_6.EntityCr
 					if (this.random.nextInt(100) < 80){
 						this.world.getWorld().playEffect(location, Effect.ZOMBIE_CHEW_WOODEN_DOOR, 0);
 					}else{
-						EntityChangeBlockEvent event = new EntityChangeBlockEvent(bukkitEntity, block, Material.AIR);
+						EntityChangeBlockEvent event = new EntityChangeBlockEvent(bukkitEntity, block, Material.AIR, (byte) 0);
 						plugin.pluginManager.callEvent(event);
 						
 						if (!event.isCancelled()){
