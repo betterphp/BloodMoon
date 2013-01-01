@@ -77,10 +77,10 @@ public class Config {
 	public static final PluginConfigKey FEATURE_SPAWN_ON_SLEEP_ENABLED			= new PluginConfigKey("features.spawn-on-sleep.enabled",		true);
 	public static final PluginConfigKey FEATURE_SPAWN_ON_SLEEP_SPAWN			= new PluginConfigKey("features.spawn-on-sleep.spawn",			Arrays.asList("ZOMBIE"));
 	
-	public static final PluginConfigKey FEATURE_MORE_MOBS_ENABLED				= new PluginConfigKey("features.more-mobs.enabled",			true);
-	public static final PluginConfigKey FEATURE_MORE_MOBS_CHANCE				= new PluginConfigKey("features.more-mobs.chance",			10);
-	public static final PluginConfigKey FEATURE_MORE_MOBS_GROUP_SIZE			= new PluginConfigKey("features.more-mobs.group-size",		4);
-	public static final PluginConfigKey FEATURE_MORE_MOBS_GROUP_VARIATION		= new PluginConfigKey("features.more-mobs.group-variation",	2);
+	public static final PluginConfigKey FEATURE_MORE_MOBS_ENABLED				= new PluginConfigKey("features.more-mobs.enabled",				true);
+	public static final PluginConfigKey FEATURE_MORE_MOBS_CHANCE				= new PluginConfigKey("features.more-mobs.chance",				10);
+	public static final PluginConfigKey FEATURE_MORE_MOBS_GROUP_SIZE			= new PluginConfigKey("features.more-mobs.group-size",			4);
+	public static final PluginConfigKey FEATURE_MORE_MOBS_GROUP_VARIATION		= new PluginConfigKey("features.more-mobs.group-variation",		2);
 	public static final PluginConfigKey FEATURE_MORE_MOBS_SPAWN					= new PluginConfigKey("features.more-mobs.spawn",				Arrays.asList("PIG_ZOMBIE", "BLAZE", "MAGMA_CUBE"));
 	
 	public static final PluginConfigKey FEATURE_LOCK_IN_WORLD_ENABLED			= new PluginConfigKey("features.lock-in-world.enabled",			false);
@@ -96,5 +96,7 @@ public class Config {
 	public static final PluginConfigKey FEATURE_WEATHER_ENABLED					= new PluginConfigKey("features.weather.enabled",				true);
 	public static final PluginConfigKey FEATURE_WEATHER_THUNDER					= new PluginConfigKey("features.weather.thunder",				true);
 	public static final PluginConfigKey FEATURE_WEATHER_RAIN					= new PluginConfigKey("features.weather.rain",					true);
+	
+	public static final PluginConfigKey FEATURE_DAYLIGHT_PROOF_MOBS_ENABLED		= new PluginConfigKey("features.daylist-proof-mobs.enabled",	true);
 	
 }

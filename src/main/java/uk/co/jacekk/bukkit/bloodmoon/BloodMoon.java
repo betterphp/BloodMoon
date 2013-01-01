@@ -19,6 +19,7 @@ import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntity;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 import uk.co.jacekk.bukkit.bloodmoon.feature.ChatMessageListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.DaylightProofMobsFeature;
 import uk.co.jacekk.bukkit.bloodmoon.feature.DoubleHealthListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.ExtendedNightListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.FireArrowsListener;
@@ -96,6 +97,7 @@ public class BloodMoon extends BasePlugin {
 		this.pluginManager.registerEvents(new TexturePackListener(this), this);
 		this.pluginManager.registerEvents(new ExtendedNightListener(this), this);
 		this.pluginManager.registerEvents(new WeatherListener(this), this);
+		this.pluginManager.registerEvents(new DaylightProofMobsFeature(this), this);
 	}
 	
 	/**
