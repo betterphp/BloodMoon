@@ -12,6 +12,7 @@ public class ExtendedNightTask extends BaseTask<BloodMoon> {
 	protected int taskID;
 	
 	private World world;
+	private PluginConfig worldConfig;
 	
 	private int maxResets;
 	private int minKills;
@@ -26,6 +27,8 @@ public class ExtendedNightTask extends BaseTask<BloodMoon> {
 		this.taskID = -1;
 		
 		this.world = world;
+		this.worldConfig = worldConfig;
+		
 		this.maxResets = worldConfig.getInt(Config.FEATURE_EXTENDED_NIGHT_MAX_RESETS);
 		this.minKills = worldConfig.getInt(Config.FEATURE_EXTENDED_NIGHT_MIN_KILLS);
 		this.preserveWeather = worldConfig.getBoolean(Config.FEATURE_WEATHER_ENABLED);
@@ -38,9 +41,11 @@ public class ExtendedNightTask extends BaseTask<BloodMoon> {
 	public void run(){
 		long worldTime = this.world.getTime();
 		
-		if ((this.minKills > 0 && this.kills > this.minKills) || (this.maxResets > 0 && this.resets > this.maxResets)){
-			plugin.scheduler.cancelTask(this.taskID);
-			return;
+		if (!this.worldConfig.getBoolean(Config.ALWAYS_ON)){
+			if ((this.minKills > 0 && this.kills > this.minKills) || (this.maxResets > 0 && this.resets > this.maxResets)){
+				plugin.scheduler.cancelTask(this.taskID);
+				return;
+			}
 		}
 		
 		if (worldTime >= 21000 && worldTime <= 21100){
