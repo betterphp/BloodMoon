@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.jacekk.bukkit</groupId>
 	<artifactId>bloodmoon</artifactId>
-	<version>0.21-SNAPSHOT</version>
+	<version>0.2</version>
 	<packaging>jar</packaging>
 	
 	<name>BloodMoon</name>
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.10</version>
+			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
 		
