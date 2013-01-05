@@ -45,6 +45,12 @@ public class MoreMobsTask extends BaseTask<BloodMoon> {
 	
 	@Override
 	public void run(){
+		long worldTime = this.world.getTime();
+		
+		if (worldTime < 13000 || worldTime > 23000){
+			return;
+		}
+		
 		spawn: for (Chunk chunk : this.world.getLoadedChunks()){
 			EntityType type = ListUtils.getRandom(this.types);
 			
