@@ -2,11 +2,14 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 
 import org.bukkit.entity.EntityType;
 
+import uk.co.jacekk.bukkit.baseplugin.v7.util.ReflectionUtils;
+
 import net.minecraft.server.v1_4_6.EntityCreeper;
 import net.minecraft.server.v1_4_6.EntityEnderman;
 import net.minecraft.server.v1_4_6.EntityLiving;
 import net.minecraft.server.v1_4_6.EntitySkeleton;
 import net.minecraft.server.v1_4_6.EntitySpider;
+import net.minecraft.server.v1_4_6.EntityTypes;
 import net.minecraft.server.v1_4_6.EntityZombie;
 import net.minecraft.server.v1_4_6.World;
 
@@ -30,6 +33,16 @@ public enum BloodMoonEntity {
 		this.entityType = entityType;
 		this.nmsClass = nmsClass;
 		this.bloodMoonClass = bloodMoonClass;
+	}
+	
+	public static void registerEntities(){
+		for (BloodMoonEntity entity : values()){
+			try{
+				ReflectionUtils.invokeMethod(EntityTypes.class, "a", Void.class, null, new Class<?>[]{Class.class, String.class, int.class}, new Object[]{entity.getBloodMoonClass(), entity.getName(), entity.getID()});
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public String getName(){
