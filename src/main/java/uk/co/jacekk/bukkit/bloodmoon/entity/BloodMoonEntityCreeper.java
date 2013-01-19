@@ -9,36 +9,36 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_4_6.CraftServer;
-import org.bukkit.craftbukkit.v1_4_6.entity.CraftCreeper;
+import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_4_R1.entity.CraftCreeper;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v7.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v8.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalNearestAttackableTarget;
 
-import net.minecraft.server.v1_4_6.Entity;
-import net.minecraft.server.v1_4_6.EntityHuman;
-import net.minecraft.server.v1_4_6.EntityLiving;
-import net.minecraft.server.v1_4_6.EntityOcelot;
-import net.minecraft.server.v1_4_6.PathfinderGoal;
-import net.minecraft.server.v1_4_6.PathfinderGoalAvoidPlayer;
-import net.minecraft.server.v1_4_6.PathfinderGoalFloat;
-import net.minecraft.server.v1_4_6.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_4_6.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_4_6.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_4_6.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_4_6.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_4_6.PathfinderGoalSwell;
-import net.minecraft.server.v1_4_6.World;
+import net.minecraft.server.v1_4_R1.Entity;
+import net.minecraft.server.v1_4_R1.EntityHuman;
+import net.minecraft.server.v1_4_R1.EntityLiving;
+import net.minecraft.server.v1_4_R1.EntityOcelot;
+import net.minecraft.server.v1_4_R1.PathfinderGoal;
+import net.minecraft.server.v1_4_R1.PathfinderGoalAvoidPlayer;
+import net.minecraft.server.v1_4_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_4_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_4_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_4_R1.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_4_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_4_R1.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_4_R1.PathfinderGoalSwell;
+import net.minecraft.server.v1_4_R1.World;
 
-public class BloodMoonEntityCreeper extends net.minecraft.server.v1_4_6.EntityCreeper {
+public class BloodMoonEntityCreeper extends net.minecraft.server.v1_4_R1.EntityCreeper {
 	
 	private BloodMoon plugin;
 	

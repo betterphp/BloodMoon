@@ -12,9 +12,9 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 
-import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v7.event.BaseListener;
-import uk.co.jacekk.bukkit.baseplugin.v7.util.ListUtils;
+import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v8.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v8.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;

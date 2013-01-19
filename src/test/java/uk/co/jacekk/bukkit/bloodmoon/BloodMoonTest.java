@@ -1,6 +1,6 @@
 package uk.co.jacekk.bukkit.bloodmoon;
 
-import net.minecraft.server.v1_4_6.EntityTypes;
+import net.minecraft.server.v1_4_R1.EntityTypes;
 
 import org.junit.Assert;
 import org.junit.Test;

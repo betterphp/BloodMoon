@@ -4,15 +4,15 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import uk.co.jacekk.bukkit.baseplugin.v7.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
-import net.minecraft.server.v1_4_6.Entity;
-import net.minecraft.server.v1_4_6.EntityHuman;
-import net.minecraft.server.v1_4_6.EntityLiving;
-import net.minecraft.server.v1_4_6.IEntitySelector;
-import net.minecraft.server.v1_4_6.PathfinderGoalTarget;
+import net.minecraft.server.v1_4_R1.Entity;
+import net.minecraft.server.v1_4_R1.EntityHuman;
+import net.minecraft.server.v1_4_R1.EntityLiving;
+import net.minecraft.server.v1_4_R1.IEntitySelector;
+import net.minecraft.server.v1_4_R1.PathfinderGoalTarget;
 
 public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget {
 	
@@ -90,7 +90,7 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 	
 	@Override
 	public void c(){
-		this.d.b(this.entity);
+		this.d.setGoalTarget(this.entity);
 		super.c();
 	}
 	
