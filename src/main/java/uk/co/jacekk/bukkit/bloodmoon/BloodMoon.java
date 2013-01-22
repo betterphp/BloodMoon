@@ -207,6 +207,7 @@ public class BloodMoon extends BasePlugin {
 	public SpawnReason getSpawnReason(Entity entity){
 		for (MetadataValue value : entity.getMetadata("spawn-reason")){
 			if (value.getOwningPlugin() instanceof BloodMoon){
+				this.log.info(value.value().toString());
 				return (SpawnReason) value.value();
 			}
 		}

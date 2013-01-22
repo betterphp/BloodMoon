@@ -77,7 +77,7 @@ public class ZombieArmorListener extends BaseListener<BloodMoon> {
 		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_ENABLED)){
 			LivingEntity entity = event.getEntity();
 			
-			if (!worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_IGNORE_SPAWNERS) || plugin.getSpawnReason(entity) != SpawnReason.SPAWNER){
+			if (!worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_IGNORE_SPAWNERS) || event.getSpawnReason() != SpawnReason.SPAWNER){
 				if (entity.getType() == EntityType.ZOMBIE && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
 					this.giveArmor(entity, worldConfig);
 				}
