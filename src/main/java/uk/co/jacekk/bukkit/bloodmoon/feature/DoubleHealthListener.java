@@ -28,7 +28,11 @@ public class DoubleHealthListener extends BaseListener<BloodMoon> {
 		if (worldConfig.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED)){
 			for (LivingEntity entity : world.getLivingEntities()){
 				if (worldConfig.getStringList(Config.FEATURE_DOUBLE_HEALTH_MOBS).contains(entity.getType().name())){
-					entity.setMaxHealth(entity.getMaxHealth() * 2);
+					int newMaxHealth = entity.getMaxHealth() * 2;
+					int damage = entity.getMaxHealth() - entity.getHealth();
+					
+					entity.setMaxHealth(newMaxHealth);
+					entity.setHealth(newMaxHealth - damage);
 				}
 			}
 		}
@@ -41,7 +45,11 @@ public class DoubleHealthListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_DOUBLE_HEALTH_ENABLED) && worldConfig.getStringList(Config.FEATURE_DOUBLE_HEALTH_MOBS).contains(entity.getType().name())){
-			entity.setMaxHealth(entity.getMaxHealth() * 2);
+			int newMaxHealth = entity.getMaxHealth() * 2;
+			int damage = entity.getMaxHealth() - entity.getHealth();
+			
+			entity.setMaxHealth(newMaxHealth);
+			entity.setHealth(newMaxHealth - damage);
 		}
 	}
 	
