@@ -17,12 +17,23 @@ public class BloodMoonNavigation extends Navigation {
 	private EntityLiving entity;
 	private Random random;
 	
+	private PluginConfig worldConfig;
+	private float multiplier;
+	
 	public BloodMoonNavigation(BloodMoon plugin, EntityLiving entity, World world, float f){
 		super(entity, world, f);
 		
 		this.plugin = plugin;
 		this.entity = entity;
 		this.random = new Random();
+		
+		this.worldConfig = plugin.getConfig(this.entity.world.worldData.getName());
+		
+		if (this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_MOVEMENT_SPEED_FAST_CHANCE)){
+			this.multiplier = (float) worldConfig.getDouble(Config.FEATURE_MOVEMENT_SPEED_FAST_MULTIPLIER);
+		}else{
+			this.multiplier = (float) worldConfig.getDouble(Config.FEATURE_MOVEMENT_SPEED_MULTIPLIER);
+		}
 	}
 	
 	@Override
@@ -43,14 +54,9 @@ public class BloodMoonNavigation extends Navigation {
 	public boolean a(PathEntity path, float speed){
 		String worldName = this.entity.world.worldData.getName();
 		String entityName = this.entity.getBukkitEntity().getType().name().toUpperCase();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && worldConfig.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains(entityName)){
-			if (this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_MOVEMENT_SPEED_FAST_CHANCE)){
-				speed *= (float) worldConfig.getDouble(Config.FEATURE_MOVEMENT_SPEED_FAST_MULTIPLIER);
-			}else{
-				speed *= (float) worldConfig.getDouble(Config.FEATURE_MOVEMENT_SPEED_MULTIPLIER);
-			}
+		if (plugin.isActive(worldName) && this.worldConfig.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.worldConfig.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains(entityName)){
+			speed *= this.multiplier;
 		}
 		
 		return super.a(path, speed);
