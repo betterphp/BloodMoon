@@ -46,9 +46,9 @@ public class Config {
 	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_MOBS					= new PluginConfigKey("features.break-blocks.mobs",					Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
 	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_BLOCKS					= new PluginConfigKey("features.break-blocks.blocks",				Arrays.asList("WOOD", "LOG", "GLASS"));
 	
-	public static final PluginConfigKey FEATURE_DOUBLE_HEALTH_ENABLED				= new PluginConfigKey("features.double-health.enabled",				true);
-	public static final PluginConfigKey FEATURE_DOUBLE_HEALTH_MULTIPLIER			= new PluginConfigKey("features.double-health.multiplier",			2.0d);
-	public static final PluginConfigKey FEATURE_DOUBLE_HEALTH_MOBS					= new PluginConfigKey("features.double-health.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
+	public static final PluginConfigKey FEATURE_MAX_HEALTH_ENABLED					= new PluginConfigKey("features.max-health.enabled",				true);
+	public static final PluginConfigKey FEATURE_MAX_HEALTH_MULTIPLIER				= new PluginConfigKey("features.max-health.multiplier",				2.0d);
+	public static final PluginConfigKey FEATURE_MAX_HEALTH_MOBS						= new PluginConfigKey("features.max-health.mobs",					Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
 	
 	public static final PluginConfigKey FEATURE_MORE_SPAWNING_ENABLED				= new PluginConfigKey("features.more-spawning.enabled",				true);
 	public static final PluginConfigKey FEATURE_MORE_SPAWNING_MULTIPLIER			= new PluginConfigKey("features.more-spawning.multiplier",			2);

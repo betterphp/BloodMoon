@@ -17,10 +17,10 @@ import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 import uk.co.jacekk.bukkit.bloodmoon.feature.ChatMessageListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.DaylightProofMobsFeature;
-import uk.co.jacekk.bukkit.bloodmoon.feature.DoubleHealthListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.ExtendedNightListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.FireArrowsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.LockInWorldListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.MaxHealthListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreDropsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreExpListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreSpawningListener;
@@ -72,7 +72,7 @@ public class BloodMoon extends BasePlugin {
 		this.pluginManager.registerEvents(new ZombieWeaponListener(this), this);
 		this.pluginManager.registerEvents(new ZombieArmorListener(this), this);
 		// NOTE: break-blocks is handled in BloodMoonEntity*
-		this.pluginManager.registerEvents(new DoubleHealthListener(this), this);
+		this.pluginManager.registerEvents(new MaxHealthListener(this), this);
 		this.pluginManager.registerEvents(new MoreSpawningListener(this), this);
 		this.pluginManager.registerEvents(new MoreExpListener(this), this);
 		this.pluginManager.registerEvents(new MoreDropsListener(this), this);
