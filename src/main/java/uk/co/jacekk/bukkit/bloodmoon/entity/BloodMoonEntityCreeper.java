@@ -130,7 +130,10 @@ public class BloodMoonEntityCreeper extends net.minecraft.server.v1_4_R1.EntityC
 								block.breakNaturally();
 							}else{
 								block.setType(Material.AIR);
-								this.world.getWorld().dropItemNaturally(location, new ItemStack(type, 1, block.getData()));
+								
+								if (worldConfig.getBoolean(Config.FEATURE_BREAK_BLOCKS_DROP_ITEMS)){
+									this.world.getWorld().dropItemNaturally(location, new ItemStack(type, 1, block.getData()));
+								}
 							}
 						}
 					}

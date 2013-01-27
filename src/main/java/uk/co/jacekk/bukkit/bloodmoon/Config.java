@@ -42,6 +42,7 @@ public class Config {
 	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MOBS					= new PluginConfigKey("features.movement-speed.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "CREEPER"));
 	
 	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_ENABLED				= new PluginConfigKey("features.break-blocks.enabled",				true);
+	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_DROP_ITEMS				= new PluginConfigKey("features.break-blocks.drop-items",			true);
 	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_REALISTIC_DROP			= new PluginConfigKey("features.break-blocks.realistic-drop",		true);
 	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_MOBS					= new PluginConfigKey("features.break-blocks.mobs",					Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
 	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_BLOCKS					= new PluginConfigKey("features.break-blocks.blocks",				Arrays.asList("WOOD", "LOG", "GLASS"));
