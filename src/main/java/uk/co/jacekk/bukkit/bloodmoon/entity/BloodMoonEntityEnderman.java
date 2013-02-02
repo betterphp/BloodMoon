@@ -28,7 +28,7 @@ import net.minecraft.server.v1_4_R1.World;
 public class BloodMoonEntityEnderman extends net.minecraft.server.v1_4_R1.EntityEnderman {
 	
 	private BloodMoon plugin;
-	private int h = 0;
+	private int f = 0;
 	
 	public BloodMoonEntityEnderman(World world){
 		super(world);
@@ -125,7 +125,7 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.v1_4_R1.Entity
 		vec3d1 = vec3d1.a();
 		double d1 = vec3d.b(vec3d1);
 		
-		return d1 > 1.0D - 0.025D / d0 ? entityhuman.m(this) : false;
+		return d1 > 1.0D - 0.025D / d0 ? entityhuman.n(this) : false;
 	}
 	
 	@Override
@@ -134,7 +134,7 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.v1_4_R1.Entity
 		String entityName = this.getBukkitEntity().getType().name().toUpperCase();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		float distance = 16.0f;
+		float distance = 64.0f;
 		
 		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
 			distance *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
@@ -144,12 +144,17 @@ public class BloodMoonEntityEnderman extends net.minecraft.server.v1_4_R1.Entity
 		
 		if (entityhuman != null){
 			if (this.d(entityhuman)){
-				if (this.h++ == 5){
-					this.h = 0;
+				if (this.f == 0){
+					this.world.makeSound(entityhuman, "mob.endermen.stare", 1.0F, 1.0F);
+				}
+				
+				if (this.f++ == 5){
+					this.f = 0;
+					this.f(true);
 					return entityhuman;
 				}
 			}else{
-				this.h = 0;
+				this.f = 0;
 			}
 		}
 		
