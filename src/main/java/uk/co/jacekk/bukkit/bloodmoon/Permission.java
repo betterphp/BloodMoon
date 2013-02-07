@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon;
 
 import org.bukkit.permissions.PermissionDefault;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.permissions.PluginPermission;
+import uk.co.jacekk.bukkit.baseplugin.v9.permissions.PluginPermission;
 
 public class Permission {
 	

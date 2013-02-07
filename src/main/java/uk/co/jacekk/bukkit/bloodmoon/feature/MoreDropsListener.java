@@ -8,8 +8,8 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.inventory.ItemStack;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v8.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 

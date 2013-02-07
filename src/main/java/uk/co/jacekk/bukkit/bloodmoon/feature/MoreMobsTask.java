@@ -11,9 +11,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v8.scheduler.BaseTask;
-import uk.co.jacekk.bukkit.baseplugin.v8.util.ListUtils;
+import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9.scheduler.BaseTask;
+import uk.co.jacekk.bukkit.baseplugin.v9.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 

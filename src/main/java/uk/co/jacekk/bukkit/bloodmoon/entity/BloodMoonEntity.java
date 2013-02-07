@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 
 import org.bukkit.entity.EntityType;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.baseplugin.v9.util.ReflectionUtils;
 
 import net.minecraft.server.v1_4_R1.EntityCreeper;
 import net.minecraft.server.v1_4_R1.EntityEnderman;

@@ -9,8 +9,8 @@ import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.metadata.MetadataValue;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.BasePlugin;
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9.BasePlugin;
+import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.command.BloodMoonExecuter;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntity;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;

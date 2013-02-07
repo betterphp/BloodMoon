@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import uk.co.jacekk.bukkit.baseplugin.v8.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
