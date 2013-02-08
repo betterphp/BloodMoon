@@ -25,6 +25,7 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  start - Forces a bloodmoon to start"));
 			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  next - Forces a bloodmoon to start at the next night"));
 			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  stop - Stops a bloodmoon"));
+			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  reload - Reloads the config."));
 			return;
 		}
 		
@@ -68,6 +69,15 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 			plugin.deactivate(worldName);
 			
 			sender.sendMessage(ChatColor.GREEN + "Bloodmoon stopped in " + worldName);
+		}else if (option.equalsIgnoreCase("reload")){
+			if (!Permission.ADMIN_RELOAD.has(sender)){
+				sender.sendMessage(plugin.formatMessage(ChatColor.RED + "You do not have permission use this command"));
+				return;
+			}
+			
+			plugin.reloadWorldConfig();
+			
+			sender.sendMessage(ChatColor.GREEN + "Config reloaded for all worlds.");
 		}else{
 			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Invalid option, see /" + label + " for correct usage"));
 		}

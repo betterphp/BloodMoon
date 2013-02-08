@@ -199,6 +199,15 @@ public class BloodMoon extends BasePlugin {
 	}
 	
 	/**
+	 * Reloads all config files.
+	 */
+	public void reloadWorldConfig(){
+		for (PluginConfig config : this.worldConfig.values()){
+			config.reload();
+		}
+	}
+	
+	/**
 	 * Gets the reason that an entity spawned. Note that these reasons are reset when the server restarts.
 	 * 
 	 * @param entity The entity
