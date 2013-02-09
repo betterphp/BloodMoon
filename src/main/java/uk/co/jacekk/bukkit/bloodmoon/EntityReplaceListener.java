@@ -55,7 +55,9 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
 	public void onCreatureSpawn(CreatureSpawnEvent event){
-		this.replaceEntity(event.getEntity());
+		if (event.getSpawnReason() == SpawnReason.NATURAL){
+			this.replaceEntity(event.getEntity());
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
