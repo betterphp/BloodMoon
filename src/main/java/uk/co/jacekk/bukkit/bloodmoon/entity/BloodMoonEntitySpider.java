@@ -1,5 +1,10 @@
 package uk.co.jacekk.bukkit.bloodmoon.entity;
 
+import net.minecraft.server.v1_4_R1.Entity;
+import net.minecraft.server.v1_4_R1.EntityHuman;
+import net.minecraft.server.v1_4_R1.EntityLiving;
+import net.minecraft.server.v1_4_R1.World;
+
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -12,16 +17,11 @@ import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v9.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
-
-import net.minecraft.server.v1_4_R1.Entity;
-import net.minecraft.server.v1_4_R1.EntityHuman;
-import net.minecraft.server.v1_4_R1.EntityLiving;
-import net.minecraft.server.v1_4_R1.World;
 
 public class BloodMoonEntitySpider extends net.minecraft.server.v1_4_R1.EntitySpider {
 	

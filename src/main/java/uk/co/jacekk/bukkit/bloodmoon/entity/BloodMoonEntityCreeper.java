@@ -3,26 +3,6 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftCreeper;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.plugin.Plugin;
-
-import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v9.util.ReflectionUtils;
-import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
-import uk.co.jacekk.bukkit.bloodmoon.Config;
-import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
-import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalNearestAttackableTarget;
-
 import net.minecraft.server.v1_4_R1.Entity;
 import net.minecraft.server.v1_4_R1.EntityHuman;
 import net.minecraft.server.v1_4_R1.EntityLiving;
@@ -37,6 +17,26 @@ import net.minecraft.server.v1_4_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_4_R1.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_4_R1.PathfinderGoalSwell;
 import net.minecraft.server.v1_4_R1.World;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Effect;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.block.BlockFace;
+import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_4_R1.entity.CraftCreeper;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
+
+import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
+import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalNearestAttackableTarget;
 
 public class BloodMoonEntityCreeper extends net.minecraft.server.v1_4_R1.EntityCreeper {
 	

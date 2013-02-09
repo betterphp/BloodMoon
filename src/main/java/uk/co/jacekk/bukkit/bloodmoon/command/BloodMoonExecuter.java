@@ -8,10 +8,10 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import uk.co.jacekk.bukkit.baseplugin.v9.command.BaseCommandExecutor;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandHandler;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.CommandTabCompletion;
-import uk.co.jacekk.bukkit.baseplugin.v9.command.SubCommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.command.BaseCommandExecutor;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.command.CommandHandler;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.command.CommandTabCompletion;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.command.SubCommandHandler;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Permission;
 
@@ -25,19 +25,19 @@ public class BloodMoonExecuter extends BaseCommandExecutor<BloodMoon> {
 	@CommandTabCompletion({"start|next|stop|reload"})
 	public void bloodmoon(CommandSender sender, String label, String[] args){
 		sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Usage: /" + label + " [action] [world_name]"));
-		sender.sendMessage(plugin.formatMessage(ChatColor.RED + "Actions:"));
+		sender.sendMessage(ChatColor.RED + "Actions:");
 		
 		if (Permission.ADMIN_START.has(sender)){
-			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  start - Forces a bloodmoon to start"));
-			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  next - Forces a bloodmoon to start at the next night"));
+			sender.sendMessage(ChatColor.RED + "  start - Forces a bloodmoon to start");
+			sender.sendMessage(ChatColor.RED + "  next - Forces a bloodmoon to start at the next night");
 		}
 		
 		if (Permission.ADMIN_STOP.has(sender)){
-			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  stop - Stops a bloodmoon"));
+			sender.sendMessage(ChatColor.RED + "  stop - Stops a bloodmoon");
 		}
 		
 		if (Permission.ADMIN_RELOAD.has(sender)){
-			sender.sendMessage(plugin.formatMessage(ChatColor.RED + "  reload - Reloads the config."));
+			sender.sendMessage(ChatColor.RED + "  reload - Reloads the config.");
 		}
 	}
 	

@@ -4,15 +4,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import uk.co.jacekk.bukkit.baseplugin.v9.config.PluginConfig;
-import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
-import uk.co.jacekk.bukkit.bloodmoon.Config;
-
 import net.minecraft.server.v1_4_R1.Entity;
 import net.minecraft.server.v1_4_R1.EntityHuman;
 import net.minecraft.server.v1_4_R1.EntityLiving;
 import net.minecraft.server.v1_4_R1.IEntitySelector;
 import net.minecraft.server.v1_4_R1.PathfinderGoalTarget;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
+import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 
 public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget {
 	
