@@ -25,6 +25,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.MoreDropsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreExpListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreMobsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreSpawningListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.NetherSkyListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnKillListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnSleepListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SuperCreepersListener;
@@ -86,6 +87,7 @@ public class BloodMoon extends BasePlugin {
 		this.pluginManager.registerEvents(new ExtendedNightListener(this), this);
 		this.pluginManager.registerEvents(new WeatherListener(this), this);
 		this.pluginManager.registerEvents(new DaylightProofMobsFeature(this), this);
+		this.pluginManager.registerEvents(new NetherSkyListener(this), this);
 	}
 	
 	/**
