@@ -101,6 +101,6 @@ public class Config {
 	
 	public static final PluginConfigKey FEATURE_DAYLIGHT_PROOF_MOBS_ENABLED			= new PluginConfigKey("features.daylight-proof-mobs.enabled",		true);
 	
-	public static final PluginConfigKey FEATURE_NETHER_SKY_ENABLED					= new PluginConfigKey("features.nether-sky.enabled",				true);
+	public static final PluginConfigKey FEATURE_NETHER_SKY_ENABLED					= new PluginConfigKey("features.nether-sky.enabled",				false);
 	
 }
