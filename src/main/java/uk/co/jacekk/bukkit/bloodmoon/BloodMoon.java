@@ -175,8 +175,9 @@ public class BloodMoon extends BasePlugin {
 	 * Sets up the config for a world. This should only be used by other plugins if a world is being loaded that would not call a WorldInitEvent.
 	 * 
 	 * @param world The {@link World} being loaded
+	 * @return The config object that was created for the world or null if it already existed.
 	 */
-	public void createConfig(World world){
+	public PluginConfig createConfig(World world){
 		String worldName = world.getName();
 		
 		if (!this.worldConfig.containsKey(worldName)){
@@ -187,7 +188,11 @@ public class BloodMoon extends BasePlugin {
 			if (worldConfig.getBoolean(Config.ALWAYS_ON)){
 				this.activate(worldName);
 			}
+			
+			return worldConfig;
 		}
+		
+		return null;
 	}
 	
 	/**
