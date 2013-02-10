@@ -98,7 +98,11 @@ public class ConfigCreateListener extends BaseListener<BloodMoon> {
 		
 		for (PluginConfigKey key : this.entityKeys){
 			for (String entityName : config.getStringList(key)){
-				EntityType type = EntityType.fromName(entityName);
+				EntityType type = null;
+				
+				try{
+					type = EntityType.valueOf(entityName);
+				}catch (IllegalArgumentException e){  }
 				
 				if (type == null || !type.isSpawnable() || !type.isAlive()){
 					plugin.log.fatal(key.getKey() + " contained an invalid entity type '" + entityName + "' in " + world.getName() + ".yml");
@@ -107,7 +111,7 @@ public class ConfigCreateListener extends BaseListener<BloodMoon> {
 					values.append("Valid Values:");
 					
 					for (EntityType entityType : EntityType.values()){
-						if (entityType.isSpawnable()){
+						if (entityType.isSpawnable() && entityType.isAlive()){
 							values.append(" ");
 							values.append(entityType.name());
 						}
