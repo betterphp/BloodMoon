@@ -1,6 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.entity;
 
 import net.minecraft.server.v1_4_R1.Entity;
+import net.minecraft.server.v1_4_R1.EntityEnderman;
 import net.minecraft.server.v1_4_R1.EntityHuman;
 import net.minecraft.server.v1_4_R1.EntityLiving;
 import net.minecraft.server.v1_4_R1.Vec3D;
@@ -25,7 +26,7 @@ import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
 
-public class BloodMoonEntityEnderman extends net.minecraft.server.v1_4_R1.EntityEnderman {
+public class BloodMoonEntityEnderman extends EntityEnderman {
 	
 	private BloodMoon plugin;
 	private int f = 0;

@@ -13,7 +13,7 @@ import net.minecraft.server.v1_4_R1.EntityTypes;
 import net.minecraft.server.v1_4_R1.EntityZombie;
 import net.minecraft.server.v1_4_R1.World;
 
-public enum BloodMoonEntity {
+public enum BloodMoonEntityType {
 	
 	CREEPER("Creeper", 50, EntityType.CREEPER, EntityCreeper.class, BloodMoonEntityCreeper.class),
 	ENDERMAN("Enderman", 58, EntityType.ENDERMAN, EntityEnderman.class, BloodMoonEntityEnderman.class),
@@ -27,7 +27,7 @@ public enum BloodMoonEntity {
 	private Class<? extends EntityLiving> nmsClass;
 	private Class<? extends EntityLiving> bloodMoonClass;
 	
-	private BloodMoonEntity(String name, int id, EntityType entityType, Class<? extends EntityLiving> nmsClass, Class<? extends EntityLiving> bloodMoonClass){
+	private BloodMoonEntityType(String name, int id, EntityType entityType, Class<? extends EntityLiving> nmsClass, Class<? extends EntityLiving> bloodMoonClass){
 		this.name = name;
 		this.id = id;
 		this.entityType = entityType;
@@ -36,7 +36,7 @@ public enum BloodMoonEntity {
 	}
 	
 	public static void registerEntities(){
-		for (BloodMoonEntity entity : values()){
+		for (BloodMoonEntityType entity : values()){
 			try{
 				ReflectionUtils.invokeMethod(EntityTypes.class, "a", Void.class, null, new Class<?>[]{Class.class, String.class, int.class}, new Object[]{entity.getBloodMoonClass(), entity.getName(), entity.getID()});
 			}catch (Exception e){

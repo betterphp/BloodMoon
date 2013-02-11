@@ -7,6 +7,7 @@ import net.minecraft.server.v1_4_R1.Entity;
 import net.minecraft.server.v1_4_R1.EntityHuman;
 import net.minecraft.server.v1_4_R1.EntityLiving;
 import net.minecraft.server.v1_4_R1.EntityVillager;
+import net.minecraft.server.v1_4_R1.EntityZombie;
 import net.minecraft.server.v1_4_R1.PathfinderGoal;
 import net.minecraft.server.v1_4_R1.PathfinderGoalBreakDoor;
 import net.minecraft.server.v1_4_R1.PathfinderGoalFloat;
@@ -40,7 +41,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalNearestAttackableTarget;
 
-public class BloodMoonEntityZombie extends net.minecraft.server.v1_4_R1.EntityZombie {
+public class BloodMoonEntityZombie extends EntityZombie {
 	
 	private BloodMoon plugin;
 	

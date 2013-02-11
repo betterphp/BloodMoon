@@ -12,7 +12,7 @@ import org.bukkit.metadata.MetadataValue;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.command.BloodMoonExecuter;
-import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntity;
+import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 import uk.co.jacekk.bukkit.bloodmoon.feature.ChatMessageListener;
@@ -50,7 +50,7 @@ public class BloodMoon extends BasePlugin {
 		
 		this.worldConfig = new HashMap<String, PluginConfig>();
 		
-		BloodMoonEntity.registerEntities();
+		BloodMoonEntityType.registerEntities();
 		
 		this.permissionManager.registerPermissions(Permission.class);
 		this.commandManager.registerCommandExecutor(new BloodMoonExecuter(this));

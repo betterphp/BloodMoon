@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import net.minecraft.server.v1_4_R1.Entity;
+import net.minecraft.server.v1_4_R1.EntityCreeper;
 import net.minecraft.server.v1_4_R1.EntityHuman;
 import net.minecraft.server.v1_4_R1.EntityLiving;
 import net.minecraft.server.v1_4_R1.EntityOcelot;
@@ -38,7 +39,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalNearestAttackableTarget;
 
-public class BloodMoonEntityCreeper extends net.minecraft.server.v1_4_R1.EntityCreeper {
+public class BloodMoonEntityCreeper extends EntityCreeper {
 	
 	private BloodMoon plugin;
 	

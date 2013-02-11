@@ -7,7 +7,7 @@ public class BloodMoonEntityTest {
 	
 	@Test
 	public void testMapping(){
-		for (BloodMoonEntity entity : BloodMoonEntity.values()){
+		for (BloodMoonEntityType entity : BloodMoonEntityType.values()){
 			Assert.assertTrue(entity.getName().equals(entity.getEntityType().getName()));
 			Assert.assertTrue(entity.getID() == entity.getEntityType().getTypeId());
 		}

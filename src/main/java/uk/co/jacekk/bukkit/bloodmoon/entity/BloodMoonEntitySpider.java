@@ -3,6 +3,7 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 import net.minecraft.server.v1_4_R1.Entity;
 import net.minecraft.server.v1_4_R1.EntityHuman;
 import net.minecraft.server.v1_4_R1.EntityLiving;
+import net.minecraft.server.v1_4_R1.EntitySpider;
 import net.minecraft.server.v1_4_R1.World;
 
 import org.bukkit.Bukkit;
@@ -23,7 +24,7 @@ import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
 
-public class BloodMoonEntitySpider extends net.minecraft.server.v1_4_R1.EntitySpider {
+public class BloodMoonEntitySpider extends EntitySpider {
 	
 	private BloodMoon plugin;
 	

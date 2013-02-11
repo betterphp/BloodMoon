@@ -16,7 +16,7 @@ import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.world.WorldInitEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
-import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntity;
+import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
 public class EntityReplaceListener extends BaseListener<BloodMoon> {
 	
@@ -31,7 +31,7 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		Entity entity = ((CraftLivingEntity) livingEntity).getHandle();
 		World world = ((CraftWorld) location.getWorld()).getHandle();
 		
-		for (BloodMoonEntity bloodMoonEntity : BloodMoonEntity.values()){
+		for (BloodMoonEntityType bloodMoonEntity : BloodMoonEntityType.values()){
 			if (creatureType == bloodMoonEntity.getEntityType() && entity.getClass().equals(bloodMoonEntity.getNMSClass())){
 				try{
 					EntityLiving customEntity = bloodMoonEntity.createEntity(world);

@@ -11,6 +11,7 @@ import net.minecraft.server.v1_4_R1.Entity;
 import net.minecraft.server.v1_4_R1.EntityArrow;
 import net.minecraft.server.v1_4_R1.EntityHuman;
 import net.minecraft.server.v1_4_R1.EntityLiving;
+import net.minecraft.server.v1_4_R1.EntitySkeleton;
 import net.minecraft.server.v1_4_R1.IRangedEntity;
 import net.minecraft.server.v1_4_R1.Item;
 import net.minecraft.server.v1_4_R1.ItemStack;
@@ -45,7 +46,7 @@ import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonNavigation;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalArrowAttack;
 import uk.co.jacekk.bukkit.bloodmoon.nms.BloodMoonPathfinderGoalNearestAttackableTarget;
 
-public class BloodMoonEntitySkeleton extends net.minecraft.server.v1_4_R1.EntitySkeleton implements IRangedEntity {
+public class BloodMoonEntitySkeleton extends EntitySkeleton implements IRangedEntity {
 	
 	private BloodMoon plugin;
 	
