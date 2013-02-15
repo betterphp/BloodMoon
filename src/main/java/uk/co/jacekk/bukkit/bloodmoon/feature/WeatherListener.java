@@ -39,8 +39,8 @@ public class WeatherListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (worldConfig.getBoolean(Config.FEATURE_WEATHER_ENABLED)){
-			world.setWeatherDuration(10);
-			world.setThunderDuration(10);
+			world.setThundering(false);
+			world.setStorm(false);
 		}
 	}
 	
