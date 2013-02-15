@@ -26,6 +26,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.MoreExpListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreMobsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.MoreSpawningListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.NetherSkyListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.PlaySoundListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnKillListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnSleepListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.SuperCreepersListener;
@@ -69,6 +70,7 @@ public class BloodMoon extends BasePlugin {
 		// NOTE: target-distance is handled in BloodMoonPathfinderGoalNearestAttackableTarget and all BloodMoonEntity*
 		// NOTE: movement-speed is handled in all BloodMoonNavigation* and BloodMoonEntity*
 		this.pluginManager.registerEvents(new ChatMessageListener(this), this);
+		this.pluginManager.registerEvents(new PlaySoundListener(this), this);
 		this.pluginManager.registerEvents(new FireArrowsListener(this), this);
 		this.pluginManager.registerEvents(new ZombieWeaponListener(this), this);
 		this.pluginManager.registerEvents(new ZombieArmorListener(this), this);

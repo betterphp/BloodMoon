@@ -1,6 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon;
 
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,7 @@ public class ConfigCreateListener extends BaseListener<BloodMoon> {
 	private PluginConfigKey[] blockKeys;
 	private PluginConfigKey[] itemKeys;
 	private PluginConfigKey[] entityKeys;
+	private PluginConfigKey[] soundKeys;
 	
 	public ConfigCreateListener(BloodMoon plugin){
 		super(plugin);
@@ -38,6 +40,10 @@ public class ConfigCreateListener extends BaseListener<BloodMoon> {
 			Config.FEATURE_SPAWN_ON_KILL_SPAWN,
 			Config.FEATURE_SPAWN_ON_SLEEP_SPAWN,
 			Config.FEATURE_MORE_MOBS_SPAWN,
+		};
+		
+		this.soundKeys = new PluginConfigKey[]{
+			Config.FEATURE_PLAY_SOUND_SOUND,
 		};
 	}
 	
@@ -115,6 +121,29 @@ public class ConfigCreateListener extends BaseListener<BloodMoon> {
 							values.append(" ");
 							values.append(entityType.name());
 						}
+					}
+					
+					plugin.log.info(values.toString());
+					
+					plugin.pluginManager.disablePlugin(plugin);
+					return;
+				}
+			}
+		}
+		
+		for (PluginConfigKey key : this.soundKeys){
+			for (String soundName : config.getStringList(key)){
+				try{
+					Sound type = Sound.valueOf(soundName);
+				}catch (IllegalArgumentException e){
+					plugin.log.fatal(key.getKey() + " contained an invalid sound type '" + soundName + "' in " + world.getName() + ".yml");
+					
+					StringBuilder values = new StringBuilder();
+					values.append("Valid Values:");
+					
+					for (Sound sound : Sound.values()){
+						values.append(" ");
+						values.append(sound.name());
 					}
 					
 					plugin.log.info(values.toString());

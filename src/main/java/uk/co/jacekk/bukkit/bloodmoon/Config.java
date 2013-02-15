@@ -13,6 +13,11 @@ public class Config {
 	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_ENABLED				= new PluginConfigKey("features.chat-message.enabled",				true);
 	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_MESSAGE				= new PluginConfigKey("features.chat-message.message",				"&cThe bloodmoon is rising !");
 	
+	public static final PluginConfigKey FEATURE_PLAY_SOUND_ENABLED					= new PluginConfigKey("features.play-sound.enabled",				true);
+	public static final PluginConfigKey FEATURE_PLAY_SOUND_SOUND					= new PluginConfigKey("features.play-sound.sound",					"WITHER_SPAWN");
+	public static final PluginConfigKey FEATURE_PLAY_SOUND_PITCH					= new PluginConfigKey("features.play-sound.pitch",					1.0d);
+	public static final PluginConfigKey FEATURE_PLAY_SOUND_VOLUME					= new PluginConfigKey("features.play-sound.volume",					1.0d);
+	
 	public static final PluginConfigKey FEATURE_ARROW_RATE_ENABLED					= new PluginConfigKey("features.arrow-rate.enabled",				true);
 	public static final PluginConfigKey FEATURE_ARROW_RATE_MULTIPLIER				= new PluginConfigKey("features.arrow-rate.multiplier",				2);
 	
