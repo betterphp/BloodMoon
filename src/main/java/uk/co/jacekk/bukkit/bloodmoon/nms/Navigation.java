@@ -4,14 +4,13 @@ import java.util.Random;
 
 import net.minecraft.server.v1_4_R1.EntityLiving;
 import net.minecraft.server.v1_4_R1.MathHelper;
-import net.minecraft.server.v1_4_R1.Navigation;
 import net.minecraft.server.v1_4_R1.PathEntity;
 import net.minecraft.server.v1_4_R1.World;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
-public class BloodMoonNavigation extends Navigation {
+public class Navigation extends net.minecraft.server.v1_4_R1.Navigation {
 	
 	private BloodMoon plugin;
 	private EntityLiving entity;
@@ -20,7 +19,7 @@ public class BloodMoonNavigation extends Navigation {
 	private PluginConfig worldConfig;
 	private float multiplier;
 	
-	public BloodMoonNavigation(BloodMoon plugin, EntityLiving entity, World world, float f){
+	public Navigation(BloodMoon plugin, EntityLiving entity, World world, float f){
 		super(entity, world, f);
 		
 		this.plugin = plugin;

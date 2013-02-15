@@ -12,7 +12,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
-public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
+public class PathfinderGoalArrowAttack extends PathfinderGoal {
 	
 	private BloodMoon plugin;
 	
@@ -26,7 +26,7 @@ public class BloodMoonPathfinderGoalArrowAttack extends PathfinderGoal {
 	private int g;
 	private float h;
 	
-	public BloodMoonPathfinderGoalArrowAttack(BloodMoon plugin, IRangedEntity irangedentity, float f, int i, float f1){
+	public PathfinderGoalArrowAttack(BloodMoon plugin, IRangedEntity irangedentity, float f, int i, float f1){
 		if (!(irangedentity instanceof EntityLiving)) {
 			throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
 		}

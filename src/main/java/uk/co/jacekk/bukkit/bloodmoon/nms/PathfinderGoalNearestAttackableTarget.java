@@ -13,17 +13,17 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
-public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget {
+public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget {
 	
 	private BloodMoon plugin;
 	
 	private EntityLiving entity;
 	private Class<?> targetType;
 	private int c;
-	private BloodMoonDistanceComparator comparator;
+	private DistanceComparator comparator;
 	private IEntitySelector entitySelctor;
 	
-	public BloodMoonPathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> targetType, float distance, int i, boolean flag, boolean flag1, IEntitySelector entitySelector){
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> targetType, float distance, int i, boolean flag, boolean flag1, IEntitySelector entitySelector){
 		super(entity, distance, flag, flag1);
 		
 		this.plugin = plugin;
@@ -32,15 +32,15 @@ public class BloodMoonPathfinderGoalNearestAttackableTarget extends PathfinderGo
 		this.targetType = targetType;
 		this.e = distance;
 		this.c = i;
-		this.comparator = new BloodMoonDistanceComparator(entity);
+		this.comparator = new DistanceComparator(entity);
 		this.entitySelctor = entitySelector;
 	}
 	
-	public BloodMoonPathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> oclass, float distance, int i, boolean flag, boolean flag1){
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> oclass, float distance, int i, boolean flag, boolean flag1){
 		this(plugin, entity, oclass, distance, i, flag, flag1, null);
 	}
 	
-	public BloodMoonPathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> oclass, float distance, int i, boolean flag){
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> oclass, float distance, int i, boolean flag){
 		this(plugin, entity, oclass, distance, i, flag, false, null);
 	}
 	

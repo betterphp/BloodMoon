@@ -14,7 +14,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
-import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntitySkeleton;
+import uk.co.jacekk.bukkit.bloodmoon.nms.EntitySkeleton;
 
 public class FireArrowsListener extends BaseListener<BloodMoon> {
 	
@@ -32,7 +32,7 @@ public class FireArrowsListener extends BaseListener<BloodMoon> {
 			Projectile projectile = (Projectile) entity;
 			LivingEntity shooter = projectile.getShooter();
 			
-			if (shooter != null && ((CraftEntity) shooter).getHandle() instanceof BloodMoonEntitySkeleton && projectile.getFireTicks() > 0){
+			if (shooter != null && ((CraftEntity) shooter).getHandle() instanceof EntitySkeleton && projectile.getFireTicks() > 0){
 				Block block = projectile.getWorld().getBlockAt(projectile.getLocation());
 				
 				if (block.getType() != Material.AIR){

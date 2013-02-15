@@ -4,11 +4,11 @@ import java.util.Comparator;
 
 import net.minecraft.server.v1_4_R1.Entity;
 
-public class BloodMoonDistanceComparator implements Comparator<Entity> {
+public class DistanceComparator implements Comparator<Entity> {
 	
 	private Entity b;
 	
-	public BloodMoonDistanceComparator(Entity b){
+	public DistanceComparator(Entity b){
 		this.b = b;
 	}
 	
