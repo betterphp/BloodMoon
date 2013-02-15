@@ -1,6 +1,5 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import java.lang.reflect.Field;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import net.minecraft.server.v1_4_R1.EntityLiving;
 import net.minecraft.server.v1_4_R1.IRangedEntity;
 import net.minecraft.server.v1_4_R1.Item;
 import net.minecraft.server.v1_4_R1.ItemStack;
-import net.minecraft.server.v1_4_R1.PathfinderGoal;
 import net.minecraft.server.v1_4_R1.PathfinderGoalFleeSun;
 import net.minecraft.server.v1_4_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_4_R1.PathfinderGoalHurtByTarget;
@@ -27,15 +25,9 @@ import net.minecraft.server.v1_4_R1.World;
 import net.minecraft.server.v1_4_R1.WorldProviderHell;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_4_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_4_R1.entity.CraftSkeleton;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
@@ -69,18 +61,13 @@ public class EntitySkeleton extends net.minecraft.server.v1_4_R1.EntitySkeleton 
 		try{
 			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, 16.0f));
 			
-			Field goala = this.goalSelector.getClass().getDeclaredField("a");
-			goala.setAccessible(true);
-			((List<PathfinderGoal>) goala.get(this.goalSelector)).clear();
-			
-			Field targeta = this.targetSelector.getClass().getDeclaredField("a");
-			targeta.setAccessible(true);
-			((List<PathfinderGoal>) targeta.get(this.targetSelector)).clear();
+			ReflectionUtils.getFieldValue(this.goalSelector.getClass(), "a", List.class, this.goalSelector).clear();
+			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.goalSelector).clear();
 			
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
 			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bH));
-			// NOTE: See bD() below
+			// NOTE: See bG() below
 			this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bH));
 			this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));

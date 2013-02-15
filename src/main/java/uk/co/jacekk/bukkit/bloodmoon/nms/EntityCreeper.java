@@ -1,13 +1,11 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 import net.minecraft.server.v1_4_R1.Entity;
 import net.minecraft.server.v1_4_R1.EntityHuman;
 import net.minecraft.server.v1_4_R1.EntityLiving;
 import net.minecraft.server.v1_4_R1.EntityOcelot;
-import net.minecraft.server.v1_4_R1.PathfinderGoal;
 import net.minecraft.server.v1_4_R1.PathfinderGoalAvoidPlayer;
 import net.minecraft.server.v1_4_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_4_R1.PathfinderGoalHurtByTarget;
@@ -19,17 +17,9 @@ import net.minecraft.server.v1_4_R1.PathfinderGoalSwell;
 import net.minecraft.server.v1_4_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_4_R1.entity.CraftCreeper;
 import org.bukkit.craftbukkit.v1_4_R1.entity.CraftLivingEntity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
@@ -44,7 +34,6 @@ public class EntityCreeper extends net.minecraft.server.v1_4_R1.EntityCreeper {
 	private BloodMoon plugin;
 	private BloodMoonEntityCreeper bloodMoonEntity;
 	
-	@SuppressWarnings("unchecked")
 	public EntityCreeper(World world){
 		super(world);
 		
@@ -63,13 +52,8 @@ public class EntityCreeper extends net.minecraft.server.v1_4_R1.EntityCreeper {
 		try{
 			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, 16.0f));
 			
-			Field goala = this.goalSelector.getClass().getDeclaredField("a");
-			goala.setAccessible(true);
-			((List<PathfinderGoal>) goala.get(this.goalSelector)).clear();
-			
-			Field targeta = this.targetSelector.getClass().getDeclaredField("a");
-			targeta.setAccessible(true);
-			((List<PathfinderGoal>) targeta.get(this.targetSelector)).clear();
+			ReflectionUtils.getFieldValue(this.goalSelector.getClass(), "a", List.class, this.goalSelector).clear();
+			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.goalSelector).clear();
 			
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 			this.goalSelector.a(2, new PathfinderGoalSwell(this));

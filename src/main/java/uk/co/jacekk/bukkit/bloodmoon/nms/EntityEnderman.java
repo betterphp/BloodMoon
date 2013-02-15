@@ -7,17 +7,10 @@ import net.minecraft.server.v1_4_R1.Vec3D;
 import net.minecraft.server.v1_4_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
-import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
 import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_4_R1.entity.CraftEnderman;
 import org.bukkit.craftbukkit.v1_4_R1.entity.CraftLivingEntity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.EntityChangeBlockEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
