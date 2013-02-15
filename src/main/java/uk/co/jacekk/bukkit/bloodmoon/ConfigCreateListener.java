@@ -134,7 +134,7 @@ public class ConfigCreateListener extends BaseListener<BloodMoon> {
 		for (PluginConfigKey key : this.soundKeys){
 			for (String soundName : config.getStringList(key)){
 				try{
-					Sound type = Sound.valueOf(soundName);
+					Sound.valueOf(soundName);
 				}catch (IllegalArgumentException e){
 					plugin.log.fatal(key.getKey() + " contained an invalid sound type '" + soundName + "' in " + world.getName() + ".yml");
 					

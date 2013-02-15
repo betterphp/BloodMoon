@@ -32,7 +32,7 @@ public class FireArrowsListener extends BaseListener<BloodMoon> {
 			Projectile projectile = (Projectile) entity;
 			LivingEntity shooter = projectile.getShooter();
 			
-			if (shooter != null && ((CraftEntity) shooter).getHandle() instanceof BloodMoonEntitySkeleton){
+			if (shooter != null && ((CraftEntity) shooter).getHandle() instanceof BloodMoonEntitySkeleton && projectile.getFireTicks() > 0){
 				Block block = projectile.getWorld().getBlockAt(projectile.getLocation());
 				
 				if (block.getType() != Material.AIR){

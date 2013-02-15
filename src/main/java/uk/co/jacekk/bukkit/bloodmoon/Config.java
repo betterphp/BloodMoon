@@ -22,6 +22,7 @@ public class Config {
 	public static final PluginConfigKey FEATURE_ARROW_RATE_MULTIPLIER				= new PluginConfigKey("features.arrow-rate.multiplier",				2);
 	
 	public static final PluginConfigKey FEATURE_FIRE_ARROWS_ENABLED					= new PluginConfigKey("features.fire-arrows.enabled",				true);
+	public static final PluginConfigKey FEATURE_FIRE_ARROWS_CHANCE					= new PluginConfigKey("features.fire-arrows.chance",				100);
 	public static final PluginConfigKey FEATURE_FIRE_ARROWS_IGNITE_TARGET			= new PluginConfigKey("features.fire-arrows.ignite-target",			true);
 	
 	public static final PluginConfigKey FEATURE_ZOMBIE_WEAPON_ENABLED				= new PluginConfigKey("features.zombie-weapon.enabled",				true);

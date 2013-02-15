@@ -212,7 +212,7 @@ public class BloodMoonEntitySkeleton extends EntitySkeleton implements IRangedEn
 		String worldName = this.world.worldData.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, bD()) > 0 || getSkeletonType() == 1 || (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED))){
+		if (EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, bD()) > 0 || getSkeletonType() == 1 || (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && (this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_FIRE_ARROWS_CHANCE)))){
 			entityarrow.setOnFire(1024);
 		}
 		
