@@ -68,10 +68,10 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 				return true;
 			}
 		}else{
-			List list = this.d.world.a(this.targetType, this.d.boundingBox.grow(distance, 4.0D, distance));
+			List<Entity> list = this.d.world.a(this.targetType, this.d.boundingBox.grow(distance, 4.0D, distance));
 			
 			Collections.sort(list, this.comparator);
-			Iterator iterator = list.iterator();
+			Iterator<Entity> iterator = list.iterator();
 			
 			while (iterator.hasNext()){
 				Entity entity = (Entity) iterator.next();

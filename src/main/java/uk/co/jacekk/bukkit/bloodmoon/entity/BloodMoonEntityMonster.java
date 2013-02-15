@@ -2,6 +2,8 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 
 import java.util.Random;
 
+import net.minecraft.server.v1_4_R1.EntityMonster;
+
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,8 +16,6 @@ import org.bukkit.inventory.ItemStack;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
-
-import net.minecraft.server.v1_4_R1.EntityMonster;
 
 public abstract class BloodMoonEntityMonster {
 	

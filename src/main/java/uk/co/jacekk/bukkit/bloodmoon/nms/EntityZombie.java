@@ -35,7 +35,6 @@ public class EntityZombie extends net.minecraft.server.v1_4_R1.EntityZombie {
 	private BloodMoon plugin;
 	private BloodMoonEntityZombie bloodMoonEntity;
 	
-	@SuppressWarnings("unchecked")
 	public EntityZombie(World world){
 		super(world);
 		
@@ -55,7 +54,7 @@ public class EntityZombie extends net.minecraft.server.v1_4_R1.EntityZombie {
 			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, 16.0f));
 			
 			ReflectionUtils.getFieldValue(this.goalSelector.getClass(), "a", List.class, this.goalSelector).clear();
-			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.goalSelector).clear();
+			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.targetSelector).clear();
 			
 			this.goalSelector.a(0, new PathfinderGoalFloat(this));
 			this.goalSelector.a(1, new PathfinderGoalBreakDoor(this));

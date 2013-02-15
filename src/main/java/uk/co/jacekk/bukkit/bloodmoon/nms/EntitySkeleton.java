@@ -42,7 +42,6 @@ public class EntitySkeleton extends net.minecraft.server.v1_4_R1.EntitySkeleton 
 	private BloodMoon plugin;
 	private BloodMoonEntitySkeleton bloodMoonEntity;
 	
-	@SuppressWarnings("unchecked")
 	public EntitySkeleton(World world){
 		super(world);
 		
@@ -62,7 +61,7 @@ public class EntitySkeleton extends net.minecraft.server.v1_4_R1.EntitySkeleton 
 			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, 16.0f));
 			
 			ReflectionUtils.getFieldValue(this.goalSelector.getClass(), "a", List.class, this.goalSelector).clear();
-			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.goalSelector).clear();
+			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.targetSelector).clear();
 			
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
