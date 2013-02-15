@@ -5,6 +5,7 @@ import java.util.Random;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_4_R1.entity.CraftLivingEntity;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
@@ -59,7 +60,9 @@ public abstract class BloodMoonEntityMonster {
 			Location location = block.getLocation();
 			
 			if (this.rand.nextInt(100) < 80){
-				nmsEntity.world.getWorld().playEffect(location, Effect.ZOMBIE_CHEW_WOODEN_DOOR, 0);
+				if (this.rand.nextInt(100) < 50){
+					nmsEntity.world.getWorld().playSound(location, Sound.ZOMBIE_WOOD, Math.min(this.rand.nextFloat() + 0.2f, 1.0f), 1.0f);
+				}
 			}else{
 				EntityChangeBlockEvent event = new EntityChangeBlockEvent(bukkitEntity, block, Material.AIR, (byte) 0);
 				plugin.pluginManager.callEvent(event);
