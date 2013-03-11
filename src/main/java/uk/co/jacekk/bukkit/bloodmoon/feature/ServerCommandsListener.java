@@ -25,7 +25,7 @@ public class ServerCommandsListener extends BaseListener<BloodMoon> {
 		
 		if (worldConfig.getBoolean(Config.FEATURE_SERVER_COMMANDS_ENABLED)){
 			for (String command : worldConfig.getStringList(Config.FEATURE_SERVER_COMMANDS_START_COMMANDS)){
-				plugin.server.dispatchCommand(plugin.server.getConsoleSender(), command.replaceAll("%w", worldName));
+				plugin.server.dispatchCommand(plugin.server.getConsoleSender(), command);
 			}
 		}
 	}
@@ -38,7 +38,7 @@ public class ServerCommandsListener extends BaseListener<BloodMoon> {
 		
 		if (worldConfig.getBoolean(Config.FEATURE_SERVER_COMMANDS_ENABLED)){
 			for (String command : worldConfig.getStringList(Config.FEATURE_SERVER_COMMANDS_END_COMMANDS)){
-				plugin.server.dispatchCommand(plugin.server.getConsoleSender(), command.replaceAll("%w", worldName));
+				plugin.server.dispatchCommand(plugin.server.getConsoleSender(), command);
 			}
 		}
 	}

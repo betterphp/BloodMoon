@@ -14,8 +14,8 @@ public class Config {
 	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_MESSAGE				= new PluginConfigKey("features.chat-message.message",				"&cThe bloodmoon is rising !");
 	
 	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_ENABLED				= new PluginConfigKey("features.server-commands.enabled",			false);
-	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_START_COMMANDS		= new PluginConfigKey("features.server-commands.commands.start",	Arrays.asList("toggledownfall %w", "time set 0", "op Notch"));
-	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_END_COMMANDS		= new PluginConfigKey("features.server-commands.commands.end",		Arrays.asList("toggledownfall %w", "time set 12000", "deop Notch"));
+	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_START_COMMANDS		= new PluginConfigKey("features.server-commands.commands.start",	Arrays.asList("toggledownfall", "time set 0", "op Notch"));
+	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_END_COMMANDS		= new PluginConfigKey("features.server-commands.commands.end",		Arrays.asList("toggledownfall", "time set 12000", "deop Notch"));
 	
 	public static final PluginConfigKey FEATURE_PLAY_SOUND_ENABLED					= new PluginConfigKey("features.play-sound.enabled",				true);
 	public static final PluginConfigKey FEATURE_PLAY_SOUND_SOUND					= new PluginConfigKey("features.play-sound.sound",					"WITHER_SPAWN");
