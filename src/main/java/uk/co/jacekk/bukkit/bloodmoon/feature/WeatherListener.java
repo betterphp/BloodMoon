@@ -3,6 +3,7 @@ package uk.co.jacekk.bukkit.bloodmoon.feature;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.weather.WeatherChangeEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
@@ -41,6 +42,17 @@ public class WeatherListener extends BaseListener<BloodMoon> {
 		if (worldConfig.getBoolean(Config.FEATURE_WEATHER_ENABLED)){
 			world.setThundering(false);
 			world.setStorm(false);
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onWeatherChange(WeatherChangeEvent event){
+		World world = event.getWorld();
+		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_WEATHER_ENABLED)){
+			event.setCancelled(true);
 		}
 	}
 	
