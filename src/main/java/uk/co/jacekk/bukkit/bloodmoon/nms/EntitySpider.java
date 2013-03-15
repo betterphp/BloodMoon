@@ -1,13 +1,13 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_4_R1.Entity;
-import net.minecraft.server.v1_4_R1.EntityLiving;
-import net.minecraft.server.v1_4_R1.World;
+import net.minecraft.server.v1_5_R1.Entity;
+import net.minecraft.server.v1_5_R1.EntityLiving;
+import net.minecraft.server.v1_5_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftSpider;
+import org.bukkit.craftbukkit.v1_5_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_5_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_5_R1.entity.CraftSpider;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
@@ -17,7 +17,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntitySpider;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntitySpider extends net.minecraft.server.v1_4_R1.EntitySpider {
+public class EntitySpider extends net.minecraft.server.v1_5_R1.EntitySpider {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntitySpider bloodMoonEntity;
@@ -46,10 +46,10 @@ public class EntitySpider extends net.minecraft.server.v1_4_R1.EntitySpider {
 	}
 	
 	@Override
-	public void j_(){
+	public void l_(){
 		this.bloodMoonEntity.onTick();
 		
-		super.j_();
+		super.l_();
 	}
 	
 	@Override

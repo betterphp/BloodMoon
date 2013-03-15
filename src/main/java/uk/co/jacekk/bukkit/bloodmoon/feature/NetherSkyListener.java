@@ -1,14 +1,14 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature;
 
-import net.minecraft.server.v1_4_R1.EnumGamemode;
-import net.minecraft.server.v1_4_R1.Packet9Respawn;
-import net.minecraft.server.v1_4_R1.WorldType;
+import net.minecraft.server.v1_5_R1.EnumGamemode;
+import net.minecraft.server.v1_5_R1.Packet9Respawn;
+import net.minecraft.server.v1_5_R1.WorldType;
 
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
-import org.bukkit.craftbukkit.v1_4_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_5_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_5_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

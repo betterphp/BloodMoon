@@ -2,25 +2,25 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 
 import java.util.List;
 
-import net.minecraft.server.v1_4_R1.Entity;
-import net.minecraft.server.v1_4_R1.EntityHuman;
-import net.minecraft.server.v1_4_R1.EntityLiving;
-import net.minecraft.server.v1_4_R1.EntityVillager;
-import net.minecraft.server.v1_4_R1.PathfinderGoalBreakDoor;
-import net.minecraft.server.v1_4_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_4_R1.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_4_R1.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_4_R1.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_4_R1.PathfinderGoalMoveThroughVillage;
-import net.minecraft.server.v1_4_R1.PathfinderGoalMoveTowardsRestriction;
-import net.minecraft.server.v1_4_R1.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_4_R1.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_4_R1.World;
+import net.minecraft.server.v1_5_R1.Entity;
+import net.minecraft.server.v1_5_R1.EntityHuman;
+import net.minecraft.server.v1_5_R1.EntityLiving;
+import net.minecraft.server.v1_5_R1.EntityVillager;
+import net.minecraft.server.v1_5_R1.PathfinderGoalBreakDoor;
+import net.minecraft.server.v1_5_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_5_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_5_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_5_R1.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_5_R1.PathfinderGoalMoveThroughVillage;
+import net.minecraft.server.v1_5_R1.PathfinderGoalMoveTowardsRestriction;
+import net.minecraft.server.v1_5_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_5_R1.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_5_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftZombie;
+import org.bukkit.craftbukkit.v1_5_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_5_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_5_R1.entity.CraftZombie;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
@@ -30,7 +30,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityZombie;
 
-public class EntityZombie extends net.minecraft.server.v1_4_R1.EntityZombie {
+public class EntityZombie extends net.minecraft.server.v1_5_R1.EntityZombie {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityZombie bloodMoonEntity;
@@ -75,10 +75,10 @@ public class EntityZombie extends net.minecraft.server.v1_4_R1.EntityZombie {
 	}
 	
 	@Override
-	public void j_(){
+	public void l_(){
 		this.bloodMoonEntity.onTick();
 		
-		super.j_();
+		super.l_();
 	}
 	
 	@Override

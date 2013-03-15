@@ -2,24 +2,24 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 
 import java.util.List;
 
-import net.minecraft.server.v1_4_R1.Entity;
-import net.minecraft.server.v1_4_R1.EntityHuman;
-import net.minecraft.server.v1_4_R1.EntityLiving;
-import net.minecraft.server.v1_4_R1.EntityOcelot;
-import net.minecraft.server.v1_4_R1.PathfinderGoalAvoidPlayer;
-import net.minecraft.server.v1_4_R1.PathfinderGoalFloat;
-import net.minecraft.server.v1_4_R1.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_4_R1.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_4_R1.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_4_R1.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_4_R1.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_4_R1.PathfinderGoalSwell;
-import net.minecraft.server.v1_4_R1.World;
+import net.minecraft.server.v1_5_R1.Entity;
+import net.minecraft.server.v1_5_R1.EntityHuman;
+import net.minecraft.server.v1_5_R1.EntityLiving;
+import net.minecraft.server.v1_5_R1.EntityOcelot;
+import net.minecraft.server.v1_5_R1.PathfinderGoalAvoidPlayer;
+import net.minecraft.server.v1_5_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_5_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_5_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_5_R1.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_5_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_5_R1.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_5_R1.PathfinderGoalSwell;
+import net.minecraft.server.v1_5_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftCreeper;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_5_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_5_R1.entity.CraftCreeper;
+import org.bukkit.craftbukkit.v1_5_R1.entity.CraftLivingEntity;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
@@ -29,7 +29,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntityCreeper extends net.minecraft.server.v1_4_R1.EntityCreeper {
+public class EntityCreeper extends net.minecraft.server.v1_5_R1.EntityCreeper {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityCreeper bloodMoonEntity;
@@ -72,10 +72,10 @@ public class EntityCreeper extends net.minecraft.server.v1_4_R1.EntityCreeper {
 	}
 	
 	@Override
-	public void j_(){
+	public void l_(){
 		this.bloodMoonEntity.onTick();
 		
-		super.j_();
+		super.l_();
 	}
 	
 	@Override
