@@ -44,8 +44,6 @@ public class Navigation extends net.minecraft.server.v1_5_R1.Navigation {
 			speed *= this.multiplier;
 		}
 		
-		plugin.log.info("Speed: " + speed);
-		
 		return super.a(path, speed);
 	}
 	
