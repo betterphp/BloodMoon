@@ -58,16 +58,16 @@ public class EntitySkeleton extends net.minecraft.server.v1_5_R1.EntitySkeleton 
 		this.bloodMoonEntity = new BloodMoonEntitySkeleton(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.SKELETON);
 		
 		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, 16.0f));
+			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, this.ay()));
 			
 			ReflectionUtils.getFieldValue(this.goalSelector.getClass(), "a", List.class, this.goalSelector).clear();
 			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.targetSelector).clear();
 			
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
-			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bH));
+			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bI));
 			// NOTE: See bG() below
-			this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bH));
+			this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bI));
 			this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
 			

@@ -6,16 +6,16 @@ import net.minecraft.server.v1_5_R1.Entity;
 
 public class DistanceComparator implements Comparator<Entity> {
 	
-	private Entity b;
+	private Entity entity;
 	
-	public DistanceComparator(Entity b){
-		this.b = b;
+	public DistanceComparator(Entity entity){
+		this.entity = entity;
 	}
 	
 	@Override
 	public int compare(Entity e1, Entity e2){
-		double d0 = this.b.e(e1);
-		double d1 = this.b.e(e2);
+		double d0 = this.entity.e(e1);
+		double d1 = this.entity.e(e2);
 		
 		return d0 < d1 ? -1 : (d0 > d1 ? 1 : 0);
 	}

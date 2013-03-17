@@ -19,8 +19,8 @@ public class Navigation extends net.minecraft.server.v1_5_R1.Navigation {
 	private PluginConfig worldConfig;
 	private float multiplier;
 	
-	public Navigation(BloodMoon plugin, EntityLiving entity, World world, float f){
-		super(entity, world, f);
+	public Navigation(BloodMoon plugin, EntityLiving entity, World world, int i){
+		super(entity, world, i);
 		
 		this.plugin = plugin;
 		this.entity = entity;
@@ -36,20 +36,6 @@ public class Navigation extends net.minecraft.server.v1_5_R1.Navigation {
 	}
 	
 	@Override
-	public boolean a(double d0, double d1, double d2, float f){
-		PathEntity pathentity = this.a(MathHelper.floor(d0), ((int) d1), MathHelper.floor(d2));
-		
-		return this.a(pathentity, f);
-	}
-	
-	@Override
-	public boolean a(EntityLiving entityliving, float f){
-		PathEntity pathentity = this.a(entityliving);
-		
-		return pathentity != null ? this.a(pathentity, f) : false;
-	}
-	
-	@Override
 	public boolean a(PathEntity path, float speed){
 		String worldName = this.entity.world.worldData.getName();
 		String entityName = this.entity.getBukkitEntity().getType().name().toUpperCase();
@@ -57,6 +43,8 @@ public class Navigation extends net.minecraft.server.v1_5_R1.Navigation {
 		if (plugin.isActive(worldName) && this.worldConfig.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.worldConfig.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains(entityName)){
 			speed *= this.multiplier;
 		}
+		
+		plugin.log.info("Speed: " + speed);
 		
 		return super.a(path, speed);
 	}

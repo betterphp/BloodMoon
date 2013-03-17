@@ -39,8 +39,8 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 					world.removeEntity(entity);
 					
 					if (customEntity != null){
-						customEntity.setPosition(location.getX(), location.getY(), location.getZ());
-						customEntity.bG();
+						customEntity.setPositionRotation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+						customEntity.bJ();
 						
 						world.addEntity(customEntity, SpawnReason.CUSTOM);
 					}

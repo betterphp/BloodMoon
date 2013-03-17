@@ -92,10 +92,10 @@ public class PathfinderGoalArrowAttack extends PathfinderGoal {
 			this.f = 0;
 		}
 		
-		if ((d0 <= this.h) && (this.f >= 20)){
-			this.entity.getNavigation().g();
-		}else{
+		if (d0 > this.j || this.f < 20){
 			this.entity.getNavigation().a(this.target, this.e);
+		}else{
+			this.entity.getNavigation().g();
 		}
 		
 		this.entity.getControllerLook().a(this.target, 30.0F, 30.0F);

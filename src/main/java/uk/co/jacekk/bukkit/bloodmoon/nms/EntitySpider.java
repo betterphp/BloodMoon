@@ -38,7 +38,7 @@ public class EntitySpider extends net.minecraft.server.v1_5_R1.EntitySpider {
 		this.bloodMoonEntity = new BloodMoonEntitySpider(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.SPIDER);
 		
 		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, 16.0f));
+			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, this.ay()));
 		}catch (Exception e){
 			e.printStackTrace();
 			this.world.removeEntity(this);

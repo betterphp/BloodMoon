@@ -7,6 +7,7 @@ import java.util.List;
 import net.minecraft.server.v1_5_R1.Entity;
 import net.minecraft.server.v1_5_R1.EntityHuman;
 import net.minecraft.server.v1_5_R1.EntityLiving;
+import net.minecraft.server.v1_5_R1.IEntitySelector;
 import net.minecraft.server.v1_5_R1.PathfinderGoalTarget;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
@@ -16,55 +17,62 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 	
 	private BloodMoon plugin;
 	
-	private EntityLiving entity;
-	private Class<?> targetType;
+	private EntityLiving a;
+	private Class<?> b;
 	private int c;
-	private DistanceComparator comparator;
+	private final IEntitySelector g;
+	private DistanceComparator h;
 	
-	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> targetType, float distance, int i, boolean flag, boolean flag1){
-		super(entity, distance, flag, flag1);
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entityliving, Class<?> class1, float f, int i, boolean flag, boolean flag1, IEntitySelector ientityselector){
+		super(entityliving, f, flag, flag1);
 		
 		this.plugin = plugin;
 		
-		this.entity = entity;
-		this.targetType = targetType;
-		this.e = distance;
+		this.b = class1;
+		this.e = f;
 		this.c = i;
-		this.comparator = new DistanceComparator(entity);
+		this.h = new DistanceComparator(entityliving);
+		this.g = ientityselector;
+		
+		this.a(1);
 	}
 	
-	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entity, Class<?> oclass, float distance, int i, boolean flag){
-		this(plugin, entity, oclass, distance, i, flag, false);
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entityliving, Class<?> class1, float f, int i, boolean flag, boolean flag1){
+		this(plugin, entityliving, class1, f, i, flag, flag1, null);
+	}
+	
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entityliving, Class<?> class1, float f, int i, boolean flag){
+		this(plugin, entityliving, class1, f, i, flag, false);
 	}
 	
 	@Override
 	public boolean a(){
-		String worldName = this.entity.world.worldData.getName();
-		String entityName = this.entity.getBukkitEntity().getType().name().toUpperCase();
+		String worldName = this.d.world.worldData.getName();
+		String entityName = this.d.getBukkitEntity().getType().name().toUpperCase();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		float distance = this.e;
+		float e = this.e;
 		
 		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
-			distance *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
+			e *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
 		}
 		
 		if (this.c > 0 && this.d.aE().nextInt(this.c) != 0){
 			return false;
 		}
 		
-		if (this.targetType == EntityHuman.class){
-			EntityHuman entityhuman = this.d.world.findNearbyVulnerablePlayer(this.d, distance);
+		if (this.b == EntityHuman.class){
+			EntityHuman entityhuman = this.d.world.findNearbyVulnerablePlayer(this.d, e);
 			
 			if (this.a(entityhuman, false)){
-				this.entity = entityhuman;
+				this.a = entityhuman;
 				return true;
 			}
 		}else{
 			@SuppressWarnings("unchecked")
-			List<Entity> list = this.d.world.a(this.targetType, this.d.boundingBox.grow(distance, 4.0D, distance));
+			List<Entity> list = this.d.world.a(this.b, this.d.boundingBox.grow(e, 4.0D, e), this.g);
 			
-			Collections.sort(list, this.comparator);
+			Collections.sort(list, this.h);
 			Iterator<Entity> iterator = list.iterator();
 			
 			while (iterator.hasNext()){
@@ -72,7 +80,7 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 				EntityLiving entityliving = (EntityLiving) entity;
 				
 				if (this.a(entityliving, false)){
-					this.entity = entityliving;
+					this.a = entityliving;
 					return true;
 				}
 			}
@@ -83,7 +91,7 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 	
 	@Override
 	public void c(){
-		this.d.setGoalTarget(this.entity);
+		this.d.setGoalTarget(this.a);
 		super.c();
 	}
 	

@@ -51,22 +51,24 @@ public class EntityZombie extends net.minecraft.server.v1_5_R1.EntityZombie {
 		this.bloodMoonEntity = new BloodMoonEntityZombie(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.ZOMBIE);
 		
 		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, 16.0f));
+			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, this.ay()));
+			
+			this.getNavigation().b(true);
 			
 			ReflectionUtils.getFieldValue(this.goalSelector.getClass(), "a", List.class, this.goalSelector).clear();
 			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.targetSelector).clear();
 			
 			this.goalSelector.a(0, new PathfinderGoalFloat(this));
 			this.goalSelector.a(1, new PathfinderGoalBreakDoor(this));
-			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bH, false));
-			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bH, true));
-			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bH));
-			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bH, false));
-			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bH));
+			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bI, false));
+			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bI, true));
+			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bI));
+			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bI, false));
+			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bI));
 			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
 			
-			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
+			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
 			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityHuman.class, 16.0F, 0, true));
 			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityVillager.class, 16.0F, 0, false));
 		}catch (Exception e){
