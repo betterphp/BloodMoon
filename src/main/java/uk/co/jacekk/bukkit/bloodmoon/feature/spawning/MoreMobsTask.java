@@ -68,7 +68,7 @@ public class MoreMobsTask extends BaseTask<BloodMoon> {
 				Location spawnLocation = new Location(world, x, y, z);
 				
 				for (Entity entity : this.world.getLivingEntities()){
-					if (entity.getLocation().distanceSquared(spawnLocation) < 1024){
+					if (!entity.isDead() && entity.getLocation().distanceSquared(spawnLocation) < 1024){
 						continue spawn;
 					}
 				}
