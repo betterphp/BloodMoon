@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.mob;
 
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -11,6 +11,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class MoreExpListener extends BaseListener<BloodMoon> {
 	
@@ -24,7 +25,7 @@ public class MoreExpListener extends BaseListener<BloodMoon> {
 		String worldName = entity.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity instanceof Creature && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_MORE_EXP_ENABLED)){
+		if (entity instanceof Creature && plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.MORE_EXP)){
 			if (!worldConfig.getBoolean(Config.FEATURE_MORE_EXP_IGNORE_SPAWNERS) || plugin.getSpawnReason(entity) != SpawnReason.SPAWNER){
 				event.setDroppedExp(event.getDroppedExp() * Math.max(worldConfig.getInt(Config.FEATURE_MORE_EXP_MULTIPLIER), 0));
 			}

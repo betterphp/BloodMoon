@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -20,6 +20,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 	
@@ -46,7 +47,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity instanceof Creature && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_SPAWN_ON_KILL_ENABLED)){
+		if (entity instanceof Creature && plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.SPAWN_ON_KILL)){
 			Creature creature = (Creature) entity;
 			LivingEntity target = creature.getTarget();
 			EntityDamageEvent lastDamage = entity.getLastDamageCause();

@@ -12,6 +12,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class PathfinderGoalArrowAttack extends PathfinderGoal {
 	
@@ -103,7 +104,7 @@ public class PathfinderGoalArrowAttack extends PathfinderGoal {
 		String worldName = this.entity.world.worldData.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		this.d = Math.max(this.d - ((plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_ARROW_RATE_ENABLED)) ? worldConfig.getInt(Config.FEATURE_ARROW_RATE_MULTIPLIER) : 1), 0);
+		this.d = Math.max(this.d - ((plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.ARROW_RATE)) ? worldConfig.getInt(Config.FEATURE_ARROW_RATE_MULTIPLIER) : 1), 0);
 		
 		float f;
 		

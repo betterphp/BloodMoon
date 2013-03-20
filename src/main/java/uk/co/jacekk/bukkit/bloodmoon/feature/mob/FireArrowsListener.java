@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.mob;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -14,6 +14,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.nms.EntitySkeleton;
 
 public class FireArrowsListener extends BaseListener<BloodMoon> {
@@ -28,7 +29,7 @@ public class FireArrowsListener extends BaseListener<BloodMoon> {
 		String worldName = entity.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity instanceof Projectile && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_IGNITE_TARGET)){
+		if (entity instanceof Projectile && plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.FIRE_ARROWS) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_IGNITE_TARGET)){
 			Projectile projectile = (Projectile) entity;
 			LivingEntity shooter = projectile.getShooter();
 			

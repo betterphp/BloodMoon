@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import org.bukkit.World;
 

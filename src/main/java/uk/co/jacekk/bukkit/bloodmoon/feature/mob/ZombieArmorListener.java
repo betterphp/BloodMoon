@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.mob;
 
 import java.util.Random;
 
@@ -17,6 +17,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.util.ListUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -58,7 +59,7 @@ public class ZombieArmorListener extends BaseListener<BloodMoon> {
 		String worldName = event.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.ZOMBIE_ARMOR)){
 			for (LivingEntity entity : event.getWorld().getLivingEntities()){
 				if (!worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_IGNORE_SPAWNERS) || plugin.getSpawnReason(entity) != SpawnReason.SPAWNER){
 					if (entity.getType() == EntityType.ZOMBIE && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_ZOMBIE_WEAPON_CHANCE)){
@@ -74,7 +75,7 @@ public class ZombieArmorListener extends BaseListener<BloodMoon> {
 		String worldName = event.getLocation().getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_ENABLED)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.ZOMBIE_ARMOR)){
 			LivingEntity entity = event.getEntity();
 			
 			if (!worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_IGNORE_SPAWNERS) || event.getSpawnReason() != SpawnReason.SPAWNER){
@@ -88,9 +89,8 @@ public class ZombieArmorListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onStop(BloodMoonEndEvent event){
 		String worldName = event.getWorld().getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_ZOMBIE_ARMOR_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.ZOMBIE_ARMOR)){
 			for (LivingEntity entity : event.getWorld().getLivingEntities()){
 				if (entity.getType() == EntityType.ZOMBIE){
 					EntityEquipment equipment = entity.getEquipment();

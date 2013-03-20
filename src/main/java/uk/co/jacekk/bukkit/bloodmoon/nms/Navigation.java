@@ -3,12 +3,12 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 import java.util.Random;
 
 import net.minecraft.server.v1_5_R1.EntityLiving;
-import net.minecraft.server.v1_5_R1.MathHelper;
 import net.minecraft.server.v1_5_R1.PathEntity;
 import net.minecraft.server.v1_5_R1.World;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class Navigation extends net.minecraft.server.v1_5_R1.Navigation {
 	
@@ -40,7 +40,7 @@ public class Navigation extends net.minecraft.server.v1_5_R1.Navigation {
 		String worldName = this.entity.world.worldData.getName();
 		String entityName = this.entity.getBukkitEntity().getType().name().toUpperCase();
 		
-		if (plugin.isActive(worldName) && this.worldConfig.getBoolean(Config.FEATURE_MOVEMENT_SPEED_ENABLED) && this.worldConfig.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains(entityName)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.MOVEMENT_SPEED) && this.worldConfig.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains(entityName)){
 			speed *= this.multiplier;
 		}
 		

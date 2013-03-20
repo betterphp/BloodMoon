@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 
 import java.util.HashMap;
 
@@ -11,6 +11,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -30,7 +31,7 @@ public class MoreMobsListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_MORE_MOBS_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.MORE_MOBS)){
 			int taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, new MoreMobsTask(plugin, world), 0L, 100L);
 			
 			if (taskID != -1){

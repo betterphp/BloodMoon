@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.mob;
 
 import org.bukkit.World;
 import org.bukkit.entity.LivingEntity;
@@ -10,6 +10,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -25,7 +26,7 @@ public class MaxHealthListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_MAX_HEALTH_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.MAX_HEALTH)){
 			for (LivingEntity entity : world.getLivingEntities()){
 				if (worldConfig.getStringList(Config.FEATURE_MAX_HEALTH_MOBS).contains(entity.getType().name())){
 					int newMaxHealth = (int) (entity.getMaxHealth() * worldConfig.getDouble(Config.FEATURE_MAX_HEALTH_MULTIPLIER));
@@ -44,7 +45,7 @@ public class MaxHealthListener extends BaseListener<BloodMoon> {
 		String worldName = event.getLocation().getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_MAX_HEALTH_ENABLED) && worldConfig.getStringList(Config.FEATURE_MAX_HEALTH_MOBS).contains(entity.getType().name())){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.MAX_HEALTH) && worldConfig.getStringList(Config.FEATURE_MAX_HEALTH_MOBS).contains(entity.getType().name())){
 			int newMaxHealth = (int) (entity.getMaxHealth() * worldConfig.getDouble(Config.FEATURE_MAX_HEALTH_MULTIPLIER));
 			int damage = entity.getMaxHealth() - entity.getHealth();
 			
@@ -59,7 +60,7 @@ public class MaxHealthListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_MAX_HEALTH_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.MAX_HEALTH)){
 			for (LivingEntity entity : world.getLivingEntities()){
 				if (worldConfig.getStringList(Config.FEATURE_MAX_HEALTH_MOBS).contains(entity.getType().name())){
 					entity.resetMaxHealth();

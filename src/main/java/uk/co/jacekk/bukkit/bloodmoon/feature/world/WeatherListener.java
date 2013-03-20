@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
@@ -9,6 +9,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -24,7 +25,7 @@ public class WeatherListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_WEATHER_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.WEATHER)){
 			world.setStorm(worldConfig.getBoolean(Config.FEATURE_WEATHER_RAIN));
 			world.setThundering(worldConfig.getBoolean(Config.FEATURE_WEATHER_THUNDER));
 			
@@ -37,9 +38,8 @@ public class WeatherListener extends BaseListener<BloodMoon> {
 	public void onStop(BloodMoonEndEvent event){
 		World world = event.getWorld();
 		String worldName = world.getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_WEATHER_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.WEATHER)){
 			world.setThundering(false);
 			world.setStorm(false);
 		}
@@ -49,9 +49,8 @@ public class WeatherListener extends BaseListener<BloodMoon> {
 	public void onWeatherChange(WeatherChangeEvent event){
 		World world = event.getWorld();
 		String worldName = world.getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_WEATHER_ENABLED)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.WEATHER)){
 			event.setCancelled(true);
 		}
 	}

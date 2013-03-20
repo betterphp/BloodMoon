@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.client;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,6 +10,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -24,7 +25,7 @@ public class TexturePackListener extends BaseListener<BloodMoon> {
 		String worldName = event.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.TEXTURE_PACK)){
 			for (Player player : event.getWorld().getPlayers()){
 				player.setTexturePack(worldConfig.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
 			}
@@ -36,7 +37,7 @@ public class TexturePackListener extends BaseListener<BloodMoon> {
 		String worldName = event.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.TEXTURE_PACK)){
 			for (Player player : event.getWorld().getPlayers()){
 				player.setTexturePack(worldConfig.getString(Config.FEATURE_TEXTURE_PACK_NORMAL));
 			}
@@ -50,7 +51,7 @@ public class TexturePackListener extends BaseListener<BloodMoon> {
 		String toName = player.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(toName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED)){
+		if (plugin.isFeatureEnabled(toName, Feature.TEXTURE_PACK)){
 			if (!plugin.isActive(fromName) && plugin.isActive(toName)){
 				player.setTexturePack(worldConfig.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
 			}else if (plugin.isActive(fromName) && !plugin.isActive(toName)){
@@ -65,7 +66,7 @@ public class TexturePackListener extends BaseListener<BloodMoon> {
 		String worldName = player.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_TEXTURE_PACK_ENABLED) && plugin.isActive(worldName)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.TEXTURE_PACK)){
 			player.setTexturePack(worldConfig.getString(Config.FEATURE_TEXTURE_PACK_BLOODMOON));
 		}
 	}

@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.mob;
 
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
@@ -9,6 +9,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class SuperCreepersListener extends BaseListener<BloodMoon> {
 	
@@ -22,7 +23,7 @@ public class SuperCreepersListener extends BaseListener<BloodMoon> {
 			String worldName = event.getEntity().getWorld().getName();
 			PluginConfig worldConfig = plugin.getConfig(worldName);
 			
-			if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_SUPER_CREEPERS_ENABLED)){
+			if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.SUPER_CREEPERS)){
 				event.setRadius((float) worldConfig.getDouble(Config.FEATURE_SUPER_CREEPERS_POWER));
 				event.setFire(worldConfig.getBoolean(Config.FEATURE_SUPER_CREEPERS_FIRE));
 			}

@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.client;
 
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -12,6 +12,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
 public class PlaySoundListener extends BaseListener<BloodMoon> {
@@ -26,7 +27,7 @@ public class PlaySoundListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_CHAT_MESSAGE_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.PLAY_SOUND)){
 			for (Player player : event.getWorld().getPlayers()){
 				player.playSound(player.getLocation(), Sound.valueOf(worldConfig.getString(Config.FEATURE_PLAY_SOUND_SOUND)), (float) worldConfig.getDouble(Config.FEATURE_PLAY_SOUND_VOLUME), (float) worldConfig.getDouble(Config.FEATURE_PLAY_SOUND_PITCH));
 			}
@@ -39,7 +40,7 @@ public class PlaySoundListener extends BaseListener<BloodMoon> {
 		String worldName = player.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_CHAT_MESSAGE_ENABLED)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.PLAY_SOUND)){
 			player.playSound(player.getLocation(), Sound.valueOf(worldConfig.getString(Config.FEATURE_PLAY_SOUND_SOUND)), (float) worldConfig.getDouble(Config.FEATURE_PLAY_SOUND_VOLUME), (float) worldConfig.getDouble(Config.FEATURE_PLAY_SOUND_PITCH));
 		}
 	}
@@ -50,7 +51,7 @@ public class PlaySoundListener extends BaseListener<BloodMoon> {
 		String worldName = player.getWorld().getName();
 		final PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_CHAT_MESSAGE_ENABLED)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.PLAY_SOUND)){
 			final String playerName = player.getName();
 			
 			plugin.scheduler.scheduleSyncDelayedTask(plugin, new Runnable(){

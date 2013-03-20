@@ -12,6 +12,7 @@ import net.minecraft.server.v1_5_R1.PathfinderGoalTarget;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget {
 	
@@ -53,7 +54,7 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 		
 		float e = this.e;
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.TARGET_DISTANCE) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
 			e *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
 		}
 		

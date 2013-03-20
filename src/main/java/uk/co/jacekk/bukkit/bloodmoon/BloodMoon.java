@@ -11,31 +11,11 @@ import org.bukkit.metadata.MetadataValue;
 
 import uk.co.jacekk.bukkit.baseplugin.v9_1.BasePlugin;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.command.BloodMoonExecuter;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
-import uk.co.jacekk.bukkit.bloodmoon.feature.ChatMessageListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.DaylightProofMobsFeature;
-import uk.co.jacekk.bukkit.bloodmoon.feature.ExtendedNightListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.FireArrowsListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.LockInWorldListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.MaxHealthListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.MoreDropsListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.MoreExpListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.MoreMobsListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.MoreSpawningListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.NetherSkyListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.PlaySoundListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.ServerCommandsListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnKillListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.SpawnOnSleepListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.SuperCreepersListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.SwordDamageListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.TexturePackListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.WeatherListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.ZombieArmorListener;
-import uk.co.jacekk.bukkit.bloodmoon.feature.ZombieWeaponListener;
 
 public class BloodMoon extends BasePlugin {
 	
@@ -67,31 +47,17 @@ public class BloodMoon extends BasePlugin {
 		
 		this.scheduler.scheduleSyncRepeatingTask(this, new TimeMonitorTask(this), 100L, 100L);
 		
-		// NOTE: arrow-rate is handled in BloodMoonPathfinderGoalArrowAttack and BloodMoonEntitySkeleton
-		// NOTE: target-distance is handled in BloodMoonPathfinderGoalNearestAttackableTarget and all BloodMoonEntity*
-		// NOTE: movement-speed is handled in all BloodMoonNavigation* and BloodMoonEntity*
-		this.pluginManager.registerEvents(new ChatMessageListener(this), this);
-		this.pluginManager.registerEvents(new ServerCommandsListener(this), this);
-		this.pluginManager.registerEvents(new PlaySoundListener(this), this);
-		this.pluginManager.registerEvents(new FireArrowsListener(this), this);
-		this.pluginManager.registerEvents(new ZombieWeaponListener(this), this);
-		this.pluginManager.registerEvents(new ZombieArmorListener(this), this);
-		// NOTE: break-blocks is handled in BloodMoonEntity*
-		this.pluginManager.registerEvents(new MaxHealthListener(this), this);
-		this.pluginManager.registerEvents(new MoreSpawningListener(this), this);
-		this.pluginManager.registerEvents(new MoreExpListener(this), this);
-		this.pluginManager.registerEvents(new MoreDropsListener(this), this);
-		this.pluginManager.registerEvents(new SwordDamageListener(this), this);
-		this.pluginManager.registerEvents(new SuperCreepersListener(this), this);
-		this.pluginManager.registerEvents(new SpawnOnKillListener(this), this);
-		this.pluginManager.registerEvents(new SpawnOnSleepListener(this), this);
-		this.pluginManager.registerEvents(new MoreMobsListener(this), this);
-		this.pluginManager.registerEvents(new LockInWorldListener(this), this);
-		this.pluginManager.registerEvents(new TexturePackListener(this), this);
-		this.pluginManager.registerEvents(new ExtendedNightListener(this), this);
-		this.pluginManager.registerEvents(new WeatherListener(this), this);
-		this.pluginManager.registerEvents(new DaylightProofMobsFeature(this), this);
-		this.pluginManager.registerEvents(new NetherSkyListener(this), this);
+		for (Feature feature : Feature.values()){
+			try{
+				Class<? extends BaseListener<BloodMoon>> listener = feature.getListenerClass();
+				
+				if (listener != null){
+					this.pluginManager.registerEvents(listener.getConstructor(BloodMoon.class).newInstance(this), this);
+				}
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	/**
@@ -173,6 +139,21 @@ public class BloodMoon extends BasePlugin {
 		}
 		
 		return this.worldConfig.get(worldName).getBoolean(Config.ENABLED);
+	}
+	
+	/**
+	 * Checks if a specific feature is enabled in a world.
+	 * 
+	 * @param worldName The name of the world
+	 * @param feature The {@link Feature} to check
+	 * @return true if the feature is enabled false if not
+	 */
+	public boolean isFeatureEnabled(String worldName, Feature feature){
+		if (!this.worldConfig.containsKey(worldName)){
+			return false;
+		}
+		
+		return this.worldConfig.get(worldName).getBoolean(feature.getEnabledConfigKey());
 	}
 	
 	/**

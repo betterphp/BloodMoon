@@ -10,6 +10,7 @@ import org.bukkit.craftbukkit.v1_5_R1.entity.CraftLivingEntity;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class BloodMoonEntityCreeper extends BloodMoonEntityMonster {
 	
@@ -23,7 +24,7 @@ public class BloodMoonEntityCreeper extends BloodMoonEntityMonster {
 		String entityName = bukkitEntity.getType().name().toUpperCase();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (nmsEntity.target instanceof EntityHuman && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_BREAK_BLOCKS_ENABLED) && worldConfig.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains(entityName) && nmsEntity.world.getTime() % 20 == 0 && nmsEntity.world.worldData.getName().equals(nmsEntity.target.world.worldData.getName())){
+		if (nmsEntity.target instanceof EntityHuman && plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.BREAK_BLOCKS) && worldConfig.getStringList(Config.FEATURE_BREAK_BLOCKS_MOBS).contains(entityName) && nmsEntity.world.getTime() % 20 == 0 && nmsEntity.world.worldData.getName().equals(nmsEntity.target.world.worldData.getName())){
 			Block[] blocks = new Block[2];
 			
 			blocks[0] = this.getBreakableTargetBlock();

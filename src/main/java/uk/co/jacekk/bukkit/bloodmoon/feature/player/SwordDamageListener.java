@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.player;
 
 import java.util.Random;
 
@@ -16,6 +16,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class SwordDamageListener extends BaseListener<BloodMoon> {
 	
@@ -33,7 +34,7 @@ public class SwordDamageListener extends BaseListener<BloodMoon> {
 		String worldName = entity.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (event.getCause() == DamageCause.ENTITY_ATTACK && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_SWORD_DAMAGE_ENABLED)){
+		if (event.getCause() == DamageCause.ENTITY_ATTACK && plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.SWORD_DAMAGE)){
 			if (entity instanceof Creature){
 				Creature creature = (Creature) entity;
 				String creatureName = creature.getType().name().toUpperCase();

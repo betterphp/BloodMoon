@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.server;
 
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
@@ -8,6 +8,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -23,7 +24,7 @@ public class ServerCommandsListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_SERVER_COMMANDS_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.SERVER_COMMANDS)){
 			for (String command : worldConfig.getStringList(Config.FEATURE_SERVER_COMMANDS_START_COMMANDS)){
 				plugin.server.dispatchCommand(plugin.server.getConsoleSender(), command);
 			}
@@ -36,7 +37,7 @@ public class ServerCommandsListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_SERVER_COMMANDS_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.SERVER_COMMANDS)){
 			for (String command : worldConfig.getStringList(Config.FEATURE_SERVER_COMMANDS_END_COMMANDS)){
 				plugin.server.dispatchCommand(plugin.server.getConsoleSender(), command);
 			}

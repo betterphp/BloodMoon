@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.mob;
 
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
@@ -12,6 +12,7 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public class MoreDropsListener extends BaseListener<BloodMoon> {
 	
@@ -25,7 +26,7 @@ public class MoreDropsListener extends BaseListener<BloodMoon> {
 		String worldName = entity.getWorld().getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity instanceof Creature && plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_MORE_DROPS_ENABLED)){
+		if (entity instanceof Creature && plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.MORE_DROPS)){
 			if (!worldConfig.getBoolean(Config.FEATURE_MORE_DROPS_IGNORE_SPAWNERS) || plugin.getSpawnReason(entity) != SpawnReason.SPAWNER){
 				for (ItemStack drop : event.getDrops()){
 					drop.setAmount(drop.getAmount() * Math.max(worldConfig.getInt(Config.FEATURE_MORE_DROPS_MULTIPLIER), 0));

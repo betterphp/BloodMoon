@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
@@ -10,10 +10,9 @@ import org.bukkit.event.player.PlayerPortalEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
-import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.Permission;
 
 public class LockInWorldListener extends BaseListener<BloodMoon> {
@@ -24,9 +23,8 @@ public class LockInWorldListener extends BaseListener<BloodMoon> {
 	
 	private boolean canTeleport(Player player, World from, World to){
 		String worldName = from.getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		return (Permission.ADMIN_IGNORE_WORLD_LOCK.has(player) || from.equals(to) || !plugin.isActive(worldName) || !worldConfig.getBoolean(Config.FEATURE_LOCK_IN_WORLD_ENABLED));
+		return (Permission.ADMIN_IGNORE_WORLD_LOCK.has(player) || from.equals(to) || !plugin.isActive(worldName) || !plugin.isFeatureEnabled(worldName, Feature.LOCK_IN_WORLD));
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)

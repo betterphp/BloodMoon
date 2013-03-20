@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import net.minecraft.server.v1_5_R1.EnumGamemode;
 import net.minecraft.server.v1_5_R1.Packet9Respawn;
@@ -16,10 +16,9 @@ import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
-import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -55,9 +54,8 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onStart(BloodMoonStartEvent event){
 		String worldName = event.getWorld().getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_NETHER_SKY_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.NETHER_SKY)){
 			for (Player player : event.getWorld().getPlayers()){
 				this.sendWorldEnvironment(player, Environment.NETHER);
 			}
@@ -69,9 +67,8 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 		World world = event.getWorld();
 		Environment environment = world.getEnvironment();
 		String worldName = world.getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_NETHER_SKY_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.NETHER_SKY)){
 			for (Player player : event.getWorld().getPlayers()){
 				this.sendWorldEnvironment(player, environment);
 			}
@@ -81,9 +78,8 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onJoin(PlayerJoinEvent event){
 		String worldName = event.getPlayer().getWorld().getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_NETHER_SKY_ENABLED)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.NETHER_SKY)){
 			this.sendWorldEnvironment(event.getPlayer(), Environment.NETHER);
 		}
 	}
@@ -91,9 +87,8 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onRespawn(PlayerRespawnEvent event){
 		String worldName = event.getPlayer().getWorld().getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_NETHER_SKY_ENABLED)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.NETHER_SKY)){
 			this.sendWorldEnvironment(event.getPlayer(), Environment.NETHER);
 		}
 	}
@@ -101,9 +96,8 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onChangeWorlds(PlayerChangedWorldEvent event){
 		String worldName = event.getPlayer().getWorld().getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_NETHER_SKY_ENABLED)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.NETHER_SKY)){
 			this.sendWorldEnvironment(event.getPlayer(), Environment.NETHER);
 		}
 	}

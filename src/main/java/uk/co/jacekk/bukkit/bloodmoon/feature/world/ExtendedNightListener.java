@@ -1,4 +1,4 @@
-package uk.co.jacekk.bukkit.bloodmoon.feature;
+package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,7 +12,7 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
-import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
@@ -45,7 +45,7 @@ public class ExtendedNightListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (worldConfig.getBoolean(Config.FEATURE_EXTENDED_NIGHT_ENABLED)){
+		if (plugin.isFeatureEnabled(worldName, Feature.DAYLIGHT_PROOF_MOBS)){
 			ExtendedNightTask task = new ExtendedNightTask(plugin, world, worldConfig);
 			int taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, task, 0L, 100L);
 			
