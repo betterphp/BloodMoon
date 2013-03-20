@@ -80,6 +80,7 @@ public class Config {
 	public static final PluginConfigKey FEATURE_SUPER_CREEPERS_ENABLED				= new PluginConfigKey("features.super-creepers.enabled",			true);
 	public static final PluginConfigKey FEATURE_SUPER_CREEPERS_POWER				= new PluginConfigKey("features.super-creepers.power",				4.0D);
 	public static final PluginConfigKey FEATURE_SUPER_CREEPERS_FIRE					= new PluginConfigKey("features.super-creepers.fire",				true);
+	public static final PluginConfigKey FEATURE_SUPER_CREEPERS_LIGHTNING			= new PluginConfigKey("features.super-creepers.lightning",			true);
 	
 	public static final PluginConfigKey FEATURE_SPAWN_ON_KILL_ENABLED				= new PluginConfigKey("features.spawn-on-kill.enabled",				true);
 	public static final PluginConfigKey FEATURE_SPAWN_ON_KILL_MOBS					= new PluginConfigKey("features.spawn-on-kill.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN"));
