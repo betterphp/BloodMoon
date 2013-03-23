@@ -1,7 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.mob;
 
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_5_R1.entity.CraftCreeper;
+import org.bukkit.craftbukkit.v1_5_R2.entity.CraftCreeper;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;

@@ -2,15 +2,15 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_5_R1.EntityLiving;
-import net.minecraft.server.v1_5_R1.PathEntity;
-import net.minecraft.server.v1_5_R1.World;
+import net.minecraft.server.v1_5_R2.EntityLiving;
+import net.minecraft.server.v1_5_R2.PathEntity;
+import net.minecraft.server.v1_5_R2.World;
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
-public class Navigation extends net.minecraft.server.v1_5_R1.Navigation {
+public class Navigation extends net.minecraft.server.v1_5_R2.Navigation {
 	
 	private BloodMoon plugin;
 	private EntityLiving entity;
