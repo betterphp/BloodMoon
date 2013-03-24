@@ -187,6 +187,14 @@ public class BloodMoon extends BasePlugin {
 	 * @return the {@link PluginConfig} for this world
 	 */
 	public PluginConfig getConfig(String worldName){
+		if (!this.worldConfig.containsKey(worldName)){
+			World world = this.server.getWorld(worldName);
+			
+			if (world != null){
+				return this.createConfig(world);
+			}
+		}
+		
 		return this.worldConfig.get(worldName);
 	}
 	
