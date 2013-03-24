@@ -49,6 +49,8 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 				world.refreshChunk(x, z);
 			}
 		}
+		
+		player.updateInventory();
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
