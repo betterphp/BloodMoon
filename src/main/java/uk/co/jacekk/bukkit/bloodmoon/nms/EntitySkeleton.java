@@ -66,7 +66,7 @@ public class EntitySkeleton extends net.minecraft.server.v1_5_R2.EntitySkeleton 
 			this.goalSelector.a(1, new PathfinderGoalFloat(this));
 			this.goalSelector.a(2, new PathfinderGoalRestrictSun(this));
 			this.goalSelector.a(3, new PathfinderGoalFleeSun(this, this.bI));
-			// NOTE: See bG() below
+			// NOTE: See bJ() below
 			this.goalSelector.a(5, new PathfinderGoalRandomStroll(this, this.bI));
 			this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
@@ -81,12 +81,12 @@ public class EntitySkeleton extends net.minecraft.server.v1_5_R2.EntitySkeleton 
 	
 	@Override
 	public void bJ(){
-		if ((this.world.worldProvider instanceof WorldProviderHell) && this.aE().nextInt(5) > 0){
-			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bH, false));
+		if (this.world.worldProvider instanceof WorldProviderHell && this.aE().nextInt(5) > 0){
+			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bI, false));
 			this.setSkeletonType(1);
 			this.setEquipment(0, new ItemStack(Item.STONE_SWORD));
 		}else{
-			this.goalSelector.a(4, new PathfinderGoalArrowAttack(this.plugin, this, this.bH, 60, 10.0f));
+			this.goalSelector.a(4, new PathfinderGoalArrowAttack(this.plugin, this, this.bI, 60, 10.0f));
 			
 			this.bH();
 			this.bI();
