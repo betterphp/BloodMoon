@@ -60,7 +60,7 @@ public class SuperCreepersListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (entity.getType() == EntityType.CREEPER && plugin.isFeatureEnabled(worldName, Feature.SUPER_CREEPERS) && worldConfig.getBoolean(Config.FEATURE_SUPER_CREEPERS_LIGHTNING)){
+		if (entity.getType() == EntityType.CREEPER && plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.SUPER_CREEPERS) && worldConfig.getBoolean(Config.FEATURE_SUPER_CREEPERS_LIGHTNING)){
 			((CraftCreeper) entity).setPowered(true);
 		}
 	}
