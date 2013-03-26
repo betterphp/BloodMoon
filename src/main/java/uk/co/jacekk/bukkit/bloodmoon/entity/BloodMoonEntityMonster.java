@@ -1,7 +1,5 @@
 package uk.co.jacekk.bukkit.bloodmoon.entity;
 
-import java.util.Random;
-
 import net.minecraft.server.v1_5_R2.EntityMonster;
 
 import org.bukkit.Effect;
@@ -17,22 +15,14 @@ import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
-public abstract class BloodMoonEntityMonster {
+public abstract class BloodMoonEntityMonster extends BloodMoonEntityLiving {
 	
-	protected BloodMoon plugin;
 	protected EntityMonster nmsEntity;
-	protected CraftLivingEntity bukkitEntity;
-	protected BloodMoonEntityType type;
-	
-	protected Random rand;
 	
 	public BloodMoonEntityMonster(BloodMoon plugin, EntityMonster nmsEntity, CraftLivingEntity bukkitEntity, BloodMoonEntityType type){
-		this.plugin = plugin;
-		this.nmsEntity = nmsEntity;
-		this.bukkitEntity = bukkitEntity;
-		this.type = type;
+		super(plugin, nmsEntity, bukkitEntity, type);
 		
-		this.rand = new Random();
+		this.nmsEntity = nmsEntity;
 	}
 	
 	protected Block getBreakableTargetBlock(){
@@ -83,7 +73,5 @@ public abstract class BloodMoonEntityMonster {
 			}
 		}
 	}
-	
-	public abstract void onTick();
 	
 }
