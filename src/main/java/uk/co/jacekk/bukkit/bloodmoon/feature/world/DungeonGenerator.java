@@ -239,11 +239,6 @@ public class DungeonGenerator extends BlockPopulator {
 			}
 		}
 		
-		chunk.getBlock(6, yMin - 3, 6).setTypeIdAndData(Material.TORCH.getId(), (byte) 5, true);
-		chunk.getBlock(6, yMin - 3, 9).setTypeIdAndData(Material.TORCH.getId(), (byte) 5, true);
-		chunk.getBlock(9, yMin - 3, 6).setTypeIdAndData(Material.TORCH.getId(), (byte) 5, true);
-		chunk.getBlock(9, yMin - 3, 9).setTypeIdAndData(Material.TORCH.getId(), (byte) 5, true);
-		
 		chunk.getBlock(7, yMin - 3, 6).setTypeIdAndData(Material.CHEST.getId(), (byte) 2, false);
 		chunk.getBlock(8, yMin - 3, 6).setTypeIdAndData(Material.CHEST.getId(), (byte) 2, false);
 		
