@@ -19,6 +19,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.MoreMobsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.MoreSpawningListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.SpawnOnKillListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.SpawnOnSleepListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.world.DungeonListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.world.ExtendedNightListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.world.LockInWorldListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.world.NetherSkyListener;
@@ -45,6 +46,7 @@ public enum Feature {
 	NETHER_SKY(NetherSkyListener.class, Config.FEATURE_NETHER_SKY_ENABLED),
 	LOCK_IN_WORLD(LockInWorldListener.class, Config.FEATURE_LOCK_IN_WORLD_ENABLED),
 	EXTENDED_NIGHT(ExtendedNightListener.class, Config.FEATURE_EXTENDED_NIGHT_ENABLED),
+	DUNGEONS(DungeonListener.class, Config.FEATURE_DUNGEONS_ENABLED),
 	
 	// Spawning features
 	SPAWN_ON_KILL(SpawnOnKillListener.class, Config.FEATURE_SPAWN_ON_KILL_ENABLED),

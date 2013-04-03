@@ -2,6 +2,10 @@ package uk.co.jacekk.bukkit.bloodmoon;
 
 import java.util.Arrays;
 
+import org.bukkit.Material;
+import org.bukkit.block.Biome;
+import org.bukkit.entity.EntityType;
+
 import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfigKey;
 
 public class Config {
@@ -113,5 +117,19 @@ public class Config {
 	public static final PluginConfigKey FEATURE_DAYLIGHT_PROOF_MOBS_ENABLED			= new PluginConfigKey("features.daylight-proof-mobs.enabled",		true);
 	
 	public static final PluginConfigKey FEATURE_NETHER_SKY_ENABLED					= new PluginConfigKey("features.nether-sky.enabled",				false);
+	
+	public static final PluginConfigKey FEATURE_DUNGEONS_ENABLED					= new PluginConfigKey("features.dungeons.enabled",					true);
+	public static final PluginConfigKey FEATURE_DUNGEONS_BIOMES						= new PluginConfigKey("features.dungeons.biomes",					Arrays.asList(Biome.PLAINS.name(), Biome.ICE_PLAINS.name(), Biome.DESERT.name(), Biome.SWAMPLAND.name()));
+	public static final PluginConfigKey FEATURE_DUNGEONS_CHANCE						= new PluginConfigKey("features.dungeons.chance",					1);
+	public static final PluginConfigKey FEATURE_DUNGEONS_MIN_LAYERS					= new PluginConfigKey("features.dungeons.min-layers",				3);
+	public static final PluginConfigKey FEATURE_DUNGEONS_MAX_LAYERS					= new PluginConfigKey("features.dungeons.max-layers",				5);
+	public static final PluginConfigKey FEATURE_DUNGEONS_SPAWNER_TYPES				= new PluginConfigKey("features.dungeons.spawner-types",			Arrays.asList(EntityType.ZOMBIE.name(), EntityType.SKELETON.name()));
+	public static final PluginConfigKey FEATURE_DUNGEONS_SPAWNER_DELAY				= new PluginConfigKey("features.dungeons.spawner-delay",			100);
+	public static final PluginConfigKey FEATURE_DUNGEONS_SPAWNER_COUNT				= new PluginConfigKey("features.dungeons.spawner-count",			6);
+	public static final PluginConfigKey FEATURE_DUNGEONS_SPAWNER_MAX_MOBS			= new PluginConfigKey("features.dungeons.spawner-max-mobs",			8);
+	public static final PluginConfigKey FEATURE_DUNGEONS_CHEST_ITEMS				= new PluginConfigKey("features.dungeons.chest-items",				Arrays.asList(Material.BREAD.name(), Material.APPLE.name(), Material.PORK.name(), Material.SADDLE.name(), Material.BUCKET.name(), Material.STRING.name(), Material.REDSTONE.name(), Material.SULPHUR.name(), Material.COCOA.name()));
+	public static final PluginConfigKey FEATURE_DUNGEONS_MIN_STACK_SIZE				= new PluginConfigKey("features.dungeons.min-stack-size",			1);
+	public static final PluginConfigKey FEATURE_DUNGEONS_MAX_STACK_SIZE				= new PluginConfigKey("features.dungeons.max-stack-size",			8);
+	public static final PluginConfigKey FEATURE_DUNGEONS_ITEMS_PER_CHEST			= new PluginConfigKey("features.dungeons.items-per-chest",			12);
 	
 }
