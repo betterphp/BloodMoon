@@ -2,14 +2,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>uk.co.jacekk.bukkit</groupId>
 	<artifactId>bloodmoon</artifactId>
+	<name>BloodMoon</name>
 	<version>0.23.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	
-	<name>BloodMoon</name>
 	<url>http://dev.bukkit.org/server-mods/bloodmoon/</url>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<upload.dbo.category>server-mods</upload.dbo.category>
+		<upload.dbo.slug>bloodmoon</upload.dbo.slug>
 	</properties>
 	
 	<repositories>
