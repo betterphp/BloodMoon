@@ -12,7 +12,6 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.block.CreatureSpawner;
 import org.bukkit.craftbukkit.v1_5_R2.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.generator.BlockPopulator;
@@ -65,14 +64,12 @@ public class DungeonGenerator extends BlockPopulator {
 				}
 			}
 			
-			for (int x = 0; x < 16; ++x){
-				chunk.getBlock(x, y, 0).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(x, y, 15).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-			}
-			
-			for (int z = 0; z < 16; ++z){
-				chunk.getBlock(0, y, z).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(15, y, z).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+			for (int i = 0; i < 16; ++i){
+				chunk.getBlock(i, y, 0).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(i, y, 15).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				
+				chunk.getBlock(0, y, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(15, y, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
 			}
 		}
 		
@@ -83,12 +80,12 @@ public class DungeonGenerator extends BlockPopulator {
 		chunk.getBlock(8, yMax + 2, 0).setTypeId(Material.IRON_FENCE.getId());
 		
 		// Roof
-		for (int x = 1; x < 15; ++x){
-			chunk.getBlock(x, yMax + 4, 1).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-			chunk.getBlock(x, yMax + 4, 14).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+		for (int i = 1; i < 15; ++i){
+			chunk.getBlock(i, yMax + 4, 1).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+			chunk.getBlock(i, yMax + 4, 14).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
 			
-			chunk.getBlock(1, yMax + 4, x).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-			chunk.getBlock(14, yMax + 4, x).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+			chunk.getBlock(1, yMax + 4, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+			chunk.getBlock(14, yMax + 4, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
 		}
 		
 		for (int x = 2; x < 14; ++x){
@@ -113,6 +110,7 @@ public class DungeonGenerator extends BlockPopulator {
 				for (int z = 1; z < 7; ++z){
 					chunk.getBlock(x, yBase, z).setTypeIdAndData(Material.WOOD_STEP.getId(), dataWood.getData(), false);
 					chunk.getBlock(x + 8, yBase, z).setTypeIdAndData(Material.WOOD_STEP.getId(), dataWood.getData(), false);
+					
 					chunk.getBlock(x, yBase, z + 8).setTypeIdAndData(Material.WOOD_STEP.getId(), dataWood.getData(), false);
 					chunk.getBlock(x + 8, yBase, z + 8).setTypeIdAndData(Material.WOOD_STEP.getId(), dataWood.getData(), false);
 				}
@@ -125,18 +123,16 @@ public class DungeonGenerator extends BlockPopulator {
 			}
 			
 			// Paths
-			for (int x = 1; x < 5; ++x){
-				chunk.getBlock(x, yBase, 7).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
-				chunk.getBlock(x, yBase, 8).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
-				chunk.getBlock(x + 10, yBase, 7).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
-				chunk.getBlock(x + 10, yBase, 8).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
-			}
-			
-			for (int z = 1; z < 5; ++z){
-				chunk.getBlock(7, yBase, z).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
-				chunk.getBlock(8, yBase, z).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
-				chunk.getBlock(7, yBase, z + 10).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
-				chunk.getBlock(8, yBase, z + 10).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
+			for (int i = 1; i < 5; ++i){
+				chunk.getBlock(i, yBase, 7).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
+				chunk.getBlock(i, yBase, 8).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
+				chunk.getBlock(i + 10, yBase, 7).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
+				chunk.getBlock(i + 10, yBase, 8).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
+				
+				chunk.getBlock(7, yBase, i).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
+				chunk.getBlock(8, yBase, i).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
+				chunk.getBlock(7, yBase, i + 10).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
+				chunk.getBlock(8, yBase, i + 10).setTypeIdAndData(Material.STEP.getId(), dataBrick.getData(), false);
 			}
 			
 			// Columns
@@ -220,15 +216,15 @@ public class DungeonGenerator extends BlockPopulator {
 		
 		// Loot room
 		for (int y = 3; y >= 0; --y){
-			for (int x = 0; x < 4; ++x){
-				chunk.getBlock(x + 6, yMin - y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(x + 6, yMin - y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+			for (int i = 0; i < 4; ++i){
+				chunk.getBlock(i + 6, yMin - y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(i + 6, yMin - y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
 				
-				chunk.getBlock(5, yMin - y, x + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(10, yMin - y, x + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(5, yMin - y, i + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(10, yMin - y, i + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
 				
 				for (int z = 0; z < 4; ++z){
-					chunk.getBlock(x + 6, yMin - y, z + 6).setTypeId(Material.AIR.getId());
+					chunk.getBlock(i + 6, yMin - y, i + 6).setTypeId(Material.AIR.getId());
 				}
 			}
 		}
