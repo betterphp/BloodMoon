@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 
 import org.bukkit.entity.EntityType;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 
 import net.minecraft.server.v1_5_R2.EntityLiving;
 import net.minecraft.server.v1_5_R2.EntityTypes;

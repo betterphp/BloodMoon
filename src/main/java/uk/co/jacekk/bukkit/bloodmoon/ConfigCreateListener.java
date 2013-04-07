@@ -8,9 +8,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldInitEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfigKey;
-import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.event.BaseListener;
 
 public class ConfigCreateListener extends BaseListener<BloodMoon> {
 	

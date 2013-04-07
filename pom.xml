@@ -12,6 +12,9 @@
 		
 		<upload.dbo.category>server-mods</upload.dbo.category>
 		<upload.dbo.slug>bloodmoon</upload.dbo.slug>
+		
+		<baseplugin.version>10.0</baseplugin.version>
+		<baseplugin.package>10_0</baseplugin.package>
 	</properties>
 	
 	<repositories>
@@ -37,7 +40,7 @@
 		<dependency>
 			<groupId>uk.co.jacekk.bukkit</groupId>
 			<artifactId>baseplugin</artifactId>
-			<version>9.1</version>
+			<version>${baseplugin.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		
@@ -86,6 +89,12 @@
 							<include>uk.co.jacekk.bukkit:baseplugin</include>
 						</includes>
 					</artifactSet>
+					<relocations>
+						<relocation>
+							<pattern>uk.co.jacekk.bukkit.baseplugin</pattern>
+							<shadedPattern>uk.co.jacekk.bukkit.baseplugin.v${baseplugin.package}</shadedPattern>
+						</relocation>
+					</relocations>
 				</configuration>
 			</plugin>
 			

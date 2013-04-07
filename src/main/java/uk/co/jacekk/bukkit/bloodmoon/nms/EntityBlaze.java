@@ -9,7 +9,7 @@ import org.bukkit.craftbukkit.v1_5_R2.entity.CraftBlaze;
 import org.bukkit.craftbukkit.v1_5_R2.entity.CraftLivingEntity;
 import org.bukkit.plugin.Plugin;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityBlaze;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;

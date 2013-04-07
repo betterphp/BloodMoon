@@ -1,7 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfigKey;
-import uk.co.jacekk.bukkit.baseplugin.v9_1.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.config.PluginConfigKey;
+import uk.co.jacekk.bukkit.baseplugin.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.client.ChatMessageListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.client.PlaySoundListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.client.TexturePackListener;

@@ -4,8 +4,8 @@ import java.util.Random;
 
 import org.bukkit.World;
 
-import uk.co.jacekk.bukkit.baseplugin.v9_1.config.PluginConfig;
-import uk.co.jacekk.bukkit.baseplugin.v9_1.scheduler.BaseTask;
+import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
+import uk.co.jacekk.bukkit.baseplugin.scheduler.BaseTask;
 
 public class TimeMonitorTask extends BaseTask<BloodMoon> {
 	
