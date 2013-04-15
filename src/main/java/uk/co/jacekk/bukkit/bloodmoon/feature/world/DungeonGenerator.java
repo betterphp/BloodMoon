@@ -44,7 +44,7 @@ public class DungeonGenerator extends BlockPopulator {
 		PluginConfig worldConfig = plugin.getConfig(world.getName());
 		Biome biome = world.getBiome(chunkX + 8, chunkZ + 8);
 		
-		if (!worldConfig.getStringList(Config.FEATURE_DUNGEONS_BIOMES).contains(biome.name()) || this.random.nextInt(100) > worldConfig.getInt(Config.FEATURE_DUNGEONS_CHANCE)){
+		if (!worldConfig.getStringList(Config.FEATURE_DUNGEONS_BIOMES).contains(biome.name()) || this.random.nextInt(10000) > worldConfig.getInt(Config.FEATURE_DUNGEONS_CHANCE)){
 			return;
 		}
 		
