@@ -224,7 +224,7 @@ public class DungeonGenerator extends BlockPopulator {
 				chunk.getBlock(10, yMin - y, i + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
 				
 				for (int z = 0; z < 4; ++z){
-					chunk.getBlock(i + 6, yMin - y, i + 6).setTypeId(Material.AIR.getId());
+					chunk.getBlock(i + 6, yMin - y, z + 6).setTypeId(Material.AIR.getId());
 				}
 			}
 		}
