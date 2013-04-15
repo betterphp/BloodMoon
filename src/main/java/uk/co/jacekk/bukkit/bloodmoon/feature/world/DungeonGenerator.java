@@ -215,8 +215,14 @@ public class DungeonGenerator extends BlockPopulator {
 		}
 		
 		// Loot room
-		for (int y = 3; y >= 0; --y){
-			for (int i = 0; i < 4; ++i){
+		for (int i = 0; i < 4; ++i){
+			chunk.getBlock(i + 6, yMin + 1, 5).setTypeIdAndData(Material.COBBLE_WALL.getId(), (byte) 0, false);
+			chunk.getBlock(i + 6, yMin + 1, 10).setTypeIdAndData(Material.COBBLE_WALL.getId(), (byte) 0, false);
+			
+			chunk.getBlock(5, yMin + 1, i + 6).setTypeIdAndData(Material.COBBLE_WALL.getId(), (byte) 0, false);
+			chunk.getBlock(10, yMin + 1, i + 6).setTypeIdAndData(Material.COBBLE_WALL.getId(), (byte) 0, false);
+			
+			for (int y = 3; y >= 0; --y){
 				chunk.getBlock(i + 6, yMin - y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
 				chunk.getBlock(i + 6, yMin - y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
 				
