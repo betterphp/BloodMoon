@@ -75,7 +75,12 @@ public class EntityCreeper extends net.minecraft.server.v1_5_R2.EntityCreeper {
 	public void l_(){
 		this.bloodMoonEntity.onTick();
 		
-		super.l_();
+		try{
+			super.l_();
+		}catch (Exception e){
+			plugin.log.warn("Exception caught while ticking entity");
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
