@@ -29,31 +29,40 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 public class DungeonGenerator extends BlockPopulator {
 	
 	private BloodMoon plugin;
-	private Random random;
 	
-	public DungeonGenerator(BloodMoon plugin, Random random){
+	public DungeonGenerator(BloodMoon plugin){
 		this.plugin = plugin;
-		this.random = random;
 	}
 	
 	@Override
 	public void populate(World world, Random random, Chunk chunk){
-		int chunkX = chunk.getX() * 16;
-		int chunkZ = chunk.getZ() * 16;
+		int chunkX = chunk.getX();
+		int chunkZ = chunk.getZ();
+		
+		int gridX = (int) (Math.floor(chunk.getX() / 10.0d) * 10);
+		int gridZ = (int) (Math.floor(chunk.getZ() / 10.0d) * 10);
+		
+		Random rand = new Random(world.getSeed() + (gridX ^ gridZ));
+		
+		int dungeonChunkX = gridX + rand.nextInt(10);
+		int dungeonChunkZ = gridZ + rand.nextInt(10);
+		
+		int worldChunkX = chunkX * 16;
+		int worldChunkZ = chunkZ * 16;
 		
 		PluginConfig worldConfig = plugin.getConfig(world.getName());
-		Biome biome = world.getBiome(chunkX + 8, chunkZ + 8);
+		Biome biome = world.getBiome(worldChunkX + 8, worldChunkZ + 8);
 		
-		if (!worldConfig.getStringList(Config.FEATURE_DUNGEONS_BIOMES).contains(biome.name()) || this.random.nextInt(10000) > worldConfig.getInt(Config.FEATURE_DUNGEONS_CHANCE)){
+		if (chunkX != dungeonChunkX || chunkZ != dungeonChunkZ || !worldConfig.getStringList(Config.FEATURE_DUNGEONS_BIOMES).contains(biome.name()) || rand.nextInt(100) > worldConfig.getInt(Config.FEATURE_DUNGEONS_CHANCE)){
 			return;
 		}
 		
-		plugin.log.info("Generated BloodMoon dungeon at " + chunkX + "," + chunkZ);
+		plugin.log.info("Generated BloodMoon dungeon at " + worldChunkX + "," + worldChunkZ);
 		
-		int yMax = world.getHighestBlockYAt(chunkX + 8, chunkZ) - 1;
+		int yMax = world.getHighestBlockYAt(worldChunkX + 8, worldChunkZ) - 1;
 		int minLayers = worldConfig.getInt(Config.FEATURE_DUNGEONS_MIN_LAYERS);
 		int maxLayers = worldConfig.getInt(Config.FEATURE_DUNGEONS_MAX_LAYERS);
-		int layers = this.random.nextInt(maxLayers - minLayers) + minLayers;
+		int layers = rand.nextInt(maxLayers - minLayers) + minLayers;
 		int yMin = yMax - (layers * 6);
 		
 		// Walls
@@ -65,11 +74,11 @@ public class DungeonGenerator extends BlockPopulator {
 			}
 			
 			for (int i = 0; i < 16; ++i){
-				chunk.getBlock(i, y, 0).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(i, y, 15).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(i, y, 0).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+				chunk.getBlock(i, y, 15).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 				
-				chunk.getBlock(0, y, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(15, y, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(0, y, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+				chunk.getBlock(15, y, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 			}
 		}
 		
@@ -81,16 +90,16 @@ public class DungeonGenerator extends BlockPopulator {
 		
 		// Roof
 		for (int i = 1; i < 15; ++i){
-			chunk.getBlock(i, yMax + 4, 1).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-			chunk.getBlock(i, yMax + 4, 14).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+			chunk.getBlock(i, yMax + 4, 1).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+			chunk.getBlock(i, yMax + 4, 14).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 			
-			chunk.getBlock(1, yMax + 4, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-			chunk.getBlock(14, yMax + 4, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+			chunk.getBlock(1, yMax + 4, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+			chunk.getBlock(14, yMax + 4, i).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 		}
 		
 		for (int x = 2; x < 14; ++x){
 			for (int z = 2; z < 14; ++z){
-				chunk.getBlock(x, yMax + 5, z).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(x, yMax + 5, z).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 			}
 		}
 		
@@ -137,10 +146,10 @@ public class DungeonGenerator extends BlockPopulator {
 			
 			// Columns
 			for (int y = 0; y < 6; ++y){
-				chunk.getBlock(5, yBase + y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(5, yBase + y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(10, yBase + y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(10, yBase + y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(5, yBase + y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+				chunk.getBlock(5, yBase + y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+				chunk.getBlock(10, yBase + y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+				chunk.getBlock(10, yBase + y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 			}
 			
 			// Spawners
@@ -223,11 +232,11 @@ public class DungeonGenerator extends BlockPopulator {
 			chunk.getBlock(10, yMin + 1, i + 6).setTypeIdAndData(Material.COBBLE_WALL.getId(), (byte) 0, false);
 			
 			for (int y = 3; y >= 0; --y){
-				chunk.getBlock(i + 6, yMin - y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(i + 6, yMin - y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(i + 6, yMin - y, 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+				chunk.getBlock(i + 6, yMin - y, 10).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 				
-				chunk.getBlock(5, yMin - y, i + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
-				chunk.getBlock(10, yMin - y, i + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(5, yMin - y, i + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
+				chunk.getBlock(10, yMin - y, i + 6).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 				
 				for (int z = 0; z < 4; ++z){
 					chunk.getBlock(i + 6, yMin - y, z + 6).setTypeId(Material.AIR.getId());
@@ -237,7 +246,7 @@ public class DungeonGenerator extends BlockPopulator {
 		
 		for (int x = 0; x < 6; ++x){
 			for (int z = 0; z < 6; ++z){
-				chunk.getBlock(x + 5, yMin - 4, z + 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) this.random.nextInt(3), false);
+				chunk.getBlock(x + 5, yMin - 4, z + 5).setTypeIdAndData(Material.SMOOTH_BRICK.getId(), (byte) rand.nextInt(3), false);
 			}
 		}
 		
@@ -269,9 +278,9 @@ public class DungeonGenerator extends BlockPopulator {
 				
 				if (type != null){
 					ItemStack item = new ItemStack(type);
-					item.setAmount(Math.min(type.getMaxStackSize(), this.random.nextInt(worldConfig.getInt(Config.FEATURE_DUNGEONS_MAX_STACK_SIZE))));
+					item.setAmount(Math.min(type.getMaxStackSize(), rand.nextInt(worldConfig.getInt(Config.FEATURE_DUNGEONS_MAX_STACK_SIZE))));
 					
-					inv.setItem(this.random.nextInt(inv.getSize()), item);
+					inv.setItem(rand.nextInt(inv.getSize()), item);
 				}
 			}
 		}

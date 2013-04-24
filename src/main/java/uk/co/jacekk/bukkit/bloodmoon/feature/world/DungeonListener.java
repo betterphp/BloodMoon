@@ -1,7 +1,5 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
-import java.util.Random;
-
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -23,7 +21,7 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		
 		if (plugin.isEnabled(worldName) && plugin.isFeatureEnabled(worldName, Feature.DUNGEONS)){
-			world.getPopulators().add(new DungeonGenerator(plugin, new Random(world.getSeed())));
+			world.getPopulators().add(new DungeonGenerator(plugin));
 		}
 	}
 	
