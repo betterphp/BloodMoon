@@ -275,6 +275,13 @@ public class DungeonGenerator extends BlockPopulator {
 				}
 			}
 		}
+		
+		// Set markers for protection
+		Block top = chunk.getBlock(8, yMax + 5, 8);
+		Block bottom = chunk.getBlock(8, yMax - (properties.getLayers() * 6) - 4, 8);
+		
+		top.setData((byte) (top.getData() | 0x8));
+		bottom.setData((byte) (bottom.getData() | 0x8));
 	}
 	
 }

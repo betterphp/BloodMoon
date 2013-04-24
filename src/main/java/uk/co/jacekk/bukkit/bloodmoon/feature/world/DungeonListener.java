@@ -1,5 +1,8 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -43,7 +46,30 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		
 		DungeonProperties properties = new DungeonProperties(block.getWorld(), worldConfig, gridX, gridZ);
 		
-		return (properties.isInChunk(chunk));
+		if (properties.isInChunk(chunk)){
+			int yMin = 0;
+			int yMax = 0;
+			
+			for (int y = 0; y < world.getMaxHeight(); ++y){
+				if ((chunk.getBlock(8, y, 8).getData() & (byte) 0x8) == 0x8){
+					yMin = y;
+					break;
+				}
+			}
+			
+			for (int y = world.getMaxHeight(); y > 0; --y){
+				if ((chunk.getBlock(8, y, 8).getData() & (byte) 0x8) == 0x8){
+					yMax = y;
+					break;
+				}
+			}
+			
+			int y = block.getY();
+			
+			return (y >= yMin && y <= yMax);
+		}
+		
+		return false;
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -53,7 +79,9 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && block.getType() != Material.IRON_FENCE && this.isProtected(block)){
+		List<Material> allowed = Arrays.asList(Material.IRON_FENCE, Material.MOB_SPAWNER, Material.COBBLE_WALL);
+		
+		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && !allowed.contains(block.getType()) && this.isProtected(block)){
 			event.setCancelled(true);
 		}
 	}
