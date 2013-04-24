@@ -106,9 +106,8 @@ public class EntitySkeleton extends net.minecraft.server.v1_5_R2.EntitySkeleton 
 	
 	@Override
 	public void l_(){
-		this.bloodMoonEntity.onTick();
-		
 		try{
+			this.bloodMoonEntity.onTick();
 			super.l_();
 		}catch (Exception e){
 			plugin.log.warn("Exception caught while ticking entity");
