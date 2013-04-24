@@ -93,7 +93,9 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && this.isProtected(block)){
+		List<Material> allowed = Arrays.asList(Material.TORCH);
+		
+		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && !allowed.contains(block.getType()) && this.isProtected(block)){
 			event.setCancelled(true);
 		}
 	}
