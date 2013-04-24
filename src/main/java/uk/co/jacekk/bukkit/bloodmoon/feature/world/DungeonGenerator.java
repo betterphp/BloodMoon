@@ -9,7 +9,6 @@ import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.TreeSpecies;
 import org.bukkit.World;
-import org.bukkit.block.Biome;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.craftbukkit.v1_5_R2.CraftWorld;
@@ -36,34 +35,26 @@ public class DungeonGenerator extends BlockPopulator {
 	
 	@Override
 	public void populate(World world, Random random, Chunk chunk){
-		int chunkX = chunk.getX();
-		int chunkZ = chunk.getZ();
-		
 		int gridX = (int) (Math.floor(chunk.getX() / 10.0d) * 10);
 		int gridZ = (int) (Math.floor(chunk.getZ() / 10.0d) * 10);
 		
-		Random rand = new Random(world.getSeed() + (gridX ^ gridZ));
-		
-		int dungeonChunkX = gridX + rand.nextInt(10);
-		int dungeonChunkZ = gridZ + rand.nextInt(10);
-		
-		int worldChunkX = chunkX * 16;
-		int worldChunkZ = chunkZ * 16;
-		
 		PluginConfig worldConfig = plugin.getConfig(world.getName());
-		Biome biome = world.getBiome(worldChunkX + 8, worldChunkZ + 8);
 		
-		if (chunkX != dungeonChunkX || chunkZ != dungeonChunkZ || !worldConfig.getStringList(Config.FEATURE_DUNGEONS_BIOMES).contains(biome.name()) || rand.nextInt(100) > worldConfig.getInt(Config.FEATURE_DUNGEONS_CHANCE)){
+		DungeonProperties properties = new DungeonProperties(world, worldConfig, gridX, gridZ);
+		
+		if (!properties.isInChunk(chunk)){
 			return;
 		}
 		
+		int worldChunkX = properties.getChunkX();
+		int worldChunkZ = properties.getChunkZ();
+		
 		plugin.log.info("Generated BloodMoon dungeon at " + worldChunkX + "," + worldChunkZ);
 		
-		int yMax = world.getHighestBlockYAt(worldChunkX + 8, worldChunkZ) - 1;
-		int minLayers = worldConfig.getInt(Config.FEATURE_DUNGEONS_MIN_LAYERS);
-		int maxLayers = worldConfig.getInt(Config.FEATURE_DUNGEONS_MAX_LAYERS);
-		int layers = rand.nextInt(maxLayers - minLayers) + minLayers;
-		int yMin = yMax - (layers * 6);
+		Random rand = properties.getRandom();
+		
+		int yMax = world.getHighestBlockYAt((worldChunkX * 16) + 8, worldChunkZ * 16) - 1;
+		int yMin = yMax - (properties.getLayers() * 6);
 		
 		// Walls
 		for (int y = yMax + 3; y > yMin; --y){
@@ -111,7 +102,7 @@ public class DungeonGenerator extends BlockPopulator {
 		dataBrick.setMaterial(Material.SMOOTH_BRICK);
 		dataBrick.setInverted(true);
 		
-		for (int layer = 0; layer <= layers; ++layer){
+		for (int layer = 0; layer <= properties.getLayers(); ++layer){
 			int yBase = yMax - (layer * 6);
 			
 			// Floors
@@ -181,7 +172,7 @@ public class DungeonGenerator extends BlockPopulator {
 		}
 		
 		// Steps
-		for (int layer = 0; layer < layers; ++layer){
+		for (int layer = 0; layer < properties.getLayers(); ++layer){
 			int yBase = yMax - (layer * 6);
 			
 			Step topStep = new Step();
