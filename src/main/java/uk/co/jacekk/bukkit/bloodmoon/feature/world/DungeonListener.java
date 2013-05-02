@@ -1,6 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import org.bukkit.Chunk;
@@ -10,7 +11,10 @@ import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPistonExtendEvent;
+import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.world.WorldInitEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -83,6 +87,54 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		
 		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && !allowed.contains(block.getType()) && this.isProtected(block)){
 			event.setCancelled(true);
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onEntityExplode(EntityExplodeEvent event){
+		World world = event.getEntity().getWorld();
+		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED)){
+			Iterator<Block> iterator = event.blockList().iterator();
+			
+			while (iterator.hasNext()){
+				Block block = iterator.next();
+				
+				if (this.isProtected(block)){
+					iterator.remove();
+				}
+			}
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onPistonExtend(BlockPistonExtendEvent event){
+		World world = event.getBlock().getWorld();
+		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED)){
+			for (Block moved : event.getBlocks()){
+				if (this.isProtected(moved)){
+					event.setCancelled(true);
+					return;
+				}
+			}
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onPistonRetract(BlockPistonRetractEvent event){
+		World world = event.getBlock().getWorld();
+		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED)){
+			if (this.isProtected(event.getRetractLocation().getBlock())){
+				event.setCancelled(true);
+			}
 		}
 	}
 	
