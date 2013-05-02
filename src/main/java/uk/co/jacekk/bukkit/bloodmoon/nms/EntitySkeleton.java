@@ -3,31 +3,31 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 import java.util.Calendar;
 import java.util.List;
 
-import net.minecraft.server.v1_5_R2.Block;
-import net.minecraft.server.v1_5_R2.Enchantment;
-import net.minecraft.server.v1_5_R2.EnchantmentManager;
-import net.minecraft.server.v1_5_R2.Entity;
-import net.minecraft.server.v1_5_R2.EntityArrow;
-import net.minecraft.server.v1_5_R2.EntityHuman;
-import net.minecraft.server.v1_5_R2.EntityLiving;
-import net.minecraft.server.v1_5_R2.IRangedEntity;
-import net.minecraft.server.v1_5_R2.Item;
-import net.minecraft.server.v1_5_R2.ItemStack;
-import net.minecraft.server.v1_5_R2.PathfinderGoalFleeSun;
-import net.minecraft.server.v1_5_R2.PathfinderGoalFloat;
-import net.minecraft.server.v1_5_R2.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_5_R2.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_5_R2.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_5_R2.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_5_R2.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_5_R2.PathfinderGoalRestrictSun;
-import net.minecraft.server.v1_5_R2.World;
-import net.minecraft.server.v1_5_R2.WorldProviderHell;
+import net.minecraft.server.v1_5_R3.Block;
+import net.minecraft.server.v1_5_R3.Enchantment;
+import net.minecraft.server.v1_5_R3.EnchantmentManager;
+import net.minecraft.server.v1_5_R3.Entity;
+import net.minecraft.server.v1_5_R3.EntityArrow;
+import net.minecraft.server.v1_5_R3.EntityHuman;
+import net.minecraft.server.v1_5_R3.EntityLiving;
+import net.minecraft.server.v1_5_R3.IRangedEntity;
+import net.minecraft.server.v1_5_R3.Item;
+import net.minecraft.server.v1_5_R3.ItemStack;
+import net.minecraft.server.v1_5_R3.PathfinderGoalFleeSun;
+import net.minecraft.server.v1_5_R3.PathfinderGoalFloat;
+import net.minecraft.server.v1_5_R3.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_5_R3.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_5_R3.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_5_R3.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_5_R3.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_5_R3.PathfinderGoalRestrictSun;
+import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_5_R3.WorldProviderHell;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_5_R2.CraftServer;
-import org.bukkit.craftbukkit.v1_5_R2.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_5_R2.entity.CraftSkeleton;
+import org.bukkit.craftbukkit.v1_5_R3.CraftServer;
+import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_5_R3.entity.CraftSkeleton;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -37,7 +37,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntitySkeleton;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntitySkeleton extends net.minecraft.server.v1_5_R2.EntitySkeleton implements IRangedEntity {
+public class EntitySkeleton extends net.minecraft.server.v1_5_R3.EntitySkeleton implements IRangedEntity {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntitySkeleton bloodMoonEntity;
@@ -95,7 +95,7 @@ public class EntitySkeleton extends net.minecraft.server.v1_5_R2.EntitySkeleton 
 		this.h(this.random.nextFloat() < au[this.world.difficulty]);
 		
 		if (getEquipment(4) == null){
-			Calendar calendar = this.world.U();
+			Calendar calendar = this.world.V();
 			
 			if (calendar.get(2) + 1 == 10 && calendar.get(5) == 31 && this.random.nextFloat() < 0.25F){
 				setEquipment(4, new ItemStack(this.random.nextFloat() < 0.1F ? Block.JACK_O_LANTERN : Block.PUMPKIN));

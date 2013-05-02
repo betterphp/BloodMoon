@@ -1,12 +1,12 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_5_R2.Entity;
-import net.minecraft.server.v1_5_R2.EntityLiving;
-import net.minecraft.server.v1_5_R2.IRangedEntity;
-import net.minecraft.server.v1_5_R2.MathHelper;
-import net.minecraft.server.v1_5_R2.PathfinderGoal;
+import net.minecraft.server.v1_5_R3.Entity;
+import net.minecraft.server.v1_5_R3.EntityLiving;
+import net.minecraft.server.v1_5_R3.IRangedEntity;
+import net.minecraft.server.v1_5_R3.MathHelper;
+import net.minecraft.server.v1_5_R3.PathfinderGoal;
 
-import org.bukkit.craftbukkit.v1_5_R2.event.CraftEventFactory;
+import org.bukkit.craftbukkit.v1_5_R3.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -70,7 +70,7 @@ public class PathfinderGoalArrowAttack extends PathfinderGoal {
 	
 	@Override
 	public boolean b(){
-		return (a()) || (!this.entity.getNavigation().f());
+		return (this.a()) || (!this.entity.getNavigation().f());
 	}
 	
 	@Override
@@ -80,12 +80,13 @@ public class PathfinderGoalArrowAttack extends PathfinderGoal {
 		
 		this.target = null;
 		this.f = 0;
+		this.d = -1;
 	}
 	
 	@Override
 	public void e(){
 		double d0 = this.entity.e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
-		boolean flag = this.entity.aD().canSee(this.target);
+		boolean flag = this.entity.getEntitySenses().canSee(this.target);
 		
 		if (flag){
 			this.f += 1;
