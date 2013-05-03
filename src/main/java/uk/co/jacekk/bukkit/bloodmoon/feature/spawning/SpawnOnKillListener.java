@@ -3,7 +3,7 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_5_R3.CraftWorld;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -11,9 +11,10 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
+import org.bukkit.event.entity.EntityDeathEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.event.BaseListener;
@@ -43,7 +44,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDeath(EntityDeathEvent event){
 		Entity entity = event.getEntity();
-		World world = entity.getWorld();
+		CraftWorld world = (CraftWorld) entity.getWorld();
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
@@ -58,7 +59,7 @@ public class SpawnOnKillListener extends BaseListener<BloodMoon> {
 					EntityType creatureType = EntityType.fromName(mobName.toUpperCase());
 					
 					if (creatureType != null){
-						world.spawnEntity(creature.getLocation(), creatureType);
+						world.spawn(creature.getLocation(), creatureType.getEntityClass(), SpawnReason.NATURAL);
 					}
 				}
 			}

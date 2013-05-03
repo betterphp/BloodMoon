@@ -1,10 +1,11 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 
 import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_5_R3.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 import org.bukkit.event.player.PlayerBedEnterEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -23,7 +24,7 @@ public class SpawnOnSleepListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onPlayerBedEnter(PlayerBedEnterEvent event){
 		Location location = event.getPlayer().getLocation();
-		World world = location.getWorld();
+		CraftWorld world = (CraftWorld) location.getWorld();
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
@@ -32,7 +33,7 @@ public class SpawnOnSleepListener extends BaseListener<BloodMoon> {
 			EntityType creatureType = EntityType.fromName(mobName.toUpperCase());
 			
 			if (creatureType != null){
-				world.spawnEntity(location, creatureType);
+				world.spawn(location, creatureType.getEntityClass(), SpawnReason.NATURAL);
 			}
 		}
 	}
