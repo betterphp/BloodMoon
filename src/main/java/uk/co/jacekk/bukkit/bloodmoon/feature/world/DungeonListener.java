@@ -92,18 +92,21 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onEntityExplode(EntityExplodeEvent event){
-		World world = event.getEntity().getWorld();
-		String worldName = world.getName();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
+		List<Block> blocks = event.blockList();
 		
-		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED)){
-			Iterator<Block> iterator = event.blockList().iterator();
+		if (!blocks.isEmpty()){
+			String worldName = blocks.get(0).getWorld().getName();
+			PluginConfig worldConfig = plugin.getConfig(worldName);
 			
-			while (iterator.hasNext()){
-				Block block = iterator.next();
+			if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED)){
+				Iterator<Block> iterator = blocks.iterator();
 				
-				if (this.isProtected(block)){
-					iterator.remove();
+				while (iterator.hasNext()){
+					Block block = iterator.next();
+					
+					if (this.isProtected(block)){
+						iterator.remove();
+					}
 				}
 			}
 		}
