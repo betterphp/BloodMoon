@@ -5,16 +5,16 @@
 	<name>BloodMoon</name>
 	<version>0.24-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<url>http://dev.bukkit.org/server-mods/bloodmoon/</url>
+	<url>http://dev.bukkit.org/bukkit-plugins/bloodmoon/</url>
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		
-		<upload.dbo.category>server-mods</upload.dbo.category>
+		<upload.dbo.category>bukkit-plugins</upload.dbo.category>
 		<upload.dbo.slug>bloodmoon</upload.dbo.slug>
 		
-		<baseplugin.version>11.1</baseplugin.version>
-		<baseplugin.package>11_1</baseplugin.package>
+		<baseplugin.version>12</baseplugin.version>
+		<baseplugin.package>12</baseplugin.package>
 	</properties>
 	
 	<repositories>
