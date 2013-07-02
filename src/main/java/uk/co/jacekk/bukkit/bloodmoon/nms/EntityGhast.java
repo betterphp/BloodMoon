@@ -1,6 +1,5 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_6_R1.EntityLiving;
 import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Bukkit;
@@ -9,7 +8,6 @@ import org.bukkit.craftbukkit.v1_6_R1.entity.CraftGhast;
 import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
 import org.bukkit.plugin.Plugin;
 
-import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityGhast;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
@@ -33,13 +31,6 @@ public class EntityGhast extends net.minecraft.server.v1_6_R1.EntityGhast {
 		
 		this.bukkitEntity = new CraftGhast((CraftServer) this.plugin.server, this);
 		this.bloodMoonEntity = new BloodMoonEntityGhast(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.GHAST);
-		
-		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
-		}catch (Exception e){
-			e.printStackTrace();
-			this.world.removeEntity(this);
-		}
 	}
 	
 	@Override

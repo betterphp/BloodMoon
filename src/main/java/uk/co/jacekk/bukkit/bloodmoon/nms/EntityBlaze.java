@@ -33,13 +33,6 @@ public class EntityBlaze extends net.minecraft.server.v1_6_R1.EntityBlaze {
 		
 		this.bukkitEntity = new CraftBlaze((CraftServer) this.plugin.server, this);
 		this.bloodMoonEntity = new BloodMoonEntityBlaze(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.BLAZE);
-		
-		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
-		}catch (Exception e){
-			e.printStackTrace();
-			this.world.removeEntity(this);
-		}
 	}
 	
 	@Override

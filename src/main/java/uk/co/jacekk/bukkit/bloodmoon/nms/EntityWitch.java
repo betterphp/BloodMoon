@@ -33,13 +33,6 @@ public class EntityWitch extends net.minecraft.server.v1_6_R1.EntityWitch {
 		
 		this.bukkitEntity = new CraftWitch((CraftServer) this.plugin.server, this);
 		this.bloodMoonEntity = new BloodMoonEntityWitch(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.WITCH);
-		
-		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
-		}catch (Exception e){
-			e.printStackTrace();
-			this.world.removeEntity(this);
-		}
 	}
 	
 	@Override

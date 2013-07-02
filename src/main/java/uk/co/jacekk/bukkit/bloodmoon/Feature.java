@@ -10,6 +10,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.mob.FireArrowsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.MaxHealthListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.MoreDropsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.MoreExpListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.mob.MovementSpeedListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.SuperCreepersListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.ZombieArmorListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.ZombieWeaponListener;
@@ -39,7 +40,7 @@ public enum Feature {
 	BREAK_BLOCKS(null, Config.FEATURE_BREAK_BLOCKS_ENABLED), // handled in BloodMoonEntity*
 	TARGET_DISTANCE(null, Config.FEATURE_TARGET_DISTANCE_ENABLED), // handled in BloodMoonPathfinderGoalNearestAttackableTarget
 	ARROW_RATE(null, Config.FEATURE_ARROW_RATE_ENABLED), // handled in BloodMoonPathfinderGoalArrowAttack
-	MOVEMENT_SPEED(null, Config.FEATURE_MOVEMENT_SPEED_ENABLED), // handled in all BloodMoonNavigation*
+	MOVEMENT_SPEED(MovementSpeedListener.class, Config.FEATURE_MOVEMENT_SPEED_ENABLED),
 	
 	// World features
 	WEATHER(WeatherListener.class, Config.FEATURE_WEATHER_ENABLED),

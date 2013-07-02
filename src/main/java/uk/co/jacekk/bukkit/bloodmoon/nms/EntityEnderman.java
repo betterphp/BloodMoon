@@ -41,13 +41,6 @@ public class EntityEnderman extends net.minecraft.server.v1_6_R1.EntityEnderman 
 		
 		this.bukkitEntity = new CraftEnderman((CraftServer) this.plugin.server, this);
 		this.bloodMoonEntity = new BloodMoonEntityEndermen(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.ENDERMAN);
-		
-		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
-		}catch (Exception e){
-			e.printStackTrace();
-			this.world.removeEntity(this);
-		}
 	}
 	
 	@Override

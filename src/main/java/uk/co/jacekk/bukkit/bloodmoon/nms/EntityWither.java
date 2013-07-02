@@ -33,13 +33,6 @@ public class EntityWither extends net.minecraft.server.v1_6_R1.EntityWither {
 		
 		this.bukkitEntity = new CraftWither((CraftServer) this.plugin.server, this);
 		this.bloodMoonEntity = new BloodMoonEntityWither(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.WITCH);
-		
-		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
-		}catch (Exception e){
-			e.printStackTrace();
-			this.world.removeEntity(this);
-		}
 	}
 	
 	@Override
