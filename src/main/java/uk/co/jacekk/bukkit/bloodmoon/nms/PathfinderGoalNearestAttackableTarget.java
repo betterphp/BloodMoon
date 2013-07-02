@@ -1,6 +1,5 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import java.lang.reflect.Constructor;
 import java.util.Collections;
 import java.util.List;
 
@@ -31,16 +30,7 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 		this.a = class1;
 		this.b = i;
 		this.e = new DistanceComparator(entity);
-		
-		try{
-			Class<?> clazz = Class.forName("net.minecraft.server.v1_6_R1.EntitySelectorNearestAttackableTarget");
-			Constructor<?> constructor = clazz.getConstructor(PathfinderGoalNearestAttackableTarget.class, IEntitySelector.class);
-			constructor.setAccessible(true);
-			
-			this.f = (IEntitySelector) constructor.newInstance(this, ientityselector);
-		}catch (Exception e){
-			e.printStackTrace();
-		}
+		this.f = new EntitySelectorNearestAttackableTarget(this, ientityselector);
 		
 		this.a(1);
 	}
@@ -87,6 +77,11 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 	public void c(){
 		this.c.setGoalTarget(this.g);
 		super.c();
+	}
+	
+	@Override
+	public boolean a(EntityLiving entityliving, boolean flag){
+		return super.a(entityliving, flag);
 	}
 	
 }
