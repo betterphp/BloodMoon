@@ -2,9 +2,9 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_5_R3.EntityLiving;
+import net.minecraft.server.v1_6_R1.EntityLiving;
 
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
 
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 

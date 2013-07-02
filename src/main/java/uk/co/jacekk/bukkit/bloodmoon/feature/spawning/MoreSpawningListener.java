@@ -2,11 +2,13 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_6_R1.EntityInsentient;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.GroupDataEntity;
+import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_5_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -45,13 +47,13 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 				for (BloodMoonEntityType bloodMoonEntity : BloodMoonEntityType.values()){
 					if (type == bloodMoonEntity.getEntityType()){
 						try{
-							EntityLiving customEntity = bloodMoonEntity.createEntity(world);
+							EntityInsentient customEntity = (EntityInsentient) bloodMoonEntity.createEntity(world);
 							
 							if (customEntity != null){
 								customEntity.setPositionRotation(location.getX() + (this.random.nextDouble() * 3) - 1.5, location.getY(), location.getZ() + (this.random.nextDouble() * 3) - 1.5, location.getYaw(), location.getPitch());
-								customEntity.bJ();
-								
+								customEntity.a((GroupDataEntity) null);
 								world.addEntity(customEntity, SpawnReason.CUSTOM);
+								customEntity.p();
 							}
 						}catch (Exception e){
 							e.printStackTrace();

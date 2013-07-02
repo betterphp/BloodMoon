@@ -1,13 +1,13 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_5_R3.Entity;
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_6_R1.Entity;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_5_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftSpider;
+import org.bukkit.craftbukkit.v1_6_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftSpider;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -17,7 +17,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntitySpider;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntitySpider extends net.minecraft.server.v1_5_R3.EntitySpider {
+public class EntitySpider extends net.minecraft.server.v1_6_R1.EntitySpider {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntitySpider bloodMoonEntity;
@@ -38,7 +38,7 @@ public class EntitySpider extends net.minecraft.server.v1_5_R3.EntitySpider {
 		this.bloodMoonEntity = new BloodMoonEntitySpider(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.SPIDER);
 		
 		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, this.ay()));
+			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
 		}catch (Exception e){
 			e.printStackTrace();
 			this.world.removeEntity(this);
@@ -58,7 +58,7 @@ public class EntitySpider extends net.minecraft.server.v1_5_R3.EntitySpider {
 	
 	@Override
 	protected Entity findTarget(){
-		float f = this.c(1.0F);
+		float f = this.d(1.0F);
 		
 		if (f < 0.5F){
 			String worldName = this.world.worldData.getName();

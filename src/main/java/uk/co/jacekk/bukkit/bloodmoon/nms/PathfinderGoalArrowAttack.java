@@ -1,12 +1,13 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_5_R3.Entity;
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.IRangedEntity;
-import net.minecraft.server.v1_5_R3.MathHelper;
-import net.minecraft.server.v1_5_R3.PathfinderGoal;
+import net.minecraft.server.v1_6_R1.Entity;
+import net.minecraft.server.v1_6_R1.EntityInsentient;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.IRangedEntity;
+import net.minecraft.server.v1_6_R1.MathHelper;
+import net.minecraft.server.v1_6_R1.PathfinderGoal;
 
-import org.bukkit.craftbukkit.v1_5_R3.event.CraftEventFactory;
+import org.bukkit.craftbukkit.v1_6_R1.event.CraftEventFactory;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -18,27 +19,27 @@ public class PathfinderGoalArrowAttack extends PathfinderGoal {
 	
 	private BloodMoon plugin;
 	
-	private final EntityLiving entity;
-	private final IRangedEntity rangedEntity;
-	private EntityLiving target;
+	private final EntityInsentient a;
+	private final IRangedEntity b;
+	private EntityLiving c;
 	
-	private int d;
-	private float e;
+	private int d = -1;
+	private double e;
 	private int f;
 	private int g;
 	private int h;
 	private float i;
 	private float j;
 	
-	public PathfinderGoalArrowAttack(BloodMoon plugin, IRangedEntity irangedentity, float f, int i, int j, float f1){
+	public PathfinderGoalArrowAttack(BloodMoon plugin, IRangedEntity irangedentity, double f, int i, int j, float f1){
 		if (!(irangedentity instanceof EntityLiving)) {
 			throw new IllegalArgumentException("ArrowAttackGoal requires Mob implements RangedAttackMob");
 		}
 		
 		this.plugin = plugin;
 		
-		this.rangedEntity = irangedentity;
-		this.entity = ((EntityLiving) irangedentity);
+		this.b = irangedentity;
+		this.a = ((EntityInsentient) irangedentity);
 		
 		this.d = -1;
 		this.e = f;
@@ -51,42 +52,42 @@ public class PathfinderGoalArrowAttack extends PathfinderGoal {
 		this.a(3);
 	}
 	
-	public PathfinderGoalArrowAttack(BloodMoon plugin, IRangedEntity irangedentity, float f, int i, float f1){
+	public PathfinderGoalArrowAttack(BloodMoon plugin, IRangedEntity irangedentity, double f, int i, float f1){
 		this(plugin, irangedentity, f, i, i, f1);
 	}
 	
 	@Override
 	public boolean a(){
-		EntityLiving entityliving = this.entity.getGoalTarget();
+		EntityLiving entityliving = this.a.getGoalTarget();
 		
 		if (entityliving == null){
 			return false;
 		}
 		
-		this.target = entityliving;
+		this.c = entityliving;
 		
 		return true;
 	}
 	
 	@Override
 	public boolean b(){
-		return (this.a()) || (!this.entity.getNavigation().f());
+		return (this.a()) || (!this.a.getNavigation().g());
 	}
 	
 	@Override
 	public void d(){
-		EntityTargetEvent.TargetReason reason = this.target.isAlive() ? EntityTargetEvent.TargetReason.FORGOT_TARGET : EntityTargetEvent.TargetReason.TARGET_DIED;
-		CraftEventFactory.callEntityTargetEvent((Entity) this.rangedEntity, null, reason);
+		EntityTargetEvent.TargetReason reason = this.c.isAlive() ? EntityTargetEvent.TargetReason.FORGOT_TARGET : EntityTargetEvent.TargetReason.TARGET_DIED;
+		CraftEventFactory.callEntityTargetEvent((Entity) this.b, null, reason);
 		
-		this.target = null;
+		this.c = null;
 		this.f = 0;
 		this.d = -1;
 	}
 	
 	@Override
 	public void e(){
-		double d0 = this.entity.e(this.target.locX, this.target.boundingBox.b, this.target.locZ);
-		boolean flag = this.entity.getEntitySenses().canSee(this.target);
+		double d0 = this.a.e(this.c.locX, this.c.boundingBox.b, this.c.locZ);
+		boolean flag = this.a.getEntitySenses().canSee(this.c);
 		
 		if (flag){
 			this.f += 1;
@@ -95,14 +96,14 @@ public class PathfinderGoalArrowAttack extends PathfinderGoal {
 		}
 		
 		if (d0 > this.j || this.f < 20){
-			this.entity.getNavigation().a(this.target, this.e);
+			this.a.getNavigation().a(this.c, this.e);
 		}else{
-			this.entity.getNavigation().g();
+			this.a.getNavigation().g();
 		}
 		
-		this.entity.getControllerLook().a(this.target, 30.0F, 30.0F);
+		this.a.getControllerLook().a(this.c, 30.0F, 30.0F);
 		
-		String worldName = this.entity.world.worldData.getName();
+		String worldName = this.a.world.worldData.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		this.d = Math.max(this.d - ((plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.ARROW_RATE)) ? worldConfig.getInt(Config.FEATURE_ARROW_RATE_MULTIPLIER) : 1), 0);
@@ -125,7 +126,7 @@ public class PathfinderGoalArrowAttack extends PathfinderGoal {
 				f1 = 1.0F;
 			}
 			
-			this.rangedEntity.a(this.target, f1);
+			this.b.a(this.c, f1);
 			this.d = MathHelper.d(f * (this.h - this.g) + this.g);
 		} else if (this.d < 0) {
 			f = MathHelper.sqrt(d0) / this.i;

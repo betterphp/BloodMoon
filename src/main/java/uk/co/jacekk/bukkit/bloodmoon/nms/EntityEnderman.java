@@ -1,16 +1,16 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_5_R3.Entity;
-import net.minecraft.server.v1_5_R3.EntityHuman;
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.Vec3D;
-import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_6_R1.Entity;
+import net.minecraft.server.v1_6_R1.EntityHuman;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.Vec3D;
+import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_5_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftEnderman;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_6_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftEnderman;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -20,7 +20,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityEndermen;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntityEnderman extends net.minecraft.server.v1_5_R3.EntityEnderman {
+public class EntityEnderman extends net.minecraft.server.v1_6_R1.EntityEnderman {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityEndermen bloodMoonEntity;
@@ -43,7 +43,7 @@ public class EntityEnderman extends net.minecraft.server.v1_5_R3.EntityEnderman 
 		this.bloodMoonEntity = new BloodMoonEntityEndermen(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.ENDERMAN);
 		
 		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, this.ay()));
+			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
 		}catch (Exception e){
 			e.printStackTrace();
 			this.world.removeEntity(this);
@@ -66,14 +66,13 @@ public class EntityEnderman extends net.minecraft.server.v1_5_R3.EntityEnderman 
 			return false;
 		}
 		
-		Vec3D vec3d = entityhuman.i(1.0F).a();
+		Vec3D vec3d = entityhuman.j(1.0F).a();
 		Vec3D vec3d1 = this.world.getVec3DPool().create(this.locX - entityhuman.locX, this.boundingBox.b + (this.length / 2.0F) - (entityhuman.locY + entityhuman.getHeadHeight()), this.locZ - entityhuman.locZ);
 		double d0 = vec3d1.b();
-		
 		vec3d1 = vec3d1.a();
 		double d1 = vec3d.b(vec3d1);
 		
-		return d1 > 1.0D - 0.025D / d0 ? entityhuman.n(this) : false;
+		return (d1 > 1.0D - 0.025D / d0) ? entityhuman.o(this) : false;
 	}
 	
 	@Override

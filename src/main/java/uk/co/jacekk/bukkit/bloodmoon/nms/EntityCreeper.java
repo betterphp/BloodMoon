@@ -2,24 +2,24 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 
 import java.util.List;
 
-import net.minecraft.server.v1_5_R3.Entity;
-import net.minecraft.server.v1_5_R3.EntityHuman;
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.EntityOcelot;
-import net.minecraft.server.v1_5_R3.PathfinderGoalAvoidPlayer;
-import net.minecraft.server.v1_5_R3.PathfinderGoalFloat;
-import net.minecraft.server.v1_5_R3.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_5_R3.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_5_R3.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_5_R3.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_5_R3.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_5_R3.PathfinderGoalSwell;
-import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_6_R1.Entity;
+import net.minecraft.server.v1_6_R1.EntityHuman;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.EntityOcelot;
+import net.minecraft.server.v1_6_R1.PathfinderGoalAvoidPlayer;
+import net.minecraft.server.v1_6_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_6_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_6_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_6_R1.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_6_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_6_R1.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_6_R1.PathfinderGoalSwell;
+import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_5_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftCreeper;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_6_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftCreeper;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -29,7 +29,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntityCreeper extends net.minecraft.server.v1_5_R3.EntityCreeper {
+public class EntityCreeper extends net.minecraft.server.v1_6_R1.EntityCreeper {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityCreeper bloodMoonEntity;
@@ -50,7 +50,7 @@ public class EntityCreeper extends net.minecraft.server.v1_5_R3.EntityCreeper {
 		this.bloodMoonEntity = new BloodMoonEntityCreeper(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.CREEPER);
 		
 		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, this.ay()));
+			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
 			
 			ReflectionUtils.getFieldValue(this.goalSelector.getClass(), "a", List.class, this.goalSelector).clear();
 			ReflectionUtils.getFieldValue(this.targetSelector.getClass(), "a", List.class, this.targetSelector).clear();
@@ -63,7 +63,7 @@ public class EntityCreeper extends net.minecraft.server.v1_5_R3.EntityCreeper {
 			this.goalSelector.a(6, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
 			
-			this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityHuman.class, 16.0F, 0, true));
+			this.targetSelector.a(1, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityHuman.class, 0, true));
 			this.targetSelector.a(2, new PathfinderGoalHurtByTarget(this, false));
 		}catch (Exception e){
 			e.printStackTrace();
@@ -96,7 +96,7 @@ public class EntityCreeper extends net.minecraft.server.v1_5_R3.EntityCreeper {
 		
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
-		return entityhuman != null && this.n(entityhuman) ? entityhuman : null;
+		return (entityhuman != null && this.o(entityhuman)) ? entityhuman : null;
 	}
 	
 }

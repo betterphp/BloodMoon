@@ -2,25 +2,25 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 
 import java.util.List;
 
-import net.minecraft.server.v1_5_R3.Entity;
-import net.minecraft.server.v1_5_R3.EntityHuman;
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.EntityVillager;
-import net.minecraft.server.v1_5_R3.PathfinderGoalBreakDoor;
-import net.minecraft.server.v1_5_R3.PathfinderGoalFloat;
-import net.minecraft.server.v1_5_R3.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_5_R3.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_5_R3.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_5_R3.PathfinderGoalMoveThroughVillage;
-import net.minecraft.server.v1_5_R3.PathfinderGoalMoveTowardsRestriction;
-import net.minecraft.server.v1_5_R3.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_5_R3.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_6_R1.Entity;
+import net.minecraft.server.v1_6_R1.EntityHuman;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.EntityVillager;
+import net.minecraft.server.v1_6_R1.PathfinderGoalBreakDoor;
+import net.minecraft.server.v1_6_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_6_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_6_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_6_R1.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_6_R1.PathfinderGoalMoveThroughVillage;
+import net.minecraft.server.v1_6_R1.PathfinderGoalMoveTowardsRestriction;
+import net.minecraft.server.v1_6_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_6_R1.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_5_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftZombie;
+import org.bukkit.craftbukkit.v1_6_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftZombie;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -30,7 +30,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityZombie;
 
-public class EntityZombie extends net.minecraft.server.v1_5_R3.EntityZombie {
+public class EntityZombie extends net.minecraft.server.v1_6_R1.EntityZombie {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityZombie bloodMoonEntity;
@@ -51,7 +51,7 @@ public class EntityZombie extends net.minecraft.server.v1_5_R3.EntityZombie {
 		this.bloodMoonEntity = new BloodMoonEntityZombie(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.ZOMBIE);
 		
 		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, this.ay()));
+			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
 			
 			this.getNavigation().b(true);
 			
@@ -60,17 +60,17 @@ public class EntityZombie extends net.minecraft.server.v1_5_R3.EntityZombie {
 			
 			this.goalSelector.a(0, new PathfinderGoalFloat(this));
 			this.goalSelector.a(1, new PathfinderGoalBreakDoor(this));
-			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, this.bI, false));
-			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, this.bI, true));
-			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, this.bI));
-			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, this.bI, false));
-			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, this.bI));
+			this.goalSelector.a(2, new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.0d, false));
+			this.goalSelector.a(3, new PathfinderGoalMeleeAttack(this, EntityVillager.class, 1.0d, true));
+			this.goalSelector.a(4, new PathfinderGoalMoveTowardsRestriction(this, 1.0d));
+			this.goalSelector.a(5, new PathfinderGoalMoveThroughVillage(this, 1.0d, false));
+			this.goalSelector.a(6, new PathfinderGoalRandomStroll(this, 1.0d));
 			this.goalSelector.a(7, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
 			this.goalSelector.a(7, new PathfinderGoalRandomLookaround(this));
 			
 			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, true));
-			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityHuman.class, 16.0F, 0, true));
-			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityVillager.class, 16.0F, 0, false));
+			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityHuman.class, 0, true));
+			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityVillager.class, 0, false));
 		}catch (Exception e){
 			e.printStackTrace();
 		}
@@ -101,7 +101,7 @@ public class EntityZombie extends net.minecraft.server.v1_5_R3.EntityZombie {
 		
 		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
 		
-		return entityhuman != null && this.n(entityhuman) ? entityhuman : null;
+		return (entityhuman != null && this.o(entityhuman)) ? entityhuman : null;
 	}
 	
 }

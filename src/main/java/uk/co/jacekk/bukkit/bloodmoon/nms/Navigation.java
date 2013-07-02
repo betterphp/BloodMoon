@@ -2,15 +2,16 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.PathEntity;
-import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_6_R1.EntityInsentient;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.PathEntity;
+import net.minecraft.server.v1_6_R1.World;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
-public class Navigation extends net.minecraft.server.v1_5_R3.Navigation {
+public class Navigation extends net.minecraft.server.v1_6_R1.Navigation {
 	
 	private BloodMoon plugin;
 	private EntityLiving entity;
@@ -19,8 +20,8 @@ public class Navigation extends net.minecraft.server.v1_5_R3.Navigation {
 	private PluginConfig worldConfig;
 	private float multiplier;
 	
-	public Navigation(BloodMoon plugin, EntityLiving entity, World world, int i){
-		super(entity, world, i);
+	public Navigation(BloodMoon plugin, EntityLiving entity, World world){
+		super((EntityInsentient) entity, world);
 		
 		this.plugin = plugin;
 		this.entity = entity;
@@ -36,7 +37,7 @@ public class Navigation extends net.minecraft.server.v1_5_R3.Navigation {
 	}
 	
 	@Override
-	public boolean a(PathEntity path, float speed){
+	public boolean a(PathEntity path, double speed){
 		String worldName = this.entity.world.worldData.getName();
 		String entityName = this.entity.getBukkitEntity().getType().name().toUpperCase();
 		

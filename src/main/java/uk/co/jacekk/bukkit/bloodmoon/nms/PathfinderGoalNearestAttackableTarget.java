@@ -1,14 +1,13 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
+import java.lang.reflect.Constructor;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
-import net.minecraft.server.v1_5_R3.Entity;
-import net.minecraft.server.v1_5_R3.EntityHuman;
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.IEntitySelector;
-import net.minecraft.server.v1_5_R3.PathfinderGoalTarget;
+import net.minecraft.server.v1_6_R1.EntityCreature;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.IEntitySelector;
+import net.minecraft.server.v1_6_R1.PathfinderGoalTarget;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
@@ -18,81 +17,75 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 	
 	private BloodMoon plugin;
 	
-	private EntityLiving a;
-	private Class<?> b;
-	private int c;
-	private final IEntitySelector g;
-	private DistanceComparator h;
+	private final Class<?> a;
+	private final int b;
+	private final DistanceComparator e;
+	private IEntitySelector f;
+	private EntityLiving g;
 	
-	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entityliving, Class<?> class1, float f, int i, boolean flag, boolean flag1, IEntitySelector ientityselector){
-		super(entityliving, f, flag, flag1);
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityCreature entity, Class<?> class1, int i, boolean flag, boolean flag1, IEntitySelector ientityselector){
+		super(entity, flag, flag1);
 		
 		this.plugin = plugin;
 		
-		this.b = class1;
-		this.e = f;
-		this.c = i;
-		this.h = new DistanceComparator(entityliving);
-		this.g = ientityselector;
+		this.a = class1;
+		this.b = i;
+		this.e = new DistanceComparator(entity);
+		
+		try{
+			Class<?> clazz = Class.forName("net.minecraft.server.v1_6_R1.EntitySelectorNearestAttackableTarget");
+			Constructor<?> constructor = clazz.getConstructor(PathfinderGoalNearestAttackableTarget.class, IEntitySelector.class);
+			constructor.setAccessible(true);
+			
+			this.f = (IEntitySelector) constructor.newInstance(this, ientityselector);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 		
 		this.a(1);
 	}
 	
-	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entityliving, Class<?> class1, float f, int i, boolean flag, boolean flag1){
-		this(plugin, entityliving, class1, f, i, flag, flag1, null);
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityCreature entity, Class<?> class1, int i, boolean flag, boolean flag1){
+		this(plugin, entity, class1, i, flag, flag1, null);
 	}
 	
-	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityLiving entityliving, Class<?> class1, float f, int i, boolean flag){
-		this(plugin, entityliving, class1, f, i, flag, false);
+	public PathfinderGoalNearestAttackableTarget(BloodMoon plugin, EntityCreature entity, Class<?> class1, int i, boolean flag){
+		this(plugin, entity, class1, i, flag, false);
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean a(){
-		String worldName = this.d.world.worldData.getName();
-		String entityName = this.d.getBukkitEntity().getType().name().toUpperCase();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
-		
-		float e = this.e;
-		
-		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.TARGET_DISTANCE) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
-			e *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
-		}
-		
-		if (this.c > 0 && this.d.aE().nextInt(this.c) != 0){
+		if (this.b > 0 && this.c.aB().nextInt(this.b) != 0){
 			return false;
 		}
 		
-		if (this.b == EntityHuman.class){
-			EntityHuman entityhuman = this.d.world.findNearbyVulnerablePlayer(this.d, e);
-			
-			if (this.a(entityhuman, false)){
-				this.a = entityhuman;
-				return true;
-			}
-		}else{
-			@SuppressWarnings("unchecked")
-			List<Entity> list = this.d.world.a(this.b, this.d.boundingBox.grow(e, 4.0D, e), this.g);
-			
-			Collections.sort(list, this.h);
-			Iterator<Entity> iterator = list.iterator();
-			
-			while (iterator.hasNext()){
-				Entity entity = iterator.next();
-				EntityLiving entityliving = (EntityLiving) entity;
-				
-				if (this.a(entityliving, false)){
-					this.a = entityliving;
-					return true;
-				}
-			}
+		String worldName = this.g.world.worldData.getName();
+		String entityName = this.g.getBukkitEntity().getType().name().toUpperCase();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		double distance = this.f();
+		
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.TARGET_DISTANCE) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
+			distance *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
 		}
 		
-		return false;
+		@SuppressWarnings("rawtypes")
+		List localList = this.c.world.a(this.a, this.c.boundingBox.grow(distance, 4.0D, distance), this.f);
+		Collections.sort(localList, this.e);
+		
+		if (localList.isEmpty()){
+			return false;
+		}
+		
+		this.g = ((EntityLiving) localList.get(0));
+		
+		return true;
 	}
 	
 	@Override
 	public void c(){
-		this.d.setGoalTarget(this.a);
+		this.c.setGoalTarget(this.g);
 		super.c();
 	}
 	

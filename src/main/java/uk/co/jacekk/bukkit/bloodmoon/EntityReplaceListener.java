@@ -1,12 +1,14 @@
 package uk.co.jacekk.bukkit.bloodmoon;
 
-import net.minecraft.server.v1_5_R3.Entity;
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_6_R1.Entity;
+import net.minecraft.server.v1_6_R1.EntityInsentient;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.GroupDataEntity;
+import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_5_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
@@ -34,15 +36,15 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		for (BloodMoonEntityType bloodMoonEntity : BloodMoonEntityType.values()){
 			if (creatureType == bloodMoonEntity.getEntityType() && entity.getClass().equals(bloodMoonEntity.getNMSClass())){
 				try{
-					EntityLiving customEntity = bloodMoonEntity.createEntity(world);
+					EntityInsentient customEntity = (EntityInsentient) bloodMoonEntity.createEntity(world);
 					
 					world.removeEntity(entity);
 					
 					if (customEntity != null){
 						customEntity.setPositionRotation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-						customEntity.bJ();
-						
+						customEntity.a((GroupDataEntity) null);
 						world.addEntity(customEntity, SpawnReason.CUSTOM);
+						customEntity.p();
 					}
 				}catch (Exception e){
 					e.printStackTrace();

@@ -2,7 +2,7 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 
 import java.util.Comparator;
 
-import net.minecraft.server.v1_5_R3.Entity;
+import net.minecraft.server.v1_6_R1.Entity;
 
 public class DistanceComparator implements Comparator<Entity> {
 	

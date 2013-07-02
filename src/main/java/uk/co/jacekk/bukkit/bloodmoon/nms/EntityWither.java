@@ -1,12 +1,12 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_5_R3.EntityLiving;
-import net.minecraft.server.v1_5_R3.World;
+import net.minecraft.server.v1_6_R1.EntityLiving;
+import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_5_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_5_R3.entity.CraftWither;
+import org.bukkit.craftbukkit.v1_6_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_6_R1.entity.CraftWither;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
@@ -14,7 +14,7 @@ import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityWither;
 
-public class EntityWither extends net.minecraft.server.v1_5_R3.EntityWither {
+public class EntityWither extends net.minecraft.server.v1_6_R1.EntityWither {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityWither bloodMoonEntity;
@@ -35,7 +35,7 @@ public class EntityWither extends net.minecraft.server.v1_5_R3.EntityWither {
 		this.bloodMoonEntity = new BloodMoonEntityWither(this.plugin, this, (CraftLivingEntity) this.bukkitEntity, BloodMoonEntityType.WITCH);
 		
 		try{
-			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world, this.ay()));
+			ReflectionUtils.setFieldValue(EntityLiving.class, "navigation", this, new Navigation(this.plugin, this, this.world));
 		}catch (Exception e){
 			e.printStackTrace();
 			this.world.removeEntity(this);
