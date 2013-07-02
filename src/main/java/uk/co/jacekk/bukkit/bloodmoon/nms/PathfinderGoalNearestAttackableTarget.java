@@ -50,8 +50,8 @@ public class PathfinderGoalNearestAttackableTarget extends PathfinderGoalTarget 
 			return false;
 		}
 		
-		String worldName = this.g.world.worldData.getName();
-		String entityName = this.g.getBukkitEntity().getType().name().toUpperCase();
+		String worldName = this.c.world.worldData.getName();
+		String entityName = this.c.getBukkitEntity().getType().name().toUpperCase();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		double distance = this.f();
