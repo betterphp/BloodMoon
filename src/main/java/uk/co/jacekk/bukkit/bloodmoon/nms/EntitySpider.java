@@ -56,7 +56,7 @@ public class EntitySpider extends net.minecraft.server.v1_6_R1.EntitySpider {
 			String entityName = this.getBukkitEntity().getType().name().toUpperCase();
 			PluginConfig worldConfig = plugin.getConfig(worldName);
 			
-			float distance = 16.0f;
+			double distance = 16.0d;
 			
 			if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
 				distance *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
