@@ -12,9 +12,7 @@ import org.bukkit.craftbukkit.v1_6_R1.entity.CraftEnderman;
 import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
 import org.bukkit.plugin.Plugin;
 
-import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
-import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityEndermen;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
@@ -23,7 +21,8 @@ public class EntityEnderman extends net.minecraft.server.v1_6_R1.EntityEnderman 
 	private BloodMoon plugin;
 	private BloodMoonEntityEndermen bloodMoonEntity;
 	
-	private int f = 0;
+	public int bt;
+	public boolean bv;
 	
 	public EntityEnderman(World world){
 		super(world);
@@ -52,7 +51,7 @@ public class EntityEnderman extends net.minecraft.server.v1_6_R1.EntityEnderman 
 		}
 	}
 	
-	private boolean d(EntityHuman entityhuman){
+	public boolean f(EntityHuman entityhuman){
 		if (entityhuman.inventory.armor[3] != null && entityhuman.inventory.armor[3].id == Material.PUMPKIN.getId()){
 			return false;
 		}
@@ -68,35 +67,7 @@ public class EntityEnderman extends net.minecraft.server.v1_6_R1.EntityEnderman 
 	
 	@Override
 	protected Entity findTarget(){
-		String worldName = this.world.worldData.getName();
-		String entityName = this.getBukkitEntity().getType().name().toUpperCase();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
-		
-		float distance = 64.0f;
-		
-		if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
-			distance *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
-		}
-		
-		EntityHuman entityhuman = this.world.findNearbyVulnerablePlayer(this, distance);
-		
-		if (entityhuman != null){
-			if (this.d(entityhuman)){
-				if (this.f == 0){
-					this.world.makeSound(entityhuman, "mob.endermen.stare", 1.0F, 1.0F);
-				}
-				
-				if (this.f++ == 5){
-					this.f = 0;
-					this.f(true);
-					return entityhuman;
-				}
-			}else{
-				this.f = 0;
-			}
-		}
-		
-		return null;
+		return this.bloodMoonEntity.findTarget();
 	}
 	
 }

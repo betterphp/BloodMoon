@@ -3,7 +3,6 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 import java.util.Random;
 
 import net.minecraft.server.v1_6_R1.EntityInsentient;
-import net.minecraft.server.v1_6_R1.EntityLiving;
 import net.minecraft.server.v1_6_R1.GroupDataEntity;
 import net.minecraft.server.v1_6_R1.World;
 

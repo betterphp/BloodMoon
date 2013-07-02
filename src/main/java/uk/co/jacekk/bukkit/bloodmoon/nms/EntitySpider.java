@@ -9,9 +9,7 @@ import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_6_R1.entity.CraftSpider;
 import org.bukkit.plugin.Plugin;
 
-import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
-import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntitySpider;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
@@ -49,23 +47,7 @@ public class EntitySpider extends net.minecraft.server.v1_6_R1.EntitySpider {
 	
 	@Override
 	protected Entity findTarget(){
-		float f = this.d(1.0F);
-		
-		if (f < 0.5F){
-			String worldName = this.world.worldData.getName();
-			String entityName = this.getBukkitEntity().getType().name().toUpperCase();
-			PluginConfig worldConfig = plugin.getConfig(worldName);
-			
-			double distance = 16.0d;
-			
-			if (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_TARGET_DISTANCE_ENABLED) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
-				distance *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
-			}
-			
-			return this.world.findNearbyVulnerablePlayer(this, distance);
-		}
-		
-		return null;
+		return this.bloodMoonEntity.findTarget();
 	}
 	
 }
