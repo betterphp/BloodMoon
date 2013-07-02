@@ -3,9 +3,7 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.mob;
 import java.util.Random;
 
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_6_R1.entity.CraftCreeper;
 import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

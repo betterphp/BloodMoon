@@ -2,7 +2,6 @@ package uk.co.jacekk.bukkit.bloodmoon;
 
 import net.minecraft.server.v1_6_R1.Entity;
 import net.minecraft.server.v1_6_R1.EntityInsentient;
-import net.minecraft.server.v1_6_R1.EntityLiving;
 import net.minecraft.server.v1_6_R1.GroupDataEntity;
 import net.minecraft.server.v1_6_R1.World;
 

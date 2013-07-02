@@ -4,7 +4,6 @@ import java.util.List;
 
 import net.minecraft.server.v1_6_R1.Entity;
 import net.minecraft.server.v1_6_R1.EntityHuman;
-import net.minecraft.server.v1_6_R1.EntityLiving;
 import net.minecraft.server.v1_6_R1.EntityVillager;
 import net.minecraft.server.v1_6_R1.PathfinderGoalBreakDoor;
 import net.minecraft.server.v1_6_R1.PathfinderGoalFloat;
