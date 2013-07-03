@@ -73,7 +73,7 @@ public class MovementSpeedListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isFeatureEnabled(worldName, Feature.MOVEMENT_SPEED)){
+		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.MOVEMENT_SPEED)){
 			if (worldConfig.getStringList(Config.FEATURE_MOVEMENT_SPEED_MOBS).contains(entity.getType().name())){
 				try{
 					BloodMoonEntityLiving bloodMoonEntity = BloodMoonEntityLiving.getBloodMoonEntity(((CraftLivingEntity) entity).getHandle());
