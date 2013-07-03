@@ -29,8 +29,8 @@ public class MaxHealthListener extends BaseListener<BloodMoon> {
 		if (plugin.isFeatureEnabled(worldName, Feature.MAX_HEALTH)){
 			for (LivingEntity entity : world.getLivingEntities()){
 				if (worldConfig.getStringList(Config.FEATURE_MAX_HEALTH_MOBS).contains(entity.getType().name())){
-					int newMaxHealth = (int) (entity.getMaxHealth() * worldConfig.getDouble(Config.FEATURE_MAX_HEALTH_MULTIPLIER));
-					int damage = entity.getMaxHealth() - entity.getHealth();
+					double newMaxHealth = entity.getMaxHealth() * worldConfig.getDouble(Config.FEATURE_MAX_HEALTH_MULTIPLIER);
+					double damage = entity.getMaxHealth() - entity.getHealth();
 					
 					entity.setMaxHealth(newMaxHealth);
 					entity.setHealth(newMaxHealth - damage);
@@ -46,8 +46,8 @@ public class MaxHealthListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.MAX_HEALTH) && worldConfig.getStringList(Config.FEATURE_MAX_HEALTH_MOBS).contains(entity.getType().name())){
-			int newMaxHealth = (int) (entity.getMaxHealth() * worldConfig.getDouble(Config.FEATURE_MAX_HEALTH_MULTIPLIER));
-			int damage = entity.getMaxHealth() - entity.getHealth();
+			double newMaxHealth = entity.getMaxHealth() * worldConfig.getDouble(Config.FEATURE_MAX_HEALTH_MULTIPLIER);
+			double damage = entity.getMaxHealth() - entity.getHealth();
 			
 			entity.setMaxHealth(newMaxHealth);
 			entity.setHealth(newMaxHealth - damage);
