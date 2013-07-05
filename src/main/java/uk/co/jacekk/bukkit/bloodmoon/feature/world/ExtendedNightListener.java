@@ -45,7 +45,7 @@ public class ExtendedNightListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isFeatureEnabled(worldName, Feature.DAYLIGHT_PROOF_MOBS)){
+		if (plugin.isFeatureEnabled(worldName, Feature.EXTENDED_NIGHT)){
 			ExtendedNightTask task = new ExtendedNightTask(plugin, world, worldConfig);
 			int taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, task, 0L, 100L);
 			
