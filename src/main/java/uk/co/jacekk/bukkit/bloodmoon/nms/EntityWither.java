@@ -1,6 +1,5 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_6_R1.Entity;
 import net.minecraft.server.v1_6_R1.World;
 
 import org.bukkit.Bukkit;
@@ -43,11 +42,6 @@ public class EntityWither extends net.minecraft.server.v1_6_R1.EntityWither {
 			plugin.log.warn("Exception caught while ticking entity");
 			e.printStackTrace();
 		}
-	}
-	
-	@Override
-	protected Entity findTarget(){
-		return this.bloodMoonEntity.findTarget();
 	}
 	
 }

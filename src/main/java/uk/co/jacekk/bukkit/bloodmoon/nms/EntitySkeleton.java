@@ -6,7 +6,6 @@ import java.util.List;
 import net.minecraft.server.v1_6_R1.Block;
 import net.minecraft.server.v1_6_R1.Enchantment;
 import net.minecraft.server.v1_6_R1.EnchantmentManager;
-import net.minecraft.server.v1_6_R1.Entity;
 import net.minecraft.server.v1_6_R1.EntityArrow;
 import net.minecraft.server.v1_6_R1.EntityHuman;
 import net.minecraft.server.v1_6_R1.EntityLiving;
@@ -19,6 +18,7 @@ import net.minecraft.server.v1_6_R1.PathfinderGoalFloat;
 import net.minecraft.server.v1_6_R1.PathfinderGoalHurtByTarget;
 import net.minecraft.server.v1_6_R1.PathfinderGoalLookAtPlayer;
 import net.minecraft.server.v1_6_R1.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_6_R1.PathfinderGoalNearestAttackableTarget;
 import net.minecraft.server.v1_6_R1.PathfinderGoalRandomLookaround;
 import net.minecraft.server.v1_6_R1.PathfinderGoalRandomStroll;
 import net.minecraft.server.v1_6_R1.PathfinderGoalRestrictSun;
@@ -71,7 +71,7 @@ public class EntitySkeleton extends net.minecraft.server.v1_6_R1.EntitySkeleton 
 			this.goalSelector.a(6, new PathfinderGoalRandomLookaround(this));
 			
 			this.targetSelector.a(1, new PathfinderGoalHurtByTarget(this, false));
-			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this.plugin, this, EntityHuman.class, 0, true));
+			this.targetSelector.a(2, new PathfinderGoalNearestAttackableTarget(this, EntityHuman.class, 0, true));
 		}catch (Exception e){
 			e.printStackTrace();
 			this.world.removeEntity(this);
@@ -116,11 +116,6 @@ public class EntitySkeleton extends net.minecraft.server.v1_6_R1.EntitySkeleton 
 			plugin.log.warn("Exception caught while ticking entity");
 			e.printStackTrace();
 		}
-	}
-	
-	@Override
-	protected Entity findTarget(){
-		return this.bloodMoonEntity.findTarget();
 	}
 	
 	@Override

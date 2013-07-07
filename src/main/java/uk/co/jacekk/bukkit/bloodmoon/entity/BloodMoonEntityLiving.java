@@ -5,18 +5,13 @@ import java.util.UUID;
 
 import net.minecraft.server.v1_6_R1.AttributeInstance;
 import net.minecraft.server.v1_6_R1.AttributeModifier;
-import net.minecraft.server.v1_6_R1.Entity;
-import net.minecraft.server.v1_6_R1.EntityHuman;
 import net.minecraft.server.v1_6_R1.EntityLiving;
 import net.minecraft.server.v1_6_R1.GenericAttributes;
 
 import org.bukkit.craftbukkit.v1_6_R1.entity.CraftLivingEntity;
 
-import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
-import uk.co.jacekk.bukkit.bloodmoon.Config;
-import uk.co.jacekk.bukkit.bloodmoon.Feature;
 
 public abstract class BloodMoonEntityLiving {
 	
@@ -93,22 +88,6 @@ public abstract class BloodMoonEntityLiving {
 		AttributeModifier modifier = new AttributeModifier(movementSpeedUID, "BloodMoon movement speed multiplier", 1.0d, 1);
 		
 		attributes.b(modifier);
-	}
-	
-	public Entity findTarget(){
-		String worldName = this.nmsEntity.world.worldData.getName();
-		String entityName = this.bukkitEntity.getType().name().toUpperCase();
-		PluginConfig worldConfig = plugin.getConfig(worldName);
-		
-		double distance = 16.0d;
-		
-		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.TARGET_DISTANCE) && worldConfig.getStringList(Config.FEATURE_TARGET_DISTANCE_MOBS).contains(entityName)){
-			distance *= worldConfig.getInt(Config.FEATURE_TARGET_DISTANCE_MULTIPLIER);
-		}
-		
-		EntityHuman entityhuman = this.nmsEntity.world.findNearbyVulnerablePlayer(this.nmsEntity, distance);
-		
-		return (entityhuman != null && this.nmsEntity.o(entityhuman)) ? entityhuman : null;
 	}
 	
 	public abstract void onTick();

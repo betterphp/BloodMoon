@@ -12,6 +12,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.mob.MoreDropsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.MoreExpListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.MovementSpeedListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.SuperCreepersListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.mob.TargetDistanceListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.ZombieArmorListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.ZombieWeaponListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.player.SwordDamageListener;
@@ -38,7 +39,7 @@ public enum Feature {
 	MORE_DROPS(MoreDropsListener.class, Config.FEATURE_MORE_DROPS_ENABLED),
 	MORE_EXP(MoreExpListener.class, Config.FEATURE_MORE_EXP_ENABLED),
 	BREAK_BLOCKS(null, Config.FEATURE_BREAK_BLOCKS_ENABLED), // handled in BloodMoonEntity*
-	TARGET_DISTANCE(null, Config.FEATURE_TARGET_DISTANCE_ENABLED), // handled in BloodMoonPathfinderGoalNearestAttackableTarget
+	TARGET_DISTANCE(TargetDistanceListener.class, Config.FEATURE_TARGET_DISTANCE_ENABLED),
 	ARROW_RATE(null, Config.FEATURE_ARROW_RATE_ENABLED), // handled in BloodMoonPathfinderGoalArrowAttack
 	MOVEMENT_SPEED(MovementSpeedListener.class, Config.FEATURE_MOVEMENT_SPEED_ENABLED),
 	

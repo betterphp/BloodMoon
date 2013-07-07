@@ -46,7 +46,7 @@ public class Config {
 	public static final PluginConfigKey FEATURE_ZOMBIE_ARMOR_ARMOR					= new PluginConfigKey("features.zombie-armor.armor",				Arrays.asList("DIAMOND", "GOLD", "IRON"));
 	
 	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_ENABLED				= new PluginConfigKey("features.target-distance.enabled",			true);
-	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MULTIPLIER			= new PluginConfigKey("features.target-distance.multiplier",		3);
+	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MULTIPLIER			= new PluginConfigKey("features.target-distance.multiplier",		3.0d);
 	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MOBS				= new PluginConfigKey("features.target-distance.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER"));
 	
 	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_ENABLED				= new PluginConfigKey("features.movement-speed.enabled",			true);
