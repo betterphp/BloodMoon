@@ -2,8 +2,8 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_6_R1.MobSpawnerAbstract;
-import net.minecraft.server.v1_6_R1.TileEntityMobSpawner;
+import net.minecraft.server.v1_6_R2.MobSpawnerAbstract;
+import net.minecraft.server.v1_6_R2.TileEntityMobSpawner;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -11,7 +11,7 @@ import org.bukkit.TreeSpecies;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.craftbukkit.v1_6_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.Inventory;
