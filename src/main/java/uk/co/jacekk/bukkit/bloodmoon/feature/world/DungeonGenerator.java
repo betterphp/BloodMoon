@@ -24,6 +24,7 @@ import uk.co.jacekk.bukkit.baseplugin.util.ListUtils;
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
+import uk.co.jacekk.bukkit.bloodmoon.event.DungeonChestFillEvent;
 
 public class DungeonGenerator extends BlockPopulator {
 	
@@ -274,6 +275,8 @@ public class DungeonGenerator extends BlockPopulator {
 					inv.setItem(rand.nextInt(inv.getSize()), item);
 				}
 			}
+			
+			this.plugin.pluginManager.callEvent(new DungeonChestFillEvent(chest));
 		}
 		
 		// Set markers for protection
