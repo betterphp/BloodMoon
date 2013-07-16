@@ -114,6 +114,7 @@ public class Config {
 	public static final PluginConfigKey FEATURE_WEATHER_ENABLED						= new PluginConfigKey("features.weather.enabled",					true);
 	public static final PluginConfigKey FEATURE_WEATHER_THUNDER						= new PluginConfigKey("features.weather.thunder",					true);
 	public static final PluginConfigKey FEATURE_WEATHER_RAIN						= new PluginConfigKey("features.weather.rain",						true);
+	public static final PluginConfigKey FEATURE_WEATHER_CHANCE						= new PluginConfigKey("features.weather.chance",					50);
 	
 	public static final PluginConfigKey FEATURE_DAYLIGHT_PROOF_MOBS_ENABLED			= new PluginConfigKey("features.daylight-proof-mobs.enabled",		true);
 	

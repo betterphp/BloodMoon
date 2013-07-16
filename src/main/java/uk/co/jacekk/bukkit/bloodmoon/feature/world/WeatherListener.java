@@ -1,5 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
+import java.util.Random;
+
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -15,8 +17,12 @@ import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
 public class WeatherListener extends BaseListener<BloodMoon> {
 	
+	private Random random;
+	
 	public WeatherListener(BloodMoon plugin){
 		super(plugin);
+		
+		this.random = new Random();
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -25,7 +31,7 @@ public class WeatherListener extends BaseListener<BloodMoon> {
 		String worldName = world.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (plugin.isFeatureEnabled(worldName, Feature.WEATHER)){
+		if (plugin.isFeatureEnabled(worldName, Feature.WEATHER) && this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_WEATHER_CHANCE)){
 			world.setStorm(worldConfig.getBoolean(Config.FEATURE_WEATHER_RAIN));
 			world.setThundering(worldConfig.getBoolean(Config.FEATURE_WEATHER_THUNDER));
 			
