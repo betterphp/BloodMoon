@@ -15,7 +15,8 @@ public class Config {
 	public static final PluginConfigKey CHANCE										= new PluginConfigKey("chance",										14);
 	
 	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_ENABLED				= new PluginConfigKey("features.chat-message.enabled",				true);
-	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_MESSAGE				= new PluginConfigKey("features.chat-message.message",				"&cThe bloodmoon is rising !");
+	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_START_MESSAGE			= new PluginConfigKey("features.chat-message.start-message",		"&cThe bloodmoon is rising !");
+	public static final PluginConfigKey FEATURE_CHAT_MESSAGE_END_MESSAGE			= new PluginConfigKey("features.chat-message.end-message",			"&cThe bloodmoon is over !");
 	
 	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_ENABLED				= new PluginConfigKey("features.server-commands.enabled",			false);
 	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_START_COMMANDS		= new PluginConfigKey("features.server-commands.commands.start",	Arrays.asList("toggledownfall", "time set 0", "op Notch"));

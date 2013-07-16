@@ -13,6 +13,7 @@ import uk.co.jacekk.bukkit.baseplugin.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.Feature;
+import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
 public class ChatMessageListener extends BaseListener<BloodMoon> {
@@ -28,8 +29,12 @@ public class ChatMessageListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isFeatureEnabled(worldName, Feature.CHAT_MESSAGE)){
-			for (Player player : world.getPlayers()){
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&', worldConfig.getString(Config.FEATURE_CHAT_MESSAGE_MESSAGE)));
+			String message = worldConfig.getString(Config.FEATURE_CHAT_MESSAGE_START_MESSAGE);
+			
+			if (!message.isEmpty()){
+				for (Player player : world.getPlayers()){
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+				}
 			}
 		}
 	}
@@ -41,8 +46,12 @@ public class ChatMessageListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isFeatureEnabled(worldName, Feature.CHAT_MESSAGE)){
-			if (plugin.isActive(worldName)){
-				player.sendMessage(ChatColor.translateAlternateColorCodes('&', worldConfig.getString(Config.FEATURE_CHAT_MESSAGE_MESSAGE)));
+			String message = worldConfig.getString(Config.FEATURE_CHAT_MESSAGE_START_MESSAGE);
+			
+			if (!message.isEmpty()){
+				if (plugin.isActive(worldName)){
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+				}
 			}
 		}
 	}
@@ -51,22 +60,42 @@ public class ChatMessageListener extends BaseListener<BloodMoon> {
 	public void onPlayerJoin(PlayerJoinEvent event){
 		Player player = event.getPlayer();
 		String worldName = player.getWorld().getName();
-		final PluginConfig worldConfig = plugin.getConfig(worldName);
+		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.CHAT_MESSAGE)){
 			final String playerName = player.getName();
+			final String message = worldConfig.getString(Config.FEATURE_CHAT_MESSAGE_START_MESSAGE);
 			
-			plugin.scheduler.scheduleSyncDelayedTask(plugin, new Runnable(){
-				
-				public void run(){
-					Player player = plugin.server.getPlayer(playerName);
+			if (!message.isEmpty()){
+				plugin.scheduler.scheduleSyncDelayedTask(plugin, new Runnable(){
 					
-					if (player != null){
-						player.sendMessage(ChatColor.translateAlternateColorCodes('&', worldConfig.getString(Config.FEATURE_CHAT_MESSAGE_MESSAGE)));
+					public void run(){
+						Player player = plugin.server.getPlayer(playerName);
+						
+						if (player != null){
+							player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+						}
 					}
+					
+				}, 40L);
+			}
+		}
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onEnd(BloodMoonEndEvent event){
+		World world = event.getWorld();
+		String worldName = world.getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		if (plugin.isFeatureEnabled(worldName, Feature.CHAT_MESSAGE)){
+			String message = worldConfig.getString(Config.FEATURE_CHAT_MESSAGE_END_MESSAGE);
+			
+			if (!message.isEmpty()){
+				for (Player player : world.getPlayers()){
+					player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 				}
-				
-			}, 40L);
+			}
 		}
 	}
 	
