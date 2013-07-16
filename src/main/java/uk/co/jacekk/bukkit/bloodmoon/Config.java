@@ -133,4 +133,7 @@ public class Config {
 	public static final PluginConfigKey FEATURE_DUNGEONS_MAX_STACK_SIZE				= new PluginConfigKey("features.dungeons.max-stack-size",			8);
 	public static final PluginConfigKey FEATURE_DUNGEONS_ITEMS_PER_CHEST			= new PluginConfigKey("features.dungeons.items-per-chest",			12);
 	
+	public static final PluginConfigKey FEATURE_GIANTS_ENABLED						= new PluginConfigKey("features.giants.enabled",					true);
+	public static final PluginConfigKey FEATURE_GIANTS_BREAK_BLOCKS					= new PluginConfigKey("features.giants.break-blocks",				Arrays.asList(Material.GRASS.name(), Material.LEAVES.name(), Material.WOOD.name(), Material.GLASS.name(), Material.CROPS.name(), Material.SOIL.name(), Material.LOG.name(), Material.WOOD_STEP.name(), Material.WOOD_STAIRS.name()));
+	
 }

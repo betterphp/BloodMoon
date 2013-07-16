@@ -17,6 +17,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.mob.ZombieArmorListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.ZombieWeaponListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.player.SwordDamageListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.server.ServerCommandsListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.GiantsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.MoreMobsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.MoreSpawningListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.SpawnOnKillListener;
@@ -55,6 +56,7 @@ public enum Feature {
 	SPAWN_ON_SLEEP(SpawnOnSleepListener.class, Config.FEATURE_SPAWN_ON_SLEEP_ENABLED),
 	MORE_SPAWNING(MoreSpawningListener.class, Config.FEATURE_MORE_SPAWNING_ENABLED),
 	MORE_MOBS(MoreMobsListener.class, Config.FEATURE_MORE_MOBS_ENABLED),
+	GIANTS(GiantsListener.class, Config.FEATURE_GIANTS_ENABLED),
 	
 	// Server features
 	SERVER_COMMANDS(ServerCommandsListener.class, Config.FEATURE_SERVER_COMMANDS_ENABLED),

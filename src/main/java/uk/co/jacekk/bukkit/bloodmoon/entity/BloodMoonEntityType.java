@@ -18,7 +18,8 @@ public enum BloodMoonEntityType {
 	GHAST("Ghast", 56, EntityType.GHAST, net.minecraft.server.v1_6_R2.EntityGhast.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityGhast.class),
 	BLAZE("Blaze", 61, EntityType.BLAZE, net.minecraft.server.v1_6_R2.EntityBlaze.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityBlaze.class),
 	WITHER("WitherBoss", 64, EntityType.WITHER, net.minecraft.server.v1_6_R2.EntityWither.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityWither.class),
-	WITCH("Witch", 66, EntityType.WITCH, net.minecraft.server.v1_6_R2.EntityWitch.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityWitch.class);
+	WITCH("Witch", 66, EntityType.WITCH, net.minecraft.server.v1_6_R2.EntityWitch.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityWitch.class),
+	GIANT_ZOMBIE("Giant", 53, EntityType.GIANT, net.minecraft.server.v1_6_R2.EntityGiantZombie.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityGiantZombie.class);
 	
 	private String name;
 	private int id;
