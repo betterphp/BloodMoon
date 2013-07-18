@@ -33,7 +33,7 @@ public class MaxHealthListener extends BaseListener<BloodMoon> {
 					double damage = entity.getMaxHealth() - entity.getHealth();
 					
 					entity.setMaxHealth(newMaxHealth);
-					entity.setHealth(newMaxHealth - damage);
+					entity.setHealth(Math.min(newMaxHealth - damage, newMaxHealth));
 				}
 			}
 		}
@@ -50,7 +50,7 @@ public class MaxHealthListener extends BaseListener<BloodMoon> {
 			double damage = entity.getMaxHealth() - entity.getHealth();
 			
 			entity.setMaxHealth(newMaxHealth);
-			entity.setHealth(newMaxHealth - damage);
+			entity.setHealth(Math.min(newMaxHealth - damage, newMaxHealth));
 		}
 	}
 	
