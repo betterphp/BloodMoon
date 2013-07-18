@@ -12,19 +12,20 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.event.BaseListener;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
+import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.Feature;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonEndEvent;
 import uk.co.jacekk.bukkit.bloodmoon.event.BloodMoonStartEvent;
 
 public class ExtendedNightListener extends BaseListener<BloodMoon> {
 	
-	private HashMap<String, ExtendedNightTask> worldTasks;
+	private HashMap<String, Integer> killCount;
 	private ArrayList<EntityType> hostileTypes;
 	
 	public ExtendedNightListener(BloodMoon plugin){
 		super(plugin);
 		
-		this.worldTasks = new HashMap<String, ExtendedNightTask>();
+		this.killCount = new HashMap<String, Integer>();
 		this.hostileTypes = new ArrayList<EntityType>();
 		
 		this.hostileTypes.add(EntityType.SKELETON);
@@ -46,36 +47,32 @@ public class ExtendedNightListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isFeatureEnabled(worldName, Feature.EXTENDED_NIGHT)){
-			ExtendedNightTask task = new ExtendedNightTask(plugin, world, worldConfig);
-			int taskID = plugin.scheduler.scheduleSyncRepeatingTask(plugin, task, 0L, 100L);
+			world.setGameRuleValue("doDaylightCycle", "false");
 			
-			if (taskID != -1){
-				task.taskID = taskID;
-				this.worldTasks.put(worldName, task);
+			if (!worldConfig.getBoolean(Config.ALWAYS_ON)){
+				this.killCount.put(worldName, 0);
 			}
 		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onStop(BloodMoonEndEvent event){
-		World world = event.getWorld();
-		String worldName = world.getName();
-		
-		ExtendedNightTask task = this.worldTasks.get(worldName);
-		
-		if (task != null){
-			plugin.scheduler.cancelTask(task.taskID);
-			this.worldTasks.remove(worldName);
-		}
+		this.killCount.remove(event.getWorld().getName());
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onEntityDeath(EntityDeathEvent event){
 		if (this.hostileTypes.contains(event.getEntityType())){
-			ExtendedNightTask task = this.worldTasks.get(event.getEntity().getWorld().getName());
+			World world = event.getEntity().getWorld();
+			String worldName = world.getName();
+			PluginConfig worldConfig = plugin.getConfig(worldName);
 			
-			if (task != null){
-				++task.kills;
+			if (plugin.isFeatureEnabled(worldName, Feature.EXTENDED_NIGHT) && this.killCount.containsKey(worldName)){
+				this.killCount.put(worldName, this.killCount.get(worldName) + 1);
+				
+				if (this.killCount.get(worldName) > worldConfig.getInt(Config.FEATURE_EXTENDED_NIGHT_MIN_KILLS)){
+					world.setGameRuleValue("doDaylightCycle", "true");
+				}
 			}
 		}
 	}
