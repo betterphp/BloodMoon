@@ -87,11 +87,18 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
-	public void onRespawn(PlayerRespawnEvent event){
+	public void onRespawn(final PlayerRespawnEvent event){
 		String worldName = event.getPlayer().getWorld().getName();
 		
 		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.NETHER_SKY)){
-			this.sendWorldEnvironment(event.getPlayer(), Environment.NETHER);
+			plugin.scheduler.runTask(plugin, new Runnable(){
+				
+				@Override
+				public void run(){
+					sendWorldEnvironment(event.getPlayer(), Environment.NETHER);
+				}
+				
+			});
 		}
 	}
 	
