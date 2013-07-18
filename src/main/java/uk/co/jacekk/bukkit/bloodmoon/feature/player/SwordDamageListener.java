@@ -45,7 +45,7 @@ public class SwordDamageListener extends BaseListener<BloodMoon> {
 					ItemStack item = player.getItemInHand();
 					String itemName = item.getType().name().toUpperCase();
 					
-					if (worldConfig.getStringList(Config.FEATURE_SPAWN_ON_KILL_MOBS).contains(creatureName) && itemName.endsWith("_SWORD") && this.random.nextInt(100) <= worldConfig.getInt(Config.FEATURE_SWORD_DAMAGE_CHANCE)){
+					if (worldConfig.getStringList(Config.FEATURE_SWORD_DAMAGE_MOBS).contains(creatureName) && itemName.endsWith("_SWORD") && this.random.nextInt(100) <= worldConfig.getInt(Config.FEATURE_SWORD_DAMAGE_CHANCE)){
 						short damage = item.getDurability();
 						short remove = (short) (item.getType().getMaxDurability() / 50);
 						
