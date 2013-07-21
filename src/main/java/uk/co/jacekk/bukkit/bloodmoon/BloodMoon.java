@@ -41,7 +41,7 @@ public class BloodMoon extends BasePlugin {
 			this.createConfig(world);
 		}
 		
-		this.pluginManager.registerEvents(new ConfigCreateListener(this), this);
+		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 		this.pluginManager.registerEvents(new SpawnReasonListener(this), this);
 		this.pluginManager.registerEvents(new EntityReplaceListener(this), this);
 		
