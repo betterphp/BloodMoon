@@ -24,7 +24,7 @@ public class MoreMobsListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		for (LivingEntity entity : world.getLivingEntities()){
-			if (worldConfig.getStringList(Config.FEATURE_MORE_MOBS_SPAWN).contains(entity.getType().name())){
+			if (worldConfig.getStringList(Config.FEATURE_SPAWN_CONTROL_SPAWN).contains(entity.getType().name())){
 				entity.remove();
 			}
 		}

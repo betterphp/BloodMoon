@@ -29,7 +29,7 @@ public class ChunkProviderServer extends net.minecraft.server.v1_6_R2.ChunkProvi
 		
 		PluginConfig worldConfig = this.plugin.getConfig(this.world.worldData.getName());
 		
-		for (String name : worldConfig.getStringList(Config.FEATURE_MORE_MOBS_SPAWN)){
+		for (String name : worldConfig.getStringList(Config.FEATURE_SPAWN_CONTROL_SPAWN)){
 			this.bloodMoonMobs.add(new BiomeMeta(EntityTypes.a(EntityType.valueOf(name).getTypeId()), 10, 4, 4));
 		}
 	}

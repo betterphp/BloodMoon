@@ -95,8 +95,8 @@ public class Config {
 	public static final PluginConfigKey FEATURE_SPAWN_ON_SLEEP_ENABLED				= new PluginConfigKey("features.spawn-on-sleep.enabled",			true);
 	public static final PluginConfigKey FEATURE_SPAWN_ON_SLEEP_SPAWN				= new PluginConfigKey("features.spawn-on-sleep.spawn",				Arrays.asList("ZOMBIE"));
 	
-	public static final PluginConfigKey FEATURE_MORE_MOBS_ENABLED					= new PluginConfigKey("features.more-mobs.enabled",					true);
-	public static final PluginConfigKey FEATURE_MORE_MOBS_SPAWN						= new PluginConfigKey("features.more-mobs.spawn",					Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN", "PIG_ZOMBIE", "BLAZE", "MAGMA_CUBE"));
+	public static final PluginConfigKey FEATURE_SPAWN_CONTROL_ENABLED				= new PluginConfigKey("features.spawn-control.enabled",				true);
+	public static final PluginConfigKey FEATURE_SPAWN_CONTROL_SPAWN					= new PluginConfigKey("features.spawn-control.spawn",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER", "ENDERMAN", "PIG_ZOMBIE", "BLAZE", "MAGMA_CUBE"));
 	
 	public static final PluginConfigKey FEATURE_LOCK_IN_WORLD_ENABLED				= new PluginConfigKey("features.lock-in-world.enabled",				false);
 	

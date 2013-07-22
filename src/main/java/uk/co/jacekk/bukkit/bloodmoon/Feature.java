@@ -55,7 +55,7 @@ public enum Feature {
 	SPAWN_ON_KILL(SpawnOnKillListener.class, Config.FEATURE_SPAWN_ON_KILL_ENABLED),
 	SPAWN_ON_SLEEP(SpawnOnSleepListener.class, Config.FEATURE_SPAWN_ON_SLEEP_ENABLED),
 	MORE_SPAWNING(MoreSpawningListener.class, Config.FEATURE_MORE_SPAWNING_ENABLED),
-	MORE_MOBS(MoreMobsListener.class, Config.FEATURE_MORE_MOBS_ENABLED),
+	SPAWN_CONTROL(MoreMobsListener.class, Config.FEATURE_SPAWN_CONTROL_ENABLED), // partially handled in ChunkProviderServer
 	GIANTS(GiantsListener.class, Config.FEATURE_GIANTS_ENABLED),
 	
 	// Server features
