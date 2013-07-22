@@ -1,12 +1,17 @@
 package uk.co.jacekk.bukkit.bloodmoon;
 
+import net.minecraft.server.v1_6_R2.IChunkLoader;
+import net.minecraft.server.v1_6_R2.WorldServer;
+
 import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldInitEvent;
 
-import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.baseplugin.event.BaseListener;
+import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.bloodmoon.nms.ChunkProviderServer;
 
 public class WorldInitListener extends BaseListener<BloodMoon> {
 	
@@ -17,7 +22,26 @@ public class WorldInitListener extends BaseListener<BloodMoon> {
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onWorldInit(WorldInitEvent event){
 		World world = event.getWorld();
-		PluginConfig config = plugin.createConfig(world);
+		
+		plugin.createConfig(world);
+		
+		if (plugin.isFeatureEnabled(world.getName(), Feature.MORE_MOBS)){
+			WorldServer worldServer = ((CraftWorld) world).getHandle();
+			
+			try{
+				IChunkLoader chunkLoader = ReflectionUtils.getFieldValue(net.minecraft.server.v1_6_R2.ChunkProviderServer.class, "e", IChunkLoader.class, worldServer.chunkProviderServer);
+				
+				ChunkProviderServer newProvider = new ChunkProviderServer(this.plugin, worldServer, chunkLoader, worldServer.chunkProviderServer.chunkProvider);
+				
+				newProvider.chunks = worldServer.chunkProviderServer.chunks;
+				newProvider.forceChunkLoad = worldServer.chunkProviderServer.forceChunkLoad;
+				
+				worldServer.chunkProviderServer = newProvider;
+				worldServer.chunkProvider = newProvider;
+			}catch (NoSuchFieldException e){
+				e.printStackTrace();
+			}
+		}
 	}
 	
 }
