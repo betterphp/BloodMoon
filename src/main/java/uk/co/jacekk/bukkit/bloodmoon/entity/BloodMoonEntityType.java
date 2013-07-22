@@ -1,12 +1,16 @@
 package uk.co.jacekk.bukkit.bloodmoon.entity;
 
+import net.minecraft.server.v1_6_R2.EntityInsentient;
+import net.minecraft.server.v1_6_R2.EntityTypes;
+import net.minecraft.server.v1_6_R2.GroupDataEntity;
+import net.minecraft.server.v1_6_R2.World;
+
+import org.bukkit.Location;
+import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
 import org.bukkit.entity.EntityType;
+import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
-
-import net.minecraft.server.v1_6_R2.EntityLiving;
-import net.minecraft.server.v1_6_R2.EntityTypes;
-import net.minecraft.server.v1_6_R2.World;
 
 public enum BloodMoonEntityType {
 	
@@ -24,10 +28,10 @@ public enum BloodMoonEntityType {
 	private String name;
 	private int id;
 	private EntityType entityType;
-	private Class<? extends EntityLiving> nmsClass;
-	private Class<? extends EntityLiving> bloodMoonClass;
+	private Class<? extends EntityInsentient> nmsClass;
+	private Class<? extends EntityInsentient> bloodMoonClass;
 	
-	private BloodMoonEntityType(String name, int id, EntityType entityType, Class<? extends EntityLiving> nmsClass, Class<? extends EntityLiving> bloodMoonClass){
+	private BloodMoonEntityType(String name, int id, EntityType entityType, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> bloodMoonClass){
 		this.name = name;
 		this.id = id;
 		this.entityType = entityType;
@@ -57,15 +61,15 @@ public enum BloodMoonEntityType {
 		return this.entityType;
 	}
 	
-	public Class<? extends EntityLiving> getNMSClass(){
+	public Class<? extends EntityInsentient> getNMSClass(){
 		return this.nmsClass;
 	}
 	
-	public Class<? extends EntityLiving> getBloodMoonClass(){
+	public Class<? extends EntityInsentient> getBloodMoonClass(){
 		return this.bloodMoonClass;
 	}
 	
-	public EntityLiving createEntity(World world){
+	private EntityInsentient createEntity(World world){
 		try{
 			return this.getBloodMoonClass().getConstructor(World.class).newInstance(world);
 		}catch (Exception e){
@@ -73,6 +77,16 @@ public enum BloodMoonEntityType {
 		}
 		
 		return null;
+	}
+	
+	public void spawnEntity(Location location){
+		World world = ((CraftWorld) location.getWorld()).getHandle();
+		
+		EntityInsentient entity = this.createEntity(world);
+		entity.setPositionRotation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
+		entity.a((GroupDataEntity) null);
+		world.addEntity(entity, SpawnReason.CUSTOM);
+		entity.p();
 	}
 	
 }

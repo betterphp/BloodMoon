@@ -2,8 +2,6 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_6_R2.EntityInsentient;
-import net.minecraft.server.v1_6_R2.GroupDataEntity;
 import net.minecraft.server.v1_6_R2.World;
 
 import org.bukkit.Location;
@@ -45,19 +43,7 @@ public class MoreSpawningListener extends BaseListener<BloodMoon> {
 			for (int i = 0; i < Math.max(worldConfig.getInt(Config.FEATURE_MORE_SPAWNING_MULTIPLIER), 1); ++i){
 				for (BloodMoonEntityType bloodMoonEntity : BloodMoonEntityType.values()){
 					if (type == bloodMoonEntity.getEntityType()){
-						try{
-							EntityInsentient customEntity = (EntityInsentient) bloodMoonEntity.createEntity(world);
-							
-							if (customEntity != null){
-								customEntity.setPositionRotation(location.getX() + (this.random.nextDouble() * 3) - 1.5, location.getY(), location.getZ() + (this.random.nextDouble() * 3) - 1.5, location.getYaw(), location.getPitch());
-								customEntity.a((GroupDataEntity) null);
-								world.addEntity(customEntity, SpawnReason.CUSTOM);
-								customEntity.p();
-							}
-						}catch (Exception e){
-							e.printStackTrace();
-						}
-						
+						bloodMoonEntity.spawnEntity(location.add((this.random.nextDouble() * 3) - 1.5, (this.random.nextDouble() * 3) - 1.5, (this.random.nextDouble() * 3) - 1.5));
 						return;
 					}
 				}

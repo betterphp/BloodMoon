@@ -1,8 +1,6 @@
 package uk.co.jacekk.bukkit.bloodmoon;
 
 import net.minecraft.server.v1_6_R2.Entity;
-import net.minecraft.server.v1_6_R2.EntityInsentient;
-import net.minecraft.server.v1_6_R2.GroupDataEntity;
 import net.minecraft.server.v1_6_R2.World;
 
 import org.bukkit.Location;
@@ -34,20 +32,8 @@ public class EntityReplaceListener extends BaseListener<BloodMoon> {
 		
 		for (BloodMoonEntityType bloodMoonEntity : BloodMoonEntityType.values()){
 			if (creatureType == bloodMoonEntity.getEntityType() && entity.getClass().equals(bloodMoonEntity.getNMSClass())){
-				try{
-					EntityInsentient customEntity = (EntityInsentient) bloodMoonEntity.createEntity(world);
-					
-					world.removeEntity(entity);
-					
-					if (customEntity != null){
-						customEntity.setPositionRotation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-						customEntity.a((GroupDataEntity) null);
-						world.addEntity(customEntity, SpawnReason.CUSTOM);
-						customEntity.p();
-					}
-				}catch (Exception e){
-					e.printStackTrace();
-				}
+				world.removeEntity(entity);
+				bloodMoonEntity.spawnEntity(location);
 				
 				return;
 			}
