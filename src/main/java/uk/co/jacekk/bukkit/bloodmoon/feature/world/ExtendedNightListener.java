@@ -57,7 +57,13 @@ public class ExtendedNightListener extends BaseListener<BloodMoon> {
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
 	public void onStop(BloodMoonEndEvent event){
-		this.killCount.remove(event.getWorld().getName());
+		World world = event.getWorld();
+		String worldName = world.getName();
+		
+		if (plugin.isFeatureEnabled(worldName, Feature.EXTENDED_NIGHT)){
+			this.killCount.remove(worldName);
+			world.setGameRuleValue("doDaylightCycle", "true");
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
