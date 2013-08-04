@@ -47,13 +47,13 @@ public class Config {
 	public static final PluginConfigKey FEATURE_ZOMBIE_ARMOR_ARMOR					= new PluginConfigKey("features.zombie-armor.armor",				Arrays.asList("DIAMOND", "GOLD", "IRON"));
 	
 	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_ENABLED				= new PluginConfigKey("features.target-distance.enabled",			true);
-	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MULTIPLIER			= new PluginConfigKey("features.target-distance.multiplier",		3.0d);
+	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MULTIPLIER			= new PluginConfigKey("features.target-distance.multiplier",		2.0d);
 	public static final PluginConfigKey FEATURE_TARGET_DISTANCE_MOBS				= new PluginConfigKey("features.target-distance.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "SPIDER", "CREEPER"));
 	
 	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_ENABLED				= new PluginConfigKey("features.movement-speed.enabled",			true);
-	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MULTIPLIER			= new PluginConfigKey("features.movement-speed.multiplier",			1.30d);
+	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MULTIPLIER			= new PluginConfigKey("features.movement-speed.multiplier",			1.20d);
 	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_FAST_CHANCE			= new PluginConfigKey("features.movement-speed.fast-chance",		15);
-	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_FAST_MULTIPLIER		= new PluginConfigKey("features.movement-speed.fast-multiplier",	1.5d);
+	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_FAST_MULTIPLIER		= new PluginConfigKey("features.movement-speed.fast-multiplier",	1.3d);
 	public static final PluginConfigKey FEATURE_MOVEMENT_SPEED_MOBS					= new PluginConfigKey("features.movement-speed.mobs",				Arrays.asList("ZOMBIE", "SKELETON", "CREEPER"));
 	
 	public static final PluginConfigKey FEATURE_BREAK_BLOCKS_ENABLED				= new PluginConfigKey("features.break-blocks.enabled",				true);
