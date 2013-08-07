@@ -43,7 +43,6 @@ public class BloodMoon extends BasePlugin {
 		
 		this.pluginManager.registerEvents(new WorldInitListener(this), this);
 		this.pluginManager.registerEvents(new SpawnReasonListener(this), this);
-		this.pluginManager.registerEvents(new EntityReplaceListener(this), this);
 		
 		this.scheduler.scheduleSyncRepeatingTask(this, new TimeMonitorTask(this), 100L, 100L);
 		
