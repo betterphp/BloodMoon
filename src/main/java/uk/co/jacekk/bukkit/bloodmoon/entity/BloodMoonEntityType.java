@@ -1,11 +1,16 @@
 package uk.co.jacekk.bukkit.bloodmoon.entity;
 
+import java.util.List;
+
+import net.minecraft.server.v1_6_R2.BiomeBase;
+import net.minecraft.server.v1_6_R2.BiomeMeta;
 import net.minecraft.server.v1_6_R2.EntityInsentient;
 import net.minecraft.server.v1_6_R2.EntityTypes;
 import net.minecraft.server.v1_6_R2.GroupDataEntity;
 import net.minecraft.server.v1_6_R2.World;
 
 import org.bukkit.Location;
+import org.bukkit.block.Biome;
 import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
@@ -43,6 +48,27 @@ public enum BloodMoonEntityType {
 		for (BloodMoonEntityType entity : values()){
 			try{
 				ReflectionUtils.invokeMethod(EntityTypes.class, "a", Void.class, null, new Class<?>[]{Class.class, String.class, int.class}, new Object[]{entity.getBloodMoonClass(), entity.getName(), entity.getID()});
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+		
+		for (Biome biome : Biome.values()){
+			try{
+				BiomeBase biomeBase = ReflectionUtils.getFieldValue(BiomeBase.class, biome.name(), BiomeBase.class, null);
+				
+				for (String field : new String[]{"K", "J", "L", "M"}){
+					@SuppressWarnings("unchecked")
+					List<BiomeMeta> mobList = ReflectionUtils.getFieldValue(BiomeBase.class, field, List.class, biomeBase);
+					
+					for (BiomeMeta meta : mobList){
+						for (BloodMoonEntityType entity : values()){
+							if (entity.getNMSClass().equals(meta.b)){
+								meta.b = entity.getBloodMoonClass();
+							}
+						}
+					}
+				}
 			}catch (Exception e){
 				e.printStackTrace();
 			}
