@@ -53,11 +53,13 @@ public enum BloodMoonEntityType {
 			}
 		}
 		
-		for (Biome biome : Biome.values()){
-			try{
-				BiomeBase biomeBase = ReflectionUtils.getFieldValue(BiomeBase.class, biome.name(), BiomeBase.class, null);
-				
-				for (String field : new String[]{"K", "J", "L", "M"}){
+		for (BiomeBase biomeBase : BiomeBase.biomes){
+			if (biomeBase == null){
+				break;
+			}
+			
+			for (String field : new String[]{"K", "J", "L", "M"}){
+				try{
 					@SuppressWarnings("unchecked")
 					List<BiomeMeta> mobList = ReflectionUtils.getFieldValue(BiomeBase.class, field, List.class, biomeBase);
 					
@@ -68,9 +70,9 @@ public enum BloodMoonEntityType {
 							}
 						}
 					}
+				}catch (Exception e){
+					e.printStackTrace();
 				}
-			}catch (Exception e){
-				e.printStackTrace();
 			}
 		}
 	}
