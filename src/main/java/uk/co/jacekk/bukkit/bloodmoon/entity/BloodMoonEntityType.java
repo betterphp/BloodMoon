@@ -10,12 +10,12 @@ import net.minecraft.server.v1_6_R2.GroupDataEntity;
 import net.minecraft.server.v1_6_R2.World;
 
 import org.bukkit.Location;
-import org.bukkit.block.Biome;
 import org.bukkit.craftbukkit.v1_6_R2.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 import uk.co.jacekk.bukkit.baseplugin.util.ReflectionUtils;
+import uk.co.jacekk.bukkit.bloodmoon.EntityRegistrationException;
 
 public enum BloodMoonEntityType {
 	
@@ -36,6 +36,8 @@ public enum BloodMoonEntityType {
 	private Class<? extends EntityInsentient> nmsClass;
 	private Class<? extends EntityInsentient> bloodMoonClass;
 	
+	private static boolean registered = false;
+	
 	private BloodMoonEntityType(String name, int id, EntityType entityType, Class<? extends EntityInsentient> nmsClass, Class<? extends EntityInsentient> bloodMoonClass){
 		this.name = name;
 		this.id = id;
@@ -44,12 +46,16 @@ public enum BloodMoonEntityType {
 		this.bloodMoonClass = bloodMoonClass;
 	}
 	
-	public static void registerEntities(){
+	public static void registerEntities() throws EntityRegistrationException {
+		if (registered){
+			throw new EntityRegistrationException("Already registered.");
+		}
+		
 		for (BloodMoonEntityType entity : values()){
 			try{
 				ReflectionUtils.invokeMethod(EntityTypes.class, "a", Void.class, null, new Class<?>[]{Class.class, String.class, int.class}, new Object[]{entity.getBloodMoonClass(), entity.getName(), entity.getID()});
 			}catch (Exception e){
-				e.printStackTrace();
+				throw new EntityRegistrationException("Failed to call EntityTypes.a() for " + entity.getName(), e);
 			}
 		}
 		
@@ -71,10 +77,12 @@ public enum BloodMoonEntityType {
 						}
 					}
 				}catch (Exception e){
-					e.printStackTrace();
+					throw new EntityRegistrationException("Failed to modify biome data field " + field, e);
 				}
 			}
 		}
+		
+		registered = true;
 	}
 	
 	public String getName(){
