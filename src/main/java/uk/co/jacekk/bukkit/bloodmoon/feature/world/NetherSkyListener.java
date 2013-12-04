@@ -1,14 +1,15 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
-import net.minecraft.server.v1_6_R3.EnumGamemode;
-import net.minecraft.server.v1_6_R3.Packet9Respawn;
-import net.minecraft.server.v1_6_R3.WorldType;
+import net.minecraft.server.v1_7_R1.EnumDifficulty;
+import net.minecraft.server.v1_7_R1.EnumGamemode;
+import net.minecraft.server.v1_7_R1.PacketPlayOutRespawn;
+import net.minecraft.server.v1_7_R1.WorldType;
 
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
-import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -33,7 +34,7 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 		CraftWorld world = (CraftWorld) player.getWorld();
 		Location location = player.getLocation();
 		
-		Packet9Respawn packet = new Packet9Respawn(environment.getId(), (byte) 1, WorldType.NORMAL, world.getMaxHeight(), EnumGamemode.a(player.getGameMode().getValue()));
+		PacketPlayOutRespawn packet = new PacketPlayOutRespawn(environment.getId(), EnumDifficulty.a(world.getDifficulty().getValue()), WorldType.NORMAL, EnumGamemode.a(player.getGameMode().getValue()));
 		
 		craftPlayer.getHandle().playerConnection.sendPacket(packet);
 		

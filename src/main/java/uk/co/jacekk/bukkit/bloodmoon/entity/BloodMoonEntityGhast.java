@@ -1,8 +1,8 @@
 package uk.co.jacekk.bukkit.bloodmoon.entity;
 
-import net.minecraft.server.v1_6_R3.EntityLiving;
+import net.minecraft.server.v1_7_R1.EntityLiving;
 
-import org.bukkit.craftbukkit.v1_6_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
 
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 

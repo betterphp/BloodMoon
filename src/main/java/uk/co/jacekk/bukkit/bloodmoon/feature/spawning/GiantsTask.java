@@ -2,12 +2,12 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_6_R3.GroupDataEntity;
-import net.minecraft.server.v1_6_R3.World;
+import net.minecraft.server.v1_7_R1.GroupDataEntity;
+import net.minecraft.server.v1_7_R1.World;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_6_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
