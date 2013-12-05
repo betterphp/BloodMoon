@@ -11,6 +11,14 @@ public class BloodMoonEntityTypeTest {
 	@Test
 	public void testReflection(){
 		try{
+			EntityTypes.class.getDeclaredField("c");
+			EntityTypes.class.getDeclaredField("e");
+		}catch (Exception e){
+			e.printStackTrace();
+			Assert.fail("EntityTypes name and id map fields not found");
+		}
+		
+		try{
 			EntityTypes.class.getDeclaredMethod("a", Class.class, String.class, int.class);
 		}catch (Exception e){
 			e.printStackTrace();

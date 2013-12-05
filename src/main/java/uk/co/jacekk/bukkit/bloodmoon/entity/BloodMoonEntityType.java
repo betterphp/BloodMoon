@@ -1,6 +1,7 @@
 package uk.co.jacekk.bukkit.bloodmoon.entity;
 
 import java.util.List;
+import java.util.Map;
 
 import net.minecraft.server.v1_7_R1.BiomeBase;
 import net.minecraft.server.v1_7_R1.BiomeMeta;
@@ -51,8 +52,21 @@ public enum BloodMoonEntityType {
 			throw new EntityRegistrationException("Already registered.");
 		}
 		
+		Map<String, Class<?>> nameMap;
+		Map<Integer, Class<?>> idMap;
+		
+		try{
+			nameMap = ReflectionUtils.getFieldValue(EntityTypes.class, "c", Map.class, null);
+			idMap = ReflectionUtils.getFieldValue(EntityTypes.class, "e", Map.class, null);
+		}catch (Exception e){
+			throw new EntityRegistrationException("Failed to get existing entity maps.", e);
+		}
+		
 		for (BloodMoonEntityType entity : values()){
 			try{
+				nameMap.remove(entity.getName());
+				idMap.remove(entity.getID());
+				
 				ReflectionUtils.invokeMethod(EntityTypes.class, "a", Void.class, null, new Class<?>[]{Class.class, String.class, int.class}, new Object[]{entity.getBloodMoonClass(), entity.getName(), entity.getID()});
 			}catch (Exception e){
 				throw new EntityRegistrationException("Failed to call EntityTypes.a() for " + entity.getName(), e);
