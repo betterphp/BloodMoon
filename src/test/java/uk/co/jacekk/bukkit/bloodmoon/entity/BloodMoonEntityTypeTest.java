@@ -1,11 +1,12 @@
-package uk.co.jacekk.bukkit.bloodmoon;
+package uk.co.jacekk.bukkit.bloodmoon.entity;
 
+import net.minecraft.server.v1_7_R1.BiomeBase;
 import net.minecraft.server.v1_7_R1.EntityTypes;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BloodMoonTest {
+public class BloodMoonEntityTypeTest {
 	
 	@Test
 	public void testReflection(){
@@ -14,6 +15,15 @@ public class BloodMoonTest {
 		}catch (Exception e){
 			e.printStackTrace();
 			Assert.fail("EntityTypes.a(Class, String, int) not found");
+		}
+		
+		try{
+			for (String field : new String[]{"as", "at", "au", "av"}){
+				BiomeBase.class.getDeclaredField(field);
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			Assert.fail("BiomeBase field not found");
 		}
 	}
 	
