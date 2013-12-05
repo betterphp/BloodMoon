@@ -29,7 +29,7 @@ public class WorldInitListener extends BaseListener<BloodMoon> {
 			WorldServer worldServer = ((CraftWorld) world).getHandle();
 			
 			try{
-				IChunkLoader chunkLoader = ReflectionUtils.getFieldValue(net.minecraft.server.v1_7_R1.ChunkProviderServer.class, "e", IChunkLoader.class, worldServer.chunkProviderServer);
+				IChunkLoader chunkLoader = ReflectionUtils.getFieldValue(net.minecraft.server.v1_7_R1.ChunkProviderServer.class, "f", IChunkLoader.class, worldServer.chunkProviderServer);
 				
 				ChunkProviderServer newProvider = new ChunkProviderServer(this.plugin, worldServer, chunkLoader, worldServer.chunkProviderServer.chunkProvider);
 				
