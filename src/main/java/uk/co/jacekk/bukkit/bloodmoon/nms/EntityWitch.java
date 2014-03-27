@@ -1,18 +1,18 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_7_R1.World;
+import net.minecraft.server.v1_7_R2.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_7_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_7_R1.entity.CraftWitch;
+import org.bukkit.craftbukkit.v1_7_R2.CraftServer;
+import org.bukkit.craftbukkit.v1_7_R2.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_7_R2.entity.CraftWitch;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityWitch;
 
-public class EntityWitch extends net.minecraft.server.v1_7_R1.EntityWitch {
+public class EntityWitch extends net.minecraft.server.v1_7_R2.EntityWitch {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityWitch bloodMoonEntity;
@@ -34,10 +34,10 @@ public class EntityWitch extends net.minecraft.server.v1_7_R1.EntityWitch {
 	}
 	
 	@Override
-	public void bj(){
+	public void bL(){
 		try{
 			this.bloodMoonEntity.onTick();
-			super.bj();
+			super.bL();
 		}catch (Exception e){
 			plugin.log.warn("Exception caught while ticking entity");
 			e.printStackTrace();

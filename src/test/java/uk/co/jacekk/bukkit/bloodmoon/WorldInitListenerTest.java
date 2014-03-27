@@ -2,8 +2,8 @@ package uk.co.jacekk.bukkit.bloodmoon;
 
 import java.lang.reflect.Field;
 
-import net.minecraft.server.v1_7_R1.ChunkProviderServer;
-import net.minecraft.server.v1_7_R1.IChunkLoader;
+import net.minecraft.server.v1_7_R2.ChunkProviderServer;
+import net.minecraft.server.v1_7_R2.IChunkLoader;
 
 import org.junit.Assert;
 import org.junit.Test;

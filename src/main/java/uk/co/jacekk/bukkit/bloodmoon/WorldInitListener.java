@@ -1,10 +1,10 @@
 package uk.co.jacekk.bukkit.bloodmoon;
 
-import net.minecraft.server.v1_7_R1.IChunkLoader;
-import net.minecraft.server.v1_7_R1.WorldServer;
+import net.minecraft.server.v1_7_R2.IChunkLoader;
+import net.minecraft.server.v1_7_R2.WorldServer;
 
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_7_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R2.CraftWorld;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.world.WorldInitEvent;
@@ -29,7 +29,7 @@ public class WorldInitListener extends BaseListener<BloodMoon> {
 			WorldServer worldServer = ((CraftWorld) world).getHandle();
 			
 			try{
-				IChunkLoader chunkLoader = ReflectionUtils.getFieldValue(net.minecraft.server.v1_7_R1.ChunkProviderServer.class, "f", IChunkLoader.class, worldServer.chunkProviderServer);
+				IChunkLoader chunkLoader = ReflectionUtils.getFieldValue(net.minecraft.server.v1_7_R2.ChunkProviderServer.class, "f", IChunkLoader.class, worldServer.chunkProviderServer);
 				
 				ChunkProviderServer newProvider = new ChunkProviderServer(this.plugin, worldServer, chunkLoader, worldServer.chunkProviderServer.chunkProvider);
 				
