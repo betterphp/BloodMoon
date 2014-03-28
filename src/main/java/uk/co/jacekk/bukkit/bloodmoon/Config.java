@@ -22,6 +22,9 @@ public class Config {
 	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_START_COMMANDS		= new PluginConfigKey("features.server-commands.commands.start",	Arrays.asList("toggledownfall", "time set 0", "op Notch"));
 	public static final PluginConfigKey FEATURE_SERVER_COMMANDS_END_COMMANDS		= new PluginConfigKey("features.server-commands.commands.end",		Arrays.asList("toggledownfall", "time set 12000", "deop Notch"));
 	
+	public static final PluginConfigKey FEATURE_DISABLED_COMMANDS_ENABLED			= new PluginConfigKey("features.disabled-commands.enabled",			true);
+	public static final PluginConfigKey FEATURE_DISABLED_COMMANDS_COMMANDS			= new PluginConfigKey("features.disabled-commands.commands",		Arrays.asList("spawn", "home"));
+	
 	public static final PluginConfigKey FEATURE_PLAY_SOUND_ENABLED					= new PluginConfigKey("features.play-sound.enabled",				true);
 	public static final PluginConfigKey FEATURE_PLAY_SOUND_SOUND					= new PluginConfigKey("features.play-sound.sound",					"WITHER_SPAWN");
 	public static final PluginConfigKey FEATURE_PLAY_SOUND_PITCH					= new PluginConfigKey("features.play-sound.pitch",					1.0d);

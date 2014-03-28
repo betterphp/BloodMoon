@@ -16,6 +16,7 @@ import uk.co.jacekk.bukkit.bloodmoon.feature.mob.TargetDistanceListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.ZombieArmorListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.mob.ZombieWeaponListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.player.SwordDamageListener;
+import uk.co.jacekk.bukkit.bloodmoon.feature.server.DisabledCommandsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.server.ServerCommandsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.GiantsListener;
 import uk.co.jacekk.bukkit.bloodmoon.feature.spawning.MoreMobsListener;
@@ -60,6 +61,7 @@ public enum Feature {
 	
 	// Server features
 	SERVER_COMMANDS(ServerCommandsListener.class, Config.FEATURE_SERVER_COMMANDS_ENABLED),
+	DISABLED_COMMANDS(DisabledCommandsListener.class, Config.FEATURE_DISABLED_COMMANDS_ENABLED),
 	
 	// Player features
 	SWORD_DAMAGE(SwordDamageListener.class, Config.FEATURE_SWORD_DAMAGE_ENABLED),
