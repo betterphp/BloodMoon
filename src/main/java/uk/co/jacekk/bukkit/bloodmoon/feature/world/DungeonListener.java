@@ -4,10 +4,13 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -15,6 +18,7 @@ import org.bukkit.event.block.BlockPistonExtendEvent;
 import org.bukkit.event.block.BlockPistonRetractEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.world.WorldInitEvent;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -39,16 +43,16 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		}
 	}
 	
-	private boolean isProtected(Block block){
-		Chunk chunk = block.getChunk();
-		World world = block.getWorld();
+	private boolean isProtected(Location location){
+		Chunk chunk = location.getChunk();
+		World world = location.getWorld();
 		
 		PluginConfig worldConfig = plugin.getConfig(world.getName());
 		
 		int gridX = (int) (Math.floor(chunk.getX() / 10.0d) * 10);
 		int gridZ = (int) (Math.floor(chunk.getZ() / 10.0d) * 10);
 		
-		DungeonProperties properties = new DungeonProperties(block.getWorld(), worldConfig, gridX, gridZ);
+		DungeonProperties properties = new DungeonProperties(world, worldConfig, gridX, gridZ);
 		
 		if (properties.isInChunk(chunk)){
 			int yMin = 0;
@@ -68,12 +72,29 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 				}
 			}
 			
-			int y = block.getY();
+			double y = location.getY();
 			
 			return (y >= yMin && y <= yMax);
 		}
 		
 		return false;
+	}
+	
+	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
+	public void onPlayerCommand(PlayerCommandPreprocessEvent event){
+		Player player = event.getPlayer();
+		String message = event.getMessage();
+		String worldName = player.getWorld().getName();
+		PluginConfig worldConfig = plugin.getConfig(worldName);
+		
+		int spaceIndex = message.indexOf(' ');
+		
+		String command = (spaceIndex > 0) ? message.substring(1, spaceIndex) : message.substring(1);
+		
+		if (plugin.isFeatureEnabled(worldName, Feature.DISABLED_COMMANDS) && worldConfig.getStringList(Config.FEATURE_DISABLED_COMMANDS_COMMANDS).contains(command) && this.isProtected(player.getLocation())){
+			event.setCancelled(true);
+			player.sendMessage(ChatColor.RED + "The /" + command + " is disabled in bloodmoon dungeons!");
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.NORMAL, ignoreCancelled = true)
@@ -85,7 +106,7 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		
 		List<Material> allowed = Arrays.asList(Material.IRON_FENCE, Material.MOB_SPAWNER, Material.COBBLE_WALL);
 		
-		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && !allowed.contains(block.getType()) && this.isProtected(block)){
+		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && !allowed.contains(block.getType()) && this.isProtected(block.getLocation())){
 			event.setCancelled(true);
 		}
 	}
@@ -104,7 +125,7 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 				while (iterator.hasNext()){
 					Block block = iterator.next();
 					
-					if (this.isProtected(block)){
+					if (this.isProtected(block.getLocation())){
 						iterator.remove();
 					}
 				}
@@ -120,7 +141,7 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		
 		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED)){
 			for (Block moved : event.getBlocks()){
-				if (this.isProtected(moved)){
+				if (this.isProtected(moved.getLocation())){
 					event.setCancelled(true);
 					return;
 				}
@@ -135,7 +156,7 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
 		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED)){
-			if (this.isProtected(event.getRetractLocation().getBlock())){
+			if (this.isProtected(event.getRetractLocation())){
 				event.setCancelled(true);
 			}
 		}
@@ -150,7 +171,7 @@ public class DungeonListener extends BaseListener<BloodMoon> {
 		
 		List<Material> allowed = Arrays.asList(Material.TORCH);
 		
-		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && !allowed.contains(block.getType()) && this.isProtected(block)){
+		if (plugin.isEnabled(worldName) && worldConfig.getBoolean(Config.FEATURE_DUNGEONS_PROTECTED) && !allowed.contains(block.getType()) && this.isProtected(block.getLocation())){
 			event.setCancelled(true);
 		}
 	}
