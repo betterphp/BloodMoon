@@ -32,7 +32,7 @@ public class DisabledCommandsListener extends BaseListener<BloodMoon> {
 		if (plugin.isActive(worldName) && plugin.isFeatureEnabled(worldName, Feature.DISABLED_COMMANDS)){
 			if (worldConfig.getStringList(Config.FEATURE_DISABLED_COMMANDS_COMMANDS).contains(command)){
 				event.setCancelled(true);
-				player.sendMessage(ChatColor.RED + "The /" + command + " is disabled suring a bloodmoon!");
+				player.sendMessage(ChatColor.RED + "The /" + command + " is disabled during a bloodmoon!");
 			}
 		}
 	}
