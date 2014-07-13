@@ -1,18 +1,18 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_7_R3.World;
+import net.minecraft.server.v1_7_R4.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_7_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftZombie;
+import org.bukkit.craftbukkit.v1_7_R4.CraftServer;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftZombie;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityZombie;
 
-public class EntityZombie extends net.minecraft.server.v1_7_R3.EntityZombie {
+public class EntityZombie extends net.minecraft.server.v1_7_R4.EntityZombie {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityZombie bloodMoonEntity;

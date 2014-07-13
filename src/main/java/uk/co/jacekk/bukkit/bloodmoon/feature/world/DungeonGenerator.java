@@ -2,8 +2,8 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_7_R3.MobSpawnerAbstract;
-import net.minecraft.server.v1_7_R3.TileEntityMobSpawner;
+import net.minecraft.server.v1_7_R4.MobSpawnerAbstract;
+import net.minecraft.server.v1_7_R4.TileEntityMobSpawner;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -11,7 +11,7 @@ import org.bukkit.TreeSpecies;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
-import org.bukkit.craftbukkit.v1_7_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.inventory.Inventory;
@@ -155,9 +155,9 @@ public class DungeonGenerator extends BlockPopulator {
 				
 				if (type != null){
 					block.setTypeIdAndData(Material.MOB_SPAWNER.getId(), (byte) 0, false);
-					MobSpawnerAbstract spawner = ((TileEntityMobSpawner) ((CraftWorld) world).getTileEntityAt(block.getX(), block.getY(), block.getZ())).a();
+					MobSpawnerAbstract spawner = ((TileEntityMobSpawner) ((CraftWorld) world).getTileEntityAt(block.getX(), block.getY(), block.getZ())).getSpawner();
 					
-					spawner.a(type.getName());
+					spawner.setMobName(type.getName());
 					
 					try{
 						ReflectionUtils.setFieldValue(MobSpawnerAbstract.class, "minSpawnDelay", spawner, worldConfig.getInt(Config.FEATURE_DUNGEONS_SPAWNER_DELAY));

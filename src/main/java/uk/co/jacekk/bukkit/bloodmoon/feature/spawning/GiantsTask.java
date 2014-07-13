@@ -2,12 +2,12 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.spawning;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_7_R3.GroupDataEntity;
-import net.minecraft.server.v1_7_R3.World;
+import net.minecraft.server.v1_7_R4.GroupDataEntity;
+import net.minecraft.server.v1_7_R4.World;
 
 import org.bukkit.Chunk;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_7_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
 import org.bukkit.entity.Entity;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
@@ -54,7 +54,7 @@ public class GiantsTask extends BaseTask<BloodMoon> {
 				EntityGiantZombie entity = new EntityGiantZombie(nmsWorld);
 				
 				entity.setPositionRotation(x, y, z, 0, 90);
-				entity.a((GroupDataEntity) null);
+				entity.prepare((GroupDataEntity) null);
 				nmsWorld.addEntity(entity, SpawnReason.CUSTOM);
 				entity.p();
 			}

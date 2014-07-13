@@ -3,15 +3,15 @@ package uk.co.jacekk.bukkit.bloodmoon.entity;
 import java.util.List;
 import java.util.Map;
 
-import net.minecraft.server.v1_7_R3.BiomeBase;
-import net.minecraft.server.v1_7_R3.BiomeMeta;
-import net.minecraft.server.v1_7_R3.EntityInsentient;
-import net.minecraft.server.v1_7_R3.EntityTypes;
-import net.minecraft.server.v1_7_R3.GroupDataEntity;
-import net.minecraft.server.v1_7_R3.World;
+import net.minecraft.server.v1_7_R4.BiomeBase;
+import net.minecraft.server.v1_7_R4.BiomeMeta;
+import net.minecraft.server.v1_7_R4.EntityInsentient;
+import net.minecraft.server.v1_7_R4.EntityTypes;
+import net.minecraft.server.v1_7_R4.GroupDataEntity;
+import net.minecraft.server.v1_7_R4.World;
 
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_7_R3.CraftWorld;
+import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
@@ -20,16 +20,16 @@ import uk.co.jacekk.bukkit.bloodmoon.EntityRegistrationException;
 
 public enum BloodMoonEntityType {
 	
-	CREEPER("Creeper", 50, EntityType.CREEPER, net.minecraft.server.v1_7_R3.EntityCreeper.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityCreeper.class),
-	ENDERMAN("Enderman", 58, EntityType.ENDERMAN, net.minecraft.server.v1_7_R3.EntityEnderman.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityEnderman.class),
-	SKELETON("Skeleton", 51, EntityType.SKELETON, net.minecraft.server.v1_7_R3.EntitySkeleton.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntitySkeleton.class),
-	SPIDER("Spider", 52, EntityType.SPIDER, net.minecraft.server.v1_7_R3.EntitySpider.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntitySpider.class),
-	ZOMBIE("Zombie", 54, EntityType.ZOMBIE, net.minecraft.server.v1_7_R3.EntityZombie.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityZombie.class),
-	GHAST("Ghast", 56, EntityType.GHAST, net.minecraft.server.v1_7_R3.EntityGhast.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityGhast.class),
-	BLAZE("Blaze", 61, EntityType.BLAZE, net.minecraft.server.v1_7_R3.EntityBlaze.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityBlaze.class),
-	WITHER("WitherBoss", 64, EntityType.WITHER, net.minecraft.server.v1_7_R3.EntityWither.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityWither.class),
-	WITCH("Witch", 66, EntityType.WITCH, net.minecraft.server.v1_7_R3.EntityWitch.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityWitch.class),
-	GIANT_ZOMBIE("Giant", 53, EntityType.GIANT, net.minecraft.server.v1_7_R3.EntityGiantZombie.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityGiantZombie.class);
+	CREEPER("Creeper", 50, EntityType.CREEPER, net.minecraft.server.v1_7_R4.EntityCreeper.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityCreeper.class),
+	ENDERMAN("Enderman", 58, EntityType.ENDERMAN, net.minecraft.server.v1_7_R4.EntityEnderman.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityEnderman.class),
+	SKELETON("Skeleton", 51, EntityType.SKELETON, net.minecraft.server.v1_7_R4.EntitySkeleton.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntitySkeleton.class),
+	SPIDER("Spider", 52, EntityType.SPIDER, net.minecraft.server.v1_7_R4.EntitySpider.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntitySpider.class),
+	ZOMBIE("Zombie", 54, EntityType.ZOMBIE, net.minecraft.server.v1_7_R4.EntityZombie.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityZombie.class),
+	GHAST("Ghast", 56, EntityType.GHAST, net.minecraft.server.v1_7_R4.EntityGhast.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityGhast.class),
+	BLAZE("Blaze", 61, EntityType.BLAZE, net.minecraft.server.v1_7_R4.EntityBlaze.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityBlaze.class),
+	WITHER("WitherBoss", 64, EntityType.WITHER, net.minecraft.server.v1_7_R4.EntityWither.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityWither.class),
+	WITCH("Witch", 66, EntityType.WITCH, net.minecraft.server.v1_7_R4.EntityWitch.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityWitch.class),
+	GIANT_ZOMBIE("Giant", 53, EntityType.GIANT, net.minecraft.server.v1_7_R4.EntityGiantZombie.class, uk.co.jacekk.bukkit.bloodmoon.nms.EntityGiantZombie.class);
 	
 	private String name;
 	private int id;
@@ -73,7 +73,7 @@ public enum BloodMoonEntityType {
 			}
 		}
 		
-		for (BiomeBase biomeBase : BiomeBase.n()){
+		for (BiomeBase biomeBase : BiomeBase.getBiomes()){
 			if (biomeBase == null){
 				break;
 			}
@@ -134,7 +134,7 @@ public enum BloodMoonEntityType {
 		
 		EntityInsentient entity = this.createEntity(world);
 		entity.setPositionRotation(location.getX(), location.getY(), location.getZ(), location.getYaw(), location.getPitch());
-		entity.a((GroupDataEntity) null);
+		entity.prepare((GroupDataEntity) null);
 		world.addEntity(entity, SpawnReason.CUSTOM);
 		entity.p();
 	}

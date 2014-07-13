@@ -3,32 +3,32 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 import java.util.Calendar;
 import java.util.List;
 
-import net.minecraft.server.v1_7_R3.Blocks;
-import net.minecraft.server.v1_7_R3.Enchantment;
-import net.minecraft.server.v1_7_R3.EnchantmentManager;
-import net.minecraft.server.v1_7_R3.EntityArrow;
-import net.minecraft.server.v1_7_R3.EntityHuman;
-import net.minecraft.server.v1_7_R3.EntityLiving;
-import net.minecraft.server.v1_7_R3.GroupDataEntity;
-import net.minecraft.server.v1_7_R3.IRangedEntity;
-import net.minecraft.server.v1_7_R3.ItemStack;
-import net.minecraft.server.v1_7_R3.Items;
-import net.minecraft.server.v1_7_R3.PathfinderGoalFleeSun;
-import net.minecraft.server.v1_7_R3.PathfinderGoalFloat;
-import net.minecraft.server.v1_7_R3.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_7_R3.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_7_R3.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_7_R3.PathfinderGoalNearestAttackableTarget;
-import net.minecraft.server.v1_7_R3.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_7_R3.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_7_R3.PathfinderGoalRestrictSun;
-import net.minecraft.server.v1_7_R3.World;
-import net.minecraft.server.v1_7_R3.WorldProviderHell;
+import net.minecraft.server.v1_7_R4.Blocks;
+import net.minecraft.server.v1_7_R4.Enchantment;
+import net.minecraft.server.v1_7_R4.EnchantmentManager;
+import net.minecraft.server.v1_7_R4.EntityArrow;
+import net.minecraft.server.v1_7_R4.EntityHuman;
+import net.minecraft.server.v1_7_R4.EntityLiving;
+import net.minecraft.server.v1_7_R4.GroupDataEntity;
+import net.minecraft.server.v1_7_R4.IRangedEntity;
+import net.minecraft.server.v1_7_R4.ItemStack;
+import net.minecraft.server.v1_7_R4.Items;
+import net.minecraft.server.v1_7_R4.PathfinderGoalFleeSun;
+import net.minecraft.server.v1_7_R4.PathfinderGoalFloat;
+import net.minecraft.server.v1_7_R4.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_7_R4.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_7_R4.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_7_R4.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_7_R4.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_7_R4.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_7_R4.PathfinderGoalRestrictSun;
+import net.minecraft.server.v1_7_R4.World;
+import net.minecraft.server.v1_7_R4.WorldProviderHell;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_7_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftSkeleton;
+import org.bukkit.craftbukkit.v1_7_R4.CraftServer;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftSkeleton;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -38,7 +38,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntitySkeleton;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntitySkeleton extends net.minecraft.server.v1_7_R3.EntitySkeleton implements IRangedEntity {
+public class EntitySkeleton extends net.minecraft.server.v1_7_R4.EntitySkeleton implements IRangedEntity {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntitySkeleton bloodMoonEntity;
@@ -79,18 +79,18 @@ public class EntitySkeleton extends net.minecraft.server.v1_7_R3.EntitySkeleton 
 	}
 	
 	@Override
-	public GroupDataEntity a(GroupDataEntity entityData){
-		entityData = super.a(entityData);
+	public GroupDataEntity prepare(GroupDataEntity entityData){
+		entityData = super.prepare(entityData);
 		
-		if (this.world.worldProvider instanceof WorldProviderHell && this.aH().nextInt(5) > 0){
+		if (this.world.worldProvider instanceof WorldProviderHell && this.aI().nextInt(5) > 0){
 			this.goalSelector.a(4, new PathfinderGoalMeleeAttack(this, EntityHuman.class, 1.2d, false));
 			this.setSkeletonType(1);
 			this.setEquipment(0, new ItemStack(Items.STONE_SWORD));
 		}else{
 			this.goalSelector.a(4, new PathfinderGoalArrowAttack(this.plugin, this, 1.0d, 20, 60, 15.0f));
 			
-			this.be();
-			this.bd();
+			this.bC();
+			this.bD();
 		}
 		
 		this.h(this.random.nextFloat() < 0.55F * this.world.b(this.locX, this.locY, this.locZ));
@@ -122,8 +122,8 @@ public class EntitySkeleton extends net.minecraft.server.v1_7_R3.EntitySkeleton 
 	public void a(EntityLiving entityLiving, float f){
 		EntityArrow entityarrow = new EntityArrow(this.world, this, entityLiving, 1.6F, 14 - this.world.difficulty.a() * 4);
 		
-		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, this.bd());
-		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, this.bd());
+		int i = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_DAMAGE.id, this.be());
+		int j = EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_KNOCKBACK.id, this.be());
 		
 		entityarrow.b(f * 2.0F + this.random.nextGaussian() * 0.25D + this.world.difficulty.a() * 0.11F);
 		
@@ -138,11 +138,11 @@ public class EntitySkeleton extends net.minecraft.server.v1_7_R3.EntitySkeleton 
 		String worldName = this.world.worldData.getName();
 		PluginConfig worldConfig = plugin.getConfig(worldName);
 		
-		if (EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, this.bd()) > 0 || getSkeletonType() == 1 || (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && (this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_FIRE_ARROWS_CHANCE)))){
+		if (EnchantmentManager.getEnchantmentLevel(Enchantment.ARROW_FIRE.id, this.be()) > 0 || getSkeletonType() == 1 || (plugin.isActive(worldName) && worldConfig.getBoolean(Config.FEATURE_FIRE_ARROWS_ENABLED) && (this.random.nextInt(100) < worldConfig.getInt(Config.FEATURE_FIRE_ARROWS_CHANCE)))){
 			entityarrow.setOnFire(1024);
 		}
 		
-		this.world.makeSound(this, "random.bow", 1.0F, 1.0F / (this.aH().nextFloat() * 0.4F + 0.8F));
+		this.world.makeSound(this, "random.bow", 1.0F, 1.0F / (this.aI().nextFloat() * 0.4F + 0.8F));
 		this.world.addEntity(entityarrow);
 	}
 	

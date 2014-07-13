@@ -1,18 +1,18 @@
 package uk.co.jacekk.bukkit.bloodmoon.nms;
 
-import net.minecraft.server.v1_7_R3.World;
+import net.minecraft.server.v1_7_R4.World;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_7_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftEnderman;
-import org.bukkit.craftbukkit.v1_7_R3.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_7_R4.CraftServer;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftEnderman;
+import org.bukkit.craftbukkit.v1_7_R4.entity.CraftLivingEntity;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityEndermen;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntityEnderman extends net.minecraft.server.v1_7_R3.EntityEnderman {
+public class EntityEnderman extends net.minecraft.server.v1_7_R4.EntityEnderman {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityEndermen bloodMoonEntity;

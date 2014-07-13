@@ -1,6 +1,6 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
-import net.minecraft.server.v1_7_R3.MobSpawnerAbstract;
+import net.minecraft.server.v1_7_R4.MobSpawnerAbstract;
 
 import org.junit.Assert;
 import org.junit.Test;
