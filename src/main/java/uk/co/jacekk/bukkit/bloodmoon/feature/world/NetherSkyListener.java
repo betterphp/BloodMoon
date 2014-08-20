@@ -40,10 +40,11 @@ public class NetherSkyListener extends BaseListener<BloodMoon> {
 		
 		int viewDistance = plugin.server.getViewDistance();
 		
-		int xMin = location.getChunk().getX() - viewDistance;
-		int xMax = location.getChunk().getX() + viewDistance;
-		int zMin = location.getChunk().getZ() - viewDistance;
-		int zMax = location.getChunk().getZ() + viewDistance;
+		//-2 and +2 to avoid chunk bug
+		int xMin = location.getChunk().getX() - viewDistance -2;
+		int xMax = location.getChunk().getX() + viewDistance + 2;
+		int zMin = location.getChunk().getZ() - viewDistance - 2;
+		int zMax = location.getChunk().getZ() + viewDistance + 2;
 		
 		for (int x = xMin; x < xMax; ++x){
 			for (int z = zMin; z < zMax; ++z){
