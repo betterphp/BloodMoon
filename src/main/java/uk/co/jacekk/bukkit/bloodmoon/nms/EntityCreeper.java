@@ -12,7 +12,7 @@ import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityCreeper;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntityCreeper extends net.minecraft.server.v1_7_R4.EntityCreeper {
+public class EntityCreeper extends net.minecraft.server.v1_8_R1.EntityCreeper {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityCreeper bloodMoonEntity;
