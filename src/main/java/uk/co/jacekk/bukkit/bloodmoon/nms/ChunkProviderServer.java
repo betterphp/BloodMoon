@@ -16,7 +16,7 @@ import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
 import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.Config;
 
-public class ChunkProviderServer extends net.minecraft.server.v1_7_R4.ChunkProviderServer {
+public class ChunkProviderServer extends net.minecraft.server.v1_8_R1.ChunkProviderServer {
 	
 	private BloodMoon plugin;
 	private List<BiomeMeta> bloodMoonMobs;
