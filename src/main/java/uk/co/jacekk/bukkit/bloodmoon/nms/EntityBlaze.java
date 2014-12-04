@@ -12,7 +12,7 @@ import uk.co.jacekk.bukkit.bloodmoon.BloodMoon;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityBlaze;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntityBlaze extends net.minecraft.server.v1_7_R4.EntityBlaze {
+public class EntityBlaze extends net.minecraft.server.v1_8_R1.EntityBlaze {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntityBlaze bloodMoonEntity;
