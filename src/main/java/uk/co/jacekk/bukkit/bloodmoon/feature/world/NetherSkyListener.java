@@ -1,15 +1,15 @@
 package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
-import net.minecraft.server.v1_7_R4.EnumDifficulty;
-import net.minecraft.server.v1_7_R4.EnumGamemode;
-import net.minecraft.server.v1_7_R4.PacketPlayOutRespawn;
-import net.minecraft.server.v1_7_R4.WorldType;
+import net.minecraft.server.v1_8_R1.EnumDifficulty;
+import net.minecraft.server.v1_8_R1.EnumGamemode;
+import net.minecraft.server.v1_8_R1.PacketPlayOutRespawn;
+import net.minecraft.server.v1_8_R1.WorldType;
 
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.World.Environment;
-import org.bukkit.craftbukkit.v1_7_R4.CraftWorld;
-import org.bukkit.craftbukkit.v1_7_R4.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;

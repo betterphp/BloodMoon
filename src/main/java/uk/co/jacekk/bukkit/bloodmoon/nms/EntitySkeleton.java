@@ -3,32 +3,32 @@ package uk.co.jacekk.bukkit.bloodmoon.nms;
 import java.util.Calendar;
 import java.util.List;
 
-import net.minecraft.server.v1_7_R4.Blocks;
-import net.minecraft.server.v1_7_R4.Enchantment;
-import net.minecraft.server.v1_7_R4.EnchantmentManager;
-import net.minecraft.server.v1_7_R4.EntityArrow;
-import net.minecraft.server.v1_7_R4.EntityHuman;
-import net.minecraft.server.v1_7_R4.EntityLiving;
-import net.minecraft.server.v1_7_R4.GroupDataEntity;
-import net.minecraft.server.v1_7_R4.IRangedEntity;
-import net.minecraft.server.v1_7_R4.ItemStack;
-import net.minecraft.server.v1_7_R4.Items;
-import net.minecraft.server.v1_7_R4.PathfinderGoalFleeSun;
-import net.minecraft.server.v1_7_R4.PathfinderGoalFloat;
-import net.minecraft.server.v1_7_R4.PathfinderGoalHurtByTarget;
-import net.minecraft.server.v1_7_R4.PathfinderGoalLookAtPlayer;
-import net.minecraft.server.v1_7_R4.PathfinderGoalMeleeAttack;
-import net.minecraft.server.v1_7_R4.PathfinderGoalNearestAttackableTarget;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRandomLookaround;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRandomStroll;
-import net.minecraft.server.v1_7_R4.PathfinderGoalRestrictSun;
-import net.minecraft.server.v1_7_R4.World;
-import net.minecraft.server.v1_7_R4.WorldProviderHell;
+import net.minecraft.server.v1_8_R1.Blocks;
+import net.minecraft.server.v1_8_R1.Enchantment;
+import net.minecraft.server.v1_8_R1.EnchantmentManager;
+import net.minecraft.server.v1_8_R1.EntityArrow;
+import net.minecraft.server.v1_8_R1.EntityHuman;
+import net.minecraft.server.v1_8_R1.EntityLiving;
+import net.minecraft.server.v1_8_R1.GroupDataEntity;
+import net.minecraft.server.v1_8_R1.IRangedEntity;
+import net.minecraft.server.v1_8_R1.ItemStack;
+import net.minecraft.server.v1_8_R1.Items;
+import net.minecraft.server.v1_8_R1.PathfinderGoalFleeSun;
+import net.minecraft.server.v1_8_R1.PathfinderGoalFloat;
+import net.minecraft.server.v1_8_R1.PathfinderGoalHurtByTarget;
+import net.minecraft.server.v1_8_R1.PathfinderGoalLookAtPlayer;
+import net.minecraft.server.v1_8_R1.PathfinderGoalMeleeAttack;
+import net.minecraft.server.v1_8_R1.PathfinderGoalNearestAttackableTarget;
+import net.minecraft.server.v1_8_R1.PathfinderGoalRandomLookaround;
+import net.minecraft.server.v1_8_R1.PathfinderGoalRandomStroll;
+import net.minecraft.server.v1_8_R1.PathfinderGoalRestrictSun;
+import net.minecraft.server.v1_8_R1.World;
+import net.minecraft.server.v1_8_R1.WorldProviderHell;
 
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_7_R4.CraftServer;
-import org.bukkit.craftbukkit.v1_7_R4.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_7_R4.entity.CraftSkeleton;
+import org.bukkit.craftbukkit.v1_8_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftSkeleton;
 import org.bukkit.plugin.Plugin;
 
 import uk.co.jacekk.bukkit.baseplugin.config.PluginConfig;
@@ -38,7 +38,7 @@ import uk.co.jacekk.bukkit.bloodmoon.Config;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntitySkeleton;
 import uk.co.jacekk.bukkit.bloodmoon.entity.BloodMoonEntityType;
 
-public class EntitySkeleton extends net.minecraft.server.v1_7_R4.EntitySkeleton implements IRangedEntity {
+public class EntitySkeleton extends net.minecraft.server.v1_8_R1.EntitySkeleton implements IRangedEntity {
 	
 	private BloodMoon plugin;
 	private BloodMoonEntitySkeleton bloodMoonEntity;

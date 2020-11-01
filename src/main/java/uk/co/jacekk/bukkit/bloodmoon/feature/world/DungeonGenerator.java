@@ -2,8 +2,8 @@ package uk.co.jacekk.bukkit.bloodmoon.feature.world;
 
 import java.util.Random;
 
-import net.minecraft.server.v1_7_R4.MobSpawnerAbstract;
-import net.minecraft.server.v1_7_R4.TileEntityMobSpawner;
+import net.minecraft.server.v1_8_R1.MobSpawnerAbstract;
+import net.minecraft.server.v1_8_R1.TileEntityMobSpawner;
 
 import org.bukkit.Chunk;
 import org.bukkit.Material;
